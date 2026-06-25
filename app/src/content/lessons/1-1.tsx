@@ -1,4 +1,4 @@
-import { Section, M, MB, Concept, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Concept, Term, Figure, StepScene, ACircle, ALine, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.1'
 
@@ -80,57 +80,47 @@ export default function Lesson_1_1() {
           Nejlíp si akci a reakci zapamatuješ na zpětném rázu. Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Akce a reakce při výstřelu"
-          steps={[
-            {
-              label: 'klid',
-              caption: <>Dělo i koule jsou v klidu. Celková <Concept id="hybnost">hybnost</Concept> soustavy je nulová.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={FORCE} />
-                  <line x1="0" y1="167" x2="420" y2="167" stroke={GROUND} strokeWidth="3" />
-                  <Cannon x={150} />
-                  <circle cx={258} cy={136} r="11" fill={BALL} />
-                  <text x="210" y="40" fill={TXT} fontSize="15" textAnchor="middle">klid: p = 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'výstřel',
-              caption: <>Výstřel: na kouli působí síla doprava (<i>akce</i>), na dělo stejně velká síla doleva (<i>reakce</i>) — <b>každá na jiné těleso</b>.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={FORCE} />
-                  <line x1="0" y1="167" x2="420" y2="167" stroke={GROUND} strokeWidth="3" />
-                  <Cannon x={120} />
-                  <circle cx={300} cy={136} r="11" fill={BALL} />
-                  <line x1="265" y1="136" x2="345" y2="136" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar)" />
-                  <text x="320" y="120" fill={FORCE} fontSize="14" textAnchor="middle">akce</text>
-                  <line x1="150" y1="100" x2="80" y2="100" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar)" />
-                  <text x="110" y="90" fill={FORCE} fontSize="14" textAnchor="middle">reakce</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'hybnosti',
-              caption: <>Hybnosti jsou stejně velké a opačné, takže se sečtou na nulu: <M>{'\\vec p_{\\text{koule}} + \\vec p_{\\text{dělo}} = 0'}</M>. Proto dělo couvne.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={BALL} />
-                  <line x1="0" y1="167" x2="420" y2="167" stroke={GROUND} strokeWidth="3" />
-                  <Cannon x={95} />
-                  <circle cx={330} cy={136} r="11" fill={BALL} />
-                  <line x1="300" y1="60" x2="360" y2="60" stroke={BALL} strokeWidth="5" markerEnd="url(#ar)" />
-                  <text x="330" y="48" fill={BALL} fontSize="14" textAnchor="middle">p (koule)</text>
-                  <line x1="150" y1="60" x2="90" y2="60" stroke={STEEL} strokeWidth="5" markerEnd="url(#ar)" />
-                  <text x="120" y="48" fill={STEEL} fontSize="14" textAnchor="middle">p (dělo)</text>
-                  <text x="210" y="150" fill={TXT} fontSize="13" textAnchor="middle">součet = 0</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 180"
+          captions={[
+            <>Dělo i koule jsou v klidu. Celková <Concept id="hybnost">hybnost</Concept> soustavy je nulová.</>,
+            <>Výstřel: na kouli působí síla doprava (<i>akce</i>), na dělo stejně velká síla doleva (<i>reakce</i>) — <b>každá na jiné těleso</b>.</>,
+            <>Hybnosti jsou stejně velké a opačné, takže se sečtou na nulu: <M>{'\\vec p_{\\text{koule}} + \\vec p_{\\text{dělo}} = 0'}</M>. Proto dělo couvne.</>,
           ]}
-        />
+        >
+          {/* markery šipek (3 barvy) */}
+          <defs>
+            <marker id="arF" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FORCE} /></marker>
+            <marker id="arB" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={BALL} /></marker>
+            <marker id="arS" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={STEEL} /></marker>
+          </defs>
+
+          {/* zem (statická) */}
+          <ALine x1={0} y1={167} x2={420} y2={167} stroke={GROUND} strokeWidth={3} />
+
+          {/* dělo se odsouvá doleva (zpětný ráz) */}
+          <AGroup x={[150, 120, 95]}><Cannon x={0} /></AGroup>
+
+          {/* koule jede doprava */}
+          <ACircle cx={[258, 300, 330]} cy={136} r={11} fill={BALL} />
+
+          {/* krok 1: klid */}
+          <AText x={210} y={40} fill={TXT} fontSize="15" textAnchor="middle" opacity={[1, 0, 0]}>klid: p = 0</AText>
+
+          {/* krok 2: akce / reakce */}
+          <ALine x1={318} y1={136} x2={392} y2={136} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
+          <AText x={356} y={120} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>akce</AText>
+          <ALine x1={150} y1={100} x2={78} y2={100} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
+          <AText x={112} y={90} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>reakce</AText>
+
+          {/* krok 3: hybnosti + součet 0 */}
+          <ALine x1={300} y1={62} x2={372} y2={62} stroke={BALL} strokeWidth={5} markerEnd="url(#arB)" opacity={[0, 0, 1]} />
+          <AText x={336} y={50} fill={BALL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (koule)</AText>
+          <ALine x1={150} y1={62} x2={88} y2={62} stroke={STEEL} strokeWidth={5} markerEnd="url(#arS)" opacity={[0, 0, 1]} />
+          <AText x={119} y={50} fill={STEEL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (dělo)</AText>
+          <AText x={210} y={152} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>součet = 0</AText>
+        </StepScene>
       </Section>
 
       <Section title="Příklad ke každému zákonu (přesně tohle chce zkoušející)">

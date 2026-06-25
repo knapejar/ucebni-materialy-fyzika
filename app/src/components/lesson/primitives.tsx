@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef, type ReactNode, type MouseEvent } from 'react'
+import { useState, useEffect, useRef, createContext, useContext, type ReactNode, type MouseEvent } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import katex from 'katex'
 import { useZoom } from '../../lib/nav'
@@ -234,4 +234,120 @@ export function Term({ id, children }: { id?: string; children: ReactNode }) {
       {children}
     </strong>
   )
+}
+
+/* ================================================================== *
+ *  ANIMOVANÁ KROKOVATELNÁ VIZUALIZACE (StepScene)
+ *
+ *  Na rozdíl od StepFigure to NEJSOU slidy: je to JEDNO svg, jehož prvky
+ *  se mezi kroky PLYNULE ZANIMUJÍ (poloha, velikost, průhlednost, barva).
+ *  Každý prvek (A*) dostane buď jednu hodnotu (konstantní přes kroky), nebo
+ *  POLE hodnot [krok0, krok1, …]; komponenta podle aktuálního kroku interpoluje.
+ *
+ *  Příklad:
+ *    <StepScene title="…" viewBox="0 0 420 180" captions={[<>…</>, <>…</>]}>
+ *      <ALine x1={0} y1={167} x2={420} y2={167} stroke="#3a4566" strokeWidth={3} />
+ *      <ACircle cx={[258, 330]} cy={136} r={11} fill="#f59e0b" />
+ *      <AText x={[210, 320]} y={40} opacity={[1, 0]}>klid</AText>
+ *    </StepScene>
+ *  Prvky, které v některém kroku „nejsou", jen schovej průhledností (opacity 0).
+ * ================================================================== */
+
+const StepCtx = createContext(0)
+const ASTEP_T = { duration: 0.55, ease: [0.4, 0, 0.2, 1] as [number, number, number, number] }
+type V<T> = T | T[]
+function pick<T>(v: V<T> | undefined, s: number): T | undefined {
+  if (v === undefined) return undefined
+  return Array.isArray(v) ? (v as T[])[Math.min(s, (v as T[]).length - 1)] : (v as T)
+}
+function av(s: number, obj: Record<string, V<number | string> | undefined>) {
+  const o: Record<string, number | string> = {}
+  for (const k in obj) {
+    const val = pick(obj[k], s)
+    if (val !== undefined) o[k] = val
+  }
+  return o
+}
+
+export function StepScene({
+  title, viewBox, captions, children,
+}: { title?: string; viewBox: string; captions: ReactNode[]; children: ReactNode }) {
+  const [i, setI] = useState(0)
+  const ref = useRef<HTMLDivElement>(null)
+  const n = captions.length
+  const prev = () => setI((x) => Math.max(0, x - 1))
+  const next = () => setI((x) => Math.min(n - 1, x + 1))
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'ArrowLeft') prev()
+      if (e.key === 'ArrowRight') next()
+    }
+    el.addEventListener('keydown', onKey)
+    return () => el.removeEventListener('keydown', onKey)
+  }, [n])
+  return (
+    <figure className="stepfig stepfig--anim" ref={ref} tabIndex={0}>
+      {title && <div className="stepfig__title">{title}</div>}
+      <div className="stepfig__stage stepfig__stage--anim">
+        <svg viewBox={viewBox} className="svg-fig">
+          <StepCtx.Provider value={i}>{children}</StepCtx.Provider>
+        </svg>
+      </div>
+      <div className="stepfig__bar">
+        <button className="stepbtn" onClick={prev} disabled={i === 0}>← Zpět</button>
+        <div className="stepfig__dots">
+          {captions.map((_, k) => (
+            <button key={k} className={`dot ${k === i ? 'is-on' : ''}`} aria-label={`Krok ${k + 1}`} onClick={() => setI(k)} />
+          ))}
+        </div>
+        <button className="stepbtn" onClick={next} disabled={i === n - 1}>Další →</button>
+      </div>
+      <figcaption className="stepfig__cap">
+        <span className="stepfig__stepno">Krok {i + 1}/{n}</span> {captions[i]}
+      </figcaption>
+    </figure>
+  )
+}
+
+// ——— animované SVG prvky (poloha/velikost/průhlednost/barva po krocích) ———
+type CommonA = { opacity?: V<number>; fill?: V<string>; stroke?: V<string>; strokeWidth?: V<number> }
+
+export function ACircle({ cx, cy, r, ...rest }: { cx: V<number>; cy: V<number>; r: V<number> } & CommonA & Record<string, unknown>) {
+  const s = useContext(StepCtx)
+  const { opacity, fill, stroke, strokeWidth, ...other } = rest
+  return <motion.circle {...other} initial={false} animate={av(s, { cx, cy, r, opacity, fill, stroke, strokeWidth })} transition={ASTEP_T} />
+}
+
+export function ALine({ x1, y1, x2, y2, ...rest }: { x1: V<number>; y1: V<number>; x2: V<number>; y2: V<number> } & CommonA & Record<string, unknown>) {
+  const s = useContext(StepCtx)
+  const { opacity, stroke, strokeWidth, fill, ...other } = rest
+  return <motion.line {...other} initial={false} animate={av(s, { x1, y1, x2, y2, opacity, stroke, strokeWidth })} transition={ASTEP_T} />
+}
+
+export function ARect({ x, y, width, height, ...rest }: { x: V<number>; y: V<number>; width: V<number>; height: V<number> } & CommonA & Record<string, unknown>) {
+  const s = useContext(StepCtx)
+  const { opacity, fill, stroke, strokeWidth, ...other } = rest
+  // x/y jako SVG atributy (ne transform) → attrX/attrY
+  return <motion.rect {...other} initial={false} animate={av(s, { attrX: x, attrY: y, width, height, opacity, fill, stroke, strokeWidth })} transition={ASTEP_T} />
+}
+
+export function AText({ x, y, children, ...rest }: { x: V<number>; y: V<number>; children: ReactNode } & CommonA & Record<string, unknown>) {
+  const s = useContext(StepCtx)
+  const { opacity, fill, stroke, strokeWidth, ...other } = rest
+  return <motion.text {...other} initial={false} animate={av(s, { attrX: x, attrY: y, opacity, fill })} transition={ASTEP_T}>{children}</motion.text>
+}
+
+// Skupina: pohyb celé pod-kresby (x,y = posun/translate), průhlednost, zvětšení, rotace.
+export function AGroup({ x, y, scale, rotate, opacity, children, ...rest }:
+  { x?: V<number>; y?: V<number>; scale?: V<number>; rotate?: V<number>; opacity?: V<number>; children: ReactNode } & Record<string, unknown>) {
+  const s = useContext(StepCtx)
+  return <motion.g {...rest} initial={false} animate={av(s, { x, y, scale, rotate, opacity })} transition={ASTEP_T}>{children}</motion.g>
+}
+
+export function APath({ d, ...rest }: { d: V<string> } & CommonA & Record<string, unknown>) {
+  const s = useContext(StepCtx)
+  const { opacity, fill, stroke, strokeWidth, ...other } = rest
+  return <motion.path {...other} initial={false} animate={av(s, { d, opacity, fill, stroke, strokeWidth })} transition={ASTEP_T} />
 }
