@@ -1,0 +1,144 @@
+import { useEffect } from 'react'
+import { useParams, Navigate } from 'react-router-dom'
+import { ZoomPage, useZoom } from '../../lib/nav'
+import { getLesson, unlockedBy, type Lesson } from '../../data/course'
+import { useProgress, markSeen } from '../../lib/progress'
+import { lessonBodies } from '../../content/lessons'
+import { ExamGoals, Callout } from './primitives'
+import { LessonErrorBoundary } from './ErrorBoundary'
+
+export default function LessonView() {
+  const { id = '' } = useParams()
+  const { zoomTo } = useZoom()
+  const { isDone, toggleDone } = useProgress()
+  const found = getLesson(id)
+
+  useEffect(() => {
+    if (found) markSeen(id)
+    const el = document.querySelector('.zoom-page--scroll')
+    if (el) el.scrollTop = 0
+  }, [id, found])
+
+  if (!found) return <Navigate to="/" replace />
+  const { lesson, theme } = found
+  const Body = lessonBodies[lesson.id]
+  const themeNum = theme.num
+  const next = unlockedBy(lesson.id)
+  const accent = theme.accent
+
+  return (
+    <ZoomPage scroll>
+      <div className="lesson" style={{ ['--accent' as string]: accent }}>
+        <header className="lesson__bar">
+          <button className="backbtn" onClick={(e) => zoomTo(`/tema/${themeNum}`, 'out', e)}>
+            ← {theme.title.replace(/\s*\(.*\)/, '')}
+          </button>
+          <button
+            className={`donebtn ${isDone(lesson.id) ? 'is-done' : ''}`}
+            onClick={() => toggleDone(lesson.id)}
+          >
+            {isDone(lesson.id) ? '✓ Hotovo' : 'Označit jako hotové'}
+          </button>
+        </header>
+
+        <article className="lesson__body">
+          <div className="lesson__eyebrow">
+            <span className="lesson__id" style={{ background: accent }}>{lesson.id}</span>
+            <span className="lesson__theme">{theme.title.replace(/\s*\(.*\)/, '')}</span>
+            {lesson.badge && (
+              <span className={`pill ${lesson.badge === 'MUST-HAVE' ? 'pill--must' : 'pill--extra'}`}>
+                {lesson.badge}
+              </span>
+            )}
+          </div>
+
+          <h1 className="lesson__title">{lesson.title}</h1>
+
+          <div className="lesson__meta">
+            {lesson.minutes && <span>⏱ ~{lesson.minutes} min</span>}
+            {lesson.questions && <span>❓ {lesson.questions} otázek</span>}
+            {lesson.prereq.length > 0 && (
+              <span className="lesson__prereq">
+                Navazuje na:{' '}
+                {lesson.prereq.map((p) => (
+                  <a key={p} href={`#/lekce/${p}`} className="chip" onClick={(e) => { e.preventDefault(); zoomTo(`/lekce/${p}`, 'none', e) }}>
+                    {p}
+                  </a>
+                ))}
+              </span>
+            )}
+          </div>
+
+          {Body ? (
+            <div className="lesson__content">
+              <LessonErrorBoundary>
+                <Body />
+              </LessonErrorBoundary>
+            </div>
+          ) : (
+            <Placeholder lesson={lesson} />
+          )}
+
+          {next.length > 0 && (
+            <div className="lesson__next">
+              <span className="lesson__next-label">Tahle lekce ti odemkne:</span>
+              {next.map((l) => (
+                <a key={l.id} href={`#/lekce/${l.id}`} className="nextchip"
+                   onClick={(e) => { e.preventDefault(); zoomTo(`/lekce/${l.id}`, 'none', e) }}>
+                  <b>{l.id}</b> {l.title}
+                </a>
+              ))}
+            </div>
+          )}
+
+          <div className="lesson__footer">
+            <button className="backbtn" onClick={(e) => zoomTo(`/tema/${themeNum}`, 'out', e)}>
+              ← zpět na mapu tématu
+            </button>
+            <button
+              className={`donebtn ${isDone(lesson.id) ? 'is-done' : ''}`}
+              onClick={() => toggleDone(lesson.id)}
+            >
+              {isDone(lesson.id) ? '✓ Hotovo' : 'Označit jako hotové'}
+            </button>
+          </div>
+        </article>
+      </div>
+    </ZoomPage>
+  )
+}
+
+/** Zobrazení nehotové lekce — pořád užitečné: shrnutí, cíle a chytáky z osnovy. */
+function Placeholder({ lesson }: { lesson: Lesson }) {
+  return (
+    <div className="lesson__content">
+      <Callout kind="info" title="Plný výklad se připravuje">
+        Tahle lekce zatím nemá hotový interaktivní výklad — doplní ho generátor lekcí. Níže je ale
+        osnova z plánu učiva, ať víš, co tě čeká a co musíš umět.
+      </Callout>
+
+      {lesson.obsah && (
+        <section className="lsection">
+          <h2 className="lsection__title">O čem to je</h2>
+          <p>{lesson.obsah}</p>
+        </section>
+      )}
+
+      {lesson.goals.length > 0 && <ExamGoals lessonId={lesson.id} goals={lesson.goals} />}
+
+      {lesson.chytaky.length > 0 && (
+        <Callout kind="chytak" title="Chytáky / časté chyby">
+          <ul>
+            {lesson.chytaky.map((c, i) => <li key={i}>{c}</li>)}
+          </ul>
+        </Callout>
+      )}
+
+      {lesson.sources.length > 0 && (
+        <p className="lesson__sources">
+          Zdroje: {lesson.sources.map((s) => <code key={s}>{s}</code>)}
+        </p>
+      )}
+    </div>
+  )
+}

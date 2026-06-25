@@ -1,0 +1,1056 @@
+{
+  "themes": [
+    {
+      "num": 1,
+      "title": "MECHANIKA",
+      "subtitle": "Základ pojmů (síla, energie, hybnost), na které navazuje všechno ostatní. Učíš se to první.",
+      "accent": "#f59e0b",
+      "accent2": "#fbbf24",
+      "glow": "rgba(245,158,11,.55)",
+      "lessons": [
+        {
+          "id": "1.1",
+          "title": "Newtonovy zákony a síla",
+          "badge": null,
+          "obsah": "hmotný bod; síla jako vektor [N]; 1., 2., 3. Newtonův zákon; pohybová rovnice **F** = m·a = dp/dt; příklady (2. NZ: pád v gravitaci, náboj v poli; 3. NZ: střelec s puškou).",
+          "goals": [
+            "vyjmenovat a vysvětlit 3 NZ",
+            "napsat 2. NZ pohybovou rovnicí + popsat veličiny",
+            "konkrétní příklad ke každému zákonu",
+            "síla = vektor [N]"
+          ],
+          "chytaky": [
+            "3. NZ — síly akce/reakce **působí na dvě různá tělesa**, proto se neruší.",
+            "2. NZ se píše obecně přes dp/dt (ne jen F = ma)."
+          ],
+          "prereq": [],
+          "sources": [
+            "Fyzika.html",
+            "Q-MECH-ZS2008-web2.html"
+          ],
+          "minutes": 20,
+          "questions": 8
+        },
+        {
+          "id": "1.2",
+          "title": "Hybnost, impulz síly a zákon zachování hybnosti",
+          "badge": null,
+          "obsah": "hybnost p = m·v; impulz síly; ZZ hybnosti v izolované soustavě; proč je součet vnitřních sil i jejich impulzů nulový (návaznost na 3. NZ); Brownův pohyb jako příklad.",
+          "goals": [
+            "definovat hybnost a impulz a jejich vztah",
+            "ZZ hybnosti a kdy platí",
+            "proč jsou vnitřní síly v součtu nulové",
+            "příklad"
+          ],
+          "chytaky": [
+            "ZZ hybnosti platí pro **izolovanou** soustavu (žádné vnější síly), i když vnitřní síly působí."
+          ],
+          "prereq": [
+            "1.1"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "mechanika-otazky.html"
+          ],
+          "minutes": 15,
+          "questions": 6
+        },
+        {
+          "id": "1.3",
+          "title": "Práce, kinetická a potenciální energie",
+          "badge": null,
+          "obsah": "práce W = F·s·cos α (skalární součin); kinetická energie (translační ½mv², rotační ½Jω²); potenciální (gravitační mgh, pružnosti ½ku²); relativita energie (člověk ve vlaku); definice skalárního součinu.",
+          "goals": [
+            "vzorec práce + závislost na úhlu",
+            "rozlišit Ek a Ep + vzorce",
+            "co je a co není práce (zvednutí knihy × držení tašky = nulová práce)",
+            "relativita energie"
+          ],
+          "chytaky": [
+            "držím-li břemeno na místě (s = 0), **práce je nulová**.",
+            "Práce závisí na úhlu α mezi silou a dráhou (cos α)."
+          ],
+          "prereq": [
+            "1.1"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "mechanika-otazky.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        },
+        {
+          "id": "1.4",
+          "title": "Zákony zachování energie (konzervativní × nekonzervativní pole)",
+          "badge": null,
+          "obsah": "konzervativní pole (práce nezávisí na dráze); ZZ mechanické energie ΔEk + ΔEp = 0; nekonzervativní/disipativní pole (tření, disipace); ZZ celkové energie (+ vnitřní energie ΔU); příklad planety — nejrychleji nejblíž Slunci.",
+          "goals": [
+            "definovat konzervativní pole a jeho hlavní vlastnost",
+            "ZZ mechanické energie a kdy platí",
+            "rozdíl od ZZ celkové energie",
+            "disipativní síla (tření)",
+            "příklad planet"
+          ],
+          "chytaky": [
+            "ZZ **mechanické** energie platí jen v konzervativním poli; je-li tření, platí ZZ **celkové** energie (část jde do vnitřní energie ΔU).",
+            "Planety: nejrychleji v perihelu (nejmenší Ep)."
+          ],
+          "prereq": [
+            "1.3"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "mechanika-otazky.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        },
+        {
+          "id": "1.5",
+          "title": "Soustava hmotných bodů, těžiště a rotace tělesa",
+          "badge": null,
+          "obsah": "dynamika souboru částic (statistické metody); poloha těžiště R_T = Σm_i·r_i / Σm_i; pohyb těžiště (rotující činka hozená šikmo → parabola); pohybová rovnice rotace Γ = J·α = dL/dt (moment síly, setrvačnosti, hybnosti, ω); dvojice sil.",
+          "goals": [
+            "vzorec pro těžiště + vysvětlit",
+            "pohybová rovnice rotace a veličiny (Γ, J, L, ω)",
+            "po jaké křivce se pohybuje těžiště vrženého tělesa (parabola)",
+            "definovat dvojici sil"
+          ],
+          "chytaky": [
+            "těžiště rotující činky letí po **parabole** (rotace na to nemá vliv).",
+            "Dvojice sil = stejně velké, opačné, **neleží na jedné přímce**."
+          ],
+          "prereq": [
+            "1.1",
+            "1.3"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "mechanika-otazky.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "1.6",
+          "title": "Pohyb na nakloněné rovině, odpor vzduchu a okamžitá rychlost",
+          "badge": null,
+          "obsah": "pohyb válce a kvádru na nakloněné rovině; vliv odporu vzduchu na pád (s odporem × bez odporu, mezní rychlost); průměrná × okamžitá rychlost (okamžitá = limita průměrné pro Δt → 0).",
+          "goals": [
+            "popsat pohyb tělesa po nakloněné rovině",
+            "vliv odporu vzduchu na pád (a co je mezní rychlost)",
+            "rozdíl průměrné a okamžité rychlosti"
+          ],
+          "chytaky": [
+            "**okamžitá rychlost = limitní (mezní) hodnota průměrné rychlosti**, když se časový interval blíží nule.",
+            "Bez odporu padají různě těžké předměty stejně; s odporem ne."
+          ],
+          "prereq": [
+            "1.1",
+            "1.3"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "mechanika-otazky.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "1.7",
+          "title": "Kinetická teorie hmoty, tepelný pohyb a teplota",
+          "badge": null,
+          "obsah": "3 axiomy kinetické teorie (diskrétní struktura; neustálý neuspořádaný pohyb; řízení Newtonovými zákony); tepelný pohyb a teplota; Brownův pohyb jako důsledek tepelného pohybu.",
+          "goals": [
+            "vyjmenovat 3 axiomy + příklad",
+            "souvislost teploty a pohybu částic",
+            "popsat Brownův pohyb a jeho příčinu"
+          ],
+          "chytaky": [
+            "vyšší teplota = rychlejší tepelný pohyb částic.",
+            "Brownův pohyb způsobuje **kolísání počtu nárazů** částic na zrnko."
+          ],
+          "prereq": [
+            "1.2"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "mechanika-otazky.html"
+          ],
+          "minutes": 15,
+          "questions": 5
+        }
+      ]
+    },
+    {
+      "num": 2,
+      "title": "FYZIKÁLNÍ POLE (gravitace, elektřina, magnetismus)",
+      "subtitle": "Největší téma. Trik: pokaždé jde o \"pole\" popsané **intenzitou/silou** a **potenciálem**. Hodně analogií (siločáry = vrstevnice apod.) je v `Otázky pole.html`.",
+      "accent": "#38bdf8",
+      "accent2": "#22d3ee",
+      "glow": "rgba(56,189,248,.55)",
+      "lessons": [
+        {
+          "id": "2.1",
+          "title": "Gravitační pole",
+          "badge": "MUST-HAVE",
+          "obsah": "Newtonův gravitační zákon F = κ·m₁m₂/r²; gravitační potenciální energie Ep = mgh; gravitace působí vzájemně, záleží na hmotnosti a vzdálenosti, míří do středu Země; příliv a odliv (Měsíc, Slunce); ověření zákona (Keplerovy zákony); Coriolisova síla.",
+          "goals": [
+            "napsat grav. zákon + veličiny",
+            "Ep = mgh",
+            "na čem závisí grav. působení",
+            "příliv/odliv",
+            "jak se zákon ověřuje"
+          ],
+          "chytaky": [
+            "gravitace je **vždy přitažlivá** a **vzájemná** (já působím na Zemi stejnou silou jako Země na mě, jen mé zrychlení je nepatrné).",
+            "Ověření = z Newtona plynou Keplerovy zákony."
+          ],
+          "prereq": [
+            "1.3"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "2.2",
+          "title": "Elektrický náboj a Coulombův zákon",
+          "badge": "MUST-HAVE",
+          "obsah": "el. náboj (skalár, ±, vlastnost částic); Coulombův zákon F = k·Q₁Q₂/r², k = 1/(4πε); permitivita (ε = εr·ε₀, permitivita vakua); 3 zákony o náboji (zachování, invariantnost, kvantování); vodiče × dielektrika; vznik náboje třením.",
+          "goals": [
+            "napsat Coulombův zákon + veličiny",
+            "charakterizovat náboj (skalár, ±)",
+            "3 zákony o náboji",
+            "rozlišit vodič a dielektrikum"
+          ],
+          "chytaky": [
+            "náboj je **skalár** (na rozdíl od síly).",
+            "Při tření vznikne vždy stejně velký + a − náboj (zákon zachování náboje).",
+            "WhatsApp 10.31.28 ot.",
+            "1: elektrostaticky se mohou přitahovat i **neutrální** tělesa (polarizace)."
+          ],
+          "prereq": [
+            "2.1"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "2.3",
+          "title": "Intenzita a potenciál elektrostatického pole",
+          "badge": "MUST-HAVE",
+          "obsah": "intenzita E = F/q (směr, siločáry); potenciál φ = Ep/q (práce); ekvipotenciální plochy (E je k nim kolmá); siločáry pro +, −, ++, +−; princip superpozice; intenzita míří ve směru **nejrychlejšího poklesu** potenciálu.",
+          "goals": [
+            "napsat a vysvětlit E = F/q a φ = Ep/q",
+            "siločáry a ekvipotenciální plochy",
+            "E ⊥ ekvipotenciála",
+            "princip superpozice"
+          ],
+          "chytaky": [
+            "intenzita má směr **nejrychlejšího POKLESU** potenciálu (ne růstu). **Povinný řešený příklad** (`WhatsApp ...10.31.29` ot.",
+            "9): dvě kuličky se stejným nábojem Q ve vzdálenosti r — uprostřed se **intenzity vyruší (E = 0)**, ale **potenciály se SČÍTAJÍ (φ ≠ 0)**.",
+            "Intenzita je vektor, potenciál skalár.",
+            "Toto je oblíbená zkušební past."
+          ],
+          "prereq": [
+            "2.2"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 6
+        },
+        {
+          "id": "2.4",
+          "title": "Elektrický dipól",
+          "badge": "MUST-HAVE",
+          "obsah": "dipól (dva opačné náboje); dipólový moment p = Q·d; vlastní pole dipólu; chování ve vnějším poli (otáčí se, M = p×E, |M| = E·p·sin α); homogenní × nehomogenní pole (translace); polární × nepolární molekuly.",
+          "goals": [
+            "definovat dipól a napsat p = Q·d",
+            "chování ve vnějším poli (kdy je moment 0 a kdy max)",
+            "rozlišit homogenní/nehomogenní pole",
+            "rozlišit polární/nepolární molekuly"
+          ],
+          "chytaky": [
+            "moment je **největší při α = 90°** a **nulový při α = 0°** (dipól zarovnaný s polem).",
+            "V **nehomogenním** poli se dipól navíc i posouvá (translace).",
+            "Polární molekula = má **vlastní** dipólový moment."
+          ],
+          "prereq": [
+            "2.3"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "2.5",
+          "title": "Gaussova věta a tok pole plochou",
+          "badge": "MUST-HAVE",
+          "obsah": "Gaussova věta φ_E = Q/ε₀; tok intenzity uzavřenou plochou; tok závisí jen na celkovém náboji uvnitř, ne na geometrii; nulový náboj uvnitř → nulový tok; tok magnetické indukce uzavřenou plochou je vždy nulový.",
+          "goals": [
+            "napsat Gaussovu větu φ_E = Q/ε₀",
+            "co je tok plochou a na čem závisí",
+            "nulový náboj uvnitř → nulový tok"
+          ],
+          "chytaky": [
+            "tok závisí **jen na náboji uvnitř** plochy, ne na jejím tvaru.",
+            "Tok **magnetické** indukce uzavřenou plochou je **vždy 0** (neexistuje magnetický monopól)."
+          ],
+          "prereq": [
+            "2.3"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "Otázky pole.html"
+          ],
+          "minutes": 15,
+          "questions": 4
+        },
+        {
+          "id": "2.6",
+          "title": "Magnetické pole: Biot-Savartův a Ampérův zákon",
+          "badge": "MUST-HAVE",
+          "obsah": "zdroj mag. pole = pohybující se náboj; Biot-Savartův zákon (indukce dB, permeabilita μ₀); Ampérův zákon ∮B·ds = μ₀·Ic; pole nekonečného vodiče B = μ₀I/2πr; Ampérovo pravidlo pravé ruky; el. proud I = dQ/dt (náboj za čas); indukční čáry jsou uzavřené, magnetický náboj neexistuje.",
+          "goals": [
+            "co je zdrojem mag. pole",
+            "co popisuje Biot-Savartův a co Ampérův zákon",
+            "B pro nekonečný vodič",
+            "definovat el. proud (I = náboj za čas)",
+            "magnetický náboj neexistuje"
+          ],
+          "chytaky": [
+            "mag.",
+            "pole budí **pohybující se** náboj (proud), ne náboj v klidu.",
+            "Magnetické indukční čáry jsou **uzavřené smyčky**."
+          ],
+          "prereq": [
+            "2.2"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "2.7",
+          "title": "Lorentzova síla, pohyb náboje v poli a hmotová spektroskopie",
+          "badge": "MUST-HAVE",
+          "obsah": "Lorentzova/magnetická síla F = q·v×B (= B·Q·v·sin α); nemění velikost rychlosti (je kolmá); Flemingovo pravidlo levé ruky; 3 případy podle úhlu (α=0 → přímý; α=90° → kružnice r = mv/BQ; obecný → šroubovice); pohyb v elektrostatickém poli (zrychlení/zpomalení, \"vodorovný vrh\"); magnetické nádoby; hmotová spektroskopie (princip + využití — hmotnost částic, izotopy) jako aplikace pohybu náboje v poli.",
+          "goals": [
+            "napsat Lorentzovu sílu + veličiny",
+            "proč nemění velikost rychlosti",
+            "3 typy pohybu podle úhlu",
+            "rozdíl pohybu v el. a mag. poli",
+            "co je magnetická nádoba",
+            "princip a využití hmotové spektroskopie"
+          ],
+          "chytaky": [
+            "magnetická síla je **vždy kolmá na rychlost**, proto **mění jen směr, ne velikost** rychlosti (nekoná práci).",
+            "V **elektrickém** poli se naopak mění velikost rychlosti (Ep ↔ Ek).",
+            "Hmotová spektroskopie využívá r = mv/BQ (různé hmotnosti → různý poloměr)."
+          ],
+          "prereq": [
+            "2.3",
+            "2.6"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        },
+        {
+          "id": "2.8",
+          "title": "Elektromagnetická indukce (Faradayův zákon)",
+          "badge": "MUST-HAVE",
+          "obsah": "magnetický tok Φ = B·S·cos α; změna mag. pole indukuje napětí a proud; Faradayův zákon ε_i = −dΦ/dt; 3 způsoby indukce (změna velikosti pole / plochy / úhlu) + příklady; využití — generátory.",
+          "goals": [
+            "napsat Φ a Faradayův zákon ε_i = −dΦ/dt",
+            "3 způsoby, jak indukovat pole, s příkladem",
+            "využití (generátory)"
+          ],
+          "chytaky": [
+            "indukuje se jen při **změně** toku (statické pole nic neindukuje).",
+            "Znaménko mínus = Lenzovo pravidlo (indukovaný proud se snaží změně bránit)."
+          ],
+          "prereq": [
+            "2.6"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "2.9",
+          "title": "Síla na vodič a proudová smyčka, magnetický moment",
+          "badge": "MUST-HAVE",
+          "obsah": "silové působení mag. pole na vodič s proudem; proudová smyčka v poli (výsledná síla F = 0, výsledný moment M = I·(S×B), |M| = I·S·B·sin α); magnetický moment; orientace v rovnováze (rovina smyčky ⊥ B, mag. moment ∥ B).",
+          "goals": [
+            "výsledná síla na smyčku je 0, ale moment ne",
+            "|M| = I·S·B·sin α",
+            "definovat magnetický moment",
+            "orientace smyčky/momentu v rovnováze"
+          ],
+          "chytaky": [
+            "v rovnováze je **rovina smyčky kolmá k B**, ale **magnetický moment rovnoběžný s B** (nepleť si to).",
+            "Výsledná síla na uzavřenou smyčku v homogenním poli = 0."
+          ],
+          "prereq": [
+            "2.6",
+            "2.7"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "2.10",
+          "title": "Vliv elektrostatického pole na hmotné prostředí",
+          "badge": "MUST-HAVE",
+          "obsah": "vodič ve vnějším poli (pohyb volných nábojů, vznik opačného pole, rovnováha E₁+E₂=0, potenciál uvnitř konstantní, Faradayova klec, elektrický stín); dielektrikum (vázané náboje, polarizace + rotace; typy: atomová, iontová); polární × nepolární molekuly.",
+          "goals": [
+            "co se děje s vodičem ve vnějším poli (rovnováha, Faradayova klec, konst. potenciál)",
+            "polarizace dielektrika a její typy",
+            "rozdíl vodič × dielektrikum"
+          ],
+          "chytaky": [
+            "pohyb nábojů ve vodiči ustane, **až je celkové pole uvnitř nulové** (E₁ + E₂ = 0).",
+            "Uvnitř vodiče = elektrický stín (Faradayova klec).",
+            "Náboj sedí na **povrchu**, ne uvnitř."
+          ],
+          "prereq": [
+            "2.3",
+            "2.4"
+          ],
+          "sources": [
+            "Otázky pole.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 6
+        },
+        {
+          "id": "2.11",
+          "title": "Vliv magnetického pole na hmotné prostředí",
+          "badge": "MUST-HAVE",
+          "obsah": "chování látky v magnetickém poli — mikroskopické procesy (orientace mikroskopických proudů/momentů v látce).",
+          "goals": [
+            "popsat, jak magnetické pole ovlivňuje hmotné prostředí na mikroskopické úrovni",
+            "odlišit od chování v elektrickém poli"
+          ],
+          "chytaky": [
+            "je to **samostatný okruh** v seznamu 2025 — neslévej ho s elektrostatickým prostředím (2.10), zkouška je rozlišuje."
+          ],
+          "prereq": [
+            "2.6"
+          ],
+          "sources": [
+            "Fyzika.html",
+            "Otázky pole.html"
+          ],
+          "minutes": 15,
+          "questions": 3
+        }
+      ]
+    },
+    {
+      "num": 3,
+      "title": "KMITY A VLNĚNÍ (vč. optiky)",
+      "subtitle": "Zahrnuje i **optiku** (interference, polarizace, Youngův pokus). Nejvíc obrázků je v `Otázky vlnění Wall opraveno.html`.",
+      "accent": "#a78bfa",
+      "accent2": "#c084fc",
+      "glow": "rgba(167,139,250,.55)",
+      "lessons": [
+        {
+          "id": "3.1",
+          "title": "Kmity a harmonický oscilátor",
+          "badge": "MUST-HAVE",
+          "obsah": "kmit, perioda, amplituda, harmonické kmitání (výchylka podle sinu); vznik jako průmět pohybu po kružnici; kvazielastická síla F = −k·u; pohybová rovnice u(t) = A·cos(ω₀t + φ); příklady (kulička na pružině, plovoucí kvádr); ZZ mechanické energie oscilátoru (Ep ↔ Ek).",
+          "goals": [
+            "definovat kmit, periodu, amplitudu, harmonické kmitání",
+            "síla LHO F = −k·u",
+            "příklad oscilátoru",
+            "přeměna Ep ↔ Ek během kmitu"
+          ],
+          "chytaky": [
+            "síla je **přímo úměrná výchylce a má opačný směr** (proto mínus). **WhatsApp 10.31.28 ot.",
+            "4** (dokonale pružný míček): **NE**koná lineární harmonické kmity — síla (tíha) je konstantní, ne úměrná výchylce.",
+            "Toto je konceptuální otázka \"zdůvodněte\", ne výpočet."
+          ],
+          "prereq": [
+            "1.3",
+            "1.1"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        },
+        {
+          "id": "3.2",
+          "title": "Tlumené a vynucené kmity, rezonance, vázané oscilátory",
+          "badge": "MUST-HAVE",
+          "obsah": "tlumené kmity (ztráty energie, u(t) = A₀·e^(−γt)·cos(ωt+φ)); vynucené kmity (periodické dodávání síly); rezonance (shoda frekvencí → max. amplituda; využití: MRI, kytara, urychlovače); vázané oscilátory (stejná × opačná fáze), izolovaný × vázaný oscilátor.",
+          "goals": [
+            "rozlišit tlumené a vynucené kmity",
+            "rezonance + příklad",
+            "síla na izolovaný × vázaný oscilátor"
+          ],
+          "chytaky": [
+            "u **izolovaného** oscilátoru závisí síla na výchylce daného oscilátoru; u **vázaných** na **rozdílu výchylek** sousedů.",
+            "Rezonance = vnější frekvence = vlastní frekvence."
+          ],
+          "prereq": [
+            "3.1"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "3.3",
+          "title": "Skládání kmitů",
+          "badge": "MUST-HAVE",
+          "obsah": "princip superpozice (výsledný kmit = vektorový součet); dva kolmé kmity (kružnice / elipsa / úsečka podle amplitud a fáze); dva kmity stejného směru s blízkou periodou → rázy.",
+          "goals": [
+            "princip superpozice kmitů",
+            "výsledek skládání dvou kolmých kmitů podle fáze/amplitudy",
+            "vznik rázů"
+          ],
+          "chytaky": [
+            "dva kolmé kmity: stejná amplituda + posun π/2 → **kružnice**; různá amplituda + π/2 → **elipsa**; ve fázi → **úsečka**.",
+            "Rázy: konstantní perioda, proměnná amplituda."
+          ],
+          "prereq": [
+            "3.1"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html",
+            "Vlnění-otázky-2026.html"
+          ],
+          "minutes": 15,
+          "questions": 4
+        },
+        {
+          "id": "3.4",
+          "title": "Vlnění: veličiny a druhy",
+          "badge": "MUST-HAVE",
+          "obsah": "vlnění (šíření kmitů, pružné vazby); vlnová délka λ, frekvence f = 1/T, perioda T, úhlová frekvence ω, vlnové číslo k = 2π/λ, vlnočet; vlnoplocha; příčné × podélné vlnění + příklady (struna; akustika = podélné).",
+          "goals": [
+            "definovat λ, f, T, ω, k a jejich vztahy",
+            "rozlišit příčné a podélné vlnění + příklad",
+            "co je vlnoplocha"
+          ],
+          "chytaky": [
+            "**příčné** vlnění (výchylka ⊥ směr) jen v pevných látkách; **podélné** (výchylka ∥ směr) i v kapalinách/plynech. **Zvuk = podélné** vlnění."
+          ],
+          "prereq": [
+            "3.1"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "3.5",
+          "title": "Postupné a stojaté vlnění",
+          "badge": "MUST-HAVE",
+          "obsah": "postupné vlnění (stejná amplituda, různá fáze, přenos energie ne látky); stojaté vlnění (stejná fáze, různá amplituda); uzly a kmitny; vznik (interference proti sobě / odraz na konci); příklady (struna, membrána).",
+          "goals": [
+            "rozlišit postupné a stojaté vlnění",
+            "uzel a kmitna",
+            "jak vzniká stojaté vlnění"
+          ],
+          "chytaky": [
+            "u **postupného** vlnění mají body stejnou amplitudu a různou fázi; u **stojatého** naopak stejnou fázi a různou amplitudu.",
+            "Stojaté vzniká interferencí dvou vln **opačného směru** (typicky odrazem)."
+          ],
+          "prereq": [
+            "3.4"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "3.6",
+          "title": "Interference vlnění, vlnové klubko, fázová a grupová rychlost",
+          "badge": "MUST-HAVE",
+          "obsah": "interference (superpozice, dráhový rozdíl → max/min; sudý/lichý počet půlvln); při interferenci se mění rozložení energie, ale celková se zachovává; vlnové klubko (superpozice vln blízkých frekvencí); fázová rychlost (stejná fáze) × grupová (stejná amplituda, přenos energie); Δx·Δk = 1 (most ke kvantové fyzice).",
+          "goals": [
+            "podmínka interferenčního max a min (dráhový rozdíl = sudý/lichý počet půlvln)",
+            "rozlišit fázovou a grupovou rychlost",
+            "vlnové klubko a čím se šíří (grupovou rychlostí)"
+          ],
+          "chytaky": [
+            "při interferenci se **přerozdělí** energie, ale **celková se zachová** (typová otázka v `Q-VLNENI`).",
+            "Vlnové klubko přenáší energii **grupovou** rychlostí.",
+            "Užší rozsah frekvencí → větší klubko, horší lokalizace."
+          ],
+          "prereq": [
+            "3.3",
+            "3.4",
+            "3.5"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 6
+        },
+        {
+          "id": "3.7",
+          "title": "Huygensův-Fresnelův princip a Dopplerův jev",
+          "badge": "MUST-HAVE",
+          "obsah": "Huygensův princip (každý bod vlnoplochy = zdroj elementárního vlnění; obal = nová vlnoplocha); Fresnelovo doplnění (inklinační faktor); ohyb (zvuk za roh); Dopplerův jev (pohyb zdroje/pozorovatele → změna frekvence); příklad sanitka; využití ultrazvuku (radar, medicína).",
+          "goals": [
+            "Huygensův princip",
+            "Dopplerův jev (kdy frekvence roste/klesá) + příklad",
+            "využití ultrazvuku"
+          ],
+          "chytaky": [
+            "Doppler — **přibližování → vyšší frekvence**, vzdalování → nižší (vzpomeň na sanitku).",
+            "Frekvence se mění při vzájemném pohybu zdroje **nebo** pozorovatele."
+          ],
+          "prereq": [
+            "3.4"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "3.8",
+          "title": "Optika: interference světla a šíření elmag. vlnění",
+          "badge": "MUST-HAVE",
+          "obsah": "interference světla = důkaz vlnové povahy; podmínky (koherence: stejná frekvence, stejná polarizace, konstantní fázový rozdíl); interferenční člen; Youngův pokus (dvě štěrbiny); interference na planparalelní tenké vrstvě (dráhový rozdíl σ, fázové zpoždění −λ/2; příklad olejová skvrna, antireflexní vrstvy); šíření elektromagnetického vlnění; světelné vlny na optickém rozhraní (odraz/lom, fázový posun na hustším prostředí).",
+          "goals": [
+            "podmínky interference světla (koherence)",
+            "popsat Youngův pokus",
+            "interference na tenké vrstvě + příklad (olejová skvrna / antireflexní vrstva)",
+            "co je fázový posun na rozhraní s hustším prostředím (−λ/2)"
+          ],
+          "chytaky": [
+            "interferovat mohou jen **koherentní** vlny (konstantní fázový rozdíl).",
+            "Z **různých** frekvencí interferenční obrazec **nevznikne**.",
+            "Na rozhraní s opticky **hustším** prostředím se při odrazu přidává fázové zpoždění λ/2 (důležité u tenké vrstvy)."
+          ],
+          "prereq": [
+            "3.6"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html",
+            "Vlnění-otázky-2026.html"
+          ],
+          "minutes": 25,
+          "questions": 6
+        },
+        {
+          "id": "3.9",
+          "title": "Optika: polarizace světla a optická aktivita",
+          "badge": "MUST-HAVE",
+          "obsah": "nepolarizované × lineárně polarizované světlo (E osciluje v jedné rovině); rovina polarizace, polarizační filtr; optická aktivita (asymetrie/chiralita molekul; chirální uhlík, stereoizomery); rozdíl polarizovaného a nepolarizovaného vlnění.",
+          "goals": [
+            "rozlišit polarizované a nepolarizované světlo",
+            "jak vzniká lineárně polarizované světlo (filtr)",
+            "optická aktivita (chiralita)"
+          ],
+          "chytaky": [
+            "polarizace je možná **jen u příčného vlnění** (proto světlo ano, zvuk ne).",
+            "Polarizované = výchylky v **jedné rovině**; nepolarizované = náhodně."
+          ],
+          "prereq": [
+            "3.4"
+          ],
+          "sources": [
+            "Otázky vlnění Wall opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 15,
+          "questions": 4
+        }
+      ]
+    },
+    {
+      "num": 4,
+      "title": "KVANTOVÁ FYZIKA",
+      "subtitle": "Mostek mezi vlněním a \"malým světem\".",
+      "accent": "#f472b6",
+      "accent2": "#fb7185",
+      "glow": "rgba(244,114,182,.55)",
+      "lessons": [
+        {
+          "id": "4.1",
+          "title": "Dualismus a foton",
+          "badge": "MUST-HAVE",
+          "obsah": "korpuskulárně-vlnový dualismus (objekty mikrosvěta se chovají jednou jako vlny, jednou jako částice — **nikdy zároveň**); experiment se dvěma štěrbinami; foton = kvantum elmag. pole (nulová klidová hmotnost, rychlost světla, E = hν); de Broglieho vlna (λ = h/p, ν = E/h; grupová rychlost = rychlost částice); E = hν, E = hc/λ, m = E/c².",
+          "goals": [
+            "vysvětlit dualismus (a že NE zároveň)",
+            "charakterizovat foton (E = hν, nulová klidová hmotnost)",
+            "de Broglieho vztahy",
+            "jak závisí E fotonu na frekvenci a vlnové délce"
+          ],
+          "chytaky": [
+            "\"Při jakém ději se objekt chová **zároveň** jako vlna i částice? → **Žádném.**\" E roste s frekvencí (E = hν), ale **klesá** s vlnovou délkou (E = hc/λ)."
+          ],
+          "prereq": [
+            "3.4",
+            "1.3"
+          ],
+          "sources": [
+            "Kvantová mechanika Otázky.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        },
+        {
+          "id": "4.2",
+          "title": "Tepelné záření černého tělesa a Planckův vyzařovací zákon",
+          "badge": "MUST-HAVE",
+          "obsah": "absolutně černé těleso (pohlcuje vše; realizace = dutina s otvorem); tepelné záření závisí na teplotě; Planckova kvantová hypotéza (energie po kvantech); **Planckův vyzařovací zákon** (samostatný okruh!); Wienův posunovací zákon (λm·T = konst.); Stefan-Boltzmann (σT⁴); Planckova konstanta jako hranice mikro/makrosvěta.",
+          "goals": [
+            "definovat absolutně černé těleso",
+            "Planckova kvantová hypotéza",
+            "znění Planckova vyzařovacího zákona (záření po kvantech hν) a Wienova posunovacího zákona",
+            "Planckova konstanta jako hranice mikro/makrosvěta"
+          ],
+          "chytaky": [
+            "**Planckův vyzařovací zákon je samostatný okruh** — uměj ho říct jasně (vyzařování po kvantech, vyřešil \"ultrafialovou katastrofu\").",
+            "Wien: s rostoucí teplotou se maximum posouvá ke **kratším** vlnovým délkám."
+          ],
+          "prereq": [
+            "4.1"
+          ],
+          "sources": [
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 6
+        },
+        {
+          "id": "4.3a",
+          "title": "Vnější fotoelektrický jev: co to je",
+          "badge": "MUST-HAVE",
+          "obsah": "fotoefekt = uvolnění elektronu absorpcí fotonu; vnější (fotoemise), vnitřní (fotovodivost), hradlový jev; jeden foton ↔ jeden elektron; termoemise; Einsteinovo vysvětlení (hν = Eₑ + výstupní práce); využití (fotočlánky, fotobuňky, fotovoltaika).",
+          "goals": [
+            "k čemu při fotoefektu dochází",
+            "rozlišit vnější/vnitřní/hradlový jev",
+            "jeden foton uvolní jeden elektron",
+            "uvést využití"
+          ],
+          "chytaky": [
+            "**jeden foton interaguje s jedním elektronem**.",
+            "Vnitřní jev = fotovodivost (elektron zůstane v látce), vnější = fotoemise (vyletí ven)."
+          ],
+          "prereq": [
+            "4.1"
+          ],
+          "sources": [
+            "Kvantová mechanika Otázky.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "4.3b",
+          "title": "Fotoefekt: drilování závislostí (intenzita × frekvence)",
+          "badge": "MUST-HAVE",
+          "obsah": "čistě procvičovací lekce jedné myšlenky: **intenzita → počet elektronů**, **frekvence/energie → energie elektronů**; rychlost/energie elektronů nezávisí na intenzitě; mezní vlnová délka; ~10 variant otázek \"co se stane, když…\".",
+          "goals": [
+            "spolehlivě odpovědět na libovolnou variantu: změna **intenzity** mění **počet** uvolněných elektronů",
+            "změna **frekvence/energie** mění **energii** elektronů"
+          ],
+          "chytaky": [
+            "**rychlost (energie) elektronů NEzávisí na intenzitě**, jen na frekvenci.",
+            "Víc intenzity = víc elektronů, ne rychlejších.",
+            "Pod mezní frekvencí se neuvolní žádný elektron, ať svítíš jakkoli silně."
+          ],
+          "prereq": [
+            "4.3a"
+          ],
+          "sources": [
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 10
+        },
+        {
+          "id": "4.4",
+          "title": "Comptonův jev a laser",
+          "badge": "NAVÍC",
+          "obsah": "Comptonův jev (nepružný rozptyl fotonu na slabě vázaném elektronu; Comptonův posun λ′−λ = h/(m₀c)·(1−cos φ); důkaz dualismu); rozdíl od fotoefektu; laser (stimulovaná emise, inverze populace, rezonátor; vlastnosti: koherence, monochromatičnost, rovnoběžnost; aplikace: medicína, průmysl).",
+          "goals": [
+            "Comptonův jev a jak dokazuje dualismus",
+            "princip laseru (stimulovaná emise)",
+            "3 vlastnosti laserového záření + 3 aplikace"
+          ],
+          "chytaky": [
+            "Compton = foton se rozptýlí a **ztratí část energie** (vlnová délka se zvětší).",
+            "Vlastnosti laseru: koherence, monochromatičnost, rovnoběžnost."
+          ],
+          "prereq": [
+            "4.1",
+            "4.3a"
+          ],
+          "sources": [
+            "Kvantová mechanika Otázky.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "4.5",
+          "title": "Heisenberg, vlnová funkce a stav částice",
+          "badge": "NAVÍC",
+          "obsah": "Heisenbergovy relace neurčitosti Δx·Δp ≥ ℏ/2 (neredukovatelné minimum); vlnová funkce ψ a |ψ|² = hustota pravděpodobnosti; Schrödingerova rovnice (stavba el. obalu, Coulombův potenciál); důkaz vlnových vlastností (rozptyl elektronů na krystalech); vztah klasické a kvantové mechaniky (limita pro velká kvantová čísla); atom v základním × excitovaném stavu; ν vyzářeného fotonu = (E₁−E₂)/h.",
+          "goals": [
+            "napsat Heisenbergovy relace + vysvětlit Δx, Δp",
+            "co znamená |ψ|² (hustota pravděpodobnosti)",
+            "vztah klasické a kvantové mechaniky",
+            "rozdíl základního a excitovaného stavu + ν = (E₁−E₂)/h"
+          ],
+          "chytaky": [
+            "Δx·Δp je **neredukovatelné minimum** (nejde \"změřit lépe\", je to vlastnost přírody). |ψ|² je **pravděpodobnost**, ne přímo poloha.",
+            "Klasická mechanika = limita kvantové pro velká kvantová čísla."
+          ],
+          "prereq": [
+            "4.1"
+          ],
+          "sources": [
+            "Kvantová mechanika Otázky.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        }
+      ]
+    },
+    {
+      "num": 5,
+      "title": "JADERNÁ A ATOMOVÁ FYZIKA",
+      "subtitle": "Hodně pojmů \"na zapamatování\" (čísla N/Z/A, typy záření, jednotky). Na konec — navazuje na atom/foton z kvantové fyziky.",
+      "accent": "#34d399",
+      "accent2": "#4ade80",
+      "glow": "rgba(52,211,153,.55)",
+      "lessons": [
+        {
+          "id": "5.1",
+          "title": "Atomové jádro: složení a jaderné síly",
+          "badge": "MUST-HAVE",
+          "obsah": "nukleony (protony, neutrony); čísla Z, N, A (A = N + Z); velikost jádra ~10⁻¹⁵ m; izotopy (stejné Z, různé N; stejné chemické, jiné fyzikální vlastnosti; deuterium/tritium); jaderné síly (přitažlivé, krátký dosah, saturace, nezávislé na náboji) × Coulombovské (odpudivé, delší dosah, jen mezi protony); proč mají těžší jádra víc neutronů.",
+          "goals": [
+            "vysvětlit N, Z, A a vztah A = N + Z",
+            "definovat izotopy a proč mají stejné chemické vlastnosti",
+            "jaderné síly vs. Coulombovské",
+            "proč mají těžší jádra víc neutronů"
+          ],
+          "chytaky": [
+            "izotopy mají stejné chemické vlastnosti, protože mají **stejný počet protonů → stejný elektronový obal**.",
+            "Jaderné síly **nezávisí na náboji** (působí stejně p-p, n-n, n-p) a mají **velmi krátký dosah** (saturace)."
+          ],
+          "prereq": [
+            "2.2",
+            "4.1"
+          ],
+          "sources": [
+            "Jaderná Fyzika Otázky opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 8
+        },
+        {
+          "id": "5.2",
+          "title": "Modely jádra a vazebná energie",
+          "badge": "MUST-HAVE",
+          "obsah": "kapkový model (jádro jako kapka, ilustruje štěpení/syntézu, Weizsäckerova formule); slupkový model (Schrödingerova rovnice, potenciálová jáma, diskrétní spektrum, excitace); vazebná energie E_V; hmotnostní úbytek Δm a stabilita jádra; kdy se uvolní jaderná energie (syntéza lehkých / štěpení těžkých).",
+          "goals": [
+            "popsat kapkový a slupkový model a k čemu se hodí",
+            "vazebná energie a hmotnostní úbytek",
+            "že úbytek souvisí se stabilitou jádra"
+          ],
+          "chytaky": [
+            "**kapkový** model = dobrý na štěpení/syntézu; **slupkový** = na excitaci a energetické hladiny.",
+            "Energie se uvolní při **syntéze lehkých** i **štěpení těžkých** jader (obojí směřuje ke stabilnějším jádrům)."
+          ],
+          "prereq": [
+            "5.1",
+            "4.5"
+          ],
+          "sources": [
+            "Jaderná Fyzika Otázky opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 5
+        },
+        {
+          "id": "5.3a",
+          "title": "Radioaktivita a její veličiny",
+          "badge": "MUST-HAVE",
+          "obsah": "radioaktivita (samovolný přechod do stabilnějšího stavu; přirozená × umělá; nezávisí na chemické vazbě/teplotě/tlaku, závisí na kombinaci Z a N); aktivita A (rozpadů za čas, [Bq], závisí na množství); rozpadová konstanta λ; doba života τ = 1/λ; poločas rozpadu T₁/₂ = τ·ln 2; N(t), A(t).",
+          "goals": [
+            "definovat radioaktivitu a na čem (ne)závisí",
+            "rozlišit aktivitu, λ, τ, T₁/₂ a jejich vztahy"
+          ],
+          "chytaky": [
+            "radioaktivita **nezávisí** na teplotě, tlaku ani chemické vazbě — jen na kombinaci Z a N. **Aktivita** ale závisí na množství vzorku (λ ne).",
+            "T₁/₂ = τ·ln 2."
+          ],
+          "prereq": [
+            "5.1"
+          ],
+          "sources": [
+            "Jaderná Fyzika Otázky opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "5.3b",
+          "title": "Typy radioaktivních přeměn (α, β, γ)",
+          "badge": "MUST-HAVE",
+          "obsah": "přeměna α (jádro He, papír zastaví, Z−2, A−4); **beta — 4 podtypy:** β⁻ (Z+1), β⁺ (Z−1), elektronový záchyt (Z−1), inverzní beta (Z−1); γ (foton, jen oslabit Pb, jádro se neposouvá) + **vnitřní a dvojná konverze**; vychylování α/β/γ v poli.",
+          "goals": [
+            "popsat α, β⁻, β⁺, elektronový záchyt, inverzní beta a γ (co se emituje, jak se mění Z, jak se chránit)",
+            "vnitřní a dvojná konverze u γ"
+          ],
+          "chytaky": [
+            "**β⁻ posouvá Z o +1, β⁺ o −1** (snadná záměna — β minus PŘIDÁ proton).",
+            "Ochrana: α = papír, β = plech, γ = jen oslabit (olovo). γ rozpad **neposouvá** prvek v tabulce."
+          ],
+          "prereq": [
+            "5.1",
+            "4.1"
+          ],
+          "sources": [
+            "Jaderná Fyzika Otázky opraveno.html",
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        },
+        {
+          "id": "5.4",
+          "title": "Rozpad alfa a tunelový jev",
+          "badge": "MUST-HAVE",
+          "obsah": "rozpad α (u těžkých jader, kde jaderné síly nestačí na Coulombovo odpuzování); uvolněná energie Q = (m_i − m_f − m)c²; Q > 0 → emise možná; klasicky částice bariéru nepřekoná, kvantově **tunelový jev** (nenulová pravděpodobnost projít bariérou).",
+          "goals": [
+            "mechanismus α rozpadu a proč u těžkých jader",
+            "vysvětlit tunelový jev a rozdíl klasický × kvantový pohled"
+          ],
+          "chytaky": [
+            "α rozpad u **těžkých** jader, protože tam jaderné síly **nestačí** kompenzovat odpuzování protonů.",
+            "Tunelový jev = klasicky nemožné, kvantově možné. (Souvisí s neurčitostí — ale netřeba znát celou lekci 4.5.)"
+          ],
+          "prereq": [
+            "5.3b",
+            "4.5"
+          ],
+          "sources": [
+            "Fyzika.html"
+          ],
+          "minutes": 15,
+          "questions": 4
+        },
+        {
+          "id": "5.5",
+          "title": "Jaderné reakce: syntéza a štěpení",
+          "badge": "MUST-HAVE",
+          "obsah": "jaderné reakce (zákony zachování; přímé × přes složené jádro; strhávání/vytrhávání); syntéza (spojení lehkých jader, fúze, magnetické nádoby × inerciální fúze, zdroj energie hvězd, bezpečnost); štěpení (rozbití těžkého jádra neutronem, řetězová reakce, moderátor, regulační tyče, U-235; přírodní reaktor Oklo); proč je fúze bezpečnější.",
+          "goals": [
+            "rozlišit syntézu a štěpení",
+            "podmínky syntézy + způsoby (magnetické nádoby, inerciální fúze)",
+            "řetězová reakce a role moderátoru/regulačních tyčí",
+            "proč je fúze bezpečnější"
+          ],
+          "chytaky": [
+            "**syntéza** = spojení **lehkých** jader (potřebuje vysokou teplotu a tlak na překonání odpuzování); **štěpení** = rozbití **těžkých** jader neutronem.",
+            "Fúze je bezpečnější — produkty jsou stabilní a reakce se sama zastaví při poruše."
+          ],
+          "prereq": [
+            "5.1",
+            "5.2"
+          ],
+          "sources": [
+            "Fyzika.html"
+          ],
+          "minutes": 25,
+          "questions": 7
+        },
+        {
+          "id": "5.6",
+          "title": "Interakce záření s látkou: dávka, kerma, expozice",
+          "badge": "MUST-HAVE",
+          "obsah": "na čem závisí účinek záření (počet, typ, energie částic); dávka D = E_D/Δm [Gy]; **kerma K = E_K/Δm [Gy]** (pro nepřímo ionizující záření); dávkový ekvivalent [Sv]; expozice X = ΔQ/Δm [C/kg, R]; **přímo × nepřímo ionizující záření**; typy účinků (dočasné/trvalé); **Čerenkovovo záření** (bonus); jediná zanedbatelná interakce = gravitační.",
+          "goals": [
+            "definovat dávku (D = E_D/Δm, [Gy])",
+            "rozlišit dávku, kermu, dávkový ekvivalent ([Sv]) a expozici ([C/kg])",
+            "rozlišit přímo a nepřímo ionizující záření",
+            "na čem závisí účinek záření. **Bonus:** co je Čerenkovovo záření"
+          ],
+          "chytaky": [
+            "nepleť jednotky — **dávka i kerma [Gy]**, **dávkový ekvivalent [Sv]**, **expozice [C/kg]**.",
+            "Kerma je pro **nepřímo** ionizující záření.",
+            "Jediná interakce, kterou není nutné uvažovat, je **gravitační**.",
+            "Čerenkov = částice letí prostředím **rychleji než světlo v daném prostředí** (analogie nadzvukového třesku)."
+          ],
+          "prereq": [
+            "5.3a",
+            "5.3b"
+          ],
+          "sources": [
+            "Fyzika.html"
+          ],
+          "minutes": 20,
+          "questions": 6
+        }
+      ]
+    }
+  ]
+}

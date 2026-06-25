@@ -1,0 +1,16 @@
+# Zdrojové materiály — do repa nechceme (osobní/objemné; obsah je přepsaný a zabudovaný v aplikaci).
+raw/
+processed/
+
+# Node / build
+node_modules/
+app/node_modules/
+app/dist/
+*.log
+.DS_Store
+
+# lokální dev utility (screenshoty / smoke testy)
+app/_*.mjs
+
+# TS build cache
+*.tsbuildinfo
