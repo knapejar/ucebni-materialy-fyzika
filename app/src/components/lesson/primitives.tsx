@@ -29,10 +29,11 @@ export function Concept({ id, children }: { id: string; children: ReactNode }) {
   }
   const go = (e: MouseEvent) => {
     e.preventDefault()
-    zoomTo(`/lekce/${c.lesson}`, 'none', e)
+    // ?focus=<id> → cílová lekce po načtení odscrolluje k pojmu a zvýrazní ho
+    zoomTo(`/lekce/${c.lesson}?focus=${id}`, 'none', e)
   }
   return (
-    <a href={`#/lekce/${c.lesson}`} className="concept" onClick={go} title={c.short || c.label}>
+    <a href={`#/lekce/${c.lesson}?focus=${id}`} className="concept" onClick={go} title={c.short || c.label}>
       {children}
     </a>
   )
@@ -225,7 +226,12 @@ function SelfCheckItem({ q, a }: { q: ReactNode; a: ReactNode }) {
   )
 }
 
-/* zvýraznění klíčového pojmu (definice na místě) */
-export function Term({ children }: { children: ReactNode }) {
-  return <strong className="term">{children}</strong>
+/* zvýraznění klíčového pojmu (definice na místě).
+   `id` = kotva pro proklik: jiné lekce se přes <Concept id="..."> doscrollují sem. */
+export function Term({ id, children }: { id?: string; children: ReactNode }) {
+  return (
+    <strong className="term" id={id ? `c-${id}` : undefined} data-concept={id}>
+      {children}
+    </strong>
+  )
 }

@@ -1,5 +1,5 @@
 import type { ComponentType } from 'react'
-import type { ConceptDef } from '../concepts'
+import { concepts, type ConceptDef } from '../concepts'
 
 // Auto-registr lekcí. Každý soubor lekce (např. `1-1.tsx`) exportuje:
 //   export const id = '1.1'
@@ -21,6 +21,12 @@ for (const path in modules) {
   const m = modules[path]
   if (m.id && m.default) lessonBodies[m.id] = m.default
   if (m.provides) Object.assign(providedConcepts, m.provides)
+}
+
+// Sloučení do živého registru pojmů: seed (concepts.ts) má přednost, lekce doplní
+// zbytek. Díky tomu <Concept id="..."> najde cíl i pro pojmy zavedené v lekcích.
+for (const k in providedConcepts) {
+  if (!(k in concepts)) concepts[k] = providedConcepts[k]
 }
 
 export function hasBody(id: string): boolean {

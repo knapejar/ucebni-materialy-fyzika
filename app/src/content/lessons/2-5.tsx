@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.5'
 
@@ -52,20 +52,20 @@ export default function Lesson_2_5() {
   return (
     <>
       <p className="lead">
-        Gaussova věta je u zkoušky vděčná: stačí napsat jeden vzoreček a říct k němu dvě věty.
+        <Term id="gaussova-veta">Gaussova věta</Term> je u zkoušky vděčná: stačí napsat jeden vzoreček a říct k němu dvě věty.
         Jádro je super jednoduché — <b>tok pole skrz uzavřenou plochu závisí jen na náboji uvnitř</b>,
-        ne na tvaru plochy. A k tomu jeden „bonusový" fakt o magnetickém poli, který chce zkoušející slyšet.
+        ne na tvaru plochy. A k tomu jeden „bonusový" fakt o <Concept id="magneticke-pole">magnetickém poli</Concept>, který chce zkoušející slyšet.
       </p>
 
       <Section title="Co je tok plochou (lidsky)">
         <p>
-          Představ si <Term>siločáry</Term> elektrického pole jako šipky vyletující z náboje. <Term>Tok</Term>{' '}
+          Představ si <Concept id="silocary">siločáry</Concept> elektrického pole jako šipky vyletující z <Concept id="naboj">náboje</Concept>. <Term id="tok-pole">Tok</Term>{' '}
           (značíme <M>{'\\varphi_E'}</M>) je vlastně <b>kolik těch siločar projde danou plochou</b> — jako kdybys
           počítala, kolik šípů proletí oknem. Když šipky míří ven, tok je kladný; když dovnitř, je záporný.
         </p>
         <p>
           U Gaussovy věty nás zajímá <Term>uzavřená plocha</Term> (myšlený „obal" kolem něčeho — koule, krabice,
-          cokoli). Říká se jí <Term>Gaussova plocha</Term>. Není to skutečná blána, jen pomyslný obal, na kterém
+          cokoli). Říká se jí <Term id="gaussova-plocha">Gaussova plocha</Term>. Není to skutečná blána, jen pomyslný obal, na kterém
           počítáme čistou bilanci: <i>kolik siločar z plochy vyletí ven mínus kolik do ní vletí</i>.
         </p>
       </Section>
@@ -74,7 +74,7 @@ export default function Lesson_2_5() {
         <p>
           Celý tok intenzity elektrického pole libovolnou uzavřenou plochou je přímo úměrný{' '}
           <b>celkovému náboji uvnitř</b> té plochy. Konstanta úměrnosti je převrácená{' '}
-          <M>{'\\varepsilon_0'}</M> (permitivita vakua):
+          <M>{'\\varepsilon_0'}</M> (<Concept id="permitivita">permitivita</Concept> vakua):
         </p>
         <MB>{'\\varphi_E = \\frac{Q}{\\varepsilon_0}'}</MB>
         <p>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.5'
 
@@ -62,9 +62,9 @@ export default function Lesson() {
           <Term>zákony zachování</Term> — to je první věc, kterou zkoušející slyší rád:
         </p>
         <ul>
-          <li>zachování <b>počtu nukleonů</b> (součet horních čísel <M>{'A'}</M> vlevo = vpravo),</li>
-          <li>zachování <b>elektrického náboje</b> (součet dolních čísel <M>{'Z'}</M> vlevo = vpravo),</li>
-          <li>zachování <b>energie</b> (relativistické) a <b>hybnosti</b> i momentu hybnosti.</li>
+          <li>zachování <b>počtu <Concept id="nukleony">nukleonů</Concept></b> (součet horních čísel <M>{'A'}</M> vlevo = vpravo),</li>
+          <li>zachování <b>elektrického <Concept id="naboj">náboje</Concept></b> (součet dolních čísel <M>{'Z'}</M> vlevo = vpravo),</li>
+          <li>zachování <b>energie</b> (relativistické) a <b><Concept id="hybnost">hybnosti</Concept></b> i <Concept id="moment-hybnosti">momentu hybnosti</Concept>.</li>
         </ul>
         <p>
           Podle toho, jak srážka proběhne, rozlišujeme dva typy. U <Term>přímé reakce</Term> částice
@@ -83,7 +83,7 @@ export default function Lesson() {
 
       <Section title="Syntéza (fúze): spojujeme LEHKÁ jádra">
         <p>
-          <Term>Jaderná syntéza</Term> = spojení dvou <b>lehkých</b> jader do jednoho těžšího.
+          <Term id="jaderna-synteza">Jaderná syntéza</Term> = spojení dvou <b>lehkých</b> jader do jednoho těžšího.
           Typicky se spojí jádra vodíku (deuterium + tritium) na helium. Vznikající jádro má menší
           klidovou energii než výchozí jádra dohromady — ten rozdíl se uvolní jako energie. Tohle je
           <b> zdroj energie hvězd</b>: ve Slunci splývají čtyři jádra vodíku na jedno helium a
@@ -91,8 +91,8 @@ export default function Lesson() {
         </p>
         <p>
           Háček je v tom, že obě jádra jsou <b>kladná</b>, takže se elektricky odpuzují. Aby se
-          dostala dost blízko, aby převážily přitažlivé <Term>jaderné síly</Term>, musí na sebe
-          narazit obrovskou rychlostí. To se navodí <b>extrémní teplotou a tlakem</b> — proto{' '}
+          dostala dost blízko, aby převážily přitažlivé <Concept id="jaderne-sily">jaderné síly</Concept>, musí na sebe
+          narazit obrovskou rychlostí. To se navodí <b>extrémní <Concept id="teplota">teplotou</Concept> a tlakem</b> — proto{' '}
           <Term>termojaderná fúze</Term>. Podmínku „dost horké, dost husté, dost dlouho" shrnuje{' '}
           <Term>Lawsonovo kritérium</Term> (součin hustoty a doby udržení <M>{'N\\,t'}</M> musí
           překročit určitou mez).
@@ -129,11 +129,11 @@ export default function Lesson() {
         <ul>
           <li>
             <Term>Magnetické nádoby</Term> (např. tokamak) — horké plazma drží pohromadě silné{' '}
-            <b>magnetické pole</b>, takže se vznáší a nedotýká stěn.
+            <b><Concept id="magneticke-pole">magnetické pole</Concept></b>, takže se vznáší a nedotýká stěn.
           </li>
           <li>
             <Term>Inerciální fúze</Term> — drobný terčík paliva je z mnoha stran současně ozářen
-            výkonnými <b>lasery</b> (nebo iontovými svazky), prudce se stlačí a zapálí dřív, než
+            výkonnými <b><Concept id="laser">lasery</Concept></b> (nebo iontovými svazky), prudce se stlačí a zapálí dřív, než
             stihne uletět.
           </li>
         </ul>
@@ -141,7 +141,7 @@ export default function Lesson() {
 
       <Section title="Štěpení: rozbíjíme TĚŽKÉ jádro neutronem">
         <p>
-          <Term>Štěpení</Term> je opačný děj: <b>těžké</b> jádro (klasicky{' '}
+          <Term id="stepeni">Štěpení</Term> je opačný děj: <b>těžké</b> jádro (klasicky{' '}
           <M>{'^{235}\\mathrm{U}'}</M>) pohltí <b>neutron</b>, tím se rozkmitá a rozpadne se na dvě
           lehčí jádra (odštěpky) a navíc vyletí <b>2–3 nové neutrony</b> a uvolní se energie. Většina
           energie (kolem 80 %) je v pohybu odštěpků, který se brzděním mění na teplo — tím se v
@@ -203,7 +203,7 @@ export default function Lesson() {
               caption: (
                 <>
                   Každý nový neutron může rozbít <b>další</b> jádro — a vznikne víc neutronů než na
-                  začátku. Proces se lavinovitě rozrůstá: to je <Term>řetězová reakce</Term>.
+                  začátku. Proces se lavinovitě rozrůstá: to je <Term id="retezova-reakce">řetězová reakce</Term>.
                 </>
               ),
               content: (
@@ -238,12 +238,12 @@ export default function Lesson() {
         </p>
         <ul>
           <li>
-            <Term>Moderátor</Term> (typicky <b>voda</b>) <b>zpomaluje</b> rychlé neutrony srážkami.
+            <Term id="moderator">Moderátor</Term> (typicky <b>voda</b>) <b>zpomaluje</b> rychlé neutrony srážkami.
             Pomalý neutron totiž vyvolá štěpení mnohem snadněji než rychlý. Voda navíc slouží jako
             chladivo.
           </li>
           <li>
-            <Term>Regulační tyče</Term> (z materiálu, který <b>pohlcuje</b> neutrony) se zasouvají
+            <Term id="regulacni-tyce">Regulační tyče</Term> (z materiálu, který <b>pohlcuje</b> neutrony) se zasouvají
             mezi palivo a odebírají přebytečné neutrony. Tím se reakce drží přesně na hraně —{' '}
             <b>multiplikační koeficient = 1</b> (každé štěpení vyvolá v průměru právě jedno další).
             Zasunu tyče hlouběji → reakce slábne; vytáhnu → sílí.

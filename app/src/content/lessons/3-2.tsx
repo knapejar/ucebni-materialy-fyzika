@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.2'
 
@@ -66,13 +66,13 @@ export default function Lesson() {
 
       <Section title="Tlumené kmity — kmitání, které samo dojede">
         <p>
-          Ideální oscilátor z minulé lekce by kmital pořád stejně. V realitě se ale část energie
+          Ideální <Concept id="harmonicky-oscilator">oscilátor</Concept> z minulé lekce by kmital pořád stejně. V realitě se ale část energie
           pořád ztrácí — třením, odporem vzduchu, odporem prostředí. Proto{' '}
-          <Term>amplituda</Term> (rozkmit) postupně klesá, až kmitání ustane. Klasická představa:
+          <Concept id="amplituda">amplituda</Concept> (rozkmit) postupně klesá, až kmitání ustane. Klasická představa:
           dítě na houpačce, které nikdo nehoupe — za chvíli se zastaví.
         </p>
         <p>
-          To popisuje rovnice <Term>tlumených kmitů</Term> — je to obyčejný kosinus, ale s amplitudou,
+          To popisuje rovnice <Term id="tlumene-kmity">tlumených kmitů</Term> — je to obyčejný kosinus, ale s amplitudou,
           která exponenciálně padá k nule:
         </p>
         <MB>{'u(t) = A_0\\,e^{-\\gamma t}\\,\\cos(\\omega t + \\varphi)'}</MB>
@@ -106,8 +106,8 @@ export default function Lesson() {
           </svg>
         </Figure>
         <Callout kind="info">
-          Pozor na slovíčka: energie se „neztrácí" ve smyslu porušení zákona zachování — mění se v{' '}
-          teplo (práce proti odporu prostředí). Mechanické energie kmitání ale opravdu ubývá.
+          Pozor na slovíčka: energie se „neztrácí" ve smyslu porušení <Concept id="zachovani-energie">zákona zachování</Concept> — mění se v{' '}
+          teplo (<Concept id="prace">práce</Concept> proti odporu prostředí). Mechanické energie kmitání ale opravdu ubývá.
         </Callout>
       </Section>
 
@@ -115,7 +115,7 @@ export default function Lesson() {
         <p>
           Když chceme, aby kmitání nedoznělo, musíme ztracenou energii pořád dodávat. Děláme to{' '}
           <Term>periodickou vnější silou</Term> — přesně jako dospělý, který houpačku pravidelně
-          postrkuje. Takovému kmitání říkáme <Term>vynucené kmity</Term>.
+          postrkuje. Takovému kmitání říkáme <Term id="vynucene-kmity">vynucené kmity</Term>.
         </p>
         <p>
           Na začátku se děje něco zajímavého: vlastní (tlumené) kmitání oscilátoru se{' '}
@@ -200,7 +200,7 @@ export default function Lesson() {
           má vnější síla. A je <b>největší</b> v jediném případě:
         </p>
         <Callout kind="tip" title="Definice na jednu větu">
-          <b>Rezonance</b> nastane, když se frekvence vnější síly rovná <b>vlastní frekvenci</b>{' '}
+          <Term id="rezonance"><b>Rezonance</b></Term> nastane, když se frekvence vnější síly rovná <b>vlastní frekvenci</b>{' '}
           oscilátoru: <M>{'\\omega_{\\text{vnější}} = \\omega_0'}</M>. Tehdy je amplituda maximální.
         </Callout>
         <p>
@@ -241,7 +241,7 @@ export default function Lesson() {
         </p>
         <MB>{'F = -k\\,u'}</MB>
         <p>
-          <Term>Vázané oscilátory</Term> jsou dva (nebo víc) oscilátorů spojené pružnou vazbou — třeba
+          <Term id="vazane-oscilatory">Vázané oscilátory</Term> jsou dva (nebo víc) oscilátorů spojené pružnou vazbou — třeba
           dvě kyvadla propojená pružinou. Vazba jim umožní si <b>vyměňovat energii</b>. A tady je ten
           rozdíl, který se ptá: prostřední pružina je natažená/stlačená podle toho, <b>jak daleko jsou
           od sebe</b> — tedy podle <b>rozdílu výchylek</b> obou sousedů, ne podle výchylky jednoho.
@@ -272,7 +272,7 @@ export default function Lesson() {
         <p>Dva typické režimy vázaných oscilátorů, které se ptají:</p>
         <ul>
           <li><b>Stejná fáze</b> — oba se vychýlí stejným směrem, vazba mezi nimi se „nepozná" a kmitají jako jeden celek.</li>
-          <li><b>Opačná fáze</b> — jdou proti sobě, vazba je maximálně napjatá; přidá vratnou sílu, takže perioda se zkrátí (kmitají rychleji).</li>
+          <li><b>Opačná fáze</b> — jdou proti sobě, vazba je maximálně napjatá; přidá vratnou sílu, takže <Concept id="perioda">perioda</Concept> se zkrátí (kmitají rychleji).</li>
         </ul>
       </Section>
 

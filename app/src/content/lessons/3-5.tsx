@@ -57,7 +57,7 @@ export default function Lesson_3_5() {
         </p>
         <ul>
           <li>
-            <b>Všechny body kmitají se stejnou amplitudou</b> (stejně velké výkyvy), ale{' '}
+            <b>Všechny body kmitají se stejnou <Concept id="amplituda">amplitudou</Concept></b> (stejně velké výkyvy), ale{' '}
             <b>s různou fází</b> — každý bod „dostane vlnu" o chviličku později než ten před ním.
           </li>
           <li>
@@ -96,7 +96,7 @@ export default function Lesson_3_5() {
 
       <Section title="Stojaté vlnění — vlna, která stojí na místě">
         <p>
-          <Concept id="stojate-vlneni">Stojaté vlnění</Concept> vypadá, jako by vlna nikam neběžela —
+          <Term id="stojate-vlneni">Stojaté vlnění</Term> vypadá, jako by vlna nikam neběžela —
           jen na místě „dýchá" nahoru a dolů. Některá místa se vůbec nehnou, jiná kmitají naplno.
         </p>
         <ul>
@@ -111,8 +111,8 @@ export default function Lesson_3_5() {
         </ul>
         <p>Dvě jména, která musíš umět ukázat na obrázku:</p>
         <ul>
-          <li><Term>Uzel</Term> = bod, který <b>neustále nekmitá</b> (výchylka je pořád nula).</li>
-          <li><Term>Kmitna</Term> = bod, který kmitá <b>s největší amplitudou</b>.</li>
+          <li><Term id="uzel">Uzel</Term> = bod, který <b>neustále nekmitá</b> (výchylka je pořád nula).</li>
+          <li><Term id="kmitna">Kmitna</Term> = bod, který kmitá <b>s největší amplitudou</b>.</li>
         </ul>
 
         <Figure caption="Stojaté vlnění na struně. Uzly (oranžově) se nehýbou; kmitny (zeleně) kmitají naplno. Struna jen kmitá nahoru dolů mezi krajními polohami — vlna se nikam neposouvá.">
@@ -212,8 +212,8 @@ export default function Lesson_3_5() {
         />
 
         <p>
-          Aby vlny daly pěkné stojaté vlnění, musejí mít <b>stejnou amplitudu, frekvenci a fázovou
-          rychlost</b> a jít <b>opačným směrem</b> (proto je odraz tak praktický — odražená vlna je
+          Aby vlny daly pěkné stojaté vlnění, musejí mít <b>stejnou amplitudu, frekvenci a <Concept id="fazova-rychlost">fázovou
+          rychlost</Concept></b> a jít <b>opačným směrem</b> (proto je odraz tak praktický — odražená vlna je
           ta původní, jen otočená).
         </p>
       </Section>
@@ -238,7 +238,7 @@ export default function Lesson_3_5() {
             „stojí", takže body jdou hezky <b>spolu (ve fázi)</b>.
           </li>
           <li>
-            Stojaté vlnění vzniká interferencí <b>dvou vln opačného směru</b> (typicky odrazem na
+            Stojaté vlnění vzniká <Concept id="interference">interferencí</Concept> <b>dvou vln opačného směru</b> (typicky odrazem na
             konci) — ne dvou vln stejného směru.
           </li>
           <li>

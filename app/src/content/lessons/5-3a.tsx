@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.3a'
 
@@ -110,8 +110,8 @@ export default function Lesson_5_3a() {
 
       <Section title="Co je radioaktivita (a na čem vůbec NEzávisí)">
         <p>
-          <Term>Radioaktivita</Term> je <Term>samovolný přechod nestabilního jádra do stabilnějšího
-          stavu</Term> — jádro se přemění (vyzáří částici nebo foton) a tím se zbaví přebytečné
+          <Term id="radioaktivita">Radioaktivita</Term> je <Term>samovolný přechod nestabilního jádra do stabilnějšího
+          stavu</Term> — jádro se přemění (vyzáří částici nebo <Concept id="foton">foton</Concept>) a tím se zbaví přebytečné
           energie. Rozlišujeme:
         </p>
         <ul>
@@ -124,7 +124,7 @@ export default function Lesson_5_3a() {
         </p>
         <ul>
           <li><b>NEzávisí</b> na <Term>teplotě, tlaku ani chemické vazbě</Term> (je úplně jedno, jestli je atom v krystalu, v plynu nebo v molekule — jádro je „schované" hluboko a okolní chemie se ho netýká);</li>
-          <li><b>závisí</b> jen na <Term>kombinaci protonového čísla Z a neutronového čísla N</Term> — nestabilní kombinace se rozpadá, stabilní ne.</li>
+          <li><b>závisí</b> jen na <Term>kombinaci <Concept id="protonove-cislo">protonového čísla Z</Concept> a neutronového čísla N</Term> — nestabilní kombinace se rozpadá, stabilní ne.</li>
         </ul>
         <Callout kind="tip" title="Jak si to představit">
           Chemie hýbe s elektrony v obalu. Rozpad se ale děje v <i>jádru</i>, kam elektronový obal
@@ -139,7 +139,7 @@ export default function Lesson_5_3a() {
           děj. Ale u velkého počtu jader už platí pěkná pravidelnost. Zavádíme:
         </p>
         <p>
-          <Term>Rozpadová konstanta</Term> <M>{'\\lambda'}</M> = pravděpodobnost, že se{' '}
+          <Term id="rozpadova-konstanta">Rozpadová konstanta</Term> <M>{'\\lambda'}</M> = pravděpodobnost, že se{' '}
           <i>jedno</i> jádro rozpadne za jednotku času. Je to „vnitřní vlastnost" daného nuklidu —{' '}
           <b>na množství vzorku nezávisí</b> (jednotka <M>{'\\mathrm{s^{-1}}'}</M>).
         </p>
@@ -148,8 +148,8 @@ export default function Lesson_5_3a() {
         </p>
         <MB>{'\\tau = \\frac{1}{\\lambda} \\qquad\\qquad T_{1/2} = \\tau\\,\\ln 2 = \\frac{\\ln 2}{\\lambda}'}</MB>
         <ul>
-          <li><Term>Střední doba života</Term> <M>{'\\tau = 1/\\lambda'}</M> — průměrná doba, jak dlouho jádro „žije", než se rozpadne.</li>
-          <li><Term>Poločas rozpadu</Term> <M>{'T_{1/2}'}</M> — čas, za který se rozpadne <b>polovina</b> jader ve vzorku. Pozor: <b>není</b> to <M>{'\\tau/2'}</M>, ale <M>{'\\tau\\cdot\\ln 2 \\approx 0{,}693\\,\\tau'}</M>.</li>
+          <li><Term id="stredni-doba-zivota">Střední doba života</Term> <M>{'\\tau = 1/\\lambda'}</M> — průměrná doba, jak dlouho jádro „žije", než se rozpadne.</li>
+          <li><Term id="polocas-rozpadu">Poločas rozpadu</Term> <M>{'T_{1/2}'}</M> — čas, za který se rozpadne <b>polovina</b> jader ve vzorku. Pozor: <b>není</b> to <M>{'\\tau/2'}</M>, ale <M>{'\\tau\\cdot\\ln 2 \\approx 0{,}693\\,\\tau'}</M>.</li>
         </ul>
         <Figure caption="Tři veličiny, jeden zdroj: všechny vyrostou z rozpadové konstanty λ.">
           <svg viewBox="0 0 360 130" className="svg-fig">
@@ -167,7 +167,7 @@ export default function Lesson_5_3a() {
 
       <Section title="Aktivita — kolik rozpadů za sekundu">
         <p>
-          <Term>Aktivita</Term> <M>{'A'}</M> vzorku je <b>počet jader, která se rozpadnou za jednotku
+          <Term id="aktivita">Aktivita</Term> <M>{'A'}</M> vzorku je <b>počet jader, která se rozpadnou za jednotku
           času</b>. Měří se v <Term>becquerelech</Term> <M>{'[\\,\\mathrm{Bq}\\,]'}</M> (1 Bq = jeden
           rozpad za sekundu; starší jednotka je curie, Ci). Platí:
         </p>

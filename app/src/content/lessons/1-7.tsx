@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.7'
 
@@ -42,7 +42,7 @@ export default function Lesson() {
 
       <Section title="O co jde: kinetická teorie hmoty">
         <p>
-          <Term>Kinetická teorie hmoty</Term> spojuje to, co na látce <i>vidíme</i> (skupenství, teplotu, tlak), s tím,
+          <Term id="kineticka-teorie">Kinetická teorie hmoty</Term> spojuje to, co na látce <i>vidíme</i> (skupenství, teplotu, tlak), s tím,
           co dělají <i>částice</i>, ze kterých je složená. Jinými slovy: makroskopický svět vysvětluje pohybem atomů a
           molekul. Nejlíp je rozpracovaná pro <b>ideální plyn</b>.
         </p>
@@ -56,21 +56,21 @@ export default function Lesson() {
         <ol className="biglist">
           <li>
             <b>1. Diskrétní struktura.</b> Látka kteréhokoliv skupenství se skládá z velmi malých částic — atomů či
-            molekul. Mezi nimi je vždycky <Term>mezera</Term>, prostor není úplně vyplněný.
+            molekul. Mezi nimi je vždycky mezera, prostor není úplně vyplněný.
             <br />
             <i>Příklad:</i> rozpustíš cukr ve vodě a objem se skoro nezvětší — molekuly cukru zapadnou do mezer mezi
             molekulami vody.
           </li>
           <li>
-            <b>2. Tepelný pohyb.</b> Částice jsou v <Term>neustálém neuspořádaném pohybu</Term> — žádný směr nemá
+            <b>2. Tepelný pohyb.</b> Částice jsou v neustálém neuspořádaném pohybu — žádný směr nemá
             přednost před ostatními a rychlosti jsou různé.
             <br />
-            <i>Příklad / důkaz:</i> <Term>Brownův pohyb</Term> a <b>difúze</b> (vůně se sama rozšíří po místnosti).
+            <i>Příklad / důkaz:</i> Brownův pohyb a <b>difúze</b> (vůně se sama rozšíří po místnosti).
           </li>
           <li>
-            <b>3. Pohyb se řídí Newtonovými zákony.</b> Částice na sebe působí přitažlivými a odpudivými silami a
+            <b>3. Pohyb se řídí <Concept id="newtonovy-zakony">Newtonovými zákony</Concept>.</b> Částice na sebe působí přitažlivými a odpudivými silami a
             chovají se podle <b>zákonů mechaniky</b>. Souhrn jejich pohybové a polohové energie je{' '}
-            <Term>vnitřní energie</Term> soustavy:
+            vnitřní energie soustavy:
             <MB>{'U = \\Delta E_\\mathrm{p} + \\Delta E_\\mathrm{k}'}</MB>
             <i>Příklad:</i> srážky molekul plynu o stěnu nádoby (Newtonovsky odraz) dávají dohromady <b>tlak</b>.
           </li>
@@ -110,11 +110,11 @@ export default function Lesson() {
 
       <Section title="Tepelný pohyb a teplota — co s čím souvisí">
         <p>
-          Pohyb částic v látce se jmenuje <Term>tepelný pohyb</Term>: je <b>nepřetržitý</b> (nikdy nepřestane) a{' '}
-          <b>neuspořádaný</b> (chaotický). Každá částice má nějakou kinetickou energii a ta odpovídá teplotě.
+          Pohyb částic v látce se jmenuje <Term id="tepelny-pohyb">tepelný pohyb</Term>: je <b>nepřetržitý</b> (nikdy nepřestane) a{' '}
+          <b>neuspořádaný</b> (chaotický). Každá částice má nějakou <Concept id="kineticka-energie">kinetickou energii</Concept> a ta odpovídá teplotě.
         </p>
         <p>
-          <Term>Teplota</Term> je veličina <b>statistické povahy</b> — popisuje soustavu jako celek, ne jednu částici.
+          <Term id="teplota">Teplota</Term> je veličina <b>statistické povahy</b> — popisuje soustavu jako celek, ne jednu částici.
           Měří se v kelvinech <M>{'(\\mathrm{K})'}</M>, případně °C nebo °F. Pro jednoatomový (ideální) plyn je
           teplota přímo úměrná <b>střední kinetické energii</b> částic:
         </p>
@@ -131,7 +131,7 @@ export default function Lesson() {
 
       <Section title="Brownův pohyb — krok po kroku">
         <p>
-          <Term>Brownův pohyb</Term> je chaotický, cukavý pohyb <b>drobného zrnka</b> (např. pylu nebo prachu) na vodní
+          <Term id="brownuv-pohyb">Brownův pohyb</Term> je chaotický, cukavý pohyb <b>drobného zrnka</b> (např. pylu nebo prachu) na vodní
           hladině. Je to <b>přímý důkaz</b> tepelného pohybu — sám zrnko vidíš pod mikroskopem, jak se nepravidelně
           škube, i když ho nic „nestrká". Proklikej si proč:
         </p>
@@ -231,7 +231,7 @@ export default function Lesson() {
 
         <p>
           Proč to zrnko vůbec ucítí? Protože je <b>maličké</b> — jeho hmotnost se blíží hmotnosti částic kapaliny, takže
-          mu nárazy podle <b>zákona zachování hybnosti</b> udělí <b>pozorovatelnou rychlost</b>. Velký kámen byste takhle
+          mu nárazy podle <b><Concept id="zachovani-hybnosti">zákona zachování hybnosti</Concept></b> udělí <b>pozorovatelnou rychlost</b>. Velký kámen byste takhle
           rozhýbat nedokázali.
         </p>
       </Section>

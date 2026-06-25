@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.8'
 
@@ -42,13 +42,13 @@ export default function Lesson_3_8() {
 
       <Section title="Co je interference světla a proč na ní záleží">
         <p>
-          <Term>Interference světla</Term> je skládání dvou (nebo více) světelných vln. Světlo je{' '}
+          <Term id="interference-svetla">Interference světla</Term> je skládání dvou (nebo více) světelných vln. Světlo je{' '}
           <Term>elektromagnetické vlnění</Term> — intenzita elektrického pole <M>{'\\vec E'}</M> a indukce
           magnetického pole <M>{'\\vec B'}</M> jsou v každém bodě navzájem kolmé, takže jde o vlnění{' '}
           <b>příčné</b>. (Viditelné světlo má <M>{'380\\,\\mathrm{nm} < \\lambda < 780\\,\\mathrm{nm}'}</M>.)
         </p>
         <p>
-          Když se dvě takové vlny potkají, jejich pole se <b>sčítají</b> (princip superpozice):
+          Když se dvě takové vlny potkají, jejich pole se <b>sčítají</b> (<Concept id="superpozice">princip superpozice</Concept>):
         </p>
         <MB>{'\\vec E = \\vec E_1 + \\vec E_2'}</MB>
         <p>
@@ -63,17 +63,17 @@ export default function Lesson_3_8() {
       <Section title="Kdy interference nastane — KOHERENCE (tady se ztrácejí body)">
         <p>
           Aby vznikl stabilní interferenční obrazec (pruhy, které se v čase nemění), musí být vlny{' '}
-          <Term>koherentní</Term>. To znamená splnit tři podmínky najednou:
+          <Term id="koherence">koherentní</Term>. To znamená splnit tři podmínky najednou:
         </p>
         <ol className="biglist">
-          <li><b>Stejná frekvence</b> (tedy i stejná vlnová délka <M>{'\\lambda'}</M>).</li>
-          <li><b>Stejná polarizace</b> — <M>{'\\vec E'}</M> obou vln kmitá ve stejné rovině (<M>{'\\vec E_{0,1} \\parallel \\vec E_{0,2}'}</M>).</li>
+          <li><b>Stejná frekvence</b> (tedy i stejná <Concept id="vlnova-delka">vlnová délka</Concept> <M>{'\\lambda'}</M>).</li>
+          <li><b>Stejná <Concept id="polarizace-svetla">polarizace</Concept></b> — <M>{'\\vec E'}</M> obou vln kmitá ve stejné rovině (<M>{'\\vec E_{0,1} \\parallel \\vec E_{0,2}'}</M>).</li>
           <li><b>Konstantní fázový rozdíl</b> v čase (fázový rozdíl se nesmí náhodně měnit).</li>
         </ol>
         <p>
           Nekoherentní vlny (např. dvě obyčejné žárovky) interferenční obrazec <b>nedají</b> — fáze tam skáče
           tak rychle, že se obrazec rozmaže a vidíme jen průměr. Zdrojem koherentního světla je{' '}
-          <b>laser</b>, nebo trik: vezme se <b>jeden</b> zdroj a jeho vlnoplocha se rozdělí (štěrbinami,
+          <b><Concept id="laser">laser</Concept></b>, nebo trik: vezme se <b>jeden</b> zdroj a jeho <Concept id="vlnoplocha">vlnoplocha</Concept> se rozdělí (štěrbinami,
           odrazem, lomem) — pak mají obě části stále stejný „rytmus".
         </p>
         <Callout kind="chytak" title="Chyták číslo jedna">
@@ -93,7 +93,7 @@ export default function Lesson_3_8() {
 
       <Section title="Youngův pokus (dvě štěrbiny) — klasika, co se vždycky chce">
         <p>
-          <Term>Youngův pokus</Term> je nejjednodušší způsob, jak interferenci světla ukázat — a zároveň{' '}
+          <Term id="younguv-pokus">Youngův pokus</Term> je nejjednodušší způsob, jak interferenci světla ukázat — a zároveň{' '}
           <b>klasický důkaz vlnové povahy světla</b>. Princip: jeden zdroj (aby bylo světlo koherentní) →
           dvě blízké štěrbiny → vzdálené stínítko, na kterém naskáčou <b>interferenční proužky</b>.
         </p>
@@ -103,7 +103,7 @@ export default function Lesson_3_8() {
           steps={[
             {
               label: 'koherentní světlo',
-              caption: <>Na <b>první stínítko</b> dopadá rovinná vlna a projde dvěma blízkými štěrbinami. Ty se podle Huygensova principu chovají jako <b>dva nové zdroje</b> — a protože vznikly z jedné vlnoplochy, vychází z nich světlo se <b>stejnou fází</b> (jsou koherentní).</>,
+              caption: <>Na <b>první stínítko</b> dopadá rovinná vlna a projde dvěma blízkými štěrbinami. Ty se podle <Concept id="huygensuv-princip">Huygensova principu</Concept> chovají jako <b>dva nové zdroje</b> — a protože vznikly z jedné vlnoplochy, vychází z nich světlo se <b>stejnou fází</b> (jsou koherentní).</>,
               content: (
                 <svg viewBox="0 0 460 240" className="svg-fig">
                   <Defs color={RAY} />
@@ -206,7 +206,7 @@ export default function Lesson_3_8() {
       <Section title="Interference na tenké vrstvě (olejová skvrna, mýdlová bublina, antireflexní vrstva)">
         <p>
           Tohle je nejhezčí praktická ukázka — a u zkoušky téměř jistá. Když světlo dopadne na{' '}
-          <Term>tenkou planparalelní vrstvu</Term> (olej na vodě, mýdlová bublina, vrstvička na čočce),
+          <Term id="tenka-vrstva">tenkou planparalelní vrstvu</Term> (olej na vodě, mýdlová bublina, vrstvička na čočce),
           část se odrazí na <b>horním</b> rozhraní a část projde dovnitř, odrazí se na <b>dolním</b> rozhraní
           a vyjde ven. Oba odražené paprsky vznikly z <b>jednoho</b> zdroje, takže jsou <b>koherentní</b> —
           a interferují spolu.
@@ -254,8 +254,8 @@ export default function Lesson_3_8() {
 
         <Callout kind="chytak" title="Hlavní chyták: fázový posun −λ/2 na hustším prostředí">
           <p>
-            Při odrazu světla na <b>opticky hustším</b> prostředí (vyšší index lomu) se fáze vlny otočí o
-            půl periody — jako by se přidalo <b>fázové zpoždění o <M>{'\\lambda/2'}</M></b>. (Je to analogie
+            <Term id="fazovy-posun-rozhrani">Při odrazu světla na <b>opticky hustším</b> prostředí (vyšší index lomu) se fáze vlny otočí o
+            půl periody — jako by se přidalo <b>fázové zpoždění o <M>{'\\lambda/2'}</M></b></Term>. (Je to analogie
             odrazu mechanického vlnění na <b>pevném konci</b>. Naopak odraz na <b>řidším</b> prostředí fázi
             nemění — jako volný konec.)
           </p>

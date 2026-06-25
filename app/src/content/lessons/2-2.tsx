@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.2'
 
@@ -43,14 +43,14 @@ export default function Lesson() {
     <>
       <p className="lead">
         Tahle lekce je „elektrický dvojník" gravitace: místo hmotností máš náboje a místo
-        gravitačního zákona Coulombův. Stačí umět napsat <b>jeden vzoreček</b>, charakterizovat
+        <Concept id="gravitacni-zakon">gravitačního zákona</Concept> Coulombův. Stačí umět napsat <b>jeden vzoreček</b>, charakterizovat
         náboj a odříkat <b>tři zákony</b> — a máš jisté body. Hlídej si jeden detail: náboj je{' '}
         <b>skalár</b>, kdežto síla mezi náboji je vektor.
       </p>
 
       <Section title="Elektrický náboj — co to vlastně je">
         <p>
-          <Term>Elektrický náboj</Term> je <b>vlastnost některých částic</b> (proton má kladný,
+          <Term id="naboj">Elektrický náboj</Term> je <b>vlastnost některých částic</b> (proton má kladný,
           elektron záporný). Je to <Term>skalární</Term> veličina — tedy <b>jen číslo se znaménkem</b>,
           žádný směr. Měří se v coulombech <M>{'[\\,\\mathrm C\\,]'}</M>.
         </p>
@@ -67,7 +67,7 @@ export default function Lesson() {
 
       <Section title="Coulombův zákon — vzoreček, který musíš umět z hlavy">
         <p>
-          <Term>Coulombův zákon</Term> popisuje <b>velikost síly mezi dvěma náboji</b>. Vypadá skoro
+          <Term id="coulombuv-zakon">Coulombův zákon</Term> popisuje <b>velikost síly mezi dvěma náboji</b>. Vypadá skoro
           úplně stejně jako gravitační zákon — jen místo hmotností jsou náboje:
         </p>
         <MB>{'F = k\\,\\frac{Q_1\\,Q_2}{r^2}, \\qquad k = \\frac{1}{4\\pi\\varepsilon}'}</MB>
@@ -105,7 +105,7 @@ export default function Lesson() {
 
       <Section title="Permitivita — co je to ε ve vzorečku">
         <p>
-          Konstanta <M>{'k'}</M> v sobě skrývá <Term>permitivitu</Term> <M>{'\\varepsilon'}</M> —
+          Konstanta <M>{'k'}</M> v sobě skrývá <Term id="permitivita">permitivitu</Term> <M>{'\\varepsilon'}</M> —
           vlastnost <b>prostředí</b>, ve kterém náboje jsou. Rozkládá se na dvě části:
         </p>
         <MB>{'\\varepsilon = \\varepsilon_r \\cdot \\varepsilon_0'}</MB>
@@ -130,7 +130,7 @@ export default function Lesson() {
         <ol className="biglist">
           <li>
             <b>Zákon zachování náboje.</b> V izolované soustavě se <b>celkový náboj nemění</b>
-            (analogie se zachováním energie). Náboj nevzniká ani nezaniká — jen se přemisťuje.
+            (analogie se <Concept id="zachovani-energie">zachováním energie</Concept>). Náboj nevzniká ani nezaniká — jen se přemisťuje.
           </li>
           <li>
             <b>Zákon invariantnosti náboje.</b> Náboj se <b>nemění pohybem</b> tělesa ani částic.
@@ -208,16 +208,16 @@ export default function Lesson() {
         <p>
           Látky dělíme podle toho, jestli v nich jsou <b>volné pohyblivé náboje</b>:
         </p>
-        <p><b><Term>Vodič</Term></b> (kovy, roztoky):</p>
+        <p><b><Term id="vodic">Vodič</Term></b> (kovy, roztoky):</p>
         <ul>
           <li>obsahuje <b>volné pohyblivé náboje</b> (v kovech volné elektrony),</li>
           <li>ve vnějším poli se náboje <b>přemístí</b> a vytvoří vlastní pole opačného směru,</li>
-          <li>výsledné pole uvnitř klesne <b>na nulu</b>, potenciál uvnitř je konstantní (Faradayova klec).</li>
+          <li>výsledné pole uvnitř klesne <b>na nulu</b>, <Concept id="potencial">potenciál</Concept> uvnitř je konstantní (<Concept id="faradayova-klec">Faradayova klec</Concept>).</li>
         </ul>
-        <p><b><Term>Dielektrikum</Term></b> (izolant — sklo, plast, suchý vzduch):</p>
+        <p><b><Term id="dielektrikum">Dielektrikum</Term></b> (izolant — sklo, plast, suchý vzduch):</p>
         <ul>
-          <li>nemá volné náboje — všechny jsou <b>pevně vázané</b> v atomech/molekulách,</li>
-          <li>ve vnějším poli se náboje jen mírně <b>posunou (polarizace)</b>, neodtečou,</li>
+          <li>nemá volné náboje — všechny jsou <b><Concept id="vazane-naboje">pevně vázané</Concept></b> v atomech/molekulách,</li>
+          <li>ve vnějším poli se náboje jen mírně <b>posunou (<Concept id="polarizace-dielektrika">polarizace</Concept>)</b>, neodtečou,</li>
           <li>pole uvnitř se <b>jen zeslabí</b>, na nulu neklesne.</li>
         </ul>
 

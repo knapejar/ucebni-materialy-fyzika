@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.3'
 
@@ -33,14 +33,14 @@ export default function Lesson_1_3() {
     <>
       <p className="lead">
         Energie je „měna", kterou ve fyzice platíš za pohyb a za zvednutí věcí nahoru — a{' '}
-        <Term>práce</Term> je převod z jednoho účtu na druhý. Zní to abstraktně, ale u zkoušky chtějí
+        práce je převod z jednoho účtu na druhý. Zní to abstraktně, ale u zkoušky chtějí
         tři vzorečky, jeden úhel a pár příkladů. Když budeš vědět, <b>co je a co není práce</b>, máš
         nejčastější chyták z krku.
       </p>
 
       <Section title="Práce: W = F·s·cos α (a proč tam je ten kosinus)">
         <p>
-          <Term>Práce</Term> je dráhový účinek síly — co síla „nadělá", když posune těleso po nějaké
+          <Term id="prace">Práce</Term> je dráhový účinek <Concept id="sila">síly</Concept> — co síla „nadělá", když posune těleso po nějaké
           dráze. V nejjednodušším případě (stálá síla, přímá dráha) platí:
         </p>
         <MB>{'W = \\vec F \\cdot \\vec s = F\\,s\\,\\cos\\alpha'}</MB>
@@ -51,7 +51,7 @@ export default function Lesson_1_3() {
           vektor) — i když ji počítáš ze dvou vektorů.
         </p>
         <p>
-          Ten zápis <M>{'\\vec F \\cdot \\vec s'}</M> je <Term>skalární součin</Term> dvou vektorů.
+          Ten zápis <M>{'\\vec F \\cdot \\vec s'}</M> je <Term id="skalarni-soucin">skalární součin</Term> dvou vektorů.
           Jeho definice je přesně <M>{'\\vec a\\cdot\\vec b = |\\vec a|\\,|\\vec b|\\,\\cos\\alpha'}</M> —
           ze dvou vektorů udělá jedno číslo a <b>bere jen tu složku, která jde stejným směrem</b>.
           Proto ten kosinus: práci koná jen ta část síly, která táhne <i>po směru</i> pohybu.
@@ -162,20 +162,20 @@ export default function Lesson_1_3() {
 
       <Section title="Kinetická energie: energie pohybu">
         <p>
-          <Term>Kinetická energie</Term> <M>{'E_k'}</M> je energie, kterou má těleso <b>proto, že se
+          <Term id="kineticka-energie">Kinetická energie</Term> <M>{'E_k'}</M> je energie, kterou má těleso <b>proto, že se
           pohybuje</b>. Definuje se jako práce nutná k tomu, abys těleso z klidu rozjel na danou
           rychlost. Má dvě podoby — podle toho, jestli se těleso <i>posouvá</i>, nebo <i>otáčí</i>:
         </p>
         <MB>{'E_k = \\tfrac{1}{2}m v^2 \\qquad\\text{(translační — posuvný pohyb)}'}</MB>
         <MB>{'E_k^{R} = \\tfrac{1}{2}J\\omega^2 \\qquad\\text{(rotační — otáčení)}'}</MB>
         <p>
-          U rotace je <M>{'J'}</M> <Term>moment setrvačnosti</Term> (jak je hmota rozmístěná kolem
+          U rotace je <M>{'J'}</M> <Concept id="moment-setrvacnosti">moment setrvačnosti</Concept> (jak je hmota rozmístěná kolem
           osy — obdoba hmotnosti pro otáčení) a <M>{'\\omega'}</M> je úhlová rychlost. Všimni si, že
           jsou to úplně stejné vzorce, jen <M>{'m\\to J'}</M> a <M>{'v\\to\\omega'}</M>.
         </p>
         <Callout kind="tip" title="Kde se ptají na obojí">
           <p>
-            Klasický zkouškový příklad: <b>válec (nebo koule) sjíždí z nakloněné roviny</b>. Protože
+            Klasický zkouškový příklad: <b>válec (nebo koule) sjíždí z <Concept id="naklonena-rovina">nakloněné roviny</Concept></b>. Protože
             se zároveň <b>posouvá i kotálí (otáčí)</b>, musíš počítat s oběma:{' '}
             <M>{'E_k = \\tfrac12 m v^2 + \\tfrac12 J\\omega^2'}</M>. Kdyby to byl kvádr, který se jen
             sune, stačí translační část.
@@ -204,7 +204,7 @@ export default function Lesson_1_3() {
 
       <Section title="Potenciální energie: energie polohy">
         <p>
-          <Term>Potenciální energie</Term> <M>{'E_p'}</M> je energie, kterou má těleso <b>kvůli své
+          <Term id="potencialni-energie">Potenciální energie</Term> <M>{'E_p'}</M> je energie, kterou má těleso <b>kvůli své
           poloze v silovém poli</b> — je „nahromaděná" a může se uvolnit. Dva vzorce, které musíš znát:
         </p>
         <MB>{'E_p = m g h \\qquad\\text{(gravitační — výška } h \\text{ nad zemí)}'}</MB>

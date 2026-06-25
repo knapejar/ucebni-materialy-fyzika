@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.1'
 
@@ -51,7 +51,7 @@ export default function Lesson_3_1() {
     <>
       <p className="lead">
         Kmity jsou „pohyb tam a zpátky“ — kulička na pružině, kyvadlo, struna. U zkoušky se ptají na{' '}
-        <Term>definice</Term> (kmit, perioda, amplituda), na <Term>sílu</Term>, která za tím stojí
+        <Term>definice</Term> (kmit, perioda, amplituda), na <Concept id="sila">sílu</Concept>, která za tím stojí
         (<M>{'F=-k\\,u'}</M>), a na to, jak se během kmitu <Term>přelévá energie</Term>. Žádné drama —
         tři pojmy, jeden vzoreček a jeden obrázek, a máš body.
       </p>
@@ -59,21 +59,21 @@ export default function Lesson_3_1() {
       <Section title="Tři pojmy, které musíš umět odříkat">
         <p>
           <Term>Kmitání (oscilace)</Term> je pohyb, při kterém se nějaká veličina (třeba výchylka)
-          mění <b>kolem rovnovážné polohy</b> a po čase se děj zopakuje. Hmotný bod vykoná <b>jeden{' '}
-          <Term>kmit</Term></b>, když projde celou dráhu (z rovnováhy ven, na druhou stranu a zpět) a
+          mění <b>kolem rovnovážné polohy</b> a po čase se děj zopakuje. <Concept id="hmotny-bod">Hmotný bod</Concept> vykoná <b>jeden{' '}
+          <Term id="kmit">kmit</Term></b>, když projde celou dráhu (z rovnováhy ven, na druhou stranu a zpět) a
           vrátí se do výchozí polohy ve stejném směru pohybu.
         </p>
         <ul className="biglist">
           <li>
-            <b><Term>Perioda</Term> <M>{'T'}</M></b> = doba jednoho kmitu (v sekundách). Kolikrát za
+            <b><Term id="perioda">Perioda</Term> <M>{'T'}</M></b> = doba jednoho kmitu (v sekundách). Kolikrát za
             sekundu to kmitne, udává <b>frekvence</b> <M>{'\\nu = 1/T'}</M> (v hertzích, <M>{'\\mathrm{Hz}'}</M>).
           </li>
           <li>
-            <b><Term>Amplituda</Term> <M>{'A'}</M></b> = <b>maximální výchylka</b> od rovnovážné
+            <b><Term id="amplituda">Amplituda</Term> <M>{'A'}</M></b> = <b>maximální výchylka</b> od rovnovážné
             polohy (jak daleko to „vykývne“).
           </li>
           <li>
-            <b><Term>Harmonické kmitání</Term></b> = takové, kde se výchylka mění <b>podle sinu (resp.
+            <b><Term id="harmonicke-kmitani">Harmonické kmitání</Term></b> = takové, kde se výchylka mění <b>podle sinu (resp.
             kosinu)</b>. To je ten „čistý“, nejjednodušší případ — a přesně ten se počítá.
           </li>
         </ul>
@@ -122,12 +122,12 @@ export default function Lesson_3_1() {
         <p>
           Aby těleso kmitalo, musí na něj působit síla, která ho <b>pořád tlačí zpátky do rovnováhy</b>.
           V rovnováze je nulová, a čím dál ho vychýlíš, tím je větší. Nejjednodušší takovou sílu —{' '}
-          <Term>kvazielastickou sílu</Term> — popisuje vzoreček:
+          <Term id="kvazielasticka-sila">kvazielastickou sílu</Term> — popisuje vzoreček:
         </p>
         <MB>{'\\vec F = -k\\,\\vec u'}</MB>
         <p>
           kde <M>{'\\vec u'}</M> je výchylka z rovnováhy a <M>{'k'}</M> je <b>tuhost</b> (kladná
-          konstanta). Soustava, kterou žene právě tahle síla, je <Term>(lineární) harmonický
+          konstanta). Soustava, kterou žene právě tahle síla, je <Term id="harmonicky-oscilator">(lineární) harmonický
           oscilátor</Term>.
         </p>
 
@@ -162,7 +162,7 @@ export default function Lesson_3_1() {
         </Figure>
 
         <p>
-          Když tu sílu dosadíš do <M>{'\\vec F = m\\vec a'}</M>, dostaneš <b>pohybovou rovnici</b>{' '}
+          Když tu sílu dosadíš do <M>{'\\vec F = m\\vec a'}</M>, dostaneš <b><Concept id="pohybova-rovnice">pohybovou rovnici</Concept></b>{' '}
           oscilátoru:
         </p>
         <MB>{'m\\,\\frac{\\mathrm d^2 u}{\\mathrm d t^2} = -k\\,u'}</MB>
@@ -195,16 +195,16 @@ export default function Lesson_3_1() {
           </li>
         </ul>
         <Callout kind="info" title="Obecná pravda na efekt">
-          Skoro každá soustava blízko stabilní rovnováhy (v <b>minimu potenciální energie</b>) kmitá
+          Skoro každá soustava blízko stabilní rovnováhy (v <b>minimu <Concept id="potencialni-energie">potenciální energie</Concept></b>) kmitá
           při malých výchylkách harmonicky. Proto je harmonický oscilátor tak důležitý — je všude.
         </Callout>
       </Section>
 
       <Section title="Zákon zachování energie: Ep ⇄ Ek">
         <p>
-          U ideálního oscilátoru (bez tření) platí <b>zákon zachování mechanické energie</b>: celková
+          U ideálního oscilátoru (bez tření) platí <b><Concept id="zachovani-mech-energie">zákon zachování mechanické energie</Concept></b>: celková
           energie <M>{'E = E_p + E_k'}</M> je <b>pořád stejná</b>, jen se neustále <b>přelévá</b> mezi
-          potenciální a kinetickou. Pružina si „schová“ energii do{' '}
+          potenciální a <Concept id="kineticka-energie">kinetickou</Concept>. Pružina si „schová“ energii do{' '}
           <M>{'E_p = \\tfrac{1}{2}k u^2'}</M>, pohyb je <M>{'E_k = \\tfrac{1}{2}m v^2'}</M>. Proklikej
           si jeden kmit:
         </p>

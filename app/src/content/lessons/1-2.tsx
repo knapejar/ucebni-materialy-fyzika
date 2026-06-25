@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.2'
 
@@ -50,7 +50,7 @@ export default function Lesson() {
 
       <Section title="Hybnost — „množství pohybu“">
         <p>
-          <Term>Hybnost</Term> <M>{'\\vec p'}</M> je míra posuvného pohybu tělesa. Spočítáš ji jako
+          <Term id="hybnost">Hybnost</Term> <M>{'\\vec p'}</M> je míra posuvného pohybu tělesa. Spočítáš ji jako
           hmotnost krát rychlost:
         </p>
         <MB>{'\\vec p = m\\,\\vec v \\qquad [\\,\\vec p\\,]=\\mathrm{kg\\,m\\,s^{-1}}'}</MB>
@@ -72,7 +72,7 @@ export default function Lesson() {
       <Section title="Impulz síly — síla působící po nějaký čas">
         <p>
           Když na těleso chvíli tlačíš silou, předáš mu „dávku" hybnosti. Tahle dávka se jmenuje{' '}
-          <Term>impulz síly</Term> <M>{'\\vec I'}</M> a je to síla krát doba působení:
+          <Term id="impulz-sily">impulz síly</Term> <M>{'\\vec I'}</M> a je to síla krát doba působení:
         </p>
         <MB>{'\\vec I = \\vec F\\,\\Delta t = \\int_{t_1}^{t_2}\\vec F\\,\\mathrm dt \\qquad [\\,\\vec I\\,]=\\mathrm{N\\,s}'}</MB>
         <p>
@@ -104,7 +104,7 @@ export default function Lesson() {
 
       <Section title="Zákon zachování hybnosti — a kdy platí">
         <p>
-          Tohle je jádro otázky. <Term>Zákon zachování hybnosti</Term> říká:
+          Tohle je jádro otázky. <Term id="zachovani-hybnosti">Zákon zachování hybnosti</Term> říká:
         </p>
         <Callout kind="info" title="Zákon zachování hybnosti">
           V <b>izolované soustavě</b> (na kterou nepůsobí žádné vnější síly) se celková hybnost
@@ -213,7 +213,7 @@ export default function Lesson() {
             nulová (to je princip rakety).
           </li>
           <li>
-            <b><Term>Brownův pohyb</Term>:</b> drobné zrnko ve vodě je ze všech stran bombardováno
+            <b><Concept id="brownuv-pohyb">Brownův pohyb</Concept>:</b> drobné zrnko ve vodě je ze všech stran bombardováno
             molekulami. Nárazy jsou náhodné a nevyrovnané, takže zrnko cuká sem a tam. Při každém
             nárazu se hybnost mezi molekulou a zrnkem <b>vyměňuje</b>, ale celková hybnost soustavy
             (zrnko + molekuly) se zachovává — je to pěkný důkaz, že hybnost se při srážkách přenáší.

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.4'
 
@@ -49,7 +49,7 @@ export default function Lesson_3_4() {
 
       <Section title="Co je vlnění (a proč „pružné vazby“)">
         <p>
-          <Term>Vlnění</Term> je <b>šíření kmitů</b> prostředím. Jeden bod se rozkmitá a protože je
+          <Term id="vlneni">Vlnění</Term> je <b>šíření <Concept id="kmit">kmitů</Concept></b> prostředím. Jeden bod se rozkmitá a protože je
           se sousedy svázaný <Term>pružnými vazbami</Term> (jako pružinky mezi částicemi), strhne
           postupně k pohybu i okolí. Tak se rozruch šíří dál a dál.
         </p>
@@ -89,7 +89,7 @@ export default function Lesson_3_4() {
             },
             {
               label: 't = T',
-              caption: <>Za jednu periodu <M>{'T'}</M> vlna ujede přesně jednu <span style={{ color: HOT }}>λ</span> a bod se vrátí, kde začal. Odtud <M>{'\\lambda = w\\,T'}</M> (<M>{'w'}</M> = rychlost šíření).</>,
+              caption: <>Za jednu <Concept id="perioda">periodu</Concept> <M>{'T'}</M> vlna ujede přesně jednu <span style={{ color: HOT }}>λ</span> a bod se vrátí, kde začal. Odtud <M>{'\\lambda = w\\,T'}</M> (<M>{'w'}</M> = rychlost šíření).</>,
               content: <WaveFrame phase={2 * Math.PI} showLambda />,
             },
           ]}
@@ -112,7 +112,7 @@ export default function Lesson_3_4() {
 
         <p><b>Prostorové veličiny</b> (popisují rozložení vln podél směru šíření):</p>
         <ul>
-          <li><Term>Vlnová délka <M>{'\\lambda'}</M></Term> [m] — vzdálenost dvou nejbližších bodů, které kmitají <b>se stejnou fází</b> (např. od hrbu k hrbu). Taky: dráha, kterou vlna urazí za jednu periodu.</li>
+          <li><Term id="vlnova-delka">Vlnová délka <M>{'\\lambda'}</M></Term> [m] — vzdálenost dvou nejbližších bodů, které kmitají <b>se stejnou fází</b> (např. od hrbu k hrbu). Taky: dráha, kterou vlna urazí za jednu periodu.</li>
           <li><Term>Vlnočet <M>{'\\sigma'}</M></Term> [m<sup>−1</sup>] — kolik vlnových délek se vejde na metr:
             <MB>{'\\sigma = \\frac{1}{\\lambda}'}</MB>
           </li>
@@ -227,7 +227,7 @@ export default function Lesson_3_4() {
       <Section title="Vlnoplocha">
         <p>
           Když se vlna šíří prostorem (ne jen po struně), je užitečné spojit body, které kmitají{' '}
-          <b>stejně (ve stejné fázi)</b>. Taková plocha se jmenuje <Term>vlnoplocha</Term>.
+          <b>stejně (ve stejné fázi)</b>. Taková plocha se jmenuje <Term id="vlnoplocha">vlnoplocha</Term>.
         </p>
         <ul>
           <li>Bodový zdroj v prostoru → vlnoplochy jsou <b>kulové</b> (slupky cibule).</li>

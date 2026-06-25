@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.5'
 
@@ -34,17 +34,17 @@ export default function Lesson_1_5() {
     <>
       <p className="lead">
         Místo abychom počítali pohyb každého kamínku v hozeném kameni zvlášť, sledujeme jediný bod —{' '}
-        <Term>těžiště</Term>. A když se těleso navíc <Term>otáčí</Term>, použijeme „rotační dvojníky"
+        <Term id="teziste">těžiště</Term>. A když se těleso navíc otáčí, použijeme „rotační dvojníky"
         síly, hmotnosti a hybnosti. U zkoušky se ptají hlavně na <b>vzorec pro těžiště</b>,{' '}
         <b>pohybovou rovnici rotace</b> a na jeden oblíbený chyták o <b>parabole</b>.
       </p>
 
       <Section title="Proč těžiště: jeden bod místo tisíce">
         <p>
-          Reálné těleso je <Term>soustava hmotných bodů</Term> — spousta malých kousků o hmotnostech{' '}
+          Reálné těleso je soustava <Concept id="hmotny-bod">hmotných bodů</Concept> — spousta malých kousků o hmotnostech{' '}
           <M>{'m_i'}</M> na polohách <M>{'\\vec r_i'}</M>. Počítat pohyb každého zvlášť je beznadějné,
           tak použijeme <b>statistický trik</b>: celé těleso nahradíme jediným bodem, do kterého
-          „slijeme" celou hmotnost. Tomu bodu se říká <Term>těžiště</Term> (hmotný střed).
+          „slijeme" celou hmotnost. Tomu bodu se říká těžiště (hmotný střed).
         </p>
         <p>
           Jeho polohu spočítáme jako <b>vážený průměr</b> poloh všech kousků — váhou je hmotnost
@@ -86,9 +86,9 @@ export default function Lesson_1_5() {
       <Section title="Jak se pohybuje těžiště (a slavný chyták s parabolou)">
         <p>
           Klíčová věc: <b>vnitřní síly</b> (jak se kousky tělesa tahají navzájem) se podle{' '}
-          <Term>3. Newtonova zákona</Term> vzájemně vyruší — vždy přijdou v párech stejně velkých a
+          <Concept id="newtonovy-zakony">3. Newtonova zákona</Concept> vzájemně vyruší — vždy přijdou v párech stejně velkých a
           opačných sil. Proto o pohybu těžiště rozhodují <b>jen vnější síly</b> a platí pro něj
-          úplně stejná pohybová rovnice jako pro jeden hmotný bod:
+          úplně stejná <Concept id="pohybova-rovnice">pohybová rovnice</Concept> jako pro jeden hmotný bod:
         </p>
         <MB>{'\\vec F_{\\text{vnější}} = M\\,\\frac{\\mathrm d^2 \\vec R_T}{\\mathrm d t^2} = M\\,\\vec a_T'}</MB>
         <p>
@@ -103,7 +103,7 @@ export default function Lesson_1_5() {
           steps={[
             {
               label: 'vržení',
-              caption: <>Činku hodíme šikmo vzhůru a roztočíme. Sledujeme oranžový bod — její <Term>těžiště</Term> (uprostřed mezi koulemi).</>,
+              caption: <>Činku hodíme šikmo vzhůru a roztočíme. Sledujeme oranžový bod — její těžiště (uprostřed mezi koulemi).</>,
               content: (
                 <svg viewBox="0 0 420 200" className="svg-fig">
                   <Defs id="ar1" color={ACCENT} />
@@ -166,7 +166,7 @@ export default function Lesson_1_5() {
 
       <Section title="Rotace tělesa: každá veličina má „otáčivého dvojníka">
         <p>
-          <Term>Rotace</Term> (otáčivý pohyb) je takový pohyb tuhého tělesa, kdy se všechny body
+          Rotace (otáčivý pohyb) je takový pohyb tuhého tělesa, kdy se všechny body
           točí kolem <b>jedné společné osy</b> se stejnou úhlovou rychlostí; jejich dráhy jsou{' '}
           <b>kružnice</b>. Translaci popisujeme <M>{'\\vec F = m\\vec a'}</M>; pro rotaci platí
           úplně stejně vypadající rovnice, jen s „otáčivými" veličinami. Tahle tabulka je u zkoušky
@@ -210,14 +210,14 @@ export default function Lesson_1_5() {
           </table>
         </div>
 
-        <p>A teď ta hlavní věta — <Term>pohybová rovnice rotace</Term> (otáčivá obdoba <M>{'\\vec F = m\\vec a = \\mathrm d\\vec p/\\mathrm dt'}</M>):</p>
+        <p>A teď ta hlavní věta — pohybová rovnice rotace (otáčivá obdoba <M>{'\\vec F = m\\vec a = \\mathrm d\\vec p/\\mathrm dt'}</M>):</p>
         <MB>{'\\vec\\Gamma = J\\,\\vec\\alpha = \\frac{\\mathrm d\\vec L}{\\mathrm d t}'}</MB>
         <p>Slovy a po jednotlivých veličinách (přesně tohle u zkoušky popiš):</p>
         <ul className="biglist">
-          <li><b><M>{'\\vec\\Gamma'}</M> — moment síly</b> (otáčivý účinek síly), <M>{'\\vec\\Gamma = \\vec r\\times\\vec F'}</M>. Roste s velikostí síly i se vzdáleností působiště od osy (rameno).</li>
-          <li><b><M>{'J'}</M> — moment setrvačnosti</b>, <M>{'J = \\sum m_i r_i^2'}</M>. „Rotační hmotnost" — jak moc se těleso brání roztočení. Záleží i na tom, <b>jak daleko od osy</b> hmota leží.</li>
+          <li><b><M>{'\\vec\\Gamma'}</M> — <Term id="moment-sily">moment síly</Term></b> (otáčivý účinek síly), <M>{'\\vec\\Gamma = \\vec r\\times\\vec F'}</M>. Roste s velikostí síly i se vzdáleností působiště od osy (rameno).</li>
+          <li><b><M>{'J'}</M> — <Term id="moment-setrvacnosti">moment setrvačnosti</Term></b>, <M>{'J = \\sum m_i r_i^2'}</M>. „Rotační hmotnost" — jak moc se těleso brání roztočení. Záleží i na tom, <b>jak daleko od osy</b> hmota leží.</li>
           <li><b><M>{'\\vec\\alpha'}</M> — úhlové zrychlení</b> (jak rychle roste otáčení).</li>
-          <li><b><M>{'\\vec L'}</M> — moment hybnosti</b>, <M>{'\\vec L = J\\vec\\omega'}</M>. Rotační obdoba hybnosti.</li>
+          <li><b><M>{'\\vec L'}</M> — <Term id="moment-hybnosti">moment hybnosti</Term></b>, <M>{'\\vec L = J\\vec\\omega'}</M>. Rotační obdoba hybnosti.</li>
           <li><b><M>{'\\vec\\omega'}</M> — úhlová rychlost</b> (jak rychle se těleso točí); je rovnoběžná s osou otáčení.</li>
         </ul>
         <p className="muted">
@@ -227,10 +227,10 @@ export default function Lesson_1_5() {
 
       <Section title="Dvojice sil — co točí, ale netlačí">
         <p>
-          <Term>Dvojice sil</Term> jsou <b>dvě stejně velké</b> a <b>opačně orientované</b> síly,
+          <Term id="dvojice-sil">Dvojice sil</Term> jsou <b>dvě stejně velké</b> a <b>opačně orientované</b> síly,
           které <b>neleží na jedné přímce</b>. Jejich výslednice je nulová (těžiště se neposune),
           ale protože jsou posunuté vedle sebe, vytvoří <b>čistý otáčivý moment</b> — těleso se
-          roztočí, ale neposune se. Klasická ukázka: otáčení volantem nebo dipól v homogenním poli.
+          roztočí, ale neposune se. Klasická ukázka: otáčení volantem nebo <Concept id="dipol">dipól</Concept> v homogenním poli.
         </p>
 
         <Figure caption="Dvojice sil: stejně velké, opačné, ale na různých přímkách (rameno d) → roztočí těleso. Pozor: kdyby ležely na téže přímce, jen by se vyrušily.">

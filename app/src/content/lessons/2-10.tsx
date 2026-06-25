@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.10'
 
@@ -44,14 +44,14 @@ export default function Lesson_2_10() {
     <>
       <p className="lead">
         Tahle otázka je oblíbená, protože se dá odpovědět „lidsky" a přitom přesně. Stačí umět dvě
-        věci: co udělá <Term>vodič</Term> ve vnějším poli (a proč ho zevnitř „odstíní") a co se děje
-        v <Term>dielektriku</Term> (polarizace). Když si zapamatuješ pár chytáků, máš bod jistý.
+        věci: co udělá <Concept id="vodic">vodič</Concept> ve vnějším poli (a proč ho zevnitř „odstíní") a co se děje
+        v <Concept id="dielektrikum">dielektriku</Concept> (polarizace). Když si zapamatuješ pár chytáků, máš bod jistý.
       </p>
 
       <Section title="O co jde: jak látka reaguje na vnější pole">
         <p>
           Vložíme kus látky do vnějšího elektrostatického pole <M>{'\\vec E'}</M>. Co se stane,
-          rozhoduje jediná otázka: <b>jsou v látce volné náboje, které se můžou hýbat?</b>
+          rozhoduje jediná otázka: <b>jsou v látce volné <Concept id="naboj">náboje</Concept>, které se můžou hýbat?</b>
         </p>
         <ul>
           <li>
@@ -60,7 +60,7 @@ export default function Lesson_2_10() {
           </li>
           <li>
             <b>Dielektrikum (izolant)</b> = látka <Term>bez</Term> volných nábojů. Všechny náboje
-            jsou <Term>vázané</Term> pevně v atomech a molekulách — můžou se jen maličko pošoupnout.
+            jsou <Term id="vazane-naboje">vázané</Term> pevně v atomech a molekulách — můžou se jen maličko pošoupnout.
           </li>
         </ul>
       </Section>
@@ -155,9 +155,9 @@ export default function Lesson_2_10() {
         />
 
         <p>
-          Hotový vodič se proto chová jako <Term>Faradayova klec</Term>: vnější pole se zvenčí
-          „rozprostře" po povrchu a <Term>elektrický stín</Term> uvnitř je chráněný. Protože uvnitř
-          není pole, <b>potenciál je tam všude stejný</b> (konstantní) — stejný jako na povrchu.
+          Hotový vodič se proto chová jako <Term id="faradayova-klec">Faradayova klec</Term>: vnější pole se zvenčí
+          „rozprostře" po povrchu a <Term id="elektricky-stin">elektrický stín</Term> uvnitř je chráněný. Protože uvnitř
+          není pole, <b><Concept id="potencial">potenciál</Concept> je tam všude stejný</b> (konstantní) — stejný jako na povrchu.
         </p>
 
         <MB>{'\\vec E_{\\text{uvnitř}} = \\vec 0 \\quad\\Rightarrow\\quad \\varphi = \\text{konst.}'}</MB>
@@ -166,8 +166,8 @@ export default function Lesson_2_10() {
       <Section title="Dielektrikum: polarizace vázaných nábojů">
         <p>
           V izolantu se nemá co volně rozpohybovat — náboje jsou <Term>vázané</Term>. Vnější pole je
-          tedy jen <b>natáhne nebo pootočí</b>. Tomu se říká <Term>polarizace</Term>. Vznikne tím
-          spousta malých dipólů, a ty <b>část</b> vnějšího pole uvnitř látky vykompenzují (nikdy ne
+          tedy jen <b>natáhne nebo pootočí</b>. Tomu se říká <Term id="polarizace-dielektrika">polarizace</Term>. Vznikne tím
+          spousta malých <Concept id="dipol">dipólů</Concept>, a ty <b>část</b> vnějšího pole uvnitř látky vykompenzují (nikdy ne
           celé — to umí jen vodič).
         </p>
 
@@ -207,7 +207,7 @@ export default function Lesson_2_10() {
           </li>
         </ul>
         <p>
-          Navíc u <Term>polárních molekul</Term> (mají vlastní dipól, třeba voda) přibývá ještě{' '}
+          Navíc u <Term id="polarni-molekula">polárních molekul</Term> (mají vlastní dipól, třeba voda) přibývá ještě{' '}
           <b>rotace</b> — pole celé molekuly natáčí, aby ležely po směru pole. Tahle orientace je{' '}
           <b>pomalejší</b> a <b>závisí na teplotě</b> (teplo molekuly rozhazuje).
         </p>
@@ -216,7 +216,7 @@ export default function Lesson_2_10() {
       <Section title="Polární × nepolární molekuly">
         <ul>
           <li>
-            <b>Polární</b> molekula <b>má</b> vlastní dipólový moment i bez pole (náboj v ní je
+            <b>Polární</b> molekula <b>má</b> vlastní <Concept id="dipolovy-moment">dipólový moment</Concept> i bez pole (náboj v ní je
             rozložený nesymetricky — typicky voda <M>{'\\mathrm{H_2O}'}</M>).
           </li>
           <li>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.1'
 
@@ -41,7 +41,7 @@ export default function Lesson() {
 
       <Section title="O co jde: dualismus jednou větou">
         <p>
-          <Term>Korpuskulárně-vlnový dualismus</Term> (korpuskulární = částicový) říká, že objekty
+          <Term id="dualismus">Korpuskulárně-vlnový dualismus</Term> (korpuskulární = částicový) říká, že objekty
           mikrosvěta — foton, elektron — se <b>jednou chovají jako vlna</b> (interferují, ohýbají se)
           a <b>jindy jako částice</b> (dopadnou na jediné místo jako kulička). Která stránka se ukáže,
           rozhoduje to, <i>jaké měření na ně pustíme</i>.
@@ -61,7 +61,7 @@ export default function Lesson() {
 
       <Section title="Tři analogické experimenty se dvěma štěrbinami">
         <p>
-          Dualismus se nejlíp ukáže na <Term>experimentu se dvěma štěrbinami</Term> (stěna se dvěma
+          Dualismus se nejlíp ukáže na <Term id="dvojsterbinovy-experiment">experimentu se dvěma štěrbinami</Term> (stěna se dvěma
           otvory, za ní stínítko). Srovnáváme tři situace: klasické <b>kuličky</b>, klasické{' '}
           <b>vlny</b> (třeba na vodě) a <b>elektrony</b>.
         </p>
@@ -116,7 +116,7 @@ export default function Lesson() {
           </li>
           <li>
             <b>Vlny.</b> Za každou štěrbinou se šíří do oblouků, oba se překryjí a{' '}
-            <Term>interferují</Term> — na stínítku vznikne pruhovaný obrazec (světlá/tmavá místa).
+            <Concept id="interference">interferují</Concept> — na stínítku vznikne pruhovaný obrazec (světlá/tmavá místa).
           </li>
           <li>
             <b>Elektrony.</b> Každý dopadne <i>bodově</i> jako kulička, ale když jich pošleš spoustu,
@@ -227,23 +227,23 @@ export default function Lesson() {
 
       <Section title="Foton — kvantum elektromagnetického pole">
         <p>
-          <Term>Foton</Term> je <b>kvantum (nejmenší porce) elektromagnetického pole</b> — částice
+          <Term id="foton">Foton</Term> je <b>kvantum (nejmenší porce) elektromagnetického pole</b> — částice
           světla. Tři věci, které o něm musíš umět vysypat:
         </p>
         <ul>
           <li><b>Nulová klidová hmotnost</b> (a tedy nulová klidová energie). Foton nikdy „nestojí“.</li>
           <li>Vždy se pohybuje <b>rychlostí světla</b> <M>{'c'}</M>.</li>
-          <li>Nese energii <M>{'E = h\\nu'}</M> a hybnost <M>{'p = E/c = h/\\lambda'}</M>.</li>
+          <li>Nese energii <M>{'E = h\\nu'}</M> a <Concept id="hybnost">hybnost</Concept> <M>{'p = E/c = h/\\lambda'}</M>.</li>
         </ul>
         <p>
           I když má foton nulovou <i>klidovou</i> hmotnost, díky své energii má <Term>relativistickou
           hmotnost</Term> <M>{'m = E/c^2'}</M> — z toho plyne i jeho hybnost. Konstanta{' '}
-          <Term>h</Term> (<Term>Planckova konstanta</Term>) je doslova „hranice mezi makrosvětem a
+          <Term>h</Term> (<Term id="planckova-konstanta">Planckova konstanta</Term>) je doslova „hranice mezi makrosvětem a
           mikrosvětem“.
         </p>
         <MB>{'E = h\\nu = \\frac{h c}{\\lambda} \\qquad p = \\frac{E}{c} = \\frac{h}{\\lambda} \\qquad m = \\frac{E}{c^2}'}</MB>
         <p>
-          (<M>{'\\nu'}</M> je frekvence, <M>{'\\lambda'}</M> vlnová délka; platí <M>{'c = \\lambda\\nu'}</M>.)
+          (<M>{'\\nu'}</M> je frekvence, <M>{'\\lambda'}</M> <Concept id="vlnova-delka">vlnová délka</Concept>; platí <M>{'c = \\lambda\\nu'}</M>.)
         </p>
       </Section>
 
@@ -283,8 +283,8 @@ export default function Lesson() {
       <Section title="De Broglieho vlna — i částice má vlnovou délku">
         <p>
           De Broglie přišel s odvážnou symetrií: když se vlna (foton) chová jako částice, ať se i{' '}
-          <b>každá částice chová jako vlna</b>. Každé částici s hybností <M>{'p'}</M> přiřadil{' '}
-          <Term>de Broglieho vlnovou délku</Term>:
+          <Term id="de-broglie"><b>každá částice chová jako vlna</b></Term>. Každé částici s hybností <M>{'p'}</M> přiřadil{' '}
+          <Term id="de-broglieho-vlna">de Broglieho vlnovou délku</Term>:
         </p>
         <MB>{'\\lambda = \\frac{h}{p} \\qquad \\nu = \\frac{E}{h}'}</MB>
         <p>
@@ -294,12 +294,12 @@ export default function Lesson() {
           věcí kolem nás žádné vlnění nevnímáme.
         </p>
         <p>
-          Energii přitom částice přenáší <Term>grupovou rychlostí</Term> vlnového klubka, a ta se
+          Energii přitom částice přenáší <Concept id="grupova-rychlost">grupovou rychlostí</Concept> <Concept id="vlnove-klubko">vlnového klubka</Concept>, a ta se
           rovná <b>rychlosti samotné částice</b> — vlnový popis tedy sedí na pohyb částice.
         </p>
         <Callout kind="tip" title="Typický zkouškový výpočet">
           <p>
-            „Kinetická energie elektronu vzroste 4×. Co udělá jeho de Broglieho vlnová délka?“ Pro
+            „<Concept id="kineticka-energie">Kinetická energie</Concept> elektronu vzroste 4×. Co udělá jeho de Broglieho vlnová délka?“ Pro
             nerelativistickou rychlost je <M>{'p = \\sqrt{2 m E_k}'}</M>, takže 4× větší{' '}
             <M>{'E_k'}</M> dá 2× větší <M>{'p'}</M>, a protože <M>{'\\lambda = h/p'}</M>, vlnová délka
             se <b>2× zmenší</b>.

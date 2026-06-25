@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.2'
 
@@ -40,13 +40,13 @@ export default function Lesson_5_2() {
 
       <Section title="Proč dva modely (a ne jeden vzoreček)">
         <p>
-          Pro jádro neexistuje jedna univerzální kvantová teorie — síly mezi nukleony jsou složité a
+          Pro jádro neexistuje jedna univerzální kvantová teorie — síly mezi <Concept id="nukleony">nukleony</Concept> jsou složité a
           jejich přesný tvar neznáme. Proto se používají <b>modely</b>: každý je dobrý na něco jiného.
           Pro zkoušku stačí umět dva a vědět, <b>na co se hodí</b>.
         </p>
         <ul>
-          <li><Term>Kapkový model</Term> — jádro jako kapka kapaliny. Dobrý na <b>štěpení a syntézu</b>.</li>
-          <li><Term>Slupkový model</Term> — nukleony na hladinách jako elektrony v obalu. Dobrý na <b>excitaci a energetické hladiny</b>.</li>
+          <li><Term id="kapkovy-model">Kapkový model</Term> — jádro jako kapka kapaliny. Dobrý na <b>štěpení a syntézu</b>.</li>
+          <li><Term id="slupkovy-model">Slupkový model</Term> — nukleony na hladinách jako elektrony v obalu. Dobrý na <b>excitaci a energetické hladiny</b>.</li>
         </ul>
       </Section>
 
@@ -59,7 +59,7 @@ export default function Lesson_5_2() {
         <p>
           Tahle představa je skvělá na <b>jaderné reakce</b>: kapka se může rozkmitat (jádro se
           <Term> excituje</Term>), protáhnout se do tvaru „činky" a <b>roztrhnout na dvě menší kapky</b> —
-          a to je přesně štěpení. Opačně se dvě kapky můžou spojit — syntéza. Z tohohle modelu vznikla
+          a to je přesně <Concept id="stepeni">štěpení</Concept>. Opačně se dvě kapky můžou spojit — <Concept id="jaderna-synteza">syntéza</Concept>. Z tohohle modelu vznikla
           i <Term>Weizsäckerova formule</Term>, která popisuje vazebnou energii jádra podle počtu a
           rozložení nukleonů.
         </p>
@@ -69,7 +69,7 @@ export default function Lesson_5_2() {
           steps={[
             {
               label: 'klidná kapka',
-              caption: <>Těžké jádro je jako kulatá kapka — drží ho pohromadě přitažlivé jaderné síly (povrchové napětí kapky).</>,
+              caption: <>Těžké jádro je jako kulatá kapka — drží ho pohromadě přitažlivé <Concept id="jaderne-sily">jaderné síly</Concept> (povrchové napětí kapky).</>,
               content: (
                 <svg viewBox="0 0 460 150" className="svg-fig">
                   <circle cx="120" cy="75" r="42" fill="none" stroke={ACCENT} strokeWidth="3" />
@@ -135,7 +135,7 @@ export default function Lesson_5_2() {
       <Section title="Slupkový model">
         <p>
           Druhý pohled bere jádro podobně jako <b>elektronový obal atomu</b>: nukleony obsazují
-          <Term> diskrétní energetické hladiny</Term> („slupky"). Vychází ze <Term>Schrödingerovy rovnice</Term>,
+          <Term> diskrétní energetické hladiny</Term> („slupky"). Vychází ze <Concept id="schrodingerova-rovnice">Schrödingerovy rovnice</Concept>,
           kde jaderné síly nahradíme efektivním <Term>potenciálem (potenciálovou jámou)</Term> — nejjednodušeji
           parabolickou nebo pravoúhlou jámou. Řešení dá <b>nespojité (diskrétní) energetické spektrum</b>:
           povolené jsou jen určité hladiny, mezi nimi ne.
@@ -147,7 +147,7 @@ export default function Lesson_5_2() {
           ostatních, ne každý s každým zvlášť.
         </p>
 
-        <Figure caption="Slupkový model: nukleony sedí v potenciálové jámě na diskrétních hladinách. Excitace = přeskok na vyšší hladinu; návrat zpět vyzáří foton.">
+        <Figure caption={<>Slupkový model: nukleony sedí v potenciálové jámě na diskrétních hladinách. Excitace = přeskok na vyšší hladinu; návrat zpět vyzáří <Concept id="foton">foton</Concept>.</>}>
           <svg viewBox="0 0 380 200" className="svg-fig">
             <Defs color={ENERGY} name="arG" />
             {/* potenciálová jáma */}
@@ -174,18 +174,18 @@ export default function Lesson_5_2() {
 
       <Section title="Vazebná energie a hmotnostní úbytek (tady jsou body)">
         <p>
-          Teď to nejdůležitější. <Term>Vazebná energie jádra</Term> <M>{'E_V'}</M> je energie, která se
+          Teď to nejdůležitější. <Term id="vazebna-energie">Vazebná energie jádra</Term> <M>{'E_V'}</M> je energie, která se
           <b> uvolní, když z volných nukleonů složíme jádro</b> (a stejně velkou energii bys musel dodat,
           abys jádro zase rozebral na jednotlivé nukleony). Čím větší vazebná energie, tím pevněji jádro drží.
         </p>
         <MB>{'E_V = \\left(N m_n + Z m_p - M_X\\right)c^2 \\approx \\left(A\\,m_u - M_X\\right)c^2'}</MB>
         <p>
-          Kde <M>{'Z'}</M> je počet protonů, <M>{'N'}</M> počet neutronů, <M>{'A = Z+N'}</M> počet nukleonů,
+          Kde <M>{'Z'}</M> je <Concept id="protonove-cislo">počet protonů</Concept>, <M>{'N'}</M> počet neutronů, <M>{'A = Z+N'}</M> <Concept id="nukleonove-cislo">počet nukleonů</Concept>,
           <M>{'\\,M_X'}</M> hmotnost samotného jádra a <M>{'m_u'}</M> atomová hmotnostní jednotka.
         </p>
         <p>
           Klíčová myšlenka: <b>jádro váží méně</b> než kdybys sečetl hmotnosti všech jeho nukleonů zvlášť.
-          Ten rozdíl je <Term>hmotnostní úbytek</Term> <M>{'\\Delta m'}</M>:
+          Ten rozdíl je <Term id="hmotnostni-ubytek">hmotnostní úbytek</Term> <M>{'\\Delta m'}</M>:
         </p>
         <MB>{'\\Delta m = N m_n + Z m_p - M_X \\quad\\Longrightarrow\\quad E_V = \\Delta m\\,c^2'}</MB>
         <p>

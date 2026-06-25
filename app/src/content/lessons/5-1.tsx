@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.1'
 
@@ -55,7 +55,7 @@ export default function Lesson_5_1() {
 
       <Section title="Z čeho se jádro skládá">
         <p>
-          Jádro je tvořeno <Term>nukleony</Term> — a nukleony jsou dva druhy částic:{' '}
+          Jádro je tvořeno <Term id="nukleony">nukleony</Term> — a nukleony jsou dva druhy částic:{' '}
           <b style={{ color: PROTON }}>protony</b> (kladný náboj) a{' '}
           <b style={{ color: NEUTRON }}>neutrony</b> (bez náboje). Jádro je maličké, jeho velikost je
           řádově <M>{'10^{-15}\\,\\mathrm{m}'}</M> (to je jeden <Term>femtometr</Term>, fm), a přitom
@@ -65,14 +65,14 @@ export default function Lesson_5_1() {
         <p>Tři čísla, která musíš znát zpaměti a nikdy si je nesmět:</p>
         <ul className="biglist">
           <li>
-            <b style={{ color: PROTON }}>Z — protonové číslo</b> = počet protonů. Určuje,{' '}
+            <b style={{ color: PROTON }}>Z — <Term id="protonove-cislo">protonové číslo</Term></b> = počet protonů. Určuje,{' '}
             <b>o jaký prvek jde</b> (a tím i celou chemii).
           </li>
           <li>
             <b style={{ color: NEUTRON }}>N — neutronové číslo</b> = počet neutronů.
           </li>
           <li>
-            <b style={{ color: ACC }}>A — nukleonové (hmotnostní) číslo</b> = počet všech nukleonů.
+            <b style={{ color: ACC }}>A — <Term id="nukleonove-cislo">nukleonové (hmotnostní) číslo</Term></b> = počet všech nukleonů.
           </li>
         </ul>
 
@@ -106,7 +106,7 @@ export default function Lesson_5_1() {
 
       <Section title="Izotopy — stejný prvek, jiná váha">
         <p>
-          <Term>Izotopy</Term> jsou jádra <b>stejného prvku</b>, která mají{' '}
+          <Term id="izotopy">Izotopy</Term> jsou jádra <b>stejného prvku</b>, která mají{' '}
           <b style={{ color: PROTON }}>stejné Z</b> (stejný počet protonů), ale{' '}
           <b style={{ color: NEUTRON }}>různé N</b> (různý počet neutronů). Protože se liší jen počtem
           neutronů, liší se i hmotností (A) — ale chemicky se chovají úplně stejně.
@@ -115,7 +115,7 @@ export default function Lesson_5_1() {
         <Callout kind="chytak" title="Proč mají izotopy stejné chemické vlastnosti?">
           Protože mají <b>stejný počet protonů (Z) → stejný počet elektronů → stejný elektronový obal</b>.
           A chemii dělá <b>elektronový obal</b>, ne jádro. Neutrony chemii neřeší. Lišit se budou jen{' '}
-          <b>fyzikálně</b> (hmotnost, hustota, případně radioaktivita) a v <b>jaderných reakcích</b>.
+          <b>fyzikálně</b> (hmotnost, hustota, případně <Concept id="radioaktivita">radioaktivita</Concept>) a v <b>jaderných reakcích</b>.
         </Callout>
 
         <p>Učebnicový příklad jsou izotopy vodíku (<M>{'Z = 1'}</M>):</p>
@@ -158,8 +158,8 @@ export default function Lesson_5_1() {
         <p>
           Tady je jádro toho, čemu se zkoušející věnuje nejvíc. V jádře jsou na sebe naskládané protony
           ve vzdálenosti <M>{'10^{-15}\\,\\mathrm{m}'}</M> — a stejné náboje se odpuzují. Působí mezi nimi{' '}
-          <Term>Coulombovská odpudivá síla</Term>, která by jádro měla roztrhat. Že se to neděje,
-          zařizují <Term>jaderné síly</Term> (silná interakce), které nukleony drží u sebe.
+          <Concept id="coulombuv-zakon">Coulombovská odpudivá síla</Concept>, která by jádro měla roztrhat. Že se to neděje,
+          zařizují <Term id="jaderne-sily">jaderné síly</Term> (silná interakce), které nukleony drží u sebe.
         </p>
 
         <div className="cmp-table">

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.6'
 
@@ -64,7 +64,7 @@ export default function Lesson_5_6() {
         </p>
 
         <p>
-          <Term>Dávka</Term> <M>{'D'}</M> = pohlcená energie záření na jednotku hmotnosti. To je „kolik
+          <Term id="davka">Dávka</Term> <M>{'D'}</M> = pohlcená energie záření na jednotku hmotnosti. To je „kolik
           energie ten kus látky pohltil":
         </p>
         <MB>{'D = \\frac{E_D}{\\Delta m}\\qquad [\\mathrm{Gy}] \\;=\\; \\mathrm{J\\,kg^{-1}}'}</MB>
@@ -74,18 +74,18 @@ export default function Lesson_5_6() {
         </p>
 
         <p>
-          <Term>Kerma</Term> <M>{'K'}</M> (z angl. <i>kinetic energy released per unit mass</i>) = energie,
+          <Term id="kerma">Kerma</Term> <M>{'K'}</M> (z angl. <i>kinetic energy released per unit mass</i>) = energie,
           kterou <b>nepřímo ionizující</b> záření předá při první srážce nabitým částicím (elektronům,
           protonům), opět na jednotku hmotnosti:
         </p>
         <MB>{'K = \\frac{E_K}{\\Delta m}\\qquad [\\mathrm{Gy}]'}</MB>
         <p>
           Stejná jednotka jako dávka (<b>Gy</b>!), ale kerma je <b>jen pro nepřímo ionizující záření</b>
-          {' '}(fotony, neutrony). Za rovnováhy sekundárních částic platí <M>{'K = D'}</M>.
+          {' '}(<Concept id="foton">fotony</Concept>, neutrony). Za rovnováhy sekundárních částic platí <M>{'K = D'}</M>.
         </p>
 
         <p>
-          <Term>Dávkový ekvivalent</Term> <M>{'H'}</M> = dávka přepočtená na to, jak je nebezpečná pro{' '}
+          <Term id="davkovy-ekvivalent">Dávkový ekvivalent</Term> <M>{'H'}</M> = dávka přepočtená na to, jak je nebezpečná pro{' '}
           <b>člověka</b>. Vynásobí se <b>jakostním faktorem</b> (a prostorovou distribucí) — alfa
           záření je při stejné dávce nebezpečnější než třeba gama:
         </p>
@@ -96,7 +96,7 @@ export default function Lesson_5_6() {
         </p>
 
         <p>
-          <Term>Expozice</Term> <M>{'X'}</M> = náboj iontů jedné polarity, které <b>fotony vytvoří ve
+          <Term id="expozice">Expozice</Term> <M>{'X'}</M> = náboj iontů jedné polarity, které <b>fotony vytvoří ve
           vzduchu</b>, na jednotku hmotnosti:
         </p>
         <MB>{'X = \\frac{\\Delta Q}{\\Delta m}\\qquad [\\mathrm{C\\,kg^{-1}}]\\;(\\text{starší jednotka rentgen R})'}</MB>
@@ -137,12 +137,12 @@ export default function Lesson_5_6() {
         </p>
         <ul>
           <li>
-            <Term>Přímo ionizující záření</Term> = <b>nabité</b> částice (elektrony, pozitrony,
+            <Term id="primo-ionizujici">Přímo ionizující záření</Term> = <b>nabité</b> částice (elektrony, pozitrony,
             protony, částice α). Mají náboj, takže <b>samy</b> ionizují prostředí — postupně ztrácejí
             energii, jak letí.
           </li>
           <li>
-            <Term>Nepřímo ionizující záření</Term> = <b>nenabité</b> částice (fotony γ/RTG, neutrony).
+            <Term id="neprimo-ionizujici">Nepřímo ionizující záření</Term> = <b>nenabité</b> částice (fotony γ/RTG, neutrony).
             Samy neionizují, ale při srážce <b>uvolní sekundární nabité částice</b>, a teprve ty
             ionizují. <b>Kerma je právě pro tenhle druh záření.</b>
           </li>
@@ -169,7 +169,7 @@ export default function Lesson_5_6() {
             },
             {
               label: 'srážka',
-              caption: <>Foton se srazí s atomem a <b>vyrazí z něj elektron</b> — předá mu kinetickou energii. To je ta energie, kterou počítá <b>kerma</b>.</>,
+              caption: <>Foton se srazí s atomem a <b>vyrazí z něj elektron</b> — předá mu <Concept id="kineticka-energie">kinetickou energii</Concept>. To je ta energie, kterou počítá <b>kerma</b>.</>,
               content: (
                 <svg viewBox="0 0 440 170" className="svg-fig">
                   <Defs color={CHARGED} id="ar-p2" />
@@ -223,7 +223,7 @@ export default function Lesson_5_6() {
 
       <Section title="Bonus: Čerenkovovo záření">
         <p>
-          Oblíbená bonusová otázka. <Term>Čerenkovovo záření</Term> je to namodralé světlo, které
+          Oblíbená bonusová otázka. <Term id="cerenkovovo-zareni">Čerenkovovo záření</Term> je to namodralé světlo, které
           svítí v bazénech jaderných reaktorů. Vzniká, když <b>nabitá částice letí prostředím rychleji,
           než je rychlost světla v tom prostředí</b> <M>{'(v > c_p)'}</M>.
         </p>

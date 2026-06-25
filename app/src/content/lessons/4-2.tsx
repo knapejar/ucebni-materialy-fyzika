@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.2'
 
@@ -41,7 +41,7 @@ export default function Lesson_4_2() {
 
       <Section title="Absolutně černé těleso — co to je">
         <p>
-          <Term>Absolutně černé těleso</Term> je <b>idealizovaný model</b>: těleso, které <b>dokonale
+          <Term id="cerne-teleso">Absolutně černé těleso</Term> je <b>idealizovaný model</b>: těleso, které <b>dokonale
           pohltí veškeré</b> dopadající elektromagnetické záření — nic neodrazí ani nepropustí. Proto
           „černé": kdyby na něj svítilo světlo, žádné by se nevrátilo zpět.
         </p>
@@ -122,14 +122,14 @@ export default function Lesson_4_2() {
           To je samozřejmě nesmysl, experiment nic takového neukazuje.
         </p>
         <p>
-          Planck to vyřešil odvážným předpokladem — <Term>Planckovou kvantovou hypotézou</Term>:
+          Planck to vyřešil odvážným předpokladem — <Term id="planckova-hypoteza">Planckovou kvantovou hypotézou</Term>:
         </p>
         <Callout kind="info" title="Znění Planckovy hypotézy">
           Emise a absorpce elektromagnetické energie neprobíhá spojitě, ale <b>jen po celistvých násobcích
           energetického kvanta</b>. Velikost jednoho kvanta je
           <MB>{'E = h\\,\\nu = \\frac{h\\,c}{\\lambda}'}</MB>
-          kde <M>{'h'}</M> je <b>Planckova konstanta</b> a <M>{'\\nu'}</M> frekvence. Jedno kvantum
-          elektromagnetického pole = jeden <b>foton</b>.
+          kde <M>{'h'}</M> je <Concept id="planckova-konstanta"><b>Planckova konstanta</b></Concept> a <M>{'\\nu'}</M> frekvence. Jedno kvantum
+          elektromagnetického pole = jeden <Concept id="foton"><b>foton</b></Concept>.
         </Callout>
         <p>
           Jinými slovy: energie nemůže téct po libovolně malých kapkách, ale jen po „balíčcích" o velikosti{' '}
@@ -139,7 +139,7 @@ export default function Lesson_4_2() {
 
       <Section title="Planckův vyzařovací zákon (samostatný okruh — uměj ho říct!)">
         <p>
-          <Term>Planckův vyzařovací zákon</Term> popisuje <b>spektrální hustotu energie záření v dutině</b> —
+          <Term id="planckuv-vyzarovaci-zakon">Planckův vyzařovací zákon</Term> popisuje <b>spektrální hustotu energie záření v dutině</b> —
           tedy jak je energie záření černého tělesa rozložená mezi jednotlivé frekvence (vlnové délky) při
           dané teplotě. Klíčové je <b>jak</b> ho Planck odvodil:
         </p>
@@ -188,7 +188,7 @@ export default function Lesson_4_2() {
 
       <Section title="Wienův posunovací zákon">
         <p>
-          <Term>Wienův posunovací zákon</Term> přesně říká, kde leží maximum spektra. Vlnová délka maxima{' '}
+          <Term id="wienuv-zakon">Wienův posunovací zákon</Term> přesně říká, kde leží maximum spektra. Vlnová délka maxima{' '}
           <M>{'\\lambda_m'}</M> krát teplota je <b>konstantní</b>:
         </p>
         <MB>{'\\lambda_m \\cdot T = \\text{konst.} \\qquad \\left(\\lambda_m = \\frac{b}{T}\\right)'}</MB>
@@ -205,7 +205,7 @@ export default function Lesson_4_2() {
 
       <Section title="Stefan-Boltzmannův zákon">
         <p>
-          Zatímco Wien říká <i>kde</i> je maximum, <Term>Stefan-Boltzmannův zákon</Term> říká <i>kolik</i>
+          Zatímco Wien říká <i>kde</i> je maximum, <Term id="stefan-boltzmann">Stefan-Boltzmannův zákon</Term> říká <i>kolik</i>
           {' '}celkem těleso vyzáří. Celková energie vyzářená jednotkovou plochou za jednotku času je úměrná{' '}
           <b>čtvrté mocnině</b> teploty:
         </p>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.3'
 
@@ -32,7 +32,7 @@ export default function Lesson_3_3() {
     <>
       <p className="lead">
         Skládání kmitů zní hrozivě, ale je za tím jen jedna myšlenka: <Term>kmity se prostě sčítají</Term>.
-        U zkoušky chtějí tři věci — princip superpozice, co vyjde ze dvou <i>kolmých</i> kmitů (kružnice /
+        U zkoušky chtějí tři věci — princip superpozice, co vyjde ze <Term id="kolme-kmity">dvou <i>kolmých</i> kmitů</Term> (kružnice /
         elipsa / úsečka) a jak vznikají <Term>rázy</Term>. To je celé. A přesně na tom je pár chytáků, kde
         se ztrácejí body.
       </p>
@@ -41,7 +41,7 @@ export default function Lesson_3_3() {
         <p>
           Když na jeden bod působí víc kmitů najednou, neperou se o něj. Každý dílčí kmit probíhá{' '}
           <b>nezávisle</b> na ostatních a výsledná výchylka je v každém okamžiku jen jejich{' '}
-          <Term>vektorový součet</Term>. To je <Term>princip superpozice kmitů</Term>:
+          <Term>vektorový součet</Term>. To je <Term id="superpozice-kmitu">princip superpozice kmitů</Term>:
         </p>
         <MB>{'\\vec u(t) = \\vec u_1(t) + \\vec u_2(t) + \\dots'}</MB>
         <p>
@@ -55,7 +55,7 @@ export default function Lesson_3_3() {
         <p>
           Mějme bod, který kmitá zároveň <b>vodorovně</b> (osa <M>{'x'}</M>) a <b>svisle</b> (osa{' '}
           <M>{'y'}</M>). Oba kmity mají stejnou úhlovou frekvenci <M>{'\\omega'}</M>, liší se ale
-          amplitudou a hlavně <Term>fázovým posunem</Term>. Klikej <b>Další →</b> a sleduj, jak se mění
+          <Concept id="amplituda">amplitudou</Concept> a hlavně <Term>fázovým posunem</Term>. Klikej <b>Další →</b> a sleduj, jak se mění
           dráha, kterou bod opisuje:
         </p>
 
@@ -91,7 +91,7 @@ export default function Lesson_3_3() {
                   Fázový posun je <M>{'\\tfrac{\\pi}{2}'}</M> a amplitudy <b>stejné</b> (<M>{'A'}</M>):{' '}
                   <M>{'x=A\\cos\\omega t'}</M>, <M>{'y=A\\sin\\omega t'}</M>. Bod obíhá po{' '}
                   <b>kružnici</b> o poloměru <M>{'A'}</M>. (Je to mimochodem přesně to, z čeho se „rozbalí"
-                  harmonický kmit — průmět rovnoměrného pohybu po kružnici.)
+                  <Concept id="harmonicke-kmitani">harmonický kmit</Concept> — průmět rovnoměrného pohybu po kružnici.)
                 </>
               ),
               content: (
@@ -163,7 +163,7 @@ export default function Lesson_3_3() {
         <p>
           Čti to takhle: druhý kosinus je <b>rychlá</b> nosná vlna (frekvence skoro jako původní kmity).
           První kosinus se mění <b>pomalu</b> a funguje jako <Term>obálka</Term> — kolísá amplitudu nahoru
-          a dolů. Výsledek je tón, který se rytmicky zesiluje a zeslabuje. Tomu se říká <Term>rázy</Term>.
+          a dolů. Výsledek je tón, který se rytmicky zesiluje a zeslabuje. Tomu se říká <Term id="razy">rázy</Term>.
         </p>
 
         <StepFigure
@@ -216,7 +216,7 @@ export default function Lesson_3_3() {
               caption: (
                 <>
                   Součet je rychlá vlna sevřená do pomalé <b style={{ color: ENV }}>obálky</b>. Hlasitost
-                  pravidelně roste a klesá. <b>Perioda kmitání je stálá</b>, mění se jen <b>amplituda</b> —
+                  pravidelně roste a klesá. <b><Concept id="perioda">Perioda</Concept> kmitání je stálá</b>, mění se jen <b>amplituda</b> —
                   to jsou rázy.
                 </>
               ),

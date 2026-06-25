@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.6'
 
@@ -42,7 +42,7 @@ export default function Lesson_1_6() {
   return (
     <>
       <p className="lead">
-        Tahle lekce spojuje tři oblíbené zkouškové otázky: <Term>nakloněnou rovinu</Term>,{' '}
+        Tahle lekce spojuje tři oblíbené zkouškové otázky: <Term id="naklonena-rovina">nakloněnou rovinu</Term>,{' '}
         <Term>odpor vzduchu</Term> a rozdíl <Term>průměrné a okamžité rychlosti</Term>. Nic
         těžkého — stačí pár vzorečků a hlavně si pohlídat dva chytáky, na kterých se ztrácejí body.
       </p>
@@ -91,7 +91,7 @@ export default function Lesson_1_6() {
         </Figure>
 
         <p>
-          Z 2. Newtonova zákona (<M>{'F_p = m a'}</M>) a z geometrie rozkladu vyjde u kvádru pěkně
+          Z 2. <Concept id="newtonovy-zakony">Newtonova zákona</Concept> (<M>{'F_p = m a'}</M>) a z geometrie rozkladu vyjde u kvádru pěkně
           jednoduchý vzorec pro zrychlení:
         </p>
         <MB>{'a = g\\,\\sin\\alpha'}</MB>
@@ -118,7 +118,7 @@ export default function Lesson_1_6() {
 
       <Section title="Odpor vzduchu: padají všechna tělesa stejně?">
         <p>
-          <b>Bez odporu vzduchu</b> je to jednoduché. Pohybová rovnice pádu je{' '}
+          <b>Bez odporu vzduchu</b> je to jednoduché. <Concept id="pohybova-rovnice">Pohybová rovnice</Concept> pádu je{' '}
           <M>{'\\vec F_G = m\\vec g = m\\dfrac{\\mathrm d\\vec v}{\\mathrm dt}'}</M>, takže po vykrácení
           hmotnosti zbude <M>{'\\vec g = \\dfrac{\\mathrm d\\vec v}{\\mathrm dt}'}</M>. Hmotnost zmizela,
           a proto <b>všechna tělesa padají stejně</b> — se stejným zrychlením, ze stejné výšky
@@ -135,7 +135,7 @@ export default function Lesson_1_6() {
           Na začátku je rychlost malá, odpor skoro žádný, takže těleso normálně zrychluje. Jak
           zrychluje, odpor roste — až se v jednu chvíli odpor <b>vyrovná tíze</b>. Výslednice je pak
           nula, zrychlení je nula a těleso dál padá <b>konstantní rychlostí</b>. Té říkáme{' '}
-          <Term>mezní (maximální) rychlost</Term>:
+          <Term id="mezni-rychlost">mezní (maximální) rychlost</Term>:
         </p>
         <MB>{'v_{\\max} = \\dfrac{mg}{kS}'}</MB>
 
@@ -236,7 +236,7 @@ export default function Lesson_1_6() {
         </p>
 
         <p>
-          <Term>Okamžitá rychlost</Term> je rychlost <b>právě teď</b>, v jednom konkrétním okamžiku —
+          <Term id="okamzita-rychlost">Okamžitá rychlost</Term> je rychlost <b>právě teď</b>, v jednom konkrétním okamžiku —
           to, co ti ukazuje tachometr. Dostaneš ji tak, že měřený interval{' '}
           <M>{'\\Delta t'}</M> necháš <b>zmenšovat až k nule</b>. Je to tedy{' '}
           <b>limita průměrné rychlosti</b> pro <M>{'\\Delta t \\to 0'}</M> (matematicky derivace

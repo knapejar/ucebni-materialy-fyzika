@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.3b'
 
@@ -56,12 +56,12 @@ export default function Lesson_4_3b() {
 
       <Section title="Dvě páčky, dvě různé věci">
         <p>
-          Připomeň si rovnici <Term>fotoefektu</Term> (Einsteinova rovnice). Energie jednoho fotonu se
+          Připomeň si rovnici <Concept id="fotoefekt">fotoefektu</Concept> (Einsteinova rovnice). Energie jednoho <Concept id="foton">fotonu</Concept> se
           rozdělí na vytržení elektronu z kovu a na jeho pohyb:
         </p>
         <MB>{'h\\nu = A + E_{e}'}</MB>
         <p>
-          kde <M>{'h\\nu'}</M> je energie fotonu, <M>{'A'}</M> je <Term>výstupní práce</Term> (kolik
+          kde <M>{'h\\nu'}</M> je energie fotonu, <M>{'A'}</M> je <Concept id="vystupni-prace">výstupní práce</Concept> (kolik
           stojí vytrhnout elektron) a <M>{'E_{e}'}</M> je energie, kterou si elektron odnese (jeho rychlost).
           Z téhle jediné rovnice plyne <b>celá lekce</b>. Klíč je oddělit dvě nezávislé páčky:
         </p>
@@ -202,13 +202,13 @@ export default function Lesson_4_3b() {
         <p>
           Když je foton moc slabý, jeho energie nestačí ani na zaplacení výstupní práce —{' '}
           <M>{'h\\nu < A'}</M> — a <b>nevyletí ani jeden elektron</b>, i kdybys svítil jak silně chceš.
-          Hranice je <Term>mezní frekvence</Term> <M>{'\\nu_0'}</M>, kde foton akorát zaplatí <M>{'A'}</M> a
+          Hranice je <Term id="mezni-frekvence">mezní frekvence</Term> <M>{'\\nu_0'}</M>, kde foton akorát zaplatí <M>{'A'}</M> a
           elektronu nezbude nic:
         </p>
         <MB>{'h\\nu_0 = A \\quad\\Rightarrow\\quad \\nu_0 = \\frac{A}{h}'}</MB>
         <p>
-          Stejnou hranici lze zapsat přes vlnovou délku. Protože vyšší frekvence = kratší vlna
-          (<M>{'\\lambda = c/\\nu'}</M>), existuje <Term>mezní vlnová délka</Term> <M>{'\\lambda_0'}</M> —{' '}
+          Stejnou hranici lze zapsat přes <Concept id="vlnova-delka">vlnovou délku</Concept>. Protože vyšší frekvence = kratší vlna
+          (<M>{'\\lambda = c/\\nu'}</M>), existuje <Term id="mezni-vlnova-delka">mezní vlnová délka</Term> <M>{'\\lambda_0'}</M> —{' '}
           <b>nejdelší</b> vlna, která fotoefekt ještě vyvolá:
         </p>
         <MB>{'\\lambda_0 = \\frac{c}{\\nu_0} = \\frac{h c}{A}'}</MB>

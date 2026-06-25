@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Concept, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.7'
 
@@ -42,7 +42,7 @@ export default function Lesson() {
   return (
     <>
       <p className="lead">
-        Tahle lekce odpovídá na otázku „co dělá magnetické pole s letícím nábojem". Je to
+        Tahle lekce odpovídá na otázku „co dělá <Concept id="magneticke-pole">magnetické pole</Concept> s letícím nábojem". Je to
         oblíbená zkoušková otázka, protože se v ní dá hezky chytit jeden trik:{' '}
         <Term>magnetická síla je vždy kolmá na rychlost</Term>, takže mění jen <i>směr</i> pohybu,
         ne jeho <i>velikost</i>. Když tohle pochopíš, máš celou otázku v kapse — včetně toho,
@@ -51,8 +51,8 @@ export default function Lesson() {
 
       <Section title="Lorentzova (magnetická) síla — vzorec a veličiny">
         <p>
-          Na náboj, který se <b>pohybuje</b> v magnetickém poli, působí{' '}
-          <Term>Lorentzova síla</Term> (taky „magnetická síla"). Na náboj v <b>klidu</b> magnetické
+          Na <Concept id="naboj">náboj</Concept>, který se <b>pohybuje</b> v magnetickém poli, působí{' '}
+          <Term id="lorentzova-sila">Lorentzova síla</Term> (taky „magnetická síla"). Na náboj v <b>klidu</b> magnetické
           pole nepůsobí — musí letět. Vektorově:
         </p>
         <MB>{'\\vec F = q\\,\\vec v \\times \\vec B'}</MB>
@@ -74,7 +74,7 @@ export default function Lesson() {
         <p>
           Z vektorového součinu <M>{'\\vec v \\times \\vec B'}</M> plyne, že{' '}
           <Term>Lorentzova síla je vždy kolmá na rychlost</Term> (a zároveň kolmá na <M>{'\\vec B'}</M>).
-          A síla kolmá na pohyb <b>nekoná práci</b> — nepřidává ani neubírá kinetickou energii.
+          A síla kolmá na pohyb <b>nekoná <Concept id="prace">práci</Concept></b> — nepřidává ani neubírá <Concept id="kineticka-energie">kinetickou energii</Concept>.
           Proto se velikost rychlosti <b>nemění</b>, mění se jen její <b>směr</b>. Síla částici jen
           „zatáčí", funguje jako provázek, který drží kámen na kruhové dráze.
         </p>
@@ -255,13 +255,13 @@ export default function Lesson() {
 
       <Section title="Magnetická nádoba">
         <p>
-          <Term>Magnetická nádoba</Term> je chytré uspořádání silných magnetických polí, které{' '}
+          <Term id="magneticka-nadoba">Magnetická nádoba</Term> je chytré uspořádání silných magnetických polí, které{' '}
           <b>udrží pohybující se nabité částice v omezeném prostoru</b> — typicky horké{' '}
           <b>plazma</b>. Funguje právě díky tomu, že magnetické pole zakřivuje dráhu nabitých
           částic a nepustí je ven.
         </p>
         <ul>
-          <li><b>Toroidní</b> (prstencová) — částice se vine po šroubovici kolem prstencových siločar; tak pracuje <b>TOKAMAK</b> pro jadernou fúzi.</li>
+          <li><b>Toroidní</b> (prstencová) — částice se vine po šroubovici kolem prstencových siločar; tak pracuje <b>TOKAMAK</b> pro <Concept id="jaderna-synteza">jadernou fúzi</Concept>.</li>
           <li><b>Zrcadlová</b> — silnější pole na koncích „odráží" částice sem a tam; velikost rychlosti se nemění.</li>
           <li>Přírodní příklad: <b>Van Allenovy pásy</b> — magnetické pole Země chytá nabité částice z kosmu a chrání nás před zářením.</li>
         </ul>
@@ -269,7 +269,7 @@ export default function Lesson() {
 
       <Section title="Hmotová spektroskopie — aplikace, na kterou čeká zkoušející">
         <p>
-          <Term>Hmotová spektroskopie</Term> je <b>separace (rozdělení) částic podle hmotnosti</b>.
+          <Term id="hmotova-spektroskopie">Hmotová spektroskopie</Term> je <b>separace (rozdělení) částic podle hmotnosti</b>.
           Stojí přesně na vzorci pro poloměr kruhové dráhy:
         </p>
         <MB>{'r = \\frac{m v}{B Q}'}</MB>
@@ -316,7 +316,7 @@ export default function Lesson() {
         </ol>
         <p>
           <b>Využití:</b> určování hmotnosti částic, <b>izotopické složení</b> směsi a{' '}
-          <b>separace izotopů</b>, analýza dechu v medicíně, monitorování životního prostředí.
+          <b>separace <Concept id="izotopy">izotopů</Concept></b>, analýza dechu v medicíně, monitorování životního prostředí.
         </p>
       </Section>
 

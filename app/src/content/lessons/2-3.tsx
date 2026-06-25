@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.3'
 
@@ -56,7 +56,7 @@ export default function Lesson_2_3() {
   return (
     <>
       <p className="lead">
-        Náboj kolem sebe „cítíš“ dvěma způsoby: jako <Term>sílu</Term> (to je{' '}
+        <Concept id="naboj">Náboj</Concept> kolem sebe „cítíš“ dvěma způsoby: jako <Term>sílu</Term> (to je{' '}
         <b>intenzita</b>, vektor) a jako <Term>energii polohy</Term> (to je <b>potenciál</b>, skalár).
         Tahle lekce je u zkoušky vděčná — stačí umět dva vzorečky, nakreslit siločáry a nespadnout
         do jedné jediné pasti (intenzita směřuje dolů, ne nahoru — a uprostřed mezi dvěma náboji se
@@ -72,7 +72,7 @@ export default function Lesson_2_3() {
         </p>
 
         <p>
-          <b>Intenzita</b> <M>{'\\vec E'}</M> je <Term>síla na jednotkový (kladný) náboj</Term>:
+          <Term id="intenzita-pole"><b>Intenzita</b></Term> <M>{'\\vec E'}</M> je <Term>síla na jednotkový (kladný) náboj</Term>:
         </p>
         <MB>{'\\vec E = \\frac{\\vec F_e}{q} \\qquad [\\,\\mathrm{N\\,C^{-1}} = \\mathrm{V\\,m^{-1}}\\,]'}</MB>
         <p>
@@ -82,11 +82,11 @@ export default function Lesson_2_3() {
         </p>
 
         <p>
-          <b>Potenciál</b> <M>{'\\varphi'}</M> je <Term>potenciální energie na jednotkový náboj</Term>:
+          <Term id="potencial"><b>Potenciál</b></Term> <M>{'\\varphi'}</M> je <Term>potenciální energie na jednotkový náboj</Term>:
         </p>
         <MB>{'\\varphi = \\frac{E_p}{q} \\qquad [\\,\\mathrm{V} = \\mathrm{J\\,C^{-1}}\\,]'}</MB>
         <p>
-          Je to <Term>skalár</Term> — jen číslo, žádný směr. Fyzikálně je to <b>práce</b> potřebná
+          Je to <Term>skalár</Term> — jen číslo, žádný směr. Fyzikálně je to <Concept id="prace"><b>práce</b></Concept> potřebná
           k přenesení jednotkového kladného náboje z místa s nulovým potenciálem sem (analogie:
           kolik práce dá vyzvednout těleso do dané výšky). Rozdíl potenciálů dvou míst je{' '}
           <Term>napětí</Term>: <M>{'U_{AB} = \\varphi_A - \\varphi_B'}</M>.
@@ -103,7 +103,7 @@ export default function Lesson_2_3() {
 
       <Section title="Siločáry: jak nakreslit pole">
         <p>
-          Pole kreslíme <Term>siločárami</Term> (indukčními čarami). Pravidlo: <b>tečna k siločáře
+          Pole kreslíme <Term id="silocary">siločárami</Term> (indukčními čarami). Pravidlo: <b>tečna k siločáře
           v daném bodě ukazuje směr intenzity</b> <M>{'\\vec E'}</M> v tom bodě. Siločáry{' '}
           <b>vycházejí z kladných nábojů a končí v záporných</b> (nebo míří do nekonečna) a nikdy se
           neprotínají.
@@ -172,7 +172,7 @@ export default function Lesson_2_3() {
 
       <Section title="Ekvipotenciální plochy: vrstevnice pole">
         <p>
-          <Term>Ekvipotenciální plocha</Term> = množina bodů se <b>stejným potenciálem</b>{' '}
+          <Term id="ekvipotencialy">Ekvipotenciální plocha</Term> = množina bodů se <b>stejným potenciálem</b>{' '}
           <M>{'\\varphi'}</M>. Nejlepší přirovnání jsou <b>vrstevnice na mapě</b>: po vrstevnici
           chodíš ve stejné výšce, po ekvipotenciále se „pohybuješ“ při stejné energii — a{' '}
           <b>nekonáš žádnou práci</b>. Kolem bodového náboje jsou to soustředné kulové slupky
@@ -213,7 +213,7 @@ export default function Lesson_2_3() {
       <Section title="Princip superpozice: pole se sčítají">
         <p>
           Když je nábojů víc, každý vytváří své pole <b>nezávisle</b> na ostatních a výsledek je
-          jejich <b>součet</b> — to je <Term>princip superpozice</Term>. Ale pozor, jak co sčítáš:
+          jejich <b>součet</b> — to je <Term id="superpozice">princip superpozice</Term>. Ale pozor, jak co sčítáš:
         </p>
         <ul>
           <li>
@@ -327,7 +327,7 @@ export default function Lesson_2_3() {
         <p>
           Praktická ukázka „nejrychlejšího poklesu“: kladný náboj puštěný v poli mezi deskami se
           rozjede <b>ve směru <M>{'\\vec E'}</M></b> — tedy z místa vyššího potenciálu do nižšího,
-          a přitom <b>zrychluje</b> (potenciální energie se mění na kinetickou, jako když plaveš po
+          a přitom <b>zrychluje</b> (<Concept id="potencialni-energie">potenciální energie</Concept> se mění na <Concept id="kineticka-energie">kinetickou</Concept>, jako když plaveš po
           proudu).
         </p>
         <Figure caption="Mezi deskami: E (modrá) míří z desky s vyšším φ k nižšímu. Kladný náboj se po proudu zrychluje (v roste).">

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.1'
 
@@ -41,9 +41,9 @@ export default function Lesson() {
 
       <Section title="Newtonův gravitační zákon — ten jeden vzoreček">
         <p>
-          <Term>Gravitační síla</Term> je základní přitažlivá síla, kterou na sebe působí
+          <Term id="gravitacni-pole">Gravitační síla</Term> je základní přitažlivá síla, kterou na sebe působí
           <b> všechna tělesa, která mají hmotnost</b>. Jak je velká, říká{' '}
-          <Term>Newtonův gravitační zákon</Term>:
+          <Term id="gravitacni-zakon">Newtonův gravitační zákon</Term>:
         </p>
 
         <MB>{'F = \\kappa\\,\\dfrac{m_1\\,m_2}{r^2}'}</MB>
@@ -87,14 +87,14 @@ export default function Lesson() {
         <p>
           Síla míří vždy <b>po spojnici</b> obou těles (je <Term>centrální</Term>) a působí{' '}
           <Term>vzájemně</Term>: na obě tělesa stejně velkou silou opačného směru (je to akce a
-          reakce). Když je těles víc, výsledné síly se prostě <b>vektorově sečtou</b> (princip
-          superpozice).
+          reakce). Když je těles víc, výsledné síly se prostě <b>vektorově sečtou</b> (<Concept id="superpozice">princip
+          superpozice</Concept>).
         </p>
       </Section>
 
       <Section title="Proč všechno padá „dolů“ — do středu Země">
         <p>
-          Země není hmotný bod, je to obrovská koule. Přesto se chová jako kdyby celá její
+          Země není <Concept id="hmotny-bod">hmotný bod</Concept>, je to obrovská koule. Přesto se chová jako kdyby celá její
           hmotnost byla soustředěná v jednom bodě <b>v jejím středu</b>. Proto gravitace kdekoli na
           povrchu míří <b>do středu Země</b> — a my tomu říkáme „dolů“. Že to tak vyjde, se ukáže
           sečtením příspěvků od všech kousíčků Země (proto ten obrázek s prstýnky → kruhy → koulí v
@@ -112,7 +112,7 @@ export default function Lesson() {
       <Section title="Gravitační potenciální energie Ep = mgh">
         <p>
           Když těleso zvedneš do výšky, „uložíš“ do něj energii — spadne-li, zase se uvolní.
-          To je <Term>gravitační potenciální energie</Term>. U povrchu Země se počítá jednoduše:
+          To je <Term id="gravitacni-energie">gravitační potenciální energie</Term>. U povrchu Země se počítá jednoduše:
         </p>
 
         <MB>{'E_p = m\\,g\\,h'}</MB>
@@ -228,7 +228,7 @@ export default function Lesson() {
         <p>
           Druhá oblíbená otázka: <b>jak víme, že ten vzoreček platí?</b> Odpověď, kterou chce
           zkoušející slyšet: <b>z Newtonova gravitačního zákona se dají odvodit všechny tři{' '}
-          <Term>Keplerovy zákony</Term></b> o pohybu planet — a ty <b>přesně sedí na pozorování</b>
+          <Term id="keplerovy-zakony">Keplerovy zákony</Term></b> o pohybu planet — a ty <b>přesně sedí na pozorování</b>
           {' '}drah planet. Souhlas výpočtu s tím, co vidíme na obloze, je to ověření.
         </p>
         <ol className="biglist">

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.11'
 
@@ -55,7 +55,7 @@ export default function Lesson_2_11() {
     <>
       <p className="lead">
         Pozor, tohle je <b>samostatná zkoušková otázka</b> — neslévej ji s elektrostatikou (lekce 2.10)!
-        Stačí umět jednu myšlenku: <Term>každý atom je maličká proudová smyčka</Term>, a vnější magnetické
+        Stačí umět jednu myšlenku: <Term>každý atom je maličká <Concept id="proudova-smycka">proudová smyčka</Concept></Term>, a vnější magnetické
         pole tyhle smyčky buď <b>natočí po sobě</b> (zesílí pole), nebo v nich <b>vyvolá moment proti sobě</b>{' '}
         (zeslabí). Z toho plyne dělení látek a jeden vzoreček. Hotovo, bod je tvůj.
       </p>
@@ -71,13 +71,13 @@ export default function Lesson_2_11() {
         </ul>
         <p>
           Příspěvek protonů v jádře <b>zanedbáváme</b> (jsou ~2000× těžší a pomalejší). Každá taková
-          smyčka má <Term>magnetický moment</Term>{' '}
-          <M>{'\\vec m = I\\,\\vec S'}</M>, takže celý atom má <Term>magnetický moment látky</Term> —
+          smyčka má <Concept id="magneticky-moment">magnetický moment</Concept>{' '}
+          <M>{'\\vec m = I\\,\\vec S'}</M>, takže celý atom má <Term id="magneticky-moment-latky">magnetický moment látky</Term> —
           součet všech těchhle dílčích momentů. <b>A jak ho pole ovlivní, rozhoduje jediná otázka:</b>
         </p>
         <Callout kind="tip" title="Klíčová otázka celé otázky">
           Má atom <b>vlastní</b> (nenulový) magnetický moment už <b>bez pole</b>, nebo ne?
-          <br />Když <b>NE</b> → <Term>diamagnetikum</Term>. Když <b>ANO</b> → <Term>paramagnetikum</Term>.
+          <br />Když <b>NE</b> → <Term id="diamagnetikum">diamagnetikum</Term>. Když <b>ANO</b> → <Term id="paramagnetikum">paramagnetikum</Term>.
         </Callout>
       </Section>
 
@@ -105,8 +105,8 @@ export default function Lesson_2_11() {
           </svg>
         </Figure>
         <p>
-          Hotová smyčka se v <b>magnetickém poli</b> chová přesně jako
-          ta z lekce o magnetickém momentu: pole na ni působí <b>moment síly</b>{' '}
+          Hotová smyčka se v <b><Concept id="magneticke-pole">magnetickém poli</Concept></b> chová přesně jako
+          ta z lekce o magnetickém momentu: pole na ni působí <b><Concept id="moment-sily">moment síly</Concept></b>{' '}
           a snaží se ji <b>natočit tak, aby moment <M>{'\\vec m'}</M> mířil po směru pole <M>{'\\vec B'}</M></b>.
           Tahle jediná věta řídí celé chování látky.
         </p>
@@ -148,8 +148,8 @@ export default function Lesson_2_11() {
                 <>
                   Zapneme <M>{'\\vec B'}</M>. Pole <b>rozkmitá oběh elektronů</b> tak, že se v atomu{' '}
                   <Term>indukuje</Term> nový moment mířící <b>PROTI poli</b> (zelené proti modrému).
-                  Stejný princip jako <b>elektromagnetická indukce</b> a{' '}
-                  <b>Lenzův zákon</b>: látka se brání změně. Výsledek:{' '}
+                  Stejný princip jako <b><Concept id="elektromagneticka-indukce">elektromagnetická indukce</Concept></b> a{' '}
+                  <b><Concept id="lenzovo-pravidlo">Lenzův zákon</Concept></b>: látka se brání změně. Výsledek:{' '}
                   <b>mírné zeslabení pole</b>.
                 </>
               ),
@@ -178,7 +178,7 @@ export default function Lesson_2_11() {
               caption: (
                 <>
                   <b>Paramagnetikum</b>: atomy <b>mají</b> vlastní nenulový moment, ale bez pole jsou
-                  <b> rozházené náhodně</b> (tepelný pohyb), takže navenek se vyruší a látka je
+                  <b> rozházené náhodně</b> (<Concept id="tepelny-pohyb">tepelný pohyb</Concept>), takže navenek se vyruší a látka je
                   nemagnetická.
                 </>
               ),
@@ -240,7 +240,7 @@ export default function Lesson_2_11() {
         <p>
           U diamagnetik je trik v tom, že zapnuté pole <b>nepatrně rozhází rovnováhu obíhajících
           elektronů</b>: celý elektronový obal se začne <b>pomalu otáčet kolem osy dané směrem pole</b>.
-          Tomuhle dodatečnému otáčení se říká <Term>Larmorova precese</Term> a právě ona je tím
+          Tomuhle dodatečnému otáčení se říká <Term id="larmorova-precese">Larmorova precese</Term> a právě ona je tím
           „indukovaným proudem navíc", který vyrobí moment <b>proti</b> vnějšímu poli (proto diamagnet
           pole zeslabuje).
         </p>
@@ -252,9 +252,9 @@ export default function Lesson_2_11() {
 
       <Section title="Jak to popsat číslem: magnetizace a susceptibilita">
         <p>
-          Míru zmagnetování látky popisuje <Term>vektor magnetizace</Term>{' '}
+          Míru zmagnetování látky popisuje <Term id="magnetizace">vektor magnetizace</Term>{' '}
           <M>{'\\vec M'}</M> = magnetický moment jednotkového objemu. Ten je (u běžných látek) úměrný
-          vnějšímu poli a konstanta úměrnosti je <Term>magnetická susceptibilita</Term>{' '}
+          vnějšímu poli a konstanta úměrnosti je <Term id="magneticka-susceptibilita">magnetická susceptibilita</Term>{' '}
           <M>{'\\chi'}</M>:
         </p>
         <MB>{'\\vec M = \\chi\\,\\vec H'}</MB>
@@ -289,7 +289,7 @@ export default function Lesson_2_11() {
         <ul>
           <li>
             <b>Tohle NENÍ otázka 2.10!</b> Seznam 2025 je rozlišuje. Elektrostatika = posun{' '}
-            <b>nábojů</b> (dipóly); magnetismus = natočení <b>proudových smyček</b> (momenty). Nesmíchej je.
+            <b><Concept id="naboj">nábojů</Concept></b> (<Concept id="dipol">dipóly</Concept>); magnetismus = natočení <b>proudových smyček</b> (momenty). Nesmíchej je.
           </li>
           <li>
             Magnetismus dělají <b>elektrony</b> (orbit + spin), <b>ne jádro</b> — protony zanedbáváme.
@@ -360,7 +360,7 @@ export default function Lesson_2_11() {
             a: (
               <>
                 V <b>elektrickém</b> poli se posouvají/natáčejí <b>náboje</b> a vznikají{' '}
-                <b>dipóly</b> (polarizace, vodič × dielektrikum). V <b>magnetickém</b> poli se natáčejí{' '}
+                <b>dipóly</b> (polarizace, <Concept id="vodic">vodič</Concept> × <Concept id="dielektrikum">dielektrikum</Concept>). V <b>magnetickém</b> poli se natáčejí{' '}
                 <b>proudové smyčky</b> a jde o <b>magnetické momenty</b> (dia × paramagnetikum). Navíc v
                 magnetickém poli existuje látka (diamagnetikum), která reaguje <b>proti</b> poli — to v
                 elektrostatice obdobu nemá.

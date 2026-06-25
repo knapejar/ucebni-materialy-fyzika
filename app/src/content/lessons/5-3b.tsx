@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.3b'
 
@@ -61,15 +61,15 @@ export default function Lesson_5_3b() {
           podle toho, <b>jak se chovají v elektrickém nebo magnetickém poli</b>: α je kladné, β záporné, γ neutrální.
         </p>
         <p>
-          Dva symboly, které musíš číst: <M>{'Z'}</M> = protonové (nábojové) číslo = pořadí prvku v tabulce a{' '}
-          <M>{'A'}</M> = nukleonové (hmotnostní) číslo = počet protonů + neutronů. Zápis jádra je{' '}
+          Dva symboly, které musíš číst: <M>{'Z'}</M> = <Concept id="protonove-cislo">protonové (nábojové) číslo</Concept> = pořadí prvku v tabulce a{' '}
+          <M>{'A'}</M> = <Concept id="nukleonove-cislo">nukleonové (hmotnostní) číslo</Concept> = počet protonů + neutronů. Zápis jádra je{' '}
           <M>{'{}^{A}_{Z}\\mathrm{X}'}</M>.
         </p>
       </Section>
 
       <Section title="Rozpad α — jádro vystřelí kus helia">
         <p>
-          Při <Term>rozpadu α</Term> jádro vyletí <b>částice α</b>, což je jádro helia{' '}
+          Při <Term id="alfa-rozpad">rozpadu α</Term> jádro vyletí <b>částice α</b>, což je jádro helia{' '}
           <M>{'{}^{4}_{2}\\mathrm{He}'}</M> — dva protony a dva neutrony pohromadě. Děje se to hlavně u{' '}
           <b>těžkých jader</b>, kde odpudivé síly mezi protony převáží.
         </p>
@@ -102,33 +102,33 @@ export default function Lesson_5_3b() {
 
       <Section title="Rozpad β — čtyři podtypy (tady číhá chyták)">
         <p>
-          Beta rozpady mění <b>nábojový stav nukleonu</b> uvnitř jádra (neutron ↔ proton). <b>Hmotnostní číslo{' '}
+          <Term id="beta-rozpad">Beta rozpady</Term> mění <b>nábojový stav nukleonu</b> uvnitř jádra (neutron ↔ proton). <b>Hmotnostní číslo{' '}
           <M>{'A'}</M> se nemění</b> (počet nukleonů zůstane stejný), mění se jen <M>{'Z'}</M>. Jsou čtyři typy
           a liší se hlavně tím, kterým směrem posunou prvek v tabulce:
         </p>
 
         <div className="biglist">
           <p>
-            <b>β⁻ (beta minus).</b> V jádře se neutron rozpadne na proton, vyletí <b>elektron</b> a antineutrino.
+            <b><Term id="beta-minus">β⁻ (beta minus)</Term>.</b> V jádře se neutron rozpadne na proton, vyletí <b>elektron</b> a antineutrino.
             Přibyl proton, takže <M>{'Z'}</M> roste o 1.
           </p>
           <MB>{'n \\to p + e^- + \\bar{\\nu}_e \\qquad {}^{A}_{Z}\\mathrm{X} \\;\\xrightarrow{\\;\\beta^-\\;}\\; {}^{\\;A}_{Z+1}\\mathrm{Y}'}</MB>
 
           <p>
-            <b>β⁺ (beta plus).</b> Proton se mění na neutron, vyletí <b>pozitron</b> (kladný „dvojník" elektronu)
+            <b><Term id="beta-plus">β⁺ (beta plus)</Term>.</b> Proton se mění na neutron, vyletí <b>pozitron</b> (kladný „dvojník" elektronu)
             a neutrino. Ubyl proton, takže <M>{'Z'}</M> klesá o 1.
           </p>
           <MB>{'p \\to n + e^+ + \\nu_e \\qquad {}^{A}_{Z}\\mathrm{X} \\;\\xrightarrow{\\;\\beta^+\\;}\\; {}^{\\;A}_{Z-1}\\mathrm{Y}'}</MB>
 
           <p>
-            <b>Elektronový záchyt.</b> Jádro si „spolkne" elektron z obalu (často z K-slupky) a spojí ho
+            <b><Term id="elektronovy-zachyt">Elektronový záchyt</Term>.</b> Jádro si „spolkne" elektron z obalu (často z K-slupky) a spojí ho
             s protonem: <M>{'p + e^- \\to n + \\nu_e'}</M>. Výsledek je stejný jako u β⁺ — <M>{'Z'}</M> klesá o 1 —
             ale <b>žádná beta částice ven nevyletí</b>.
           </p>
           <MB>{'{}^{A}_{Z}\\mathrm{X} + e^- \\;\\longrightarrow\\; {}^{\\;A}_{Z-1}\\mathrm{Y}'}</MB>
 
           <p>
-            <b>Inverzní beta rozpad.</b> Jádro pohltí <b>antineutrino</b> a proton se změní na neutron:{' '}
+            <b><Term id="inverzni-beta">Inverzní beta rozpad</Term>.</b> Jádro pohltí <b>antineutrino</b> a proton se změní na neutron:{' '}
             <M>{'p + \\bar{\\nu}_e \\to n + e^+'}</M>. Opět <M>{'Z'}</M> klesá o 1.
           </p>
           <MB>{'{}^{A}_{Z}\\mathrm{X} + \\bar{\\nu}_e \\;\\longrightarrow\\; {}^{\\;A}_{Z-1}\\mathrm{Y} + e^+'}</MB>
@@ -143,7 +143,7 @@ export default function Lesson_5_3b() {
       <Section title="Rozpad γ — jádro se jen uklidní (a NEPOSOUVÁ se)">
         <p>
           Po α nebo β je jádro často <b>vybuzené</b> (má přebytek energie). Tu vyhodí jako{' '}
-          <Term>foton γ</Term> — kvantum elektromagnetického záření o velmi krátké vlnové délce a vysoké energii (MeV).
+          <Term id="gama-rozpad">foton γ</Term> — kvantum elektromagnetického záření o velmi krátké <Concept id="vlnova-delka">vlnové délce</Concept> a vysoké energii (MeV).
           Žádný nukleon neubyl ani nepřibyl, takže <b><M>{'A'}</M> i <M>{'Z'}</M> zůstanou stejné</b> a prvek se
           v tabulce <b>neposune</b> — jen klesne na nižší energii.
         </p>
@@ -157,11 +157,11 @@ export default function Lesson_5_3b() {
         <Callout kind="info" title="Místo fotonu může přijít konverze">
           <ul>
             <li>
-              <b>Vnitřní konverze.</b> Jádro nepošle foton ven, ale předá energii přímo <b>elektronu z obalu</b>{' '}
+              <b><Term id="vnitrni-konverze">Vnitřní konverze</Term>.</b> Jádro nepošle foton ven, ale předá energii přímo <b>elektronu z obalu</b>{' '}
               (nejčastěji z K-slupky) a ten vyletí jako rychlý elektron.
             </li>
             <li>
-              <b>Dvojná (párová) konverze.</b> Je-li energie jádra větší než <M>{'2 m_e c^2'}</M>, vznikne v jeho
+              <b><Term id="dvojna-konverze">Dvojná (párová) konverze</Term>.</b> Je-li energie jádra větší než <M>{'2 m_e c^2'}</M>, vznikne v jeho
               elektromagnetickém poli rovnou <b>pár elektron + pozitron</b>. Tady se elektronový obal vůbec nepodílí.
             </li>
           </ul>
@@ -315,7 +315,7 @@ export default function Lesson_5_3b() {
           },
           {
             q: <>Proč se prvek při rozpadu γ neposune v periodické tabulce?</>,
-            a: <>Protože se nemění počet protonů ani nukleonů — jádro jen vyzáří foton a přejde z vybuzeného stavu na nižší energii. <M>{'A'}</M> i <M>{'Z'}</M> zůstávají stejné.</>,
+            a: <>Protože se nemění počet protonů ani nukleonů — jádro jen vyzáří <Concept id="foton">foton</Concept> a přejde z vybuzeného stavu na nižší energii. <M>{'A'}</M> i <M>{'Z'}</M> zůstávají stejné.</>,
           },
           {
             q: <>Vzorek mezi deskami kondenzátoru: které záření se vychýlí ke kladné desce, které k záporné a které poletí rovně?</>,

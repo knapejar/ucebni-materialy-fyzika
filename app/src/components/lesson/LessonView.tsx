@@ -1,14 +1,17 @@
 import { useEffect } from 'react'
-import { useParams, Navigate } from 'react-router-dom'
+import { useParams, useSearchParams, Navigate } from 'react-router-dom'
 import { ZoomPage, useZoom } from '../../lib/nav'
 import { getLesson, nextLesson, type Lesson } from '../../data/course'
 import { useProgress, markSeen } from '../../lib/progress'
+import { focusConcept } from '../../lib/focus'
 import { lessonBodies } from '../../content/lessons'
 import { ExamGoals, Callout } from './primitives'
 import { LessonErrorBoundary } from './ErrorBoundary'
 
 export default function LessonView() {
   const { id = '' } = useParams()
+  const [sp] = useSearchParams()
+  const focus = sp.get('focus')
   const { zoomTo } = useZoom()
   const { isDone, toggleDone } = useProgress()
   const found = getLesson(id)
@@ -18,6 +21,11 @@ export default function LessonView() {
     const el = document.querySelector('.zoom-page--scroll')
     if (el) el.scrollTop = 0
   }, [id, found])
+
+  // Proklik pojmu: po načtení lekce odscrolluj k pojmu a zvýrazni ho.
+  useEffect(() => {
+    if (found && focus) focusConcept(focus, 420)
+  }, [id, focus, found])
 
   if (!found) return <Navigate to="/" replace />
   const { lesson, theme } = found
@@ -90,7 +98,11 @@ export default function LessonView() {
                   <span className="nextlesson__eyebrow">Další lekce</span>
                   <span className="nextlesson__name"><b>{next.id}</b> · {next.title}</span>
                 </span>
-                <span className="nextlesson__arrow">→</span>
+                <span className="nextlesson__arrow" aria-hidden>
+                  <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M4 12h13M12 5l8 7-8 7" fill="none" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </a>
             ) : (
               <a
@@ -102,7 +114,11 @@ export default function LessonView() {
                   <span className="nextlesson__eyebrow">🎉 Tohle byla poslední lekce</span>
                   <span className="nextlesson__name">Zpět na mapu fyziky</span>
                 </span>
-                <span className="nextlesson__arrow">⌂</span>
+                <span className="nextlesson__arrow" aria-hidden>
+                  <svg viewBox="0 0 24 24" width="20" height="20">
+                    <path d="M3 11l9-7 9 7M5 10v9h14v-9" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </span>
               </a>
             )}
           </div>

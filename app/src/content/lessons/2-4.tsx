@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.4'
 
@@ -74,13 +74,13 @@ export default function Lesson_2_4() {
 
       <Section title="Co je dipól a co je dipólový moment">
         <p>
-          <Term>Elektrický dipól</Term> je soustava <b>dvou stejně velkých nábojů opačného znaménka</b>{' '}
+          <Term id="dipol">Elektrický dipól</Term> je soustava <b>dvou stejně velkých <Concept id="naboj">nábojů</Concept> opačného znaménka</b>{' '}
           (<M>{'+Q'}</M> a <M>{'-Q'}</M>) ve stálé vzdálenosti <M>{'d'}</M>. Jako celek je elektricky
           neutrální (náboje se sečtou na nulu), ale náboj je v něm <b>rozdělen nesymetricky</b> — a právě
           to je důležité.
         </p>
         <p>
-          Jak moc je dipól „silný" a kam míří, popisuje jeden vektor — <Term>dipólový moment</Term>:
+          Jak moc je dipól „silný" a kam míří, popisuje jeden vektor — <Term id="dipolovy-moment">dipólový moment</Term>:
         </p>
         <MB>{'\\vec p = Q\\,\\vec d'}</MB>
         <p>
@@ -97,8 +97,8 @@ export default function Lesson_2_4() {
       <Section title="Vlastní pole dipólu">
         <p>
           Dipól sám kolem sebe vytváří elektrické pole. Spočítá se jednoduše přes{' '}
-          <a href="#/lekce/2.3" className="concept">princip superpozice</a>: v každém bodě sečteš (vektorově)
-          <b> intenzitu od kladného a od záporného náboje</b>. Výsledné siločáry vychází z <M>{'+Q'}</M> a
+          <Concept id="superpozice">princip superpozice</Concept>: v každém bodě sečteš (vektorově)
+          <b> <Concept id="intenzita-pole">intenzitu</Concept> od kladného a od záporného náboje</b>. Výsledné <Concept id="silocary">siločáry</Concept> vychází z <M>{'+Q'}</M> a
           vrací se do <M>{'-Q'}</M>.
         </p>
         <Figure caption="Vlastní pole dipólu: intenzita E v daném bodě je vektorový součet polí obou nábojů. Siločáry (modré) jdou od + k −, červené čárkované jsou ekvipotenciály (jsou na siločáry kolmé).">
@@ -130,11 +130,11 @@ export default function Lesson_2_4() {
 
       <Section title="Dipól ve vnějším poli: otáčí se (hlavní věc!)">
         <p>
-          Tohle je jádro otázky. Vlož dipól do <a href="#/lekce/2.3" className="concept">vnějšího pole</a>{' '}
+          Tohle je jádro otázky. Vlož dipól do <Concept id="intenzita-pole">vnějšího pole</Concept>{' '}
           <M>{'\\vec E'}</M>. Na kladný konec pole zatlačí jedním směrem, na záporný konec opačným směrem —
-          vznikne <b>dvojice sil</b>, která dipól <Term>otáčí</Term> tak, aby se srovnal s polem.
+          vznikne <Concept id="dvojice-sil"><b>dvojice sil</b></Concept>, která dipól <Term>otáčí</Term> tak, aby se srovnal s polem.
         </p>
-        <p>Otáčivý účinek měří <a href="#/lekce/1.5" className="concept">moment síly</a>:</p>
+        <p>Otáčivý účinek měří <Concept id="moment-sily">moment síly</Concept>:</p>
         <MB>{'\\vec M = \\vec p \\times \\vec E \\qquad |\\vec M| = p\\,E\\,\\sin\\alpha'}</MB>
         <p>
           kde <M>{'\\alpha'}</M> je úhel mezi <M>{'\\vec p'}</M> a <M>{'\\vec E'}</M>. To{' '}

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.6'
 
@@ -37,7 +37,7 @@ export default function Lesson() {
     <>
       <p className="lead">
         Když se na jednom místě potkají dvě vlny, sečtou se. Někde se zesílí, jinde vyruší — a to
-        celé řídí jediná věc: <Term>dráhový rozdíl</Term>. U zkoušky se ptají na podmínku maxima a
+        celé řídí jediná věc: <Term id="drahovy-rozdil">dráhový rozdíl</Term>. U zkoušky se ptají na podmínku maxima a
         minima, na rozdíl <Term>fázové</Term> a <Term>grupové</Term> rychlosti a na vlnové klubko.
         Naučíš se to tady za pár minut a chytáky budeš mít přečtené dopředu.
       </p>
@@ -46,12 +46,12 @@ export default function Lesson() {
         <p>
           Dvě vlnění se v prostoru navzájem neruší ani „nepřekážejí" — prostě se v každém bodě a
           každém okamžiku <Term>sečtou jejich okamžité výchylky</Term>. Tomu se říká{' '}
-          <Term>princip superpozice</Term>. (Pozor: výchylka je vektor, takže u prostorových vln se
+          <Concept id="superpozice">princip superpozice</Concept>. (Pozor: výchylka je vektor, takže u prostorových vln se
           sčítá vektorově — se směrem.)
         </p>
         <p>
           Skládání vln stejné frekvence (a stejné polarizace) nazýváme{' '}
-          <Term>interference</Term>. Výsledek závisí jen na tom, <b>jak jsou vlny vůči sobě fázově
+          <Term id="interference">interference</Term>. Výsledek závisí jen na tom, <b>jak jsou vlny vůči sobě fázově
           posunuté</b> — a to v daném místě určuje <Term>dráhový rozdíl</Term> <M>{'\\Delta'}</M>,
           tedy o kolik delší dráhu urazila jedna vlna oproti druhé.
         </p>
@@ -89,14 +89,14 @@ export default function Lesson() {
         <ul className="biglist">
           <li>
             <b>Sudý počet půlvln</b> → vlny dorazí <Term>ve fázi</Term> →{' '}
-            <Term>interferenční maximum</Term> (zesílí se).
+            <Term id="interferencni-maximum">interferenční maximum</Term> (zesílí se).
           </li>
           <li>
             <b>Lichý počet půlvln</b> → vlny dorazí <Term>v protifázi</Term> →{' '}
-            <Term>interferenční minimum</Term> (vyruší se).
+            <Term id="interferencni-minimum">interferenční minimum</Term> (vyruší se).
           </li>
         </ul>
-        <p>Zapsáno přes vlnovou délku <M>{'\\lambda'}</M> (kde <M>{'k=0,1,2,\\dots'}</M>):</p>
+        <p>Zapsáno přes <Concept id="vlnova-delka">vlnovou délku</Concept> <M>{'\\lambda'}</M> (kde <M>{'k=0,1,2,\\dots'}</M>):</p>
         <MB>{'\\Delta = 2k\\,\\frac{\\lambda}{2}=k\\lambda \\quad\\Rightarrow\\quad \\textbf{maximum}'}</MB>
         <MB>{'\\Delta = (2k+1)\\,\\frac{\\lambda}{2} \\quad\\Rightarrow\\quad \\textbf{minimum}'}</MB>
         <p>
@@ -176,8 +176,8 @@ export default function Lesson() {
         <p>
           Teď složíme dvě vlny, které mají skoro stejnou frekvenci (malý rozdíl{' '}
           <M>{'\\Delta\\omega'}</M> a <M>{'\\Delta k'}</M>). Vyjde rychlá „nosná" vlna, jejíž{' '}
-          amplituda je pomalu modulovaná do balíčků — to jsou <Term>rázy</Term>, respektive{' '}
-          <Term>vlnové klubko</Term>. Amplituda výsledku závisí na čase i na poloze:
+          amplituda je pomalu modulovaná do balíčků — to jsou <Concept id="razy">rázy</Concept>, respektive{' '}
+          <Term id="vlnove-klubko">vlnové klubko</Term>. Amplituda výsledku závisí na čase i na poloze:
         </p>
         <MB>{'u(x,t)=2A\\cos\\!\\Big(\\tfrac{\\Delta\\omega}{2}\\,t-\\tfrac{\\Delta k}{2}\\,x\\Big)\\cdot\\cos(\\bar\\omega\\,t-\\bar k\\,x)'}</MB>
         <p>
@@ -186,11 +186,11 @@ export default function Lesson() {
         </p>
         <ul className="biglist">
           <li>
-            <Term>Fázová rychlost</Term> <M>{'w=\\dfrac{\\bar\\omega}{\\bar k}'}</M> = rychlost
+            <Term id="fazova-rychlost">Fázová rychlost</Term> <M>{'w=\\dfrac{\\bar\\omega}{\\bar k}'}</M> = rychlost
             postupu místa se <b>stejnou fází</b> (jednoho hřebene nosné vlny).
           </li>
           <li>
-            <Term>Grupová rychlost</Term> <M>{'v_g=\\dfrac{\\mathrm d\\omega}{\\mathrm dk}'}</M> =
+            <Term id="grupova-rychlost">Grupová rychlost</Term> <M>{'v_g=\\dfrac{\\mathrm d\\omega}{\\mathrm dk}'}</M> =
             rychlost postupu místa se <b>stejnou amplitudou</b> (postup obálky / klubka).{' '}
             <b>Tudy se přenáší energie.</b>
           </li>
@@ -240,9 +240,9 @@ export default function Lesson() {
         <p>Tato „směna" se dá zapsat jako</p>
         <MB>{'\\Delta x\\cdot\\Delta k \\approx 1'}</MB>
         <p>
-          a je to přímý předchůdce <b>Heisenbergovy relace neurčitosti</b>. V kvantové mechanice
+          a je to přímý předchůdce <b><Concept id="heisenberg-relace">Heisenbergovy relace neurčitosti</Concept></b>. V kvantové mechanice
           popisuje pohybující se částici právě vlnové klubko: čím přesněji chceš znát její polohu
-          (úzké klubko), tím méně přesně je určená její hybnost (široký rozsah <M>{'k'}</M>) — a
+          (úzké klubko), tím méně přesně je určená její <Concept id="hybnost">hybnost</Concept> (široký rozsah <M>{'k'}</M>) — a
           naopak. Proto se říká, že částici nelze mít zároveň přesně lokalizovanou v poloze i v
           hybnosti.
         </p>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.9'
 
@@ -59,16 +59,16 @@ export default function Lesson() {
   return (
     <>
       <p className="lead">
-        Tohle je oblíbená zkoušková dvojka otázek: <b>co dělá magnetické pole s vodičem, kterým teče
+        Tohle je oblíbená zkoušková dvojka otázek: <b>co dělá <Concept id="magneticke-pole">magnetické pole</Concept> s vodičem, kterým teče
         proud</b>, a <b>jak se chová proudová smyčka</b>. Stačí umět pár vět a jeden chyták —
         a body máš jisté. Hlavní past je úplně na konci, tak vydrž až k ní.
       </p>
 
       <Section title="Síla na vodič s proudem — odkud se bere">
         <p>
-          V drátu se proud = pohybující se náboje. A na pohybující se náboj v magnetickém poli působí{' '}
-          magnetická síla <M>{'F_m = B\\,Q\\,v\\,\\sin\\alpha'}</M>. Když ty malé síly na všechny
-          nositele náboje sečteš, vyjde <Term>síla na vodič s proudem</Term>:
+          V drátu se <Concept id="elektricky-proud">proud</Concept> = pohybující se náboje. A na pohybující se náboj v magnetickém poli působí{' '}
+          <Concept id="lorentzova-sila">magnetická síla</Concept> <M>{'F_m = B\\,Q\\,v\\,\\sin\\alpha'}</M>. Když ty malé síly na všechny
+          nositele náboje sečteš, vyjde <Term id="sila-na-vodic">síla na vodič s proudem</Term>:
         </p>
         <MB>{'F = B\\,I\\,l\\,\\sin\\alpha'}</MB>
         <p>
@@ -98,7 +98,7 @@ export default function Lesson() {
 
       <Section title="Proudová smyčka v poli — síly se sčítají na nulu">
         <p>
-          Teď z vodiče udělej obdélníkovou <Term>proudovou smyčku</Term> (rámeček, kterým teče
+          Teď z vodiče udělej obdélníkovou <Term id="proudova-smycka">proudovou smyčku</Term> (rámeček, kterým teče
           proud <M>{'I'}</M>) a vlož ji do <b>homogenního</b> (všude stejného) magnetického pole.
           Na každou stranu rámečku působí magnetická síla. Klíčové zjištění:
         </p>
@@ -120,7 +120,7 @@ export default function Lesson() {
 
       <Section title="Moment síly: smyčku to roztočí">
         <p>
-          I když je výslednice sil nula, <b>dvojice sil na protější strany působí v různé výšce</b> —
+          I když je výslednice sil nula, <b><Concept id="dvojice-sil">dvojice sil</Concept> na protější strany působí v různé výšce</b> —
           a to je přesně dvojice sil, která smyčku <Term>otáčí</Term>. Výsledný moment je
         </p>
         <MB>{'\\vec M = I\\,(\\vec S \\times \\vec B) \\qquad\\Rightarrow\\qquad |\\vec M| = I\\,S\\,B\\,\\sin\\alpha'}</MB>
@@ -223,18 +223,18 @@ export default function Lesson() {
 
       <Section title="Magnetický moment — co to je">
         <p>
-          Aby se to psalo hezky, zavádí se <Term>magnetický moment</Term> smyčky jako vektor:
+          Aby se to psalo hezky, zavádí se <Term id="magneticky-moment">magnetický moment</Term> smyčky jako vektor:
         </p>
         <MB>{'\\vec m = I\\,\\vec S'}</MB>
         <p>
           Velikost je <M>{'m = I\\,S'}</M> (proud krát plocha) a <b>směr je kolmý na rovinu
           smyčky</b> (po směru normály <M>{'\\vec S'}</M>, podle pravotočivé orientace proudu).
-          S ním se moment síly napíše jako čistý vektorový součin:
+          S ním se <Concept id="moment-sily">moment síly</Concept> napíše jako čistý vektorový součin:
         </p>
         <MB>{'\\vec M = \\vec m \\times \\vec B \\qquad |\\vec M| = m\\,B\\,\\sin\\alpha = I\\,S\\,B\\,\\sin\\alpha'}</MB>
         <p>
           Magnetický moment ti říká, „jak silně se smyčka chce natočit do pole“. Je to úplná analogie
-          elektrického dipólu v elektrickém poli (tam moment <M>{'M = p\\,E\\,\\sin\\alpha'}</M>).
+          <Concept id="dipol">elektrického dipólu</Concept> v elektrickém poli (tam moment <M>{'M = p\\,E\\,\\sin\\alpha'}</M>).
         </p>
       </Section>
 

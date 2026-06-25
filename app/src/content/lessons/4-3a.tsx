@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.3a'
 
@@ -45,7 +45,7 @@ export default function Lesson() {
   return (
     <>
       <p className="lead">
-        Tady poprvé uvidíš <Term>foton v akci</Term>: dopadne na kov a vykopne z něj elektron. Je to
+        Tady poprvé uvidíš <Concept id="foton">foton</Concept> v akci: dopadne na kov a vykopne z něj elektron. Je to
         oblíbená zkoušková otázka — chtějí hlavně, abys řekla, <b>co se děje</b>, uměla{' '}
         <b>rozlišit tři druhy</b> jevu a věděla, že <b>jeden foton uvolní jeden elektron</b>.
         Výpočty necháme na později, teď jde o pochopení.
@@ -53,7 +53,7 @@ export default function Lesson() {
 
       <Section title="Co je fotoelektrický jev (fotoefekt)">
         <p>
-          <Term>Fotoelektrický jev</Term> (krátce <Term>fotoefekt</Term>) je děj, při kterém{' '}
+          <Term id="fotoefekt">Fotoelektrický jev</Term> (krátce fotoefekt) je děj, při kterém{' '}
           <b>světlo (elektromagnetické záření) uvolní elektron z látky</b> — nejčastěji z kovu.
           Mechanismus je jednoduchý: foton dopadne na povrch, <Term>pohltí se</Term> (absorbuje) a
           svou energii předá jednomu elektronu. Pokud té energie bylo dost, elektron se utrhne.
@@ -219,17 +219,17 @@ export default function Lesson() {
 
       <Section title="Einsteinovo vysvětlení — energetická bilance">
         <p>
-          Celé je to jen <b>zákon zachování energie</b> pro jednu srážku fotonu s elektronem. Energie,
+          Celé je to jen <b><Concept id="zachovani-energie">zákon zachování energie</Concept></b> pro jednu srážku fotonu s elektronem. Energie,
           kterou foton přinese, se rozdělí na dvě části:
         </p>
         <MB>{'h\\nu = E_e + A'}</MB>
         <ul>
-          <li><M>{'h\\nu'}</M> = energie dopadajícího fotonu (<M>{'h'}</M> je Planckova konstanta, <M>{'\\nu'}</M> frekvence),</li>
-          <li><M>{'A'}</M> = <Term>výstupní práce</Term> — nejmenší energie nutná, aby elektron látku opustil (vlastnost daného materiálu a povrchu),</li>
+          <li><M>{'h\\nu'}</M> = energie dopadajícího fotonu (<M>{'h'}</M> je <Concept id="planckova-konstanta">Planckova konstanta</Concept>, <M>{'\\nu'}</M> frekvence),</li>
+          <li><M>{'A'}</M> = <Term id="vystupni-prace">výstupní práce</Term> — nejmenší energie nutná, aby elektron látku opustil (vlastnost daného materiálu a povrchu),</li>
           <li><M>{'E_e'}</M> = energie, kterou si elektron odnese jako pohyb (to, co „zbude").</li>
         </ul>
         <p>
-          Z toho hned plyne <Term>prahová (mezní) frekvence</Term> <M>{'\\nu_0'}</M>: foton musí mít
+          Z toho hned plyne <Concept id="mezni-frekvence">prahová (mezní) frekvence</Concept> <M>{'\\nu_0'}</M>: foton musí mít
           aspoň takovou energii, aby pokryl výstupní práci, <M>{'h\\nu_0 = A'}</M>. Když je{' '}
           <M>{'h\\nu < A'}</M>, elektron se neuvolní <b>ani kdybys svítila sebevíc</b> — slabému
           fotonu na to prostě energie nestačí.
@@ -246,7 +246,7 @@ export default function Lesson() {
         <p>
           Stejný princip „dodat elektronu dost energie, ať uteče" funguje i bez světla. Při{' '}
           <Term>termoemisi</Term> se elektrony (pak se jim říká <b>termoelektrony</b>) uvolní z{' '}
-          <b>silně zahřátého</b> kovu — energii si vezmou z tepelného pohybu částic. Hezky to potvrzuje
+          <b>silně zahřátého</b> kovu — energii si vezmou z <Concept id="tepelny-pohyb">tepelného pohybu</Concept> částic. Hezky to potvrzuje
           Einsteinův pohled: výstupní práce při termoemisi je zhruba stejná jako u fotoemise{' '}
           <M>{'(A_{\\text{termo}} \\approx A_{\\text{foto}})'}</M>.
         </p>

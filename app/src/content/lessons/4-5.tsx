@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Concept, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.5'
 
@@ -41,8 +41,8 @@ export default function Lesson_4_5() {
       <Section title="Heisenbergovy relace neurčitosti">
         <p>
           V klasické mechanice si u tělesa kdykoli změříš zároveň, <b>kde je</b> (poloha){' '}
-          i <b>jak rychle a kam letí</b> (hybnost <M>{'p = m v'}</M>). U částice v mikrosvětě
-          to <b>nejde současně přesně</b>. Platí <Term>Heisenbergova relace neurčitosti</Term>:
+          i <b>jak rychle a kam letí</b> (<Concept id="hybnost">hybnost</Concept> <M>{'p = m v'}</M>). U částice v mikrosvětě
+          to <b>nejde současně přesně</b>. Platí <Term id="heisenberg-relace">Heisenbergova relace neurčitosti</Term>:
         </p>
 
         <MB>{'\\Delta x \\cdot \\Delta p \\;\\ge\\; \\frac{\\hbar}{2}, \\qquad \\hbar = \\frac{h}{2\\pi}'}</MB>
@@ -92,16 +92,16 @@ export default function Lesson_4_5() {
         <p>
           Proč to v běžném životě nevidíš? <M>{'\\hbar'}</M> je nepředstavitelně malé. U zrnka
           prachu nebo auta vyjde neurčitost tak titěrná, že je neměřitelná — chovají se jako
-          klasické <Term>hmotné body</Term>. Naplno se relace projeví až u elektronu v atomu.
+          klasické <Concept id="hmotny-bod">hmotné body</Concept>. Naplno se relace projeví až u elektronu v atomu.
         </p>
       </Section>
 
       <Section title="Vlnová funkce ψ a |ψ|² (hustota pravděpodobnosti)">
         <p>
-          Když polohu nemůžeme znát přesně, čím částici vůbec popíšeme? <Term>Vlnovou
+          Když polohu nemůžeme znát přesně, čím částici vůbec popíšeme? <Term id="vlnova-funkce">Vlnovou
           funkcí</Term> <M>{'\\psi(x,t)'}</M> (psí). Sama o sobě nemá přímý fyzikální význam —
           je to matematický „obal", který v sobě nese všechnu informaci o stavu částice.
-          Fyzikální význam má až její <b>druhá mocnina</b>:
+          Fyzikální význam má až její <b>druhá mocnina</b> — <Term id="hustota-pravdepodobnosti">hustota pravděpodobnosti</Term>:
         </p>
 
         <MB>{'|\\psi(x,t)|^2 \\;=\\; \\text{hustota pravděpodobnosti}'}</MB>
@@ -147,7 +147,7 @@ export default function Lesson_4_5() {
       <Section title="Schrödingerova rovnice (jak se staví elektronový obal)">
         <p>
           Jak se vlnová funkce v čase vyvíjí a jaké tvary <M>{'|\\psi|^2'}</M> v atomu vzniknou?
-          To řeší <Term>Schrödingerova rovnice</Term> — <b>základní rovnice kvantové
+          To řeší <Term id="schrodingerova-rovnice">Schrödingerova rovnice</Term> — <b>základní rovnice kvantové
           mechaniky</b>. Symbolicky se píše:
         </p>
 
@@ -155,12 +155,12 @@ export default function Lesson_4_5() {
 
         <p>
           <M>{'\\hat H'}</M> je hamiltonián (operátor celkové energie). U elektronu v atomu do něj
-          dosadíme <b>Coulombův potenciál</b> přitažlivé síly mezi záporným elektronem a kladným
+          dosadíme <b><Concept id="coulombuv-zakon">Coulombův potenciál</Concept></b> přitažlivé síly mezi záporným elektronem a kladným
           jádrem — a z řešení vyjdou <b>dovolené energetické hladiny</b> a tvary orbitalů. <b>Tak
           se „postaví" elektronový obal.</b>
         </p>
         <ul>
-          <li>Má v kvantové mechanice <b>stejné postavení jako 2. Newtonův zákon</b> v té klasické (Newtonův zákon říká, jak se vyvíjí poloha; Schrödinger říká, jak se vyvíjí <M>{'\\psi'}</M>).</li>
+          <li>Má v kvantové mechanice <b>stejné postavení jako <Concept id="newtonovy-zakony">2. Newtonův zákon</Concept></b> v té klasické (Newtonův zákon říká, jak se vyvíjí poloha; Schrödinger říká, jak se vyvíjí <M>{'\\psi'}</M>).</li>
           <li>Z řešení automaticky vychází, že energie je <b>kvantovaná</b> — povolené jsou jen určité hladiny.</li>
           <li>Stačí znát potenciální energii systému; přesné řešení se ale často najít nedá (jen se ví, že existuje).</li>
         </ul>
@@ -186,11 +186,11 @@ export default function Lesson_4_5() {
 
       <Section title="Důkaz vlnových vlastností: ohyb elektronů na krystalu">
         <p>
-          Že částice opravdu mají vlnovou povahu (de&nbsp;Broglie), se <b>dokázalo
+          Že částice opravdu mají vlnovou povahu (<Concept id="de-broglie">de&nbsp;Broglie</Concept>), se <b>dokázalo
           experimentálně</b>: elektrony se při průchodu <b>krystalem</b> (např. tenkou vrstvou
-          niklu) <Term>ohýbají</Term> a vytvoří <b>interferenční obrazec</b> — přesně jako
+          niklu) ohýbají a vytvoří <b><Concept id="interference">interferenční obrazec</Concept></b> — přesně jako
           vlny. Funguje to proto, že rozestup atomů v krystalu je řádově stejný jako de
-          Broglieho vlnová délka elektronu, takže krystal slouží jako přírodní „mřížka".
+          Broglieho <Concept id="vlnova-delka">vlnová délka</Concept> elektronu, takže krystal slouží jako přírodní „mřížka".
         </p>
         <Figure caption="Elektrony (jako vlny) projdou pravidelnou mříží krystalu a na stínítku vytvoří soustavu maxim a minim — ohybový (interferenční) obrazec. To by čistá kulička nikdy neudělala.">
           <svg viewBox="0 0 440 180" className="svg-fig">
@@ -249,10 +249,10 @@ export default function Lesson_4_5() {
       <Section title="Atom v základním × excitovaném stavu a vyzáření fotonu">
         <p>
           Elektrony v atomu sedí na povolených hladinách. <b>Nejnižší možná energie</b> =
-          <Term> základní stav</Term> (atom je „v klidu", nejstabilnější). Dodáme-li energii
+          <Term id="zakladni-excitovany-stav"> základní stav</Term> (atom je „v klidu", nejstabilnější). Dodáme-li energii
           (teplem, srážkou, světlem), elektron <b>přeskočí výš</b> — atom je v{' '}
-          <Term>excitovaném stavu</Term>. Ten je nestabilní: elektron za chvíli <b>spadne
-          zpět</b> a přebytek energie <b>vyzáří jako foton</b>. Klikej krok po kroku:
+          <b>excitovaném stavu</b>. Ten je nestabilní: elektron za chvíli <b>spadne
+          zpět</b> a přebytek energie <b>vyzáří jako <Concept id="foton">foton</Concept></b>. Klikej krok po kroku:
         </p>
 
         <StepFigure
@@ -339,12 +339,12 @@ export default function Lesson_4_5() {
       <SelfCheck
         items={[
           {
-            q: <>Napiš Heisenbergovu relaci neurčitosti a vysvětli, proč ji nejde „obejít" lepším přístrojem.</>,
+            q: <>Napiš <Term id="heisenberg">Heisenbergovu relaci</Term> neurčitosti a vysvětli, proč ji nejde „obejít" lepším přístrojem.</>,
             a: <><M>{'\\Delta x \\cdot \\Delta p \\ge \\hbar/2'}</M>. Součin neurčitosti polohy a hybnosti má <b>neredukovatelné minimum</b> — je to <b>vlastnost přírody</b> (vlnová povaha částic), ne nedokonalost měřidla. Lepší přístroj na tom nic nezmění.</>,
           },
           {
             q: <>Co fyzikálně znamená <M>{'|\\psi|^2'}</M>?</>,
-            a: <><b>Hustotu pravděpodobnosti</b> — pravděpodobnost, že částici (popsanou vlnovou funkcí <M>{'\\psi'}</M>) najdeš v daném <b>místě a čase</b>. Pozor: je to pravděpodobnost, <b>ne přímo poloha</b> ani dráha. Když <M>{'|\\psi|^2 = 0{,}2'}</M>, je tam 20% šance.</>,
+            a: <><Term id="hustota-pravdepodobnosti"><b>Hustotu pravděpodobnosti</b></Term> — pravděpodobnost, že částici (popsanou vlnovou funkcí <M>{'\\psi'}</M>) najdeš v daném <b>místě a čase</b>. Pozor: je to pravděpodobnost, <b>ne přímo poloha</b> ani dráha. Když <M>{'|\\psi|^2 = 0{,}2'}</M>, je tam 20% šance.</>,
           },
           {
             q: <>Jaký je vztah klasické a kvantové mechaniky?</>,

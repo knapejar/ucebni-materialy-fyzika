@@ -41,19 +41,19 @@ export default function Lesson_1_1() {
 
       <Section title="Síla a hmotný bod — domluvme se na pojmech">
         <p>
-          <Concept id="sila">Síla</Concept> je <Term>vektorová</Term> veličina: má velikost i směr.
+          <Term id="sila">Síla</Term> je <Term>vektorová</Term> veličina: má velikost i směr.
           Měří se v newtonech, <M>{'[\\,\\mathrm{N}\\,] = \\mathrm{kg\\,m\\,s^{-2}}'}</M>. Síla je
           „příčina", proč se pohyb mění (zrychluje, brzdí, zatáčí) nebo proč se těleso deformuje.
         </p>
         <p>
           Abychom to měli jednoduché, často nahradíme těleso{' '}
-          <Concept id="hmotny-bod">hmotným bodem</Concept> — bodem, do kterého soustředíme celou
+          <Term id="hmotny-bod">hmotným bodem</Term> — bodem, do kterého soustředíme celou
           hmotnost a jehož rozměry zanedbáme (rozměry tělesa jsou mnohem menší než vzdálenosti děje).
         </p>
       </Section>
 
       <Section title="Tři Newtonovy zákony">
-        <p>Celé to stojí na <Concept id="newtonovy-zakony">třech Newtonových zákonech</Concept>:</p>
+        <p>Celé to stojí na <Term id="newtonovy-zakony">třech Newtonových zákonech</Term>:</p>
 
         <ol className="biglist">
           <li>
@@ -63,7 +63,7 @@ export default function Lesson_1_1() {
           </li>
           <li>
             <b>2. zákon (síla a zrychlení).</b> Výslednice sil udává tělesu zrychlení. Píše se{' '}
-            <Concept id="pohybova-rovnice">pohybovou rovnicí</Concept>:
+            <Term id="pohybova-rovnice">pohybovou rovnicí</Term>:
             <MB>{'\\vec{F} = m\\,\\vec{a} = \\frac{\\mathrm{d}\\vec{p}}{\\mathrm{d}t}'}</MB>
             kde <M>{'\\vec{p}=m\\vec{v}'}</M> je <Concept id="hybnost">hybnost</Concept>. Tvar přes{' '}
             <M>{'\\mathrm{d}\\vec p/\\mathrm{d}t'}</M> je obecnější (platí, i když se mění hmotnost).

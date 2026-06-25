@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.9'
 
@@ -64,7 +64,8 @@ export default function Lesson() {
 
       <Section title="Polarizované × nepolarizované — o co jde">
         <p>
-          Světlo je <b>příčné</b> elektromagnetické vlnění: vektor intenzity elektrického pole{' '}
+          Světlo je <b>příčné</b> elektromagnetické <Concept id="vlneni">vlnění</Concept>: vektor{' '}
+          <Concept id="intenzita-pole">intenzity elektrického pole</Concept>{' '}
           <M>{'\\vec E'}</M> kmitá <b>kolmo</b> na směr šíření. Otázka je, <i>v jakých rovinách</i> ty
           kmity probíhají.
         </p>
@@ -74,7 +75,7 @@ export default function Lesson() {
             <b>v náhodně otočených rovinách</b>. Roviny jsou rozházené do všech směrů kolem paprsku.
           </li>
           <li>
-            <Term>Lineárně polarizované světlo</Term>: <M>{'\\vec E'}</M> kmitá <b>jen v jedné rovině</b>.
+            <Term id="polarizace-svetla">Lineárně polarizované světlo</Term>: <M>{'\\vec E'}</M> kmitá <b>jen v jedné rovině</b>.
             Tahle rovina se jmenuje <Term>rovina polarizace</Term>.
           </li>
         </ul>
@@ -187,13 +188,13 @@ export default function Lesson() {
 
       <Section title="Optická aktivita a chiralita">
         <p>
-          <Term>Optická aktivita</Term> je schopnost některých látek <b>stáčet rovinu polarizace</b>
+          <Term id="opticka-aktivita">Optická aktivita</Term> je schopnost některých látek <b>stáčet rovinu polarizace</b>
           procházejícího lineárně polarizovaného světla. Když mezi dva zkřížené filtry (které jinak
           zhasnou) vložíš opticky aktivní roztok, světlo se zase trochu rozsvítí — protože látka rovinu
           pootočila.
         </p>
         <p>
-          Příčinou je <Term>asymetrie molekul</Term> — molekula je <Term>chirální</Term>: nedá se
+          Příčinou je <Term>asymetrie molekul</Term> — molekula je <Term id="chiralita">chirální</Term>: nedá se
           ztotožnit se svým zrcadlovým obrazem (jako <b>levá a pravá ruka</b>). U organických látek to
           typicky způsobuje <Term>chirální (asymetrický) uhlík</Term> — atom uhlíku se čtyřmi <b>různými</b>
           skupinami. Vznikají tak dvojice <Term>stereoizomerů</Term>, které stáčejí rovinu opačným směrem

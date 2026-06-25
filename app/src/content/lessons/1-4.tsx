@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.4'
 
@@ -67,14 +67,14 @@ export default function Lesson_1_4() {
     <>
       <p className="lead">
         Tahle lekce je zlatý důl na body, protože jde celá o jednu otázku: <b>kdy se energie zachovává a v jakém tvaru</b>.
-        Stačí umět rozlišit <Term>konzervativní</Term> a <Term>nekonzervativní</Term> pole a vědět, který „zákon zachování" kde platí.
+        Stačí umět rozlišit <Term>konzervativní</Term> a <Term>nekonzervativní</Term> pole a vědět, který <Term id="zachovani-energie">„zákon zachování"</Term> kde platí.
         Tady se nejvíc chybuje v jediném slově — <i>mechanická</i> versus <i>celková</i> energie.
       </p>
 
       <Section title="Konzervativní pole — práce nezávisí na dráze">
         <p>
-          <Term>Konzervativní (potenciálové) silové pole</Term> je takové, kde se při přeměně
-          potenciální energie <M>{'E_p'}</M> na kinetickou <M>{'E_k'}</M> a zpět <b>nic neztrácí</b>.
+          <Term id="konzervativni-pole">Konzervativní (potenciálové) silové pole</Term> je takové, kde se při přeměně
+          <Concept id="potencialni-energie">potenciální energie</Concept> <M>{'E_p'}</M> na <Concept id="kineticka-energie">kinetickou</Concept> <M>{'E_k'}</M> a zpět <b>nic neztrácí</b>.
           Klíčová vlastnost, kterou zkoušející chce slyšet:
         </p>
         <Callout kind="info" title="Hlavní vlastnost konzervativního pole">
@@ -82,7 +82,7 @@ export default function Lesson_1_4() {
           (zpět do startu) je celková práce <b>nulová</b>.
         </Callout>
         <p>
-          Práci konzervativní síly umíme zapsat jako úbytek potenciální energie:
+          <Concept id="prace">Práci</Concept> konzervativní síly umíme zapsat jako úbytek potenciální energie:
         </p>
         <MB>{'W = -\\Delta E_p'}</MB>
         <p>
@@ -111,7 +111,7 @@ export default function Lesson_1_4() {
       <Section title="Zákon zachování mechanické energie">
         <p>
           V <b>izolované soustavě</b> a v <b>konzervativním poli</b> platí{' '}
-          <Term>zákon zachování mechanické energie</Term>: kinetická energie se mění v potenciální a naopak,
+          <Term id="zachovani-mech-energie">zákon zachování mechanické energie</Term>: kinetická energie se mění v potenciální a naopak,
           ale jejich <b>součet zůstává stálý</b>.
         </p>
         <MB>{'\\Delta E_k + \\Delta E_p = 0 \\qquad\\Longleftrightarrow\\qquad E_M = E_k + E_p = \\text{konst.}'}</MB>
@@ -192,7 +192,7 @@ export default function Lesson_1_4() {
 
       <Section title="Nekonzervativní (disipativní) pole — tření">
         <p>
-          <Term>Nekonzervativní (disipativní) síly</Term> — typicky <b>tření</b> a <b>odporové síly</b> — se chovají jinak:
+          <Term id="disipativni-sila">Nekonzervativní (disipativní) síly</Term> — typicky <b>tření</b> a <b>odporové síly</b> — se chovají jinak:
           nezávisí jen na poloze, ale i na <b>rychlosti</b>, kterou se těleso pohybuje. Při pohybu rozhází část mechanické energie
           „nahodile" mezi částice látky — to je <Term>disipace</Term>. Tahle energie se <b>už nevrátí</b> zpět na pohyb,
           jde o <b>nevratný proces</b> (mění se hlavně na <b>teplo</b>).
@@ -223,7 +223,7 @@ export default function Lesson_1_4() {
       <Section title="Zákon zachování CELKOVÉ energie">
         <p>
           Když je ve hře tření, energie se přesto nikam neztratí — jen přejde do formy, na kterou jsme v mechanice „neviděli".
-          Proto platí obecnější <Term>zákon zachování celkové energie</Term>: v izolované soustavě je stálá <b>celková</b> energie,
+          Proto platí obecnější <Term id="zachovani-celkove-energie">zákon zachování celkové energie</Term>: v izolované soustavě je stálá <b>celková</b> energie,
           do které započteme i <b>vnitřní energii</b> <M>{'U'}</M> (a další formy — deformační, chemickou…).
         </p>
         <MB>{'E_c = E_k + E_p + U = \\text{konst.} \\qquad\\Longleftrightarrow\\qquad \\Delta E_k + \\Delta E_p + \\Delta U = 0'}</MB>

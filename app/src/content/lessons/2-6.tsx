@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.6'
 
@@ -45,8 +45,8 @@ export default function Lesson_2_6() {
 
       <Section title="Odkud se bere magnetické pole">
         <p>
-          Jediná věc, kterou si musíš zapamatovat ze všeho nejvíc: magnetické pole budí{' '}
-          <Term>pohybující se náboj</Term>. Tedy <Term>elektrický proud</Term>. Náboj, který si
+          Jediná věc, kterou si musíš zapamatovat ze všeho nejvíc: <Term id="magneticke-pole">magnetické pole</Term> budí{' '}
+          <Term>pohybující se náboj</Term>. Tedy <Term id="elektricky-proud">elektrický proud</Term>. <Concept id="naboj">Náboj</Concept>, který si
           klidně leží na místě, kolem sebe magnetické pole <b>nedělá</b> (dělá jen elektrické).
           Jakmile se ale rozjede, objeví se kolem něj magnetické pole.
         </p>
@@ -100,7 +100,7 @@ export default function Lesson_2_6() {
 
         <ol className="biglist">
           <li>
-            <b>Biot-Savartův zákon</b> — <Term>univerzální „kalkulačka"</Term>. Spočítá příspěvek{' '}
+            <Term id="biot-savart"><b>Biot-Savartův zákon</b></Term> — univerzální „kalkulačka". Spočítá příspěvek{' '}
             <M>{'\\mathrm d\\vec B'}</M> od jednoho <b>nekonečně malého kousku vodiče</b>{' '}
             <M>{'\\mathrm d\\vec s'}</M> a ty pak všechny kousky <b>sečteš (zintegruješ)</b>. Funguje
             na jakýkoli tvar drátu, ale počítá se hůř.
@@ -109,7 +109,7 @@ export default function Lesson_2_6() {
             <M>{'\\alpha'}</M> je úhel mezi <M>{'\\mathrm d\\vec s'}</M> a <M>{'\\vec r'}</M>.
           </li>
           <li>
-            <b>Ampérův zákon</b> — <Term>zkratka pro souměrné případy</Term> (analogie Gaussova zákona
+            <Term id="amperuv-zakon"><b>Ampérův zákon</b></Term> — zkratka pro souměrné případy (analogie <Concept id="gaussova-veta">Gaussova zákona</Concept>
             z elektrostatiky). Říká: když obejdeš libovolnou <b>uzavřenou křivku</b>, součet{' '}
             <M>{'\\vec B\\cdot\\mathrm d\\vec s'}</M> podél ní je roven proudu, který tou křivkou
             protéká, krát <M>{'\\mu_0'}</M>:
@@ -127,16 +127,16 @@ export default function Lesson_2_6() {
         </Callout>
 
         <p>
-          V obou se objevuje konstanta <Term>permeabilita vakua</Term>{' '}
+          V obou se objevuje konstanta <Term id="permeabilita-vakua">permeabilita vakua</Term>{' '}
           <M>{'\\mu_0 = 4\\pi\\cdot 10^{-7}\\ \\mathrm{T\\,m/A}'}</M>. Je to jen „násobící konstanta"
-          magnetického pole, podobně jako u Coulombova zákona vystupuje permitivita.
+          magnetického pole, podobně jako u <Concept id="coulombuv-zakon">Coulombova zákona</Concept> vystupuje <Concept id="permitivita">permitivita</Concept>.
         </p>
       </Section>
 
       <Section title="Nejdůležitější výsledek: pole nekonečného přímého vodiče">
         <p>
-          Tohle je <b>jediný vzoreček, který musíš umět zpaměti</b>. Když dosadíš přímý nekonečný
-          drát do Ampérova zákona (kružnice kolem drátu, na ní je <M>{'B'}</M> všude stejně velké),
+          Tohle je <b>jediný vzoreček, který musíš umět zpaměti</b>. Když dosadíš <Term id="pole-primeho-vodice">přímý nekonečný
+          drát</Term> do Ampérova zákona (kružnice kolem drátu, na ní je <M>{'B'}</M> všude stejně velké),
           vyjde:
         </p>
         <MB>{'B = \\frac{\\mu_0\\,I}{2\\pi r}'}</MB>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.4'
 
@@ -57,15 +57,15 @@ export default function Lesson() {
     <>
       <p className="lead">
         Tahle lekce odpovídá na otázku, kterou zkoušející milují: <b>proč vůbec</b> z těžkého jádra
-        vyletí α částice, když na to „nemá energii"? Odpověď je <Term>tunelový jev</Term> — perla
+        vyletí α částice, když na to „nemá energii"? Odpověď je <Term id="tunelovy-jev">tunelový jev</Term> — perla
         kvantové fyziky. Stačí pochopit jeden obrázek a umět říct, čím se liší klasický a kvantový
         pohled.
       </p>
 
       <Section title="Proč právě těžká jádra (a ne lehká)">
         <p>
-          V jádře proti sobě bojují dvě síly. <Term>Jaderné síly</Term> jsou přitažlivé, ale mají{' '}
-          <b>velmi krátký dosah</b> — působí jen mezi sousedními nukleony. <Term>Coulombovské
+          V jádře proti sobě bojují dvě síly. <Concept id="jaderne-sily">Jaderné síly</Concept> jsou přitažlivé, ale mají{' '}
+          <b>velmi krátký dosah</b> — působí jen mezi sousedními <Concept id="nukleony">nukleony</Concept>. <Term>Coulombovské
           (elektrostatické) síly</Term> jsou odpudivé, působí mezi všemi protony a mají{' '}
           <b>dlouhý dosah</b>.
         </p>
@@ -113,7 +113,7 @@ export default function Lesson() {
       <Section title="Uvolněná energie Q — kdy je rozpad vůbec možný">
         <p>
           Aby k rozpadu mohlo dojít, musí se při něm <b>uvolnit</b> energie. Spočítá se z{' '}
-          <Term>hmotnostního úbytku</Term> — porovnáš hmotnost před a po:
+          <Concept id="hmotnostni-ubytek">hmotnostního úbytku</Concept> — porovnáš hmotnost před a po:
         </p>
         <MB>{'Q = (m_i - m_f - m)\\,c^2'}</MB>
         <p>
@@ -123,21 +123,21 @@ export default function Lesson() {
         </p>
         <MB>{'{}^{A}_{Z}\\mathrm{X} \\;\\longrightarrow\\; {}^{A-4}_{Z-2}\\mathrm{Y} \\;+\\; {}^{4}_{2}\\alpha'}</MB>
         <p>
-          Klíčová podmínka: <M>{'Q > 0'}</M> ⇒ emise α částice je <b>energeticky možná</b> (uvolněná
-          energie se rozdělí jako kinetická energie odletující α částice a dceřiného jádra). Když by
+          Klíčová podmínka: <M>{'Q > 0'}</M> ⇒ emise α částice je <b>energeticky možná</b> (<Term id="uvolnena-energie-q">uvolněná
+          energie</Term> se rozdělí jako <Concept id="kineticka-energie">kinetická energie</Concept> odletující α částice a dceřiného jádra). Když by
           vyšlo <M>{'Q \\le 0'}</M>, rozpad sám od sebe neproběhne.
         </p>
         <Callout kind="tip" title="Jak si Q zapamatovat">
           „Co zmizí na hmotě, objeví se jako energie." Hmotnost po rozpadu je o trošku{' '}
           <b>menší</b> než před ním a ten rozdíl × <M>{'c^2'}</M> je uvolněná energie{' '}
-          <M>{'Q'}</M>. Je to stejný princip <M>{'E=mc^2'}</M> jako u vazebné energie.
+          <M>{'Q'}</M>. Je to stejný princip <M>{'E=mc^2'}</M> jako u <Concept id="vazebna-energie">vazebné energie</Concept>.
         </Callout>
       </Section>
 
       <Section title="Jádro pudla: klasicky to nejde, kvantově ano">
         <p>
           α částice je uvnitř jádra jako míček v jámě obklopené vysokým „valem" —{' '}
-          <Term>potenciálovou bariérou</Term>. Tu bariéru vytváří právě Coulombovské odpuzování. A teď
+          <Term id="potencialova-bariera">potenciálovou bariérou</Term>. Tu bariéru vytváří právě Coulombovské odpuzování. A teď
           ten zádrhel, kvůli kterému lekce existuje:
         </p>
         <ul>
@@ -154,7 +154,7 @@ export default function Lesson() {
           </li>
         </ul>
         <p>
-          Odkud se ta možnost bere? Souvisí s <Term>Heisenbergovou relací neurčitosti</Term>:
+          Odkud se ta možnost bere? Souvisí s <Concept id="heisenberg-relace">Heisenbergovou relací neurčitosti</Concept>:
           polohu a energii částice nelze určit současně úplně přesně, takže částice „nemá" ostře danou
           energii a může se s jistou pravděpodobností ocitnout i za bariérou. (Celou tuhle lekci o
           neurčitosti znát nemusíš — stačí ta jedna věta.)
@@ -223,7 +223,7 @@ export default function Lesson() {
               label: 'kvantově: tunel',
               caption: (
                 <>
-                  Kvantově: vlnová funkce α částice <b>nezmizí</b> uvnitř bariéry — jen zeslábne. Za
+                  Kvantově: <Concept id="vlnova-funkce">vlnová funkce</Concept> α částice <b>nezmizí</b> uvnitř bariéry — jen zeslábne. Za
                   bariérou má nenulovou hodnotu, takže <b>existuje malá pravděpodobnost</b>, že tam
                   částici najdeme. To je <Term>tunelový jev</Term>.
                 </>
@@ -279,7 +279,7 @@ export default function Lesson() {
           Co znamenají barvy na obrázku: <b>modrá</b> křivka je <b>potenciál</b> (jáma uvnitř, vysoký
           val v okolí), <b>žlutá</b> hladina je <b>energie α částice</b> (níž než val) a{' '}
           <b>růžová</b> je <b>vlnová funkce</b> <M>{'\\psi'}</M>. Že je <M>{'\\psi'}</M> nenulová i za
-          valem, znamená <b>nenulovou pravděpodobnost výskytu</b> <M>{'|\\psi|^2'}</M> i vně jádra —
+          valem, znamená <b>nenulovou <Concept id="hustota-pravdepodobnosti">pravděpodobnost výskytu</Concept></b> <M>{'|\\psi|^2'}</M> i vně jádra —
           a to je celé tajemství tunelování.
         </p>
       </Section>
@@ -351,7 +351,7 @@ export default function Lesson() {
             ),
           },
           {
-            q: <>Jak se změní nukleonové číslo <M>{'A'}</M> a protonové číslo <M>{'Z'}</M> při α rozpadu?</>,
+            q: <>Jak se změní <Concept id="nukleonove-cislo">nukleonové číslo</Concept> <M>{'A'}</M> a <Concept id="protonove-cislo">protonové číslo</Concept> <M>{'Z'}</M> při α rozpadu?</>,
             a: (
               <>
                 Protože α částice odnese 2 protony a 2 neutrony: <M>{'Z\\to Z-2'}</M> a{' '}

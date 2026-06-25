@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.8'
 
@@ -85,8 +85,8 @@ export default function Lesson_2_8() {
 
       <Section title="Magnetický tok Φ — kolik pole „protéká“ plochou">
         <p>
-          Představ si rámeček (smyčku drátu) v magnetickém poli. <Term>Magnetický tok</Term>{' '}
-          <M>{'\\Phi'}</M> říká, kolik siločar magnetického pole tím rámečkem „prochází". Když je pole
+          Představ si rámeček (smyčku drátu) v <Concept id="magneticke-pole">magnetickém poli</Concept>. <Term id="magneticky-tok">Magnetický tok</Term>{' '}
+          <M>{'\\Phi'}</M> říká, kolik <Concept id="silocary">siločar</Concept> magnetického pole tím rámečkem „prochází". Když je pole
           homogenní (všude stejné) a plocha rovinná, počítá se jednoduše:
         </p>
         <MB>{'\\Phi = \\vec{B}\\cdot\\vec{S} = B\\,S\\,\\cos\\alpha'}</MB>
@@ -116,8 +116,8 @@ export default function Lesson_2_8() {
 
       <Section title="Elektromagnetická indukce — změna toku vyrobí napětí">
         <p>
-          <Term>Elektromagnetická indukce</Term> je vznik napětí (a v uzavřeném obvodu i proudu) ve
-          vodiči, když se mění magnetický tok. Klíčové slovo je <b>změna</b>: dáš-li smyčku do pole,
+          <Term id="elektromagneticka-indukce">Elektromagnetická indukce</Term> je vznik napětí (a v uzavřeném obvodu i <Concept id="elektricky-proud">proudu</Concept>) ve
+          <Concept id="vodic">vodiči</Concept>, když se mění magnetický tok. Klíčové slovo je <b>změna</b>: dáš-li smyčku do pole,
           které se nemění a smyčka se nehýbe, <b>neteče nic</b>. Jakmile se ale tok začne měnit
           (přiblížíš magnet, otočíš smyčku…), naskočí napětí.
         </p>
@@ -168,7 +168,7 @@ export default function Lesson_2_8() {
       <Section title="Faradayův zákon — vzoreček, který musí padnout">
         <p>
           Velikost indukovaného napětí <M>{'\\varepsilon_i'}</M> se rovná tomu, <b>jak rychle</b> se
-          mění tok. Přesně to říká <Term>Faradayův zákon</Term>:
+          mění tok. Přesně to říká <Term id="faraduv-zakon">Faradayův zákon</Term>:
         </p>
         <MB>{'\\varepsilon_i = -\\frac{\\mathrm{d}\\Phi}{\\mathrm{d}t}'}</MB>
         <p>
@@ -242,7 +242,7 @@ export default function Lesson_2_8() {
           </li>
           <li>
             <b>Znaménko mínus</b> ve <M>{'\\varepsilon_i = -\\mathrm{d}\\Phi/\\mathrm{d}t'}</M> není jen
-            ozdoba — je to <Term>Lenzovo pravidlo</Term>: indukovaný proud teče tak, aby svým magnetickým
+            ozdoba — je to <Term id="lenzovo-pravidlo">Lenzovo pravidlo</Term>: indukovaný proud teče tak, aby svým magnetickým
             polem <b>bránil té změně</b>, která ho vyvolala (důsledek setrvačnosti soustavy). Přibližuješ
             magnet → indukované pole ho „odpuzuje".
           </li>

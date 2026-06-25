@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.7'
 
@@ -34,8 +34,8 @@ export default function Lesson_3_7() {
   return (
     <>
       <p className="lead">
-        Dvě klasické zkouškové otázky, které jdou ruku v ruce. <Term>Huygensův princip</Term> ti
-        dá názorné vysvětlení, proč se vlnění ohýbá za roh (slyšíš za zeď). A <Term>Dopplerův
+        Dvě klasické zkouškové otázky, které jdou ruku v ruce. <Term id="huygensuv-princip">Huygensův princip</Term> ti
+        dá názorné vysvětlení, proč se <Concept id="vlneni">vlnění</Concept> ohýbá za roh (slyšíš za zeď). A <Term id="dopplernv-jev">Dopplerův
         jev</Term> je ta sanitka, co změní tón, když projede kolem — stačí umět <b>jednu větu a
         jedno pravidlo</b> a máš bod.
       </p>
@@ -49,7 +49,7 @@ export default function Lesson_3_7() {
         </p>
         <p>
           Huygensův nápad (formulace, kterou chce zkoušející): <b>každý bod vlnoplochy, kam vlnění
-          dospělo, se sám stává zdrojem</b> malého <Term>elementárního vlnění</Term> — drobné
+          dospělo, se sám stává zdrojem</b> malého <Term id="elementarni-vlneni">elementárního vlnění</Term> — drobné
           kulové vlnky. <b>Novou vlnoplochu o chvíli později dostaneš jako obal (obálku) všech těchto
           elementárních vlnek.</b>
         </p>
@@ -133,8 +133,8 @@ export default function Lesson_3_7() {
         <p>
           Huygensovi něco scházelo: kdyby každý bod vyzařoval kulově na <b>všechny</b> strany,
           vznikla by i vlna mířící <b>dozadu</b> (proti směru šíření), kterou v reálu nevidíme.
-          Fresnel to dořešil: elementární vlnky se <b>interferencí</b> sečtou tak, že se zesílí
-          jen na vnější obálce — jinde se vyruší. Zavedl <Term>inklinační faktor</Term>:
+          Fresnel to dořešil: elementární vlnky se <Concept id="interference">interferencí</Concept> sečtou tak, že se zesílí
+          jen na vnější obálce — jinde se vyruší. Zavedl <Term id="inklinacni-faktor">inklinační faktor</Term>:
         </p>
         <MB>{'K(\\theta) = \\tfrac{1}{2}\\,(1 + \\cos\\theta)'}</MB>
         <p>
@@ -162,7 +162,7 @@ export default function Lesson_3_7() {
 
       <Section title="K čemu to je: ohyb (zvuk za roh)">
         <p>
-          Důležitý důsledek Huygensova principu je <Term>ohyb</Term> (difrakce): když vlna projde
+          Důležitý důsledek Huygensova principu je <Term id="ohyb">ohyb</Term> (difrakce): když vlna projde
           úzkou škvírou nebo mine roh, body na okraji se chovají jako nové zdroje a vyšlou vlnky{' '}
           <b>i do oblasti za překážkou</b>. Proto <b>slyšíš člověka i za rohem</b>, i když ho
           nevidíš. Stejně tak se ohýbají vlny na vodě kolem mola.
@@ -208,7 +208,7 @@ export default function Lesson_3_7() {
               caption: (
                 <>
                   Stojící zdroj vysílá vlnoplochy <b>pravidelně do všech stran</b> — vzdálenost mezi
-                  nimi (vlnová délka <M>{'\\lambda'}</M>) je všude stejná. Vlevo i vpravo slyšíš{' '}
+                  nimi (<Concept id="vlnova-delka">vlnová délka</Concept> <M>{'\\lambda'}</M>) je všude stejná. Vlevo i vpravo slyšíš{' '}
                   <b>stejný tón</b> <M>{'f_0'}</M>.
                 </>
               ),
@@ -305,7 +305,7 @@ export default function Lesson_3_7() {
 
       <Section title="Využití ultrazvuku (a Dopplera obecně)">
         <p>
-          Dopplerův jev a odraz vln se prakticky využívají k <b>měření rychlostí</b> — vyšlu vlnu,
+          <Term id="doppleruv-jev">Dopplerův jev</Term> a odraz vln se prakticky využívají k <b>měření rychlostí</b> — vyšlu vlnu,
           změřím posun frekvence odraženého signálu a z něj spočítám rychlost:
         </p>
         <ul>

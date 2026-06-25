@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.4'
 
@@ -64,23 +64,23 @@ export default function Lesson() {
     <>
       <p className="lead">
         Dvě věci do téhle „navíc" lekce, ale zkoušející je miluje, protože hezky ukazují, že světlo
-        je <b>částice</b>. <Term>Comptonův jev</Term> je důkaz dualismu (foton se chová jako kulečníková
+        je <b>částice</b>. <Term>Comptonův jev</Term> je důkaz <Concept id="dualismus">dualismu</Concept> (<Concept id="foton">foton</Concept> se chová jako kulečníková
         koule) a <Term>laser</Term> je jeho praktické vyústění. Stačí umět princip a pár pojmů zpaměti.
       </p>
 
       <Section title="Comptonův jev — foton jako kulečníková koule">
         <p>
-          <Term>Comptonův jev</Term> je <Term>nepružný rozptyl fotonu</Term> (rentgenového nebo gama
+          <Term id="comptonuv-jev">Comptonův jev</Term> je <Term>nepružný rozptyl fotonu</Term> (rentgenového nebo gama
           záření) na slabě vázaném, prakticky volném elektronu. Klasická vlnová fyzika to neuměla
           vysvětlit. Kvantová fyzika ano: bere to jako <b>srážku dvou částic</b> — fotonu a elektronu —
-          a platí při ní <b>zákon zachování energie i hybnosti</b>, úplně jako u dvou kuliček.
+          a platí při ní <b><Concept id="zachovani-energie">zákon zachování energie</Concept> i <Concept id="zachovani-hybnosti">hybnosti</Concept></b>, úplně jako u dvou kuliček.
         </p>
         <p>
           Při srážce foton <b>předá elektronu část své energie</b>. Elektron se uvolní a odletí
           stranou, foton změní směr (rozptýlí se o úhel <M>{'\\varphi'}</M>) a pokračuje dál — ale s{' '}
-          <b>menší energií</b>. Menší energie fotonu znamená <b>delší vlnovou délku</b> (<M>{'E=hc/\\lambda'}</M>,
+          <b>menší energií</b>. Menší energie fotonu znamená <b>delší <Concept id="vlnova-delka">vlnovou délku</Concept></b> (<M>{'E=hc/\\lambda'}</M>,
           takže menší <M>{'E'}</M> ⇒ větší <M>{'\\lambda'}</M>). Tomuhle nárůstu se říká{' '}
-          <Term>Comptonův posun</Term>:
+          <Term id="comptonuv-posun">Comptonův posun</Term>:
         </p>
         <MB>{'\\lambda\' - \\lambda = \\frac{h}{m_0\\,c}\\,(1-\\cos\\varphi)'}</MB>
         <p>
@@ -118,7 +118,7 @@ export default function Lesson() {
 
         <Callout kind="info" title="Proč je to důkaz dualismu?">
           Kdyby bylo světlo jen vlna, předalo by elektronu energii „rozmazaně" a vlnová délka by se
-          nezměnila. To, že se foton chová jako <b>částice s hybností</b> a po srážce odletí s menší
+          nezměnila. To, že se foton chová jako <b>částice s <Concept id="hybnost">hybností</Concept></b> a po srážce odletí s menší
           energií podle vzorce, je přímý <Term>důkaz korpuskulárně-vlnového dualismu</Term> — světlo
           tady ukazuje svou částicovou tvář.
         </Callout>
@@ -130,7 +130,7 @@ export default function Lesson() {
         </p>
         <ul>
           <li>
-            <b>Fotoefekt:</b> foton <b>zanikne</b> a předá elektronu <b>celou</b> svou energii.
+            <b><Concept id="fotoefekt">Fotoefekt</Concept>:</b> foton <b>zanikne</b> a předá elektronu <b>celou</b> svou energii.
             Funguje hlavně pro nižší energie a pevně vázané elektrony.
           </li>
           <li>
@@ -143,9 +143,9 @@ export default function Lesson() {
 
       <Section title="Laser — princip stimulované emise">
         <p>
-          <Term>LASER</Term> = <i>Light Amplification by Stimulated Emission of Radiation</i> (zesilování
+          <Term id="laser">LASER</Term> = <i>Light Amplification by Stimulated Emission of Radiation</i> (zesilování
           světla stimulovanou emisí záření). Je to zdroj světla, které je{' '}
-          <b>koherentní, monochromatické a rovnoběžné</b> — tedy úzký, „čistý" svazek, jaký běžná
+          <b><Concept id="koherence">koherentní</Concept>, monochromatické a rovnoběžné</b> — tedy úzký, „čistý" svazek, jaký běžná
           žárovka nesvede. Stojí na třech částech: <Term>aktivní prostředí</Term> (kde se světlo
           zesiluje), <Term>zdroj energie</Term> (pumpa, např. výbojka) a <Term>rezonátor</Term> (dvě
           zrcadla — jedno plně odrazivé, druhé polopropustné).
@@ -160,7 +160,7 @@ export default function Lesson() {
               caption: (
                 <>
                   <b>Zdroj energie</b> pumpuje energii do aktivního prostředí a{' '}
-                  <b>excituje</b> elektrony — vybudí je ze základní hladiny do vyšší.
+                  <b><Concept id="zakladni-excitovany-stav">excituje</Concept></b> elektrony — vybudí je ze základní hladiny do vyšší.
                 </>
               ),
               content: (
@@ -184,7 +184,7 @@ export default function Lesson() {
               caption: (
                 <>
                   Pumpujeme tak silně, že <b>většina</b> elektronů je nahoře (víc nahoře než dole). Tomu
-                  se říká <Term>inverze populace</Term> — bez ní by laser nefungoval.
+                  se říká <Term id="inverze-populace">inverze populace</Term> — bez ní by laser nefungoval.
                 </>
               ),
               content: (
@@ -208,7 +208,7 @@ export default function Lesson() {
               caption: (
                 <>
                   Letící foton „strhne" excitovaný elektron dolů a ten vyzáří <b>druhý, totožný</b> foton
-                  — stejná frekvence i fáze. To je <Term>stimulovaná emise</Term>: z 1 fotonu jsou 2,
+                  — stejná frekvence i fáze. To je <Term id="stimulovana-emise">stimulovaná emise</Term>: z 1 fotonu jsou 2,
                   pak 4, 8…
                 </>
               ),
@@ -265,7 +265,7 @@ export default function Lesson() {
       <Section title="Vlastnosti a využití laseru (tohle se ptají vždycky)">
         <p>Tři vlastnosti laserového záření, které musíš umět vyjmenovat:</p>
         <ul>
-          <li><b>Koherence</b> — vlny mají sladěnou fázi (umí spolu interferovat).</li>
+          <li><b>Koherence</b> — vlny mají sladěnou fázi (umí spolu <Concept id="interference">interferovat</Concept>).</li>
           <li><b>Monochromatičnost</b> — jen jedna barva / vlnová délka.</li>
           <li><b>Rovnoběžnost</b> — svazek se skoro nerozbíhá, drží tenký i daleko.</li>
         </ul>
