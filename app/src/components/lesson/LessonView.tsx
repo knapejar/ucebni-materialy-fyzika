@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useParams, useSearchParams, Navigate } from 'react-router-dom'
 import { ZoomPage, useZoom } from '../../lib/nav'
 import { getLesson, nextLesson, type Lesson } from '../../data/course'
@@ -15,6 +15,15 @@ export default function LessonView() {
   const { zoomTo } = useZoom()
   const { isDone, toggleDone } = useProgress()
   const found = getLesson(id)
+
+  // Těžký obsah lekce (KaTeX, SVG, animace) mountujeme až PO zoom přechodu,
+  // aby synchronní render neblokoval animaci (jinak se přechod „zasekne").
+  const [bodyReady, setBodyReady] = useState(false)
+  useEffect(() => {
+    setBodyReady(false)
+    const t = window.setTimeout(() => setBodyReady(true), 380)
+    return () => window.clearTimeout(t)
+  }, [id])
 
   useEffect(() => {
     if (found) markSeen(id)
@@ -82,7 +91,7 @@ export default function LessonView() {
           {Body ? (
             <div className="lesson__content">
               <LessonErrorBoundary>
-                <Body />
+                {bodyReady ? <Body /> : <div className="lesson__skeleton" aria-hidden />}
               </LessonErrorBoundary>
             </div>
           ) : (

@@ -1,4 +1,3 @@
-import { motion } from 'framer-motion'
 import type { MouseEvent, ReactNode } from 'react'
 
 export interface MindNodeProps {
@@ -6,38 +5,33 @@ export interface MindNodeProps {
   y: number // % střed
   accent: string
   size?: 'xl' | 'lg' | 'md' | 'sm'
-  label: ReactNode // hlavní text v uzlu (číslo / zkratka)
-  caption?: string // popisek pod uzlem
-  tip?: string // tooltip (celý název) — když chceme jiný text než caption
+  label: ReactNode
+  caption?: string
+  tip?: string
   badge?: 'MUST-HAVE' | 'NAVÍC' | null
-  progress?: number // 0..1 (prstenec)
+  progress?: number
   done?: boolean
   delay?: number
   onClick?: (ev: MouseEvent) => void
 }
 
+// Čistě CSS (žádný Framer Motion) — uzly se nemusí draze vytvářet/rušit při
+// přechodech mapy. Vstupní animace přes @keyframes, hover/tap přes :hover/:active.
 export default function MindNode({
   x, y, accent, size = 'md', label, caption, tip, badge, progress = 0, done, delay = 0, onClick,
 }: MindNodeProps) {
   const r = 46
   const c = 2 * Math.PI * r
   const p = done ? 1 : Math.max(0, Math.min(1, progress))
-  // DŮLEŽITÉ: polohu (a centrování přes translate(-50%,-50%)) řeší vnější wrapper,
-  // protože vnitřní motion.button si sám řídí `transform` (scale/hover). Kdyby
-  // bylo centrování na tlačítku, Framer Motion by ho přepsal a uzel by se rozjel
-  // vůči spojnicím mapy.
   return (
     <div
       className={`mindnode-pos mindnode-pos--${size}`}
       style={{ left: `${x}%`, top: `${y}%`, ['--accent' as string]: accent }}
     >
-      <motion.button
+      <button
         type="button"
         className="mindnode"
-        initial={{ opacity: 0, scale: 0.4 }}
-        animate={{ opacity: 1, scale: 1, transition: { delay, type: 'spring', stiffness: 180, damping: 18 } }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.95 }}
+        style={{ animationDelay: `${delay}s` }}
         onClick={onClick}
         title={tip || caption}
       >
@@ -58,7 +52,7 @@ export default function MindNode({
             {badge === 'MUST-HAVE' ? '★' : '+'}
           </span>
         )}
-      </motion.button>
+      </button>
       {caption && <span className="mindnode__caption">{caption}</span>}
     </div>
   )

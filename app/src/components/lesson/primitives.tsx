@@ -7,13 +7,23 @@ import { concepts } from '../../content/concepts'
 /* ------------------------------------------------------------------ *
  *  MATEMATIKA (KaTeX, bundlovaná — žádný CDN)
  * ------------------------------------------------------------------ */
+// Memoizace KaTeX — renderToString je drahé; stejné vzorce (i napříč překresleními
+// kroků) renderujeme jen jednou. Zrychluje mount lekce i animace.
+const mathCache = new Map<string, string>()
+function renderMath(tex: string, display: boolean): string {
+  const key = (display ? 'D|' : 'I|') + tex
+  let html = mathCache.get(key)
+  if (html === undefined) {
+    html = katex.renderToString(tex, { throwOnError: false, displayMode: display })
+    mathCache.set(key, html)
+  }
+  return html
+}
 export function M({ children }: { children: string }) {
-  const html = katex.renderToString(children, { throwOnError: false, displayMode: false })
-  return <span className="math-inline" dangerouslySetInnerHTML={{ __html: html }} />
+  return <span className="math-inline" dangerouslySetInnerHTML={{ __html: renderMath(children, false) }} />
 }
 export function MB({ children }: { children: string }) {
-  const html = katex.renderToString(children, { throwOnError: false, displayMode: true })
-  return <div className="math-block" dangerouslySetInnerHTML={{ __html: html }} />
+  return <div className="math-block" dangerouslySetInnerHTML={{ __html: renderMath(children, true) }} />
 }
 
 /* ------------------------------------------------------------------ *

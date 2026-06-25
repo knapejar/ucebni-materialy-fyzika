@@ -52,26 +52,34 @@ export function ZoomProvider({ children }: { children: ReactNode }) {
   return <Ctx.Provider value={{ ...state, zoomTo }}>{children}</Ctx.Provider>
 }
 
-const DUR = 0.62
+const DUR = 0.3
 const EASE = [0.22, 1, 0.36, 1] as const
 
-const variantsFor = (dir: ZoomDir): Variants => {
+// Přechod vedený PRŮHLEDNOSTÍ (opacity je čistě kompozitní – nerasterizuje se).
+// Škálování děláme jen JEMNÉ: těžká lekce bez škálování (jinak se draze
+// rasterizuje obří vrstva), lehká mapa jen lehký „zoom" pocit.
+const variantsFor = (dir: ZoomDir, heavy: boolean): Variants => {
+  // Lekce (heavy): jen crossfade (scale 1) — těžká vrstva, škálování by sekalo.
+  // Mapa (light): výrazný zoom k/od uzlu → zachová „prezi" pocit, je lehká.
+  const inS = heavy ? 1 : 0.9 // počáteční scale při příchodu
+  const outS = heavy ? 1 : 1.12 // koncový scale při odchodu
+  const t = { duration: DUR, ease: EASE }
   if (dir === 'in')
     return {
-      initial: { scale: 0.28, opacity: 0 },
-      animate: { scale: 1, opacity: 1, transition: { duration: DUR, ease: EASE } },
-      exit: { scale: 2.4, opacity: 0, transition: { duration: DUR, ease: EASE } },
+      initial: { scale: inS, opacity: 0 },
+      animate: { scale: 1, opacity: 1, transition: t },
+      exit: { scale: outS, opacity: 0, transition: t },
     }
   if (dir === 'out')
     return {
-      initial: { scale: 2.4, opacity: 0 },
-      animate: { scale: 1, opacity: 1, transition: { duration: DUR, ease: EASE } },
-      exit: { scale: 0.28, opacity: 0, transition: { duration: DUR, ease: EASE } },
+      initial: { scale: outS, opacity: 0 },
+      animate: { scale: 1, opacity: 1, transition: t },
+      exit: { scale: inS, opacity: 0, transition: t },
     }
   return {
-    initial: { scale: 0.92, opacity: 0 },
-    animate: { scale: 1, opacity: 1, transition: { duration: 0.4, ease: EASE } },
-    exit: { scale: 1.04, opacity: 0, transition: { duration: 0.3, ease: EASE } },
+    initial: { opacity: 0 },
+    animate: { opacity: 1, transition: { duration: 0.22 } },
+    exit: { opacity: 0, transition: { duration: 0.16 } },
   }
 }
 
@@ -82,7 +90,7 @@ export function ZoomPage({ children, scroll = false }: { children: ReactNode; sc
     <motion.div
       className={scroll ? 'zoom-page zoom-page--scroll' : 'zoom-page'}
       style={{ transformOrigin: `${origin.x}% ${origin.y}%` }}
-      variants={variantsFor(dir)}
+      variants={variantsFor(dir, scroll)}
       initial="initial"
       animate="animate"
       exit="exit"
