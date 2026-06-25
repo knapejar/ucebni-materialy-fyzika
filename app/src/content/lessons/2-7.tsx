@@ -1,4 +1,4 @@
-import { Section, M, MB, Concept, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Concept, Term, Figure, StepScene, ACircle, ALine, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.7'
 
@@ -90,21 +90,21 @@ export default function Lesson() {
           natáhneš tak, že:
         </p>
         <Figure caption="Levá ruka: indukční čáry B vstupují do dlaně, prsty ukazují směr pohybu (proudu / kladného náboje), odtažený palec ukazuje směr síly F.">
-          <svg viewBox="0 0 360 200" className="svg-fig">
+          <svg viewBox="0 0 400 210" className="svg-fig">
             <Defs color={FORCE} name="arF" />
             <Defs color={VEL} name="arV" />
             <Defs color={ACC} name="arB" />
             {/* dlaň */}
-            <rect x="120" y="80" width="70" height="74" rx="12" fill="#2a3350" stroke={DIM} strokeWidth="1.5" />
+            <rect x="120" y="90" width="70" height="74" rx="12" fill="#2a3350" stroke={DIM} strokeWidth="1.5" />
             {/* čtyři prsty směr v (doprava) */}
-            <line x1="190" y1="100" x2="280" y2="100" stroke={VEL} strokeWidth="6" markerEnd="url(#arV)" />
-            <text x="240" y="92" fill={VEL} fontSize="15" textAnchor="middle">v (pohyb náboje)</text>
+            <line x1="190" y1="112" x2="298" y2="112" stroke={VEL} strokeWidth="6" markerEnd="url(#arV)" />
+            <text x="244" y="170" fill={VEL} fontSize="15" textAnchor="middle">v (pohyb náboje)</text>
             {/* palec síla F (nahoru) */}
-            <line x1="150" y1="80" x2="150" y2="22" stroke={FORCE} strokeWidth="6" markerEnd="url(#arF)" />
-            <text x="150" y="16" fill={FORCE} fontSize="15" textAnchor="middle">F (síla)</text>
+            <line x1="150" y1="90" x2="150" y2="34" stroke={FORCE} strokeWidth="6" markerEnd="url(#arF)" />
+            <text x="150" y="26" fill={FORCE} fontSize="15" textAnchor="middle">F (síla)</text>
             {/* B do dlaně (ze předu dovnitř) */}
-            <line x1="60" y1="160" x2="120" y2="120" stroke={ACC} strokeWidth="6" markerEnd="url(#arB)" />
-            <text x="58" y="178" fill={ACC} fontSize="15" textAnchor="middle">B do dlaně</text>
+            <line x1="58" y1="180" x2="118" y2="138" stroke={ACC} strokeWidth="6" markerEnd="url(#arB)" />
+            <text x="66" y="198" fill={ACC} fontSize="15" textAnchor="middle">B do dlaně</text>
           </svg>
         </Figure>
         <p>
@@ -119,104 +119,85 @@ export default function Lesson() {
           Proklikej si tři případy.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Pohyb náboje v homogenním magnetickém poli podle úhlu α"
-          steps={[
-            {
-              label: 'α = 0° → přímka',
-              caption: (
-                <>
-                  <b>Rychlost rovnoběžná s <M>{'\\vec B'}</M>.</b> Pak <M>{'\\sin 0^\\circ = 0'}</M>, takže{' '}
-                  <M>{'F = 0'}</M> — magnetické pole na náboj <b>vůbec nepůsobí</b>. Náboj letí dál{' '}
-                  <b>rovnoměrně přímočaře</b>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={ACC} name="arB0" />
-                  <Defs color={VEL} name="arV0" />
-                  {/* indukční čáry B vodorovně */}
-                  {[40, 80, 120, 160].map((y) => (
-                    <line key={y} x1="20" y1={y} x2="400" y2={y} stroke={ACC} strokeWidth="1.5" strokeDasharray="8 8" opacity="0.5" markerEnd="url(#arB0)" />
-                  ))}
-                  <text x="380" y="32" fill={ACC} fontSize="14" textAnchor="end">B</text>
-                  {/* náboj a rychlost rovnoběžně */}
-                  <circle cx="60" cy="120" r="10" fill={VEL} />
-                  <text x="60" y="124" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">+</text>
-                  <line x1="74" y1="120" x2="360" y2="120" stroke={VEL} strokeWidth="4" markerEnd="url(#arV0)" />
-                  <text x="220" y="108" fill={VEL} fontSize="15" textAnchor="middle">v ∥ B → přímka, F = 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'α = 90° → kružnice',
-              caption: (
-                <>
-                  <b>Rychlost kolmá na <M>{'\\vec B'}</M>.</b> Síla je maximální a pořád míří dovnitř —
-                  funguje jako <b>dostředivá síla</b>. Náboj opisuje <b>kružnici</b> o poloměru{' '}
-                  <M>{'r = \\dfrac{m v}{B Q}'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={VEL} name="arV90" />
-                  <Defs color={FORCE} name="arF90" />
-                  {/* B z roviny ven: tečky */}
-                  {[[70, 40], [150, 40], [230, 40], [310, 40], [350, 90], [70, 140], [150, 150]].map(([cx, cy], k) => (
-                    <g key={k}>
-                      <circle cx={cx} cy={cy} r="6" fill="none" stroke={ACC} strokeWidth="1.5" />
-                      <circle cx={cx} cy={cy} r="1.6" fill={ACC} />
-                    </g>
-                  ))}
-                  <text x="350" y="40" fill={ACC} fontSize="13" textAnchor="start" dx="10">B ven z roviny</text>
-                  {/* kružnice */}
-                  <circle cx="210" cy="95" r="55" fill="none" stroke={DIM} strokeWidth="2" strokeDasharray="5 6" />
-                  {/* náboj na kružnici */}
-                  <circle cx="210" cy="40" r="9" fill={VEL} />
-                  {/* rychlost tečně (doprava) */}
-                  <line x1="222" y1="40" x2="290" y2="40" stroke={VEL} strokeWidth="4" markerEnd="url(#arV90)" />
-                  <text x="270" y="30" fill={VEL} fontSize="14" textAnchor="middle">v</text>
-                  {/* síla dostředivě (dolů ke středu) */}
-                  <line x1="210" y1="52" x2="210" y2="88" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF90)" />
-                  <text x="232" y="74" fill={FORCE} fontSize="14" textAnchor="middle">F</text>
-                  <text x="210" y="170" fill={TXT} fontSize="14" textAnchor="middle">r = m·v / (B·Q)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'obecný úhel → šroubovice',
-              caption: (
-                <>
-                  <b>Rychlost šikmo k <M>{'\\vec B'}</M>.</b> Rozložíme ji: složka <b>podél</b> <M>{'\\vec B'}</M>{' '}
-                  jede rovnoměrně přímo (na ni síla není), složka <b>kolmá</b> dělá kroužení. Dohromady →{' '}
-                  <b>šroubovice</b> (spirála). Velikost rychlosti se pořád nemění.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={ACC} name="arBh" />
-                  <Defs color={VEL} name="arVh" />
-                  {/* osa B vodorovně */}
-                  <line x1="20" y1="95" x2="400" y2="95" stroke={ACC} strokeWidth="2" strokeDasharray="8 8" opacity="0.6" markerEnd="url(#arBh)" />
-                  <text x="395" y="84" fill={ACC} fontSize="14" textAnchor="end">B</text>
-                  {/* šroubovice */}
-                  <path
-                    d="M40,95 C 60,45 100,45 120,95 C 140,145 180,145 200,95 C 220,45 260,45 280,95 C 300,145 340,145 360,95"
-                    fill="none"
-                    stroke={DIM}
-                    strokeWidth="2.5"
-                  />
-                  {/* náboj */}
-                  <circle cx="40" cy="95" r="9" fill={VEL} />
-                  {/* rychlost šikmo */}
-                  <line x1="50" y1="88" x2="110" y2="55" stroke={VEL} strokeWidth="4" markerEnd="url(#arVh)" />
-                  <text x="105" y="46" fill={VEL} fontSize="14" textAnchor="middle">v (šikmo)</text>
-                  <text x="210" y="172" fill={TXT} fontSize="14" textAnchor="middle">složení: přímý posun + kroužení = šroubovice</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 210"
+          captions={[
+            <>
+              <b>α = 0° — rychlost rovnoběžná s <M>{'\\vec B'}</M>.</b> Pak <M>{'\\sin 0^\\circ = 0'}</M>, takže{' '}
+              <M>{'F = 0'}</M> — magnetické pole na náboj <b>vůbec nepůsobí</b>. Náboj letí dál{' '}
+              <b>rovnoměrně přímočaře</b>.
+            </>,
+            <>
+              <b>α = 90° — rychlost kolmá na <M>{'\\vec B'}</M>.</b> Síla je maximální a pořád míří dovnitř —
+              funguje jako <b>dostředivá síla</b>. Náboj opisuje <b>kružnici</b> o poloměru{' '}
+              <M>{'r = \\dfrac{m v}{B Q}'}</M>.
+            </>,
+            <>
+              <b>Obecný úhel — rychlost šikmo k <M>{'\\vec B'}</M>.</b> Rozložíme ji: složka <b>podél</b> <M>{'\\vec B'}</M>{' '}
+              jede rovnoměrně přímo (na ni síla není), složka <b>kolmá</b> dělá kroužení. Dohromady →{' '}
+              <b>šroubovice</b> (spirála). Velikost rychlosti se pořád nemění.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="m27Bh" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACC} /></marker>
+            <marker id="m27V" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={VEL} /></marker>
+            <marker id="m27F" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FORCE} /></marker>
+          </defs>
+
+          {/* === pole B === */}
+          {/* vodorovné indukční čáry — viditelné v kroku 0 (přímka) a 2 (šroubovice, osa B) */}
+          <AGroup opacity={[0.5, 0, 0.5]}>
+            {[40, 75, 110, 145, 180].map((y) => (
+              <line key={y} x1={24} y1={y} x2={392} y2={y} stroke={ACC} strokeWidth={1.5} strokeDasharray="8 8" markerEnd="url(#m27Bh)" />
+            ))}
+          </AGroup>
+          <AText x={410} y={44} fill={ACC} fontSize="15" textAnchor="end" opacity={[1, 0, 1]}>B</AText>
+
+          {/* tečky „B ven z roviny" — viditelné jen v kroku 1 (kružnice) */}
+          <AGroup opacity={[0, 1, 0]}>
+            {[[70, 36], [150, 36], [360, 70], [70, 110], [70, 180], [150, 180], [360, 180]].map(([cx, cy], k) => (
+              <g key={k}>
+                <circle cx={cx} cy={cy} r={6} fill="none" stroke={ACC} strokeWidth={1.5} />
+                <circle cx={cx} cy={cy} r={1.8} fill={ACC} />
+              </g>
+            ))}
+          </AGroup>
+          <AText x={300} y={120} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>B ven z roviny</AText>
+
+          {/* === trajektorie (3 varianty, prolínají se průhledností) === */}
+          {/* přímka */}
+          <APath d="M60,110 L392,110" fill="none" stroke={DIM} strokeWidth={2.5} strokeDasharray="6 6" opacity={[1, 0, 0]} />
+          {/* kružnice */}
+          <APath d="M220,55 A 55 55 0 1 0 220.01,55" fill="none" stroke={DIM} strokeWidth={2} strokeDasharray="5 6" opacity={[0, 1, 0]} />
+          {/* šroubovice */}
+          <APath
+            d="M60,110 C 80,60 120,60 140,110 C 160,160 200,160 220,110 C 240,60 280,60 300,110 C 320,160 360,160 380,110"
+            fill="none" stroke={DIM} strokeWidth={2.5} opacity={[0, 0, 1]}
+          />
+
+          {/* === náboj (jeden, putuje mezi stavy) === */}
+          <ACircle cx={[60, 220, 60]} cy={[110, 55, 110]} r={10} fill={VEL} />
+          <AText x={[60, 220, 60]} y={[114, 59, 114]} fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight={700}>+</AText>
+
+          {/* === rychlost v (tečně k pohybu) === */}
+          <ALine
+            x1={[78, 234, 74]} y1={[110, 55, 102]}
+            x2={[210, 300, 138]} y2={[110, 55, 64]}
+            stroke={VEL} strokeWidth={4} markerEnd="url(#m27V)"
+          />
+          <AText x={[148, 268, 152]} y={[98, 44, 50]} fill={VEL} fontSize="14" textAnchor="middle">v</AText>
+
+          {/* === síla F (jen kružnice, dostředivě ke středu) === */}
+          <ALine x1={220} y1={70} x2={220} y2={98} stroke={FORCE} strokeWidth={4} markerEnd="url(#m27F)" opacity={[0, 1, 0]} />
+          <AText x={244} y={88} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>F</AText>
+
+          {/* === popisky pod scénou (prolínají se) === */}
+          <AText x={220} y={200} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>v ∥ B → přímka, F = 0</AText>
+          <AText x={220} y={200} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>r = m·v / (B·Q)</AText>
+          <AText x={220} y={200} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>přímý posun + kroužení = šroubovice</AText>
+        </StepScene>
       </Section>
 
       <Section title="Pohyb v elektrickém vs. magnetickém poli — hlavní rozdíl">
@@ -280,30 +261,30 @@ export default function Lesson() {
         </p>
 
         <Figure caption="Stejná rychlost i náboj, ale různá hmotnost → různý poloměr. Těžší ion (modrá) má větší poloměr, lehčí (oranžová) menší.">
-          <svg viewBox="0 0 420 210" className="svg-fig">
+          <svg viewBox="0 0 440 250" className="svg-fig">
             <Defs color={VEL} name="arVs" />
-            {/* B z roviny ven */}
-            {[[60, 40], [130, 40], [200, 40], [270, 40], [340, 40], [60, 90]].map(([cx, cy], k) => (
+            {/* B z roviny ven (homogenní pole, tečky) */}
+            {[[90, 50], [170, 50], [250, 50], [330, 50], [410, 50], [330, 130], [410, 130], [410, 200]].map(([cx, cy], k) => (
               <g key={k}>
                 <circle cx={cx} cy={cy} r="5" fill="none" stroke={ACC} strokeWidth="1.4" />
                 <circle cx={cx} cy={cy} r="1.4" fill={ACC} />
               </g>
             ))}
-            <text x="345" y="40" fill={ACC} fontSize="12" textAnchor="start" dx="10">B</text>
+            <text x="410" y="34" fill={ACC} fontSize="13" textAnchor="middle">B (ven z roviny)</text>
             {/* zdroj / vstřik */}
-            <rect x="20" y="150" width="46" height="34" rx="5" fill="#2a3350" stroke={DIM} strokeWidth="1.5" />
-            <text x="43" y="200" fill={DIM} fontSize="11" textAnchor="middle">zdroj iontů</text>
-            {/* společná počáteční rychlost nahoru */}
-            <line x1="70" y1="167" x2="130" y2="167" stroke={VEL} strokeWidth="3" markerEnd="url(#arVs)" />
-            <text x="100" y="160" fill={VEL} fontSize="12" textAnchor="middle">v</text>
+            <rect x="18" y="190" width="48" height="36" rx="5" fill="#2a3350" stroke={DIM} strokeWidth="1.5" />
+            <text x="42" y="242" fill={DIM} fontSize="12" textAnchor="middle">zdroj iontů</text>
+            {/* společná počáteční rychlost doprava */}
+            <line x1="66" y1="208" x2="118" y2="208" stroke={VEL} strokeWidth="3" markerEnd="url(#arVs)" />
+            <text x="92" y="200" fill={VEL} fontSize="13" textAnchor="middle">v</text>
             {/* dráha lehčí částice (menší poloměr) - oranžová */}
-            <path d="M130,167 A 55 55 0 0 0 130 57" fill="none" stroke={VEL} strokeWidth="3" />
-            <circle cx="130" cy="57" r="6" fill={VEL} />
-            <text x="150" y="100" fill={VEL} fontSize="12" textAnchor="middle">malé m</text>
+            <path d="M120,208 A 50 50 0 0 0 120 108" fill="none" stroke={VEL} strokeWidth="3" />
+            <circle cx="120" cy="108" r="6" fill={VEL} />
+            <text x="120" y="92" fill={VEL} fontSize="13" textAnchor="middle">malé m → malé r</text>
             {/* dráha těžší částice (větší poloměr) - modrá */}
-            <path d="M130,167 A 95 95 0 0 0 130 -23" fill="none" stroke={ACC} strokeWidth="3" />
-            <circle cx="130" cy="-23" r="6" fill={ACC} opacity="0" />
-            <text x="250" y="80" fill={ACC} fontSize="12" textAnchor="middle">velké m → velký r</text>
+            <path d="M120,208 A 90 90 0 0 0 120 28" fill="none" stroke={ACC} strokeWidth="3" />
+            <circle cx="120" cy="28" r="6" fill={ACC} />
+            <text x="300" y="170" fill={ACC} fontSize="13" textAnchor="middle">velké m → velký r</text>
           </svg>
         </Figure>
 

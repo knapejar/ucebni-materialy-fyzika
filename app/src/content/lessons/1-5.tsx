@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.5'
 
@@ -98,70 +98,52 @@ export default function Lesson_1_5() {
           žádný vliv</b>, protože tíhová síla působí pořád stejně na celou hmotnost.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Šikmo vržená rotující činka — kudy letí těžiště?"
-          steps={[
-            {
-              label: 'vržení',
-              caption: <>Činku hodíme šikmo vzhůru a roztočíme. Sledujeme oranžový bod — její těžiště (uprostřed mezi koulemi).</>,
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs id="ar1" color={ACCENT} />
-                  <line x1="0" y1="185" x2="420" y2="185" stroke={FAINT} strokeWidth="2" />
-                  {/* cinka u zeme, sikma */}
-                  <g transform="translate(70,150) rotate(-30)">
-                    <line x1="-22" y1="0" x2="22" y2="0" stroke={MASS} strokeWidth="4" />
-                    <circle cx="-22" cy="0" r="9" fill={MASS} />
-                    <circle cx="22" cy="0" r="9" fill={MASS} />
-                  </g>
-                  <circle cx="70" cy="150" r="5" fill={ACCENT} />
-                  {/* sipka pocatecni rychlosti */}
-                  <line x1="80" y1="142" x2="135" y2="110" stroke={ACCENT} strokeWidth="3" markerEnd="url(#ar1)" />
-                  <text x="135" y="100" fill={ACCENT} fontSize="13">v₀</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'stoupání',
-              caption: <>Koule se točí kolem těžiště a opisují kličky, ale samotné <b>těžiště</b> stoupá po hladké křivce.</>,
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs id="ar2" color={ACCENT} />
-                  <line x1="0" y1="185" x2="420" y2="185" stroke={FAINT} strokeWidth="2" />
-                  {/* naznak parabolicke drahy az do tohoto bodu */}
-                  <path d="M70,150 Q150,70 210,62" fill="none" stroke={ACCENT} strokeWidth="2" strokeDasharray="4 5" opacity="0.7" />
-                  {/* cinka ve vrcholu, jine natoceni */}
-                  <g transform="translate(210,62) rotate(60)">
-                    <line x1="-22" y1="0" x2="22" y2="0" stroke={MASS} strokeWidth="4" />
-                    <circle cx="-22" cy="0" r="9" fill={MASS} />
-                    <circle cx="22" cy="0" r="9" fill={MASS} />
-                  </g>
-                  <circle cx="210" cy="62" r="5" fill={ACCENT} />
-                </svg>
-              ),
-            },
-            {
-              label: 'celá parabola',
-              caption: <>Spojnice poloh těžiště je <b>parabola</b> — úplně stejná, jako by žádná rotace nebyla. <b>To je ten chyták.</b></>,
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs id="ar3" color={ACCENT} />
-                  <line x1="0" y1="185" x2="420" y2="185" stroke={FAINT} strokeWidth="2" />
-                  {/* cela parabola */}
-                  <path d="M70,150 Q210,-20 350,150" fill="none" stroke={ACCENT} strokeWidth="3" />
-                  <text x="210" y="40" fill={ACCENT} fontSize="15" textAnchor="middle" fontWeight="700">parabola</text>
-                  {/* nekolik poloh teziste + naznak rotujici cinky */}
-                  <g transform="translate(70,150) rotate(-30)"><line x1="-16" y1="0" x2="16" y2="0" stroke={MASS} strokeWidth="3" /><circle cx="-16" r="6" fill={MASS} /><circle cx="16" r="6" fill={MASS} /></g>
-                  <g transform="translate(210,62) rotate(70)"><line x1="-16" y1="0" x2="16" y2="0" stroke={MASS} strokeWidth="3" /><circle cx="-16" r="6" fill={MASS} /><circle cx="16" r="6" fill={MASS} /></g>
-                  <g transform="translate(350,150) rotate(150)"><line x1="-16" y1="0" x2="16" y2="0" stroke={MASS} strokeWidth="3" /><circle cx="-16" r="6" fill={MASS} /><circle cx="16" r="6" fill={MASS} /></g>
-                  <circle cx="70" cy="150" r="4" fill={ACCENT} />
-                  <circle cx="210" cy="62" r="4" fill={ACCENT} />
-                  <circle cx="350" cy="150" r="4" fill={ACCENT} />
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 200"
+          captions={[
+            <>Činku hodíme šikmo vzhůru a roztočíme. Sledujeme oranžový bod — její <b>těžiště</b> (uprostřed mezi koulemi).</>,
+            <>Koule se točí kolem těžiště a opisují kličky, ale samotné <b>těžiště</b> stoupá po hladké křivce.</>,
+            <>Spojnice poloh těžiště je <b>parabola</b> — úplně stejná, jako by žádná rotace nebyla. <b>To je ten chyták.</b></>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="arP" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACCENT} /></marker>
+          </defs>
+
+          {/* zem */}
+          <ALine x1={0} y1={185} x2={420} y2={185} stroke={FAINT} strokeWidth={2} />
+
+          {/* parabolicka draha teziste — postupne se odkryva (kratky usek → cela krivka) */}
+          <APath
+            d={[
+              'M70,150 L70,150',
+              'M70,150 Q150,70 210,65',
+              'M70,150 Q210,-20 350,150',
+            ]}
+            fill="none"
+            stroke={ACCENT}
+            strokeWidth={[3, 2, 3]}
+            opacity={[0, 0.8, 1]}
+          />
+
+          {/* sipka pocatecni rychlosti v0 — jen v 1. kroku */}
+          <ALine x1={80} y1={142} x2={138} y2={108} stroke={ACCENT} strokeWidth={3} markerEnd="url(#arP)" opacity={[1, 0, 0]} />
+          <AText x={[150, 150, 150]} y={[100, 100, 100]} fill={ACCENT} fontSize="14" opacity={[1, 0, 0]}>v₀</AText>
+
+          {/* rotujici cinka: posune se po drahe a otaci se */}
+          <AGroup x={[70, 210, 350]} y={[150, 65, 150]} rotate={[-30, 70, 160]}>
+            <line x1="-22" y1="0" x2="22" y2="0" stroke={MASS} strokeWidth="4" />
+            <circle cx="-22" cy="0" r="9" fill={MASS} />
+            <circle cx="22" cy="0" r="9" fill={MASS} />
+          </AGroup>
+
+          {/* teziste — oranzovy bod jede po drahe spolu s cinkou */}
+          <ACircle cx={[70, 210, 350]} cy={[150, 65, 150]} r={6} fill={ACCENT} />
+
+          {/* popisek "parabola" — objevi se az v poslednim kroku */}
+          <AText x={210} y={42} fill={ACCENT} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>parabola</AText>
+        </StepScene>
       </Section>
 
       <Section title="Rotace tělesa: každá veličina má „otáčivého dvojníka">
@@ -233,25 +215,31 @@ export default function Lesson_1_5() {
           roztočí, ale neposune se. Klasická ukázka: otáčení volantem nebo <Concept id="dipol">dipól</Concept> v homogenním poli.
         </p>
 
-        <Figure caption="Dvojice sil: stejně velké, opačné, ale na různých přímkách (rameno d) → roztočí těleso. Pozor: kdyby ležely na téže přímce, jen by se vyrušily.">
-          <svg viewBox="0 0 420 180" className="svg-fig">
-            <Defs id="arF" color={FORCE} />
-            {/* tyc / teleso */}
-            <line x1="120" y1="40" x2="300" y2="140" stroke={MASS} strokeWidth="6" strokeLinecap="round" />
+        <Figure caption="Dvojice sil: stejně velké, opačné, na různých přímkách. Rameno d je kolmá vzdálenost obou nositelek → těleso se roztočí. Pozor: kdyby ležely na téže přímce, jen by se vyrušily.">
+          <svg viewBox="0 0 420 200" className="svg-fig">
+            <defs>
+              <marker id="arF" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FORCE} /></marker>
+              <marker id="arGs" markerWidth="9" markerHeight="9" refX="2" refY="4.5" orient="auto"><path d="M9,0 L0,4.5 L9,9 z" fill={GREEN} /></marker>
+              <marker id="arGe" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={GREEN} /></marker>
+            </defs>
+            {/* nositelky sil (vodorovne primky, na nichz sily lezi) */}
+            <line x1="55" y1="55" x2="345" y2="55" stroke={FAINT} strokeWidth="1.5" strokeDasharray="5 5" />
+            <line x1="75" y1="150" x2="365" y2="150" stroke={FAINT} strokeWidth="1.5" strokeDasharray="5 5" />
+            {/* tyc / teleso (sikma) */}
+            <line x1="110" y1="55" x2="310" y2="150" stroke={MASS} strokeWidth="6" strokeLinecap="round" />
             {/* osa otaceni (teziste) uprostred */}
-            <circle cx="210" cy="90" r="5" fill={ACCENT} />
-            <text x="210" y="105" fill={ACCENT} fontSize="12" textAnchor="middle">osa</text>
-            {/* sila nahore doprava */}
-            <line x1="120" y1="40" x2="200" y2="40" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
-            <text x="160" y="30" fill={FORCE} fontSize="14" textAnchor="middle">F</text>
-            {/* sila dole doleva */}
-            <line x1="300" y1="140" x2="220" y2="140" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
-            <text x="260" y="160" fill={FORCE} fontSize="14" textAnchor="middle">−F</text>
-            {/* rameno d */}
-            <line x1="155" y1="40" x2="155" y2="140" stroke={GREEN} strokeWidth="1.5" strokeDasharray="4 4" />
-            <line x1="265" y1="40" x2="265" y2="140" stroke={GREEN} strokeWidth="1.5" strokeDasharray="4 4" />
-            <line x1="155" y1="165" x2="265" y2="165" stroke={GREEN} strokeWidth="1.5" markerEnd="url(#arF)" />
-            <text x="210" y="178" fill={GREEN} fontSize="12" textAnchor="middle">rameno d</text>
+            <circle cx="210" cy="102" r="5" fill={ACCENT} />
+            <text x="210" y="120" fill={ACCENT} fontSize="13" textAnchor="middle">osa</text>
+            {/* sila nahore doprava — pusobiste na hornim konci tyce */}
+            <line x1="110" y1="55" x2="200" y2="55" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
+            <text x="165" y="44" fill={FORCE} fontSize="15" textAnchor="middle" fontWeight="700">F</text>
+            {/* sila dole doleva — pusobiste na dolnim konci tyce */}
+            <line x1="310" y1="150" x2="220" y2="150" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
+            <text x="265" y="170" fill={FORCE} fontSize="15" textAnchor="middle" fontWeight="700">−F</text>
+            {/* rameno d — kolma (svisla) vzdalenost obou nositelek */}
+            <line x1="385" y1="55" x2="385" y2="150" stroke={GREEN} strokeWidth="1.5" markerStart="url(#arGs)" markerEnd="url(#arGe)" />
+            <text x="378" y="107" fill={GREEN} fontSize="13" textAnchor="end">d</text>
+            <text x="378" y="123" fill={GREEN} fontSize="11" textAnchor="end">rameno</text>
           </svg>
         </Figure>
       </Section>

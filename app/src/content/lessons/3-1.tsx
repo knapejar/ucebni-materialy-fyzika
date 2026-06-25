@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, ARect, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.1'
 
@@ -91,31 +91,7 @@ export default function Lesson_3_1() {
           perioda. Proklikej si to:
         </p>
 
-        <StepFigure
-          title="Harmonické kmitání jako stín bodu obíhajícího kružnici"
-          steps={[
-            {
-              label: 'rovnováha',
-              caption: <>Bod je „na boku“ kružnice, jeho stín je v <b>rovnovážné poloze</b> (výchylka 0). Fáze <M>{'\\omega_0 t = 0'}</M>.</>,
-              content: <CircleProjection phase={0} />,
-            },
-            {
-              label: 'půl cesty nahoru',
-              caption: <>Bod stoupá, stín se vychyluje nahoru. Výchylka <M>{'u = A\\sin(\\omega_0 t)'}</M> roste.</>,
-              content: <CircleProjection phase={Math.PI / 4} />,
-            },
-            {
-              label: 'krajní poloha',
-              caption: <>Bod je nahoře, stín dosáhl <b>maxima = amplitudy</b> <M>{'A'}</M>. Tady se na chvíli zastaví a vrací se.</>,
-              content: <CircleProjection phase={Math.PI / 2} />,
-            },
-            {
-              label: 'zpět přes rovnováhu',
-              caption: <>Bod oběhl dál, stín letí zpět dolů přes rovnováhu. Za celé oběhnutí (perioda <M>{'T'}</M>) udělá stín jeden celý kmit.</>,
-              content: <CircleProjection phase={(5 * Math.PI) / 4} />,
-            },
-          ]}
-        />
+        <CircleProjectionScene />
       </Section>
 
       <Section title="Co kmity žene: kvazielastická síla F = −k·u">
@@ -209,31 +185,7 @@ export default function Lesson_3_1() {
           si jeden kmit:
         </p>
 
-        <StepFigure
-          title="Přelévání energie během kmitu (kulička na pružině)"
-          steps={[
-            {
-              label: 'krajní poloha',
-              caption: <>Maximální výchylka <M>{'A'}</M>. Kulička stojí (<M>{'v=0'}</M>) → <b><M>{'E_k=0'}</M></b>, ale pružina je nejvíc napnutá → <b><M>{'E_p'}</M> je maximální</b>.</>,
-              content: <EnergyState pos={1} />,
-            },
-            {
-              label: 'cesta k rovnováze',
-              caption: <>Kulička zrychluje. <M>{'E_p'}</M> se mění na <M>{'E_k'}</M> — pružina „vrací“ energii do pohybu.</>,
-              content: <EnergyState pos={0.5} />,
-            },
-            {
-              label: 'rovnovážná poloha',
-              caption: <>Výchylka 0 → <b><M>{'E_p=0'}</M></b>, zato rychlost je <b>největší</b> → <b><M>{'E_k'}</M> je maximální</b>. Tady kulička sviští nejrychleji.</>,
-              content: <EnergyState pos={0} />,
-            },
-            {
-              label: 'druhá krajní poloha',
-              caption: <>Kulička přeletěla na druhou stranu, zase se zastaví: <M>{'E_k=0'}</M>, <M>{'E_p'}</M> maximální. A celý součet <M>{'E_p+E_k'}</M> byl celou dobu stejný.</>,
-              content: <EnergyState pos={-1} />,
-            },
-          ]}
-        />
+        <EnergyScene />
         <p>
           Zkráceně: <b>v krajní poloze</b> je všechno v <M>{'E_p'}</M> (stojí, nejvíc napnuté),{' '}
           <b>v rovnováze</b> je všechno v <M>{'E_k'}</M> (nejrychlejší, nenapnuté). Mezi tím se to
@@ -297,95 +249,134 @@ export default function Lesson_3_1() {
   )
 }
 
+/* Pružina jako řetězec path d (klikatá čára x1→x2 ve výšce y). */
+function springPath(x1: number, x2: number, y: number) {
+  const n = 8
+  const dx = (x2 - x1) / n
+  let d = `M${x1},${y}`
+  for (let k = 0; k < n; k++) {
+    const xa = x1 + dx * (k + 0.5)
+    const ya = y + (k % 2 === 0 ? -9 : 9)
+    d += ` L${xa.toFixed(1)},${ya.toFixed(1)}`
+  }
+  d += ` L${x2.toFixed(1)},${y}`
+  return d
+}
+
 /* ------------------------------------------------------------------ *
- *  SVG: stín bodu obíhajícího kružnici → sinusovka
+ *  ANIMOVANÁ SCÉNA: stín bodu obíhajícího kružnici → sinusovka
+ *  Bod jede po kružnici, poloměr se otáčí, oranžový stín jede po sinusovce,
+ *  čárkovaná spojnice je drží propojené. Fáze: 0, π/4, π/2, 5π/4.
  * ------------------------------------------------------------------ */
-function CircleProjection({ phase }: { phase: number }) {
-  const cx = 110, cy = 110, R = 70
-  // bod na kružnici (kladný úhel = nahoru), y nahoru = menší svg-y
-  const px = cx + R * Math.cos(phase)
-  const py = cy - R * Math.sin(phase)
-  const sinY = cy - R * Math.sin(phase) // výška stínu = stejná jako y bodu
-  const axisX = 250
-  // sinusovka u = A sin(theta), theta 0..2pi mapováno na x 250..470
+const CP_CX = 110, CP_CY = 110, CP_R = 70, CP_AXIS = 250
+const CP_PHASES = [0, Math.PI / 4, Math.PI / 2, (5 * Math.PI) / 4]
+const cpPx = CP_PHASES.map((th) => +(CP_CX + CP_R * Math.cos(th)).toFixed(2))
+const cpPy = CP_PHASES.map((th) => +(CP_CY - CP_R * Math.sin(th)).toFixed(2))
+const cpMarkX = CP_PHASES.map((th) => +(CP_AXIS + (th / (2 * Math.PI)) * 200).toFixed(2))
+const cpSinePts = (() => {
   const pts: string[] = []
   for (let i = 0; i <= 60; i++) {
     const th = (i / 60) * 2 * Math.PI
-    const x = axisX + (th / (2 * Math.PI)) * 200
-    const y = cy - R * Math.sin(th)
+    const x = CP_AXIS + (th / (2 * Math.PI)) * 200
+    const y = CP_CY - CP_R * Math.sin(th)
     pts.push(`${x.toFixed(1)},${y.toFixed(1)}`)
   }
-  const markX = axisX + (phase / (2 * Math.PI)) * 200
+  return pts.join(' ')
+})()
+
+function CircleProjectionScene() {
   return (
-    <svg viewBox="0 0 490 230" className="svg-fig">
+    <StepScene
+      title="Harmonické kmitání jako stín bodu obíhajícího kružnici"
+      viewBox="0 0 490 230"
+      captions={[
+        <>Bod je „na boku“ kružnice, jeho stín je v <b>rovnovážné poloze</b> (výchylka 0). Fáze <M>{'\\omega_0 t = 0'}</M>.</>,
+        <>Bod stoupá, stín se vychyluje nahoru. Výchylka <M>{'u = A\\sin(\\omega_0 t)'}</M> roste.</>,
+        <>Bod je nahoře, stín dosáhl <b>maxima = amplitudy</b> <M>{'A'}</M>. Tady se na chvíli zastaví a vrací se.</>,
+        <>Bod oběhl dál, stín letí zpět dolů přes rovnováhu. Za celé oběhnutí (perioda <M>{'T'}</M>) udělá stín jeden celý kmit.</>,
+      ]}
+    >
       <Defs id="arCP" color={TXT} />
-      {/* kružnice */}
-      <circle cx={cx} cy={cy} r={R} fill="none" stroke={SPRING} strokeWidth="2" />
-      <circle cx={cx} cy={cy} r="3" fill={TXT} />
-      <text x={cx - 12} y={cy + 20} fill={TXT} fontSize="12">S</text>
-      {/* poloměr k bodu */}
-      <line x1={cx} y1={cy} x2={px} y2={py} stroke={ACC} strokeWidth="2" />
-      <circle cx={px} cy={py} r="6" fill={ACC} />
-      {/* vodorovná spojnice stínu (projekce na svislou osu sinusovky) */}
-      <line x1={px} y1={py} x2={markX} y2={sinY} stroke={BALL} strokeWidth="1.6" strokeDasharray="5,4" />
+      {/* —— statická kostra —— */}
+      <circle cx={CP_CX} cy={CP_CY} r={CP_R} fill="none" stroke={SPRING} strokeWidth="2" />
+      <circle cx={CP_CX} cy={CP_CY} r="3" fill={TXT} />
+      <text x={CP_CX - 12} y={CP_CY + 20} fill={TXT} fontSize="12">S</text>
       {/* osy sinusovky */}
-      <line x1={axisX} y1="20" x2={axisX} y2="200" stroke={GRID} strokeWidth="1.5" />
-      <line x1={axisX - 10} y1={cy} x2="478" y2={cy} stroke={GRID} strokeWidth="1.5" markerEnd="url(#arCP)" />
-      <text x="470" y={cy + 18} fill={TXT} fontSize="13" fontStyle="italic">t</text>
-      <text x={axisX - 16} y="28" fill={TXT} fontSize="13" fontStyle="italic">u</text>
-      {/* sinusovka */}
-      <polyline points={pts.join(' ')} fill="none" stroke={SPRING} strokeWidth="2" />
-      {/* aktuální bod na sinusovce */}
-      <circle cx={markX} cy={sinY} r="5" fill={BALL} />
+      <line x1={CP_AXIS} y1="20" x2={CP_AXIS} y2="200" stroke={GRID} strokeWidth="1.5" />
+      <line x1={CP_AXIS - 10} y1={CP_CY} x2="478" y2={CP_CY} stroke={GRID} strokeWidth="1.5" markerEnd="url(#arCP)" />
+      <text x="470" y={CP_CY + 18} fill={TXT} fontSize="13" fontStyle="italic">t</text>
+      <text x={CP_AXIS - 16} y="28" fill={TXT} fontSize="13" fontStyle="italic">u</text>
+      <polyline points={cpSinePts} fill="none" stroke={SPRING} strokeWidth="2" />
       {/* amplituda */}
-      <line x1="462" y1={cy} x2="462" y2={cy - R} stroke={ACC} strokeWidth="1.5" />
-      <text x="468" y={cy - R / 2} fill={ACC} fontSize="13" fontStyle="italic">A</text>
-    </svg>
+      <line x1="462" y1={CP_CY} x2="462" y2={CP_CY - CP_R} stroke={ACC} strokeWidth="1.5" />
+      <text x="468" y={CP_CY - CP_R / 2} fill={ACC} fontSize="13" fontStyle="italic">A</text>
+
+      {/* —— animované prvky —— */}
+      {/* čárkovaná spojnice stínu (bod → stín na sinusovce) */}
+      <ALine x1={cpPx} y1={cpPy} x2={cpMarkX} y2={cpPy} stroke={BALL} strokeWidth={1.6} strokeDasharray="5,4" />
+      {/* poloměr k bodu */}
+      <ALine x1={CP_CX} y1={CP_CY} x2={cpPx} y2={cpPy} stroke={ACC} strokeWidth={2} />
+      {/* bod na kružnici */}
+      <ACircle cx={cpPx} cy={cpPy} r={6} fill={ACC} />
+      {/* stín na sinusovce */}
+      <ACircle cx={cpMarkX} cy={cpPy} r={5} fill={BALL} />
+    </StepScene>
   )
 }
 
 /* ------------------------------------------------------------------ *
- *  SVG: stav energie oscilátoru (pos = výchylka v jednotkách A: -1..1)
- *  Sloupce Ep a Ek + kulička na pružině.
+ *  ANIMOVANÁ SCÉNA: přelévání energie (kulička na pružině)
+ *  Kulička jede po ose, pružina se natahuje/smršťuje, sloupce Ep a Ek
+ *  plynule mění výšku. Výchylka pos (v jednotkách A): 1, 0.5, 0, −1.
  * ------------------------------------------------------------------ */
-function EnergyState({ pos }: { pos: number }) {
-  const eqX = 230           // rovnovážná poloha (svg x)
-  const A = 90              // amplituda v px
-  const ballX = eqX + pos * A
-  const epFrac = pos * pos          // Ep ~ u^2
-  const ekFrac = 1 - epFrac         // Ek = 1 - Ep (celková = 1)
-  const barH = 90, barY = 30, barW = 34
-  const epH = epFrac * barH
-  const ekH = ekFrac * barH
+const EN_EQX = 230, EN_A = 90, EN_Y = 110
+const EN_POS = [1, 0.5, 0, -1]
+const enBallX = EN_POS.map((p) => +(EN_EQX + p * EN_A).toFixed(2))
+const enSpring = enBallX.map((bx) => springPath(30, bx - 20, EN_Y))
+const EN_BARH = 90, EN_BARY = 30
+const enEpH = EN_POS.map((p) => +(p * p * EN_BARH).toFixed(2))
+const enEkH = enEpH.map((h) => +(EN_BARH - h).toFixed(2))
+const enEpY = enEpH.map((h) => +(EN_BARY + EN_BARH - h).toFixed(2))
+const enEkY = enEkH.map((h) => +(EN_BARY + EN_BARH - h).toFixed(2))
+
+function EnergyScene() {
   return (
-    <svg viewBox="0 0 470 210" className="svg-fig">
-      {/* —— vlevo: kulička na pružině —— */}
+    <StepScene
+      title="Přelévání energie během kmitu (kulička na pružině)"
+      viewBox="0 0 470 210"
+      captions={[
+        <>Maximální výchylka <M>{'A'}</M>. Kulička stojí (<M>{'v=0'}</M>) → <b><M>{'E_k=0'}</M></b>, ale pružina je nejvíc napnutá → <b><M>{'E_p'}</M> je maximální</b>.</>,
+        <>Kulička zrychluje. <M>{'E_p'}</M> se mění na <M>{'E_k'}</M> — pružina „vrací“ energii do pohybu.</>,
+        <>Výchylka 0 → <b><M>{'E_p=0'}</M></b>, zato rychlost je <b>největší</b> → <b><M>{'E_k'}</M> je maximální</b>. Tady kulička sviští nejrychleji.</>,
+        <>Kulička přeletěla na druhou stranu, zase se zastaví: <M>{'E_k=0'}</M>, <M>{'E_p'}</M> maximální. A celý součet <M>{'E_p+E_k'}</M> byl celou dobu stejný.</>,
+      ]}
+    >
+      {/* —— statická kostra: zeď, podlaha, rovnováha, krajní polohy —— */}
       <line x1="30" y1="30" x2="30" y2="170" stroke={SPRING} strokeWidth="4" />
       <line x1="30" y1="160" x2="350" y2="160" stroke={GRID} strokeWidth="2" />
-      {/* rovnovážná poloha */}
-      <line x1={eqX} y1="55" x2={eqX} y2="160" stroke={TXT} strokeWidth="1.3" strokeDasharray="5,5" />
-      <text x={eqX} y="50" fill={TXT} fontSize="11" textAnchor="middle">rovnováha</text>
-      {/* pružina */}
-      <Spring x1={30} x2={ballX - 20} y={110} />
-      {/* kulička */}
-      <circle cx={ballX} cy={110} r="18" fill={BALL} />
-      {/* krajní polohy -A, +A čárkovaně */}
-      <line x1={eqX - A} y1="80" x2={eqX - A} y2="160" stroke={GRID} strokeWidth="1.2" strokeDasharray="3,4" />
-      <line x1={eqX + A} y1="80" x2={eqX + A} y2="160" stroke={GRID} strokeWidth="1.2" strokeDasharray="3,4" />
-      <text x={eqX - A} y="175" fill={TXT} fontSize="11" textAnchor="middle">−A</text>
-      <text x={eqX + A} y="175" fill={TXT} fontSize="11" textAnchor="middle">+A</text>
+      <line x1={EN_EQX} y1="55" x2={EN_EQX} y2="160" stroke={TXT} strokeWidth="1.3" strokeDasharray="5,5" />
+      <text x={EN_EQX} y="50" fill={TXT} fontSize="11" textAnchor="middle">rovnováha</text>
+      <line x1={EN_EQX - EN_A} y1="80" x2={EN_EQX - EN_A} y2="160" stroke={GRID} strokeWidth="1.2" strokeDasharray="3,4" />
+      <line x1={EN_EQX + EN_A} y1="80" x2={EN_EQX + EN_A} y2="160" stroke={GRID} strokeWidth="1.2" strokeDasharray="3,4" />
+      <text x={EN_EQX - EN_A} y="175" fill={TXT} fontSize="11" textAnchor="middle">−A</text>
+      <text x={EN_EQX + EN_A} y="175" fill={TXT} fontSize="11" textAnchor="middle">+A</text>
 
-      {/* —— vpravo: sloupce energie —— */}
-      <text x="410" y="20" fill={TXT} fontSize="12" textAnchor="middle">energie</text>
-      {/* rámeček celkové energie (konstantní) */}
-      <rect x="378" y={barY} width={barW} height={barH} fill="none" stroke={TXT} strokeWidth="1.2" strokeDasharray="4,3" />
-      <rect x="426" y={barY} width={barW} height={barH} fill="none" stroke={TXT} strokeWidth="1.2" strokeDasharray="4,3" />
-      {/* Ep sloupec */}
-      <rect x="378" y={barY + barH - epH} width={barW} height={epH} fill={EP} opacity="0.85" />
-      <text x="395" y={barY + barH + 16} fill={EP} fontSize="13" textAnchor="middle" fontStyle="italic">Ep</text>
-      {/* Ek sloupec */}
-      <rect x="426" y={barY + barH - ekH} width={barW} height={ekH} fill={EK} opacity="0.85" />
-      <text x="443" y={barY + barH + 16} fill={EK} fontSize="13" textAnchor="middle" fontStyle="italic">Ek</text>
-    </svg>
+      {/* rámečky celkové energie (konstantní) + popisky */}
+      <text x="404" y="20" fill={TXT} fontSize="12" textAnchor="middle">energie</text>
+      <rect x="372" y={EN_BARY} width={34} height={EN_BARH} fill="none" stroke={TXT} strokeWidth="1.2" strokeDasharray="4,3" />
+      <rect x="420" y={EN_BARY} width={34} height={EN_BARH} fill="none" stroke={TXT} strokeWidth="1.2" strokeDasharray="4,3" />
+      <text x="389" y={EN_BARY + EN_BARH + 16} fill={EP} fontSize="13" textAnchor="middle" fontStyle="italic">Ep</text>
+      <text x="437" y={EN_BARY + EN_BARH + 16} fill={EK} fontSize="13" textAnchor="middle" fontStyle="italic">Ek</text>
+
+      {/* —— animované prvky —— */}
+      {/* pružina (řetězec d se mění s polohou kuličky) */}
+      <APath d={enSpring} fill="none" stroke={SPRING} strokeWidth={2.5} />
+      {/* kulička */}
+      <ACircle cx={enBallX} cy={EN_Y} r={18} fill={BALL} />
+      {/* sloupec Ep */}
+      <ARect x={372} y={enEpY} width={34} height={enEpH} fill={EP} opacity={0.85} />
+      {/* sloupec Ek */}
+      <ARect x={420} y={enEkY} width={34} height={enEkH} fill={EK} opacity={0.85} />
+    </StepScene>
   )
 }

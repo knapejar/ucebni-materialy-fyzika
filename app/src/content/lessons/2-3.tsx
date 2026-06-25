@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.3'
 
@@ -186,26 +186,26 @@ export default function Lesson_2_3() {
         </Callout>
 
         <Figure caption="Kolem náboje: siločáry (modré, radiální) jsou kolmé k ekvipotenciálám (fialové kružnice). Intenzita E míří od + ven = tam, kde potenciál nejrychleji klesá.">
-          <svg viewBox="0 0 360 220" className="svg-fig">
+          <svg viewBox="0 0 360 240" className="svg-fig">
             <Defs />
             {/* ekvipotenciály */}
-            {[34, 58, 82].map((r) => (
-              <circle key={r} cx="180" cy="110" r={r} fill="none" stroke={POT} strokeWidth="1.6" strokeDasharray="5 5" />
+            {[32, 56, 80].map((r) => (
+              <circle key={r} cx="180" cy="126" r={r} fill="none" stroke={POT} strokeWidth="1.6" strokeDasharray="5 5" />
             ))}
             <text x="180" y="18" fill={POT} fontSize="13" textAnchor="middle">ekvipotenciály φ = konst.</text>
             {/* siločáry radiálně ven */}
             {[0, 45, 90, 135, 180, 225, 270, 315].map((a) => {
               const rad = (a * Math.PI) / 180
               const x1 = 180 + 16 * Math.cos(rad)
-              const y1 = 110 + 16 * Math.sin(rad)
-              const x2 = 180 + 96 * Math.cos(rad)
-              const y2 = 110 + 96 * Math.sin(rad)
+              const y1 = 126 + 16 * Math.sin(rad)
+              const x2 = 180 + 90 * Math.cos(rad)
+              const y2 = 126 + 90 * Math.sin(rad)
               return <line key={a} x1={x1} y1={y1} x2={x2} y2={y2} stroke={ACC} strokeWidth="2" markerEnd="url(#ar-acc)" />
             })}
-            <Charge x={180} y={110} sign="+" r={12} />
+            <Charge x={180} y={126} sign="+" r={12} />
             {/* popisek kolmosti */}
-            <text x="300" y="60" fill={ACC} fontSize="13">E (siločára)</text>
-            <text x="40" y="200" fill={TXT} fontSize="12">E ⊥ ekvipotenciála</text>
+            <text x="356" y="84" fill={ACC} fontSize="13" textAnchor="end">E (siločára)</text>
+            <text x="180" y="232" fill={TXT} fontSize="12" textAnchor="middle">E ⊥ ekvipotenciála</text>
           </svg>
         </Figure>
       </Section>
@@ -238,80 +238,63 @@ export default function Lesson_2_3() {
           potenciál? Klikej <b>Další →</b>.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Uprostřed mezi dvěma stejnými náboji"
-          steps={[
-            {
-              label: 'rozbor',
-              caption: <>Dvě kuličky se stejným nábojem <M>{'+Q'}</M> ve vzdálenosti <M>{'r'}</M>. Sledujeme bod <b>S</b> přesně uprostřed (vzdálenost <M>{'r/2'}</M> od každé).</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs />
-                  <line x1="80" y1="90" x2="340" y2="90" stroke={MUTE} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <Charge x={80} y={90} sign="+" />
-                  <Charge x={340} y={90} sign="+" />
-                  <circle cx="210" cy="90" r="5" fill={GREEN} />
-                  <text x="210" y="78" fill={GREEN} fontSize="14" textAnchor="middle">S</text>
-                  <text x="145" y="115" fill={MUTE} fontSize="13" textAnchor="middle">r/2</text>
-                  <text x="275" y="115" fill={MUTE} fontSize="13" textAnchor="middle">r/2</text>
-                  <text x="80" y="50" fill={POS} fontSize="14" textAnchor="middle">+Q</text>
-                  <text x="340" y="50" fill={POS} fontSize="14" textAnchor="middle">+Q</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'intenzity (vektory)',
-              caption: <>Levá kulička tlačí kladný testovací náboj <b>doprava</b>, pravá stejně silně <b>doleva</b>. Šipky <M>{'\\vec E_1, \\vec E_2'}</M> jsou stejně dlouhé a opačné.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs />
-                  <line x1="80" y1="90" x2="340" y2="90" stroke={MUTE} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <Charge x={80} y={90} sign="+" />
-                  <Charge x={340} y={90} sign="+" />
-                  {/* E1 od levé doprava */}
-                  <line x1="178" y1="90" x2="250" y2="90" stroke={ACC} strokeWidth="4" markerEnd="url(#ar-acc)" />
-                  <text x="232" y="78" fill={ACC} fontSize="14" textAnchor="middle">E₁ →</text>
-                  {/* E2 od pravé doleva */}
-                  <line x1="242" y1="110" x2="170" y2="110" stroke={POT} strokeWidth="4" markerEnd="url(#ar-pos)" />
-                  <text x="190" y="130" fill={POT} fontSize="14" textAnchor="middle">← E₂</text>
-                  <circle cx="210" cy="90" r="5" fill={GREEN} />
-                  <text x="210" y="62" fill={TXT} fontSize="13" textAnchor="middle">stejně velké, opačné</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'E = 0',
-              caption: <>Vektory se <b>vyruší</b>: <M>{'\\vec E = \\vec E_1 + \\vec E_2 = 0'}</M>. Uprostřed by testovací náboj necítil žádnou výslednou sílu.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs />
-                  <line x1="80" y1="90" x2="340" y2="90" stroke={MUTE} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <Charge x={80} y={90} sign="+" />
-                  <Charge x={340} y={90} sign="+" />
-                  <circle cx="210" cy="90" r="16" fill="none" stroke={GREEN} strokeWidth="2.5" />
-                  <text x="210" y="95" fill={GREEN} fontSize="18" textAnchor="middle" fontWeight="700">E = 0</text>
-                  <text x="210" y="150" fill={TXT} fontSize="13" textAnchor="middle">intenzity se vyruší (vektor)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'φ ≠ 0',
-              caption: <>Ale potenciály jsou <b>kladná čísla</b> (oba náboje kladné) a <b>sčítají se</b>: <M>{'\\varphi = \\varphi_1 + \\varphi_2 > 0'}</M>. Žádné rušení — skaláry nemají směr!</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs />
-                  <line x1="80" y1="90" x2="340" y2="90" stroke={MUTE} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <Charge x={80} y={90} sign="+" />
-                  <Charge x={340} y={90} sign="+" />
-                  <text x="150" y="80" fill={POT} fontSize="15" textAnchor="middle">φ₁ {'>'} 0</text>
-                  <text x="270" y="80" fill={POT} fontSize="15" textAnchor="middle">φ₂ {'>'} 0</text>
-                  <text x="210" y="135" fill={GREEN} fontSize="17" textAnchor="middle" fontWeight="700">φ = φ₁ + φ₂ ≠ 0</text>
-                  <text x="210" y="158" fill={TXT} fontSize="12" textAnchor="middle">potenciály se sčítají (skalár)</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 200"
+          captions={[
+            <>Dvě kuličky se stejným nábojem <M>{'+Q'}</M> ve vzdálenosti <M>{'r'}</M>. Sledujeme bod <b>S</b> přesně uprostřed (vzdálenost <M>{'r/2'}</M> od každé).</>,
+            <>Levá kulička tlačí kladný testovací náboj <b>doprava</b>, pravá stejně silně <b>doleva</b>. Šipky <M>{'\\vec E_1, \\vec E_2'}</M> jsou stejně dlouhé a opačné.</>,
+            <>Vektory se <b>vyruší</b>: <M>{'\\vec E = \\vec E_1 + \\vec E_2 = 0'}</M>. Uprostřed by testovací náboj necítil žádnou výslednou sílu.</>,
+            <>Ale potenciály jsou <b>kladná čísla</b> (oba náboje kladné) a <b>sčítají se</b>: <M>{'\\varphi = \\varphi_1 + \\varphi_2 > 0'}</M>. Žádné rušení — skaláry nemají směr!</>,
           ]}
-        />
+        >
+          {/* markery šipek — pevná velikost (userSpaceOnUse), aby nerostly se strokeWidth */}
+          <defs>
+            <marker id="s23-acc" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L11,5 L0,10 z" fill={ACC} />
+            </marker>
+            <marker id="s23-pot" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto">
+              <path d="M0,0 L11,5 L0,10 z" fill={POT} />
+            </marker>
+          </defs>
+
+          {/* osa spojnice — stále přítomná */}
+          <ALine x1={93} y1={100} x2={327} y2={100} stroke={MUTE} strokeWidth={1.5} strokeDasharray="4 4" />
+
+          {/* dva kladné náboje — stále přítomné (kroužek + znaménko) */}
+          <ACircle cx={80} cy={100} r={13} fill={POS} />
+          <AText x={80} y={106} fill="#0b1020" fontSize="17" fontWeight="700" textAnchor="middle">+</AText>
+          <ACircle cx={340} cy={100} r={13} fill={POS} />
+          <AText x={340} y={106} fill="#0b1020" fontSize="17" fontWeight="700" textAnchor="middle">+</AText>
+
+          {/* popisky náboje +Q — jen v kroku 0 */}
+          <AText x={80} y={62} fill={POS} fontSize="15" textAnchor="middle" opacity={[1, 0, 0, 0]}>+Q</AText>
+          <AText x={340} y={62} fill={POS} fontSize="15" textAnchor="middle" opacity={[1, 0, 0, 0]}>+Q</AText>
+
+          {/* bod S — objeví se v kroku 0, pak schován */}
+          <ACircle cx={210} cy={100} r={5} fill={GREEN} opacity={[1, 0, 0, 0]} />
+          <AText x={210} y={84} fill={GREEN} fontSize="15" textAnchor="middle" opacity={[1, 0, 0, 0]}>S</AText>
+          <AText x={145} y={123} fill={MUTE} fontSize="13" textAnchor="middle" opacity={[1, 0, 0, 0]}>r/2</AText>
+          <AText x={275} y={123} fill={MUTE} fontSize="13" textAnchor="middle" opacity={[1, 0, 0, 0]}>r/2</AText>
+
+          {/* krok 1: intenzity (vektory) — E1 doprava, E2 doleva, posunuté svisle aby se nepřekrývaly */}
+          <ALine x1={188} y1={88} x2={252} y2={88} stroke={ACC} strokeWidth={3} markerEnd="url(#s23-acc)" opacity={[0, 1, 0, 0]} />
+          <AText x={236} y={78} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0, 0]}>E₁ →</AText>
+          <ALine x1={232} y1={112} x2={168} y2={112} stroke={POT} strokeWidth={3} markerEnd="url(#s23-pot)" opacity={[0, 1, 0, 0]} />
+          <AText x={184} y={130} fill={POT} fontSize="14" textAnchor="middle" opacity={[0, 1, 0, 0]}>← E₂</AText>
+          <AText x={210} y={64} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>stejně velké, opačné</AText>
+
+          {/* krok 2: E = 0 — kroužek a text se objeví */}
+          <ACircle cx={210} cy={100} r={[5, 5, 24, 5]} fill="none" stroke={GREEN} strokeWidth={2.5} opacity={[0, 0, 1, 0]} />
+          <AText x={210} y={106} fill={GREEN} fontSize="17" fontWeight="700" textAnchor="middle" opacity={[0, 0, 1, 0]}>E = 0</AText>
+          <AText x={210} y={160} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1, 0]}>intenzity se vyruší (vektor)</AText>
+
+          {/* krok 3: φ ≠ 0 — potenciály se sčítají */}
+          <AText x={150} y={78} fill={POT} fontSize="15" textAnchor="middle" opacity={[0, 0, 0, 1]}>φ₁ {'>'} 0</AText>
+          <AText x={270} y={78} fill={POT} fontSize="15" textAnchor="middle" opacity={[0, 0, 0, 1]}>φ₂ {'>'} 0</AText>
+          <AText x={210} y={150} fill={GREEN} fontSize="17" fontWeight="700" textAnchor="middle" opacity={[0, 0, 0, 1]}>φ = φ₁ + φ₂ ≠ 0</AText>
+          <AText x={210} y={172} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 0, 1]}>potenciály se sčítají (skalár)</AText>
+        </StepScene>
 
         <Callout kind="chytak" title="TADY padá nejvíc lidí">
           Uprostřed mezi dvěma stejnými náboji je <M>{'\\vec E = 0'}</M>, ale{' '}

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.2'
 
@@ -9,12 +9,13 @@ export const provides = {
   'zachovani-hybnosti': { lesson: '1.2', label: 'zákon zachování hybnosti', short: 'V izolované soustavě je celková hybnost stálá.' },
 }
 
-/* Šipka pro SVG (definice markeru). */
+/* Šipka pro SVG (definice markeru). markerUnits=userSpaceOnUse → hrot má pevnou
+   velikost nezávisle na strokeWidth (jinak by se s tlustou čarou nafoukl). */
 function Defs({ id: mid, color }: { id: string; color: string }) {
   return (
     <defs>
-      <marker id={mid} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-        <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
+      <marker id={mid} markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+        <path d="M0,0 L12,6 L0,12 z" fill={color} />
       </marker>
     </defs>
   )
@@ -146,59 +147,53 @@ export default function Lesson() {
 
         <p>Proklikej si to na výstřelu / odrazu dvou vozíčků (model „výbuchu" uvnitř soustavy):</p>
 
-        <StepFigure
+        <StepScene
           title="Zachování hybnosti v izolované soustavě"
-          steps={[
-            {
-              label: 'klid',
-              caption: <>Dva vozíčky se stlačenou pružinou mezi nimi stojí. Celková hybnost soustavy je nulová: <M>{'\\vec p_{\\text{celk}}=0'}</M>.</>,
-              content: (
-                <svg viewBox="0 0 420 170" className="svg-fig">
-                  <line x1="0" y1="137" x2="420" y2="137" stroke={GROUND} strokeWidth="3" />
-                  <Cart x={150} w={50} color={BLUE} label="A" />
-                  <path d="M205 111 l8 -7 l-8 -7 l8 -7 l-8 -7 l8 -7" fill="none" stroke={ACCENT} strokeWidth="3" />
-                  <Cart x={220} w={50} color={ACCENT} label="B" />
-                  <text x="210" y="40" fill={TXT} fontSize="15" textAnchor="middle">klid: p = 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'vnitřní síly',
-              caption: <>Pružina se uvolní. Na A i B působí <b>vnitřní</b> síly — podle 3. NZ stejně velké a opačné. Žádná síla nepřichází zvenčí.</>,
-              content: (
-                <svg viewBox="0 0 420 170" className="svg-fig">
-                  <Defs id="af2" color={FORCE} />
-                  <line x1="0" y1="137" x2="420" y2="137" stroke={GROUND} strokeWidth="3" />
-                  <Cart x={130} w={50} color={BLUE} label="A" />
-                  <Cart x={240} w={50} color={ACCENT} label="B" />
-                  <line x1="175" y1="70" x2="105" y2="70" stroke={FORCE} strokeWidth="4" markerEnd="url(#af2)" />
-                  <text x="140" y="60" fill={FORCE} fontSize="13" textAnchor="middle">F na A</text>
-                  <line x1="245" y1="70" x2="315" y2="70" stroke={FORCE} strokeWidth="4" markerEnd="url(#af2)" />
-                  <text x="290" y="60" fill={FORCE} fontSize="13" textAnchor="middle">F na B</text>
-                  <text x="210" y="160" fill={TXT} fontSize="12" textAnchor="middle">|F| stejné, opačný směr → součet sil = 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rozjedou se',
-              caption: <>Vozíčky se rozjedou na opačné strany. Jejich hybnosti jsou opačné a stále se sčítají na nulu: <M>{'\\vec p_A + \\vec p_B = 0'}</M>.</>,
-              content: (
-                <svg viewBox="0 0 420 170" className="svg-fig">
-                  <Defs id="ap1" color={BLUE} />
-                  <Defs id="ap2" color={ACCENT} />
-                  <line x1="0" y1="137" x2="420" y2="137" stroke={GROUND} strokeWidth="3" />
-                  <Cart x={70} w={50} color={BLUE} label="A" />
-                  <Cart x={300} w={50} color={ACCENT} label="B" />
-                  <line x1="100" y1="65" x2="40" y2="65" stroke={BLUE} strokeWidth="5" markerEnd="url(#ap1)" />
-                  <text x="70" y="54" fill={BLUE} fontSize="13" textAnchor="middle">p (A)</text>
-                  <line x1="320" y1="65" x2="380" y2="65" stroke={ACCENT} strokeWidth="5" markerEnd="url(#ap2)" />
-                  <text x="350" y="54" fill={ACCENT} fontSize="13" textAnchor="middle">p (B)</text>
-                  <text x="210" y="160" fill={TXT} fontSize="13" textAnchor="middle">součet hybností = 0 (jako na začátku)</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 170"
+          captions={[
+            <>Dva vozíčky se stlačenou pružinou mezi nimi stojí. Celková hybnost soustavy je nulová: <M>{'\\vec p_{\\text{celk}}=0'}</M>.</>,
+            <>Pružina se uvolní. Na A i B působí <b>vnitřní</b> síly — podle 3. NZ stejně velké a opačné. Žádná síla nepřichází zvenčí.</>,
+            <>Vozíčky se rozjedou na opačné strany. Jejich hybnosti jsou opačné a stále se sčítají na nulu: <M>{'\\vec p_A + \\vec p_B = 0'}</M>.</>,
           ]}
-        />
+        >
+          {/* markery šipek (3 barvy) — pevná velikost hrotu (userSpaceOnUse) */}
+          <defs>
+            <marker id="af2" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto"><path d="M0,0 L12,6 L0,12 z" fill={FORCE} /></marker>
+            <marker id="apA" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" refX="10" refY="6.5" orient="auto"><path d="M0,0 L13,6.5 L0,13 z" fill={BLUE} /></marker>
+            <marker id="apB" markerUnits="userSpaceOnUse" markerWidth="13" markerHeight="13" refX="10" refY="6.5" orient="auto"><path d="M0,0 L13,6.5 L0,13 z" fill={ACCENT} /></marker>
+          </defs>
+
+          {/* zem (statická) */}
+          <ALine x1={0} y1={137} x2={420} y2={137} stroke={GROUND} strokeWidth={3} />
+
+          {/* vozíček A (modrý) — stojí, pak couvne doleva */}
+          <AGroup x={[150, 140, 70]}><Cart x={0} w={50} color={BLUE} label="A" /></AGroup>
+
+          {/* pružina mezi vozíčky — viditelná jen v klidu, pak se uvolní */}
+          <AGroup opacity={[1, 0, 0]}>
+            <path d="M205 111 l8 -7 l-8 -7 l8 -7 l-8 -7 l8 -7" fill="none" stroke={ACCENT} strokeWidth="3" />
+          </AGroup>
+
+          {/* vozíček B (oranžový) — stojí, pak ujede doprava */}
+          <AGroup x={[220, 230, 300]}><Cart x={0} w={50} color={ACCENT} label="B" /></AGroup>
+
+          {/* krok 1: popisek klidu */}
+          <AText x={210} y={40} fill={TXT} fontSize="15" textAnchor="middle" opacity={[1, 0, 0]}>klid: p = 0</AText>
+
+          {/* krok 2: vnitřní síly (akce–reakce) */}
+          <ALine x1={150} y1={72} x2={88} y2={72} stroke={FORCE} strokeWidth={4} markerEnd="url(#af2)" opacity={[0, 1, 0]} />
+          <AText x={119} y={62} fill={FORCE} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>F na A</AText>
+          <ALine x1={270} y1={72} x2={332} y2={72} stroke={FORCE} strokeWidth={4} markerEnd="url(#af2)" opacity={[0, 1, 0]} />
+          <AText x={301} y={62} fill={FORCE} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>F na B</AText>
+          <AText x={210} y={40} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>|F| stejné, opačný směr → součet sil = 0</AText>
+
+          {/* krok 3: hybnosti rozjetých vozíčků */}
+          <ALine x1={95} y1={65} x2={35} y2={65} stroke={BLUE} strokeWidth={5} markerEnd="url(#apA)" opacity={[0, 0, 1]} />
+          <AText x={65} y={54} fill={BLUE} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>p (A)</AText>
+          <ALine x1={325} y1={65} x2={385} y2={65} stroke={ACCENT} strokeWidth={5} markerEnd="url(#apB)" opacity={[0, 0, 1]} />
+          <AText x={355} y={54} fill={ACCENT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>p (B)</AText>
+          <AText x={210} y={40} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>součet hybností = 0 (jako na začátku)</AText>
+        </StepScene>
       </Section>
 
       <Section title="Příklady (přesně tohle chce zkoušející slyšet)">

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.5'
 
@@ -26,25 +26,39 @@ function Defs() {
   )
 }
 
-/* Siločáry od kladného náboje ven (8 paprsků ven z bodu cx,cy). */
-function Rays({ cx, cy, len = 70, color = ACCENT, out = true }: { cx: number; cy: number; len?: number; color?: string; out?: boolean }) {
-  const dirs = [0, 45, 90, 135, 180, 225, 270, 315]
+/* Animované paprsky pro StepScene: 8 siločar z náboje (210,100).
+   Délka roste podle plochy; v posledním kroku (náboj venku) zmizí. */
+const RAY_DIRS = [0, 45, 90, 135, 180, 225, 270, 315]
+const RAY_LEN = [70, 88, 66, 66] // kroky: malá, velká, divný tvar, (venku – schováno)
+function AnimRays() {
+  const cx = 210
+  const cy = 100
+  const r0 = 17
   return (
-    <g>
-      {dirs.map((deg, i) => {
-        const r = (deg * Math.PI) / 180
-        const r0 = 16
-        const ix = cx + r0 * Math.cos(r)
-        const iy = cy + r0 * Math.sin(r)
-        const ox = cx + len * Math.cos(r)
-        const oy = cy + len * Math.sin(r)
-        const x1 = out ? ix : ox
-        const y1 = out ? iy : oy
-        const x2 = out ? ox : ix
-        const y2 = out ? oy : iy
-        return <line key={i} x1={x1} y1={y1} x2={x2} y2={y2} stroke={color} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.9" />
+    <>
+      {RAY_DIRS.map((deg, i) => {
+        const a = (deg * Math.PI) / 180
+        const ca = Math.cos(a)
+        const sa = Math.sin(a)
+        const x1 = cx + r0 * ca
+        const y1 = cy + r0 * sa
+        const x2 = RAY_LEN.map((L) => cx + L * ca)
+        const y2 = RAY_LEN.map((L) => cy + L * sa)
+        return (
+          <ALine
+            key={i}
+            x1={x1}
+            y1={y1}
+            x2={x2}
+            y2={y2}
+            stroke={ACCENT}
+            strokeWidth={2.4}
+            markerEnd="url(#ar25)"
+            opacity={[0.92, 0.92, 0.92, 0]}
+          />
+        )
       })}
-    </g>
+    </>
   )
 }
 
@@ -94,98 +108,70 @@ export default function Lesson_2_5() {
           nafoukneš, zmáčkneš, nebo náboj posuneš stranou.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Tok závisí jen na náboji uvnitř"
-          steps={[
-            {
-              label: 'malá plocha',
-              caption: (
-                <>
-                  Kolem kladného náboje <M>{'+Q'}</M> obalíme malou kouli. Všechny siločáry, co z náboje vyletí,
-                  projdou plochou ven → tok <M>{'\\varphi_E = Q/\\varepsilon_0'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs />
-                  <circle cx="210" cy="100" r="55" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
-                  <Rays cx={210} cy={100} len={78} />
-                  <circle cx="210" cy="100" r="13" fill={POS} />
-                  <text x="210" y="105" fill="#0b1020" fontSize="15" textAnchor="middle" fontWeight="700">+</text>
-                  <text x="210" y="180" fill={SURF} fontSize="13" textAnchor="middle">malá Gaussova plocha</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'velká plocha',
-              caption: (
-                <>
-                  Plochu nafoukneme na dvojnásobek. Siločáry jsou řidší, ale projde jich <b>úplně stejný počet</b> →
-                  tok je <b>pořád</b> <M>{'Q/\\varepsilon_0'}</M>. Tvar a velikost plochy nehrají roli.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs />
-                  <circle cx="210" cy="100" r="88" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
-                  <Rays cx={210} cy={100} len={110} />
-                  <circle cx="210" cy="100" r="13" fill={POS} />
-                  <text x="210" y="105" fill="#0b1020" fontSize="15" textAnchor="middle" fontWeight="700">+</text>
-                  <text x="210" y="196" fill={SURF} fontSize="13" textAnchor="middle">stejný tok, větší plocha</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'divný tvar',
-              caption: (
-                <>
-                  I když je plocha pokroucená a náboj sedí někde u kraje, tok se nezmění — <b>jediné, co rozhoduje,
-                  je, že náboj je uvnitř</b>. Geometrie je jedno.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs />
-                  <path
-                    d="M120,60 C70,70 80,150 140,150 C180,175 270,180 320,140 C370,110 350,55 290,55 C240,40 170,45 120,60 Z"
-                    fill="none"
-                    stroke={SURF}
-                    strokeWidth="2.5"
-                    strokeDasharray="6 5"
-                  />
-                  <Rays cx={170} cy={110} len={62} />
-                  <circle cx="170" cy="110" r="13" fill={POS} />
-                  <text x="170" y="115" fill="#0b1020" fontSize="15" textAnchor="middle" fontWeight="700">+</text>
-                  <text x="210" y="194" fill={SURF} fontSize="13" textAnchor="middle">pokroucená plocha — tok stejný</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'náboj venku',
-              caption: (
-                <>
-                  A teď náboj <b>mimo</b> plochu: co na jedné straně vletí dovnitř, na druhé zase vyletí ven. Bilance je
-                  nula → <M>{'\\varphi_E = 0'}</M>. Náboj venku do toku nepřispívá.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs />
-                  <circle cx="250" cy="100" r="58" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
-                  <circle cx="80" cy="100" r="13" fill={POS} />
-                  <text x="80" y="105" fill="#0b1020" fontSize="15" textAnchor="middle" fontWeight="700">+</text>
-                  <line x1="98" y1="100" x2="200" y2="100" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" />
-                  <line x1="200" y1="100" x2="312" y2="100" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.55" />
-                  <line x1="98" y1="78" x2="205" y2="70" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.7" />
-                  <line x1="205" y1="70" x2="300" y2="62" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.45" />
-                  <line x1="98" y1="122" x2="205" y2="130" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.7" />
-                  <line x1="205" y1="130" x2="300" y2="138" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.45" />
-                  <text x="250" y="190" fill={SURF} fontSize="13" textAnchor="middle">náboj venku → vletí i vyletí → φ = 0</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 216"
+          captions={[
+            <>
+              Kolem kladného náboje <M>{'+Q'}</M> obalíme malou kouli. Všechny siločáry, co z náboje vyletí,
+              projdou plochou ven → tok <M>{'\\varphi_E = Q/\\varepsilon_0'}</M>.
+            </>,
+            <>
+              Plochu nafoukneme na dvojnásobek. Siločáry jsou řidší, ale projde jich <b>úplně stejný počet</b> →
+              tok je <b>pořád</b> <M>{'Q/\\varepsilon_0'}</M>. Tvar a velikost plochy nehrají roli.
+            </>,
+            <>
+              I když je plocha celá pokroucená a nepravidelná, tok se nezmění — <b>jediné, co rozhoduje,
+              je, že náboj je uvnitř</b>. Geometrie je jedno.
+            </>,
+            <>
+              A teď náboj <b>mimo</b> plochu: co na jedné straně vletí dovnitř, na druhé zase vyletí ven. Bilance je
+              nula → <M>{'\\varphi_E = 0'}</M>. Náboj venku do toku nepřispívá.
+            </>,
           ]}
-        />
+        >
+          <Defs />
+
+          {/* Gaussova plocha: kruh (malý → velký → schovaný → posunutý vpravo, náboj venku) */}
+          <ACircle
+            cx={[210, 210, 210, 258]}
+            cy={100}
+            r={[58, 90, 58, 60]}
+            fill="none"
+            stroke={SURF}
+            strokeWidth={2.5}
+            strokeDasharray="6 5"
+            opacity={[1, 1, 0, 1]}
+          />
+
+          {/* Gaussova plocha: pokroucený obal — jen ve 3. kroku (obklopuje paprsky) */}
+          <APath
+            d="M302,100 C300,130 290,160 268,150 C240,185 175,190 150,156 C120,170 100,120 116,96 C100,60 120,30 152,46 C175,10 245,10 272,50 C300,40 305,75 302,100 Z"
+            fill="none"
+            stroke={SURF}
+            strokeWidth={2.5}
+            strokeDasharray="6 5"
+            opacity={[0, 0, 1, 0]}
+          />
+
+          {/* paprsky z náboje (kroky 1–3), v posledním zmizí */}
+          <AnimRays />
+
+          {/* siločáry procházející plochou (jen krok 4: náboj venku) */}
+          <ALine x1={98} y1={100} x2={[98, 98, 98, 322]} y2={100} stroke={ACCENT} strokeWidth={2.4} markerEnd="url(#ar25)" opacity={[0, 0, 0, 0.95]} />
+          <ALine x1={98} y1={74} x2={[98, 98, 98, 315]} y2={62} stroke={ACCENT} strokeWidth={2.4} markerEnd="url(#ar25)" opacity={[0, 0, 0, 0.8]} />
+          <ALine x1={98} y1={126} x2={[98, 98, 98, 315]} y2={138} stroke={ACCENT} strokeWidth={2.4} markerEnd="url(#ar25)" opacity={[0, 0, 0, 0.8]} />
+
+          {/* náboj +Q: ve středu (kroky 1–3), pak ven doleva (krok 4) */}
+          <ACircle cx={[210, 210, 210, 80]} cy={100} r={13} fill={POS} />
+          <AText x={[210, 210, 210, 80]} y={105} fill="#0b1020" fontSize="15" textAnchor="middle" fontWeight="700">+</AText>
+
+          {/* popisky pod scénou — vždy jen jeden viditelný */}
+          <AText x={210} y={211} fill={SURF} fontSize="13" textAnchor="middle" opacity={[1, 0, 0, 0]}>malá Gaussova plocha</AText>
+          <AText x={210} y={211} fill={SURF} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>stejný tok, větší plocha</AText>
+          <AText x={210} y={211} fill={SURF} fontSize="13" textAnchor="middle" opacity={[0, 0, 1, 0]}>pokroucená plocha — tok stejný</AText>
+          <AText x={210} y={211} fill={SURF} fontSize="13" textAnchor="middle" opacity={[0, 0, 0, 1]}>náboj venku → vletí i vyletí → φ = 0</AText>
+        </StepScene>
       </Section>
 
       <Section title="Nulový náboj uvnitř → nulový tok">
@@ -195,17 +181,22 @@ export default function Lesson_2_5() {
           na nulu a tok je taky nula (kolik siločar z plusu vyletí, tolik jich do mínusu vletí).
         </p>
         <Figure caption="Uvnitř je +Q i −Q, dohromady náboj 0 → celkový tok plochou je nulový (každá siločára z plusu skončí v mínusu).">
-          <svg viewBox="0 0 420 180" className="svg-fig">
-            <Defs />
-            <circle cx="210" cy="90" r="72" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
-            <circle cx="165" cy="90" r="12" fill={POS} />
-            <text x="165" y="95" fill="#0b1020" fontSize="14" textAnchor="middle" fontWeight="700">+</text>
-            <circle cx="255" cy="90" r="12" fill={NEG} />
-            <text x="255" y="95" fill="#0b1020" fontSize="14" textAnchor="middle" fontWeight="700">−</text>
-            <path d="M177,90 C200,72 220,72 243,90" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" />
-            <path d="M177,90 C200,108 220,108 243,90" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" />
-            <path d="M174,82 C195,55 225,55 246,82" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" opacity="0.8" />
-            <text x="210" y="168" fill={TXT} fontSize="13" textAnchor="middle">Q = (+Q) + (−Q) = 0 → φ = 0</text>
+          <svg viewBox="0 0 420 190" className="svg-fig">
+            <defs>
+              <marker id="ar25d" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto">
+                <path d="M0,0 L8,4 L0,8 z" fill={ACCENT} />
+              </marker>
+            </defs>
+            <circle cx="210" cy="86" r="74" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
+            {/* siločáry z + do − (oblouk nahoře, přímka uprostřed, oblouk dole) — šipky míří do mínusu */}
+            <path d="M171,80 C200,44 224,44 250,76" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25d)" opacity="0.85" />
+            <path d="M172,86 L246,86" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25d)" />
+            <path d="M171,92 C200,128 224,128 250,96" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25d)" opacity="0.85" />
+            <circle cx="158" cy="86" r="13" fill={POS} />
+            <text x="158" y="91" fill="#0b1020" fontSize="14" textAnchor="middle" fontWeight="700">+</text>
+            <circle cx="262" cy="86" r="13" fill={NEG} />
+            <text x="262" y="91" fill="#0b1020" fontSize="14" textAnchor="middle" fontWeight="700">−</text>
+            <text x="210" y="182" fill={TXT} fontSize="13" textAnchor="middle">Q = (+Q) + (−Q) = 0 → φ = 0</text>
           </svg>
         </Figure>
       </Section>
@@ -228,8 +219,8 @@ export default function Lesson_2_5() {
             <text x="210" y="95" fill={TXT} fontSize="13" textAnchor="middle">magnet (N – S)</text>
             <ellipse cx="210" cy="90" rx="118" ry="62" fill="none" stroke={ACCENT} strokeWidth="2.2" markerEnd="url(#ar25)" />
             <ellipse cx="210" cy="90" rx="150" ry="78" fill="none" stroke={ACCENT} strokeWidth="2" opacity="0.6" />
-            <circle cx="320" cy="40" r="42" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
-            <text x="320" y="44" fill={SURF} fontSize="12" textAnchor="middle">plocha</text>
+            <circle cx="322" cy="56" r="38" fill="none" stroke={SURF} strokeWidth="2.5" strokeDasharray="6 5" />
+            <text x="322" y="60" fill={SURF} fontSize="12" textAnchor="middle">plocha</text>
           </svg>
         </Figure>
         <Callout kind="info" title="Srovnání jednou větou">

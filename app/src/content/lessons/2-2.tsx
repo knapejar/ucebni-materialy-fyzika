@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, ARect, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.2'
 
@@ -150,58 +150,57 @@ export default function Lesson() {
           Klasický pokus: třením přejdou elektrony z jednoho tělesa na druhé. Pozor na chyták —
           <b> nevzniká „nový" náboj</b>, jen se přesune. Klikej <b>Další →</b>:
         </p>
-        <StepFigure
+        <StepScene
           title="Tření hřebenu o svetr"
-          steps={[
-            {
-              label: 'před třením',
-              caption: <>Obě tělesa jsou <b>neutrální</b>: stejně kladného i záporného náboje. Celkový náboj soustavy je nula.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <rect x="40" y="60" width="130" height="70" rx="10" fill="none" stroke={TXT} strokeWidth="2" />
-                  <text x="105" y="50" fill={TXT} fontSize="13" textAnchor="middle">svetr</text>
-                  <rect x="250" y="60" width="130" height="70" rx="10" fill="none" stroke={TXT} strokeWidth="2" />
-                  <text x="315" y="50" fill={TXT} fontSize="13" textAnchor="middle">hřeben</text>
-                  <text x="70" y="92" fill={POS} fontSize="15">+</text><text x="90" y="92" fill={NEG} fontSize="15">−</text><text x="120" y="92" fill={POS} fontSize="15">+</text><text x="140" y="92" fill={NEG} fontSize="15">−</text>
-                  <text x="70" y="118" fill={NEG} fontSize="15">−</text><text x="90" y="118" fill={POS} fontSize="15">+</text><text x="120" y="118" fill={NEG} fontSize="15">−</text><text x="140" y="118" fill={POS} fontSize="15">+</text>
-                  <text x="280" y="92" fill={NEG} fontSize="15">−</text><text x="300" y="92" fill={POS} fontSize="15">+</text><text x="330" y="92" fill={NEG} fontSize="15">−</text><text x="350" y="92" fill={POS} fontSize="15">+</text>
-                  <text x="280" y="118" fill={POS} fontSize="15">+</text><text x="300" y="118" fill={NEG} fontSize="15">−</text><text x="330" y="118" fill={POS} fontSize="15">+</text><text x="350" y="118" fill={NEG} fontSize="15">−</text>
-                  <text x="210" y="160" fill={TXT} fontSize="13" textAnchor="middle">oba neutrální</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'třením',
-              caption: <>Třením přeskočí část <b>elektronů</b> (záporných nábojů) ze svetru na hřeben. Žádný náboj se nevyrobí — jen <b>cestuje</b>.</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <defs><Arrow id="el" color={NEG} /></defs>
-                  <rect x="40" y="60" width="130" height="70" rx="10" fill="none" stroke={TXT} strokeWidth="2" />
-                  <rect x="250" y="60" width="130" height="70" rx="10" fill="none" stroke={TXT} strokeWidth="2" />
-                  <line x1="180" y1="95" x2="245" y2="95" stroke={NEG} strokeWidth="4" markerEnd="url(#el)" />
-                  <text x="212" y="84" fill={NEG} fontSize="13" textAnchor="middle">e⁻</text>
-                  <text x="105" y="100" fill={TXT} fontSize="13" textAnchor="middle">svetr</text>
-                  <text x="315" y="100" fill={TXT} fontSize="13" textAnchor="middle">hřeben</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'po třením',
-              caption: <>Svetr ztratil elektrony → je <b>kladný</b>, hřeben je získal → je <b>záporný</b>. Vzniklý <b>+</b> a <b>−</b> náboj je <b>stejně velký</b> (zákon zachování náboje).</>,
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <rect x="40" y="60" width="130" height="70" rx="10" fill="none" stroke={POS} strokeWidth="2.5" />
-                  <text x="105" y="50" fill={POS} fontSize="14" textAnchor="middle">svetr: +Q</text>
-                  <text x="75" y="105" fill={POS} fontSize="20">+</text><text x="100" y="105" fill={POS} fontSize="20">+</text><text x="125" y="105" fill={POS} fontSize="20">+</text>
-                  <rect x="250" y="60" width="130" height="70" rx="10" fill="none" stroke={NEG} strokeWidth="2.5" />
-                  <text x="315" y="50" fill={NEG} fontSize="14" textAnchor="middle">hřeben: −Q</text>
-                  <text x="285" y="105" fill={NEG} fontSize="20">−</text><text x="310" y="105" fill={NEG} fontSize="20">−</text><text x="335" y="105" fill={NEG} fontSize="20">−</text>
-                  <text x="210" y="160" fill={TXT} fontSize="13" textAnchor="middle">+Q a −Q stejně velké</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 190"
+          captions={[
+            <>Obě tělesa jsou <b>neutrální</b>: stejně kladného i záporného náboje. Celkový náboj soustavy je nula.</>,
+            <>Třením přeskočí část <b>elektronů</b> (záporných nábojů) ze svetru na hřeben. Žádný náboj se nevyrobí — jen <b>cestuje</b>.</>,
+            <>Svetr ztratil elektrony → je <b>kladný</b>, hřeben je získal → je <b>záporný</b>. Vzniklý <b>+</b> a <b>−</b> náboj je <b>stejně velký</b> (zákon zachování náboje).</>,
           ]}
-        />
+        >
+          <defs><Arrow id="el" color={NEG} /></defs>
+
+          {/* ——— rámeček svetr (vlevo): barva přejde na kladnou ——— */}
+          <ARect x={40} y={62} width={130} height={70} rx={10} fill="none"
+            stroke={[TXT, TXT, POS]} strokeWidth={[2, 2, 2.6]} />
+          {/* ——— rámeček hřeben (vpravo): barva přejde na zápornou ——— */}
+          <ARect x={250} y={62} width={130} height={70} rx={10} fill="none"
+            stroke={[TXT, TXT, NEG]} strokeWidth={[2, 2, 2.6]} />
+
+          {/* popisky boxů (mění barvu i text přes prolnutí) */}
+          <AText x={105} y={50} fill={[TXT, TXT, POS]} fontSize="14" textAnchor="middle" opacity={[1, 1, 0]}>svetr</AText>
+          <AText x={105} y={50} fill={POS} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>svetr: +Q</AText>
+          <AText x={315} y={50} fill={[TXT, TXT, NEG]} fontSize="14" textAnchor="middle" opacity={[1, 1, 0]}>hřeben</AText>
+          <AText x={315} y={50} fill={NEG} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>hřeben: −Q</AText>
+
+          {/* ——— SVETR: kladné náboje (zůstávají) ——— */}
+          <AText x={[72, 72, 80]} y={[92, 92, 108]} fill={POS} fontSize={[15, 15, 22]} textAnchor="middle" fontWeight="700">+</AText>
+          <AText x={[120, 120, 105]} y={[118, 118, 108]} fill={POS} fontSize={[15, 15, 22]} textAnchor="middle" fontWeight="700">+</AText>
+          <AText x={[142, 142, 130]} y={[92, 92, 108]} fill={POS} fontSize={[15, 15, 22]} textAnchor="middle" fontWeight="700">+</AText>
+          {/* svetr: záporné — dva zůstanou ve fázi 1-2, ve fázi 3 zmizí (odešly) */}
+          <AText x={95} y={92} fill={NEG} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>−</AText>
+          <AText x={95} y={118} fill={NEG} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>−</AText>
+          {/* svetr: putující elektron — z boxu vlevo přejde do boxu vpravo (do volného místa) */}
+          <AText x={[142, 278, 278]} y={[118, 118, 108]} fill={NEG} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>−</AText>
+
+          {/* ——— HŘEBEN: kladné náboje (zmizí ve fázi 3 — vyrušily se s příchozími e⁻) ——— */}
+          <AText x={278} y={92} fill={POS} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>+</AText>
+          <AText x={350} y={92} fill={POS} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>+</AText>
+          <AText x={300} y={118} fill={POS} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>+</AText>
+          {/* hřeben: záporné — zůstanou; ve fázi 3 zvětšené a rozmístěné */}
+          <AText x={[300, 300, 280]} y={[92, 92, 108]} fill={NEG} fontSize={[15, 15, 22]} textAnchor="middle" fontWeight="700">−</AText>
+          <AText x={[330, 330, 330]} y={[92, 92, 108]} fill={NEG} fontSize={[15, 15, 22]} textAnchor="middle" fontWeight="700">−</AText>
+          <AText x={[330, 330, 355]} y={[118, 118, 108]} fill={NEG} fontSize={[15, 15, 22]} textAnchor="middle" fontWeight="700">−</AText>
+
+          {/* ——— šipka přenosu elektronů (jen krok 2) ——— */}
+          <ALine x1={180} y1={97} x2={240} y2={97} stroke={NEG} strokeWidth={4} markerEnd="url(#el)" opacity={[0, 1, 0]} />
+          <AText x={210} y={84} fill={NEG} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>e⁻</AText>
+
+          {/* ——— spodní popisky stavu ——— */}
+          <AText x={210} y={172} fill={TXT} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>oba neutrální</AText>
+          <AText x={210} y={172} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>+Q a −Q stejně velké</AText>
+        </StepScene>
       </Section>
 
       <Section title="Vodič × dielektrikum — jeden rozdíl, který stačí">
@@ -225,8 +224,8 @@ export default function Lesson() {
           <svg viewBox="0 0 420 200" className="svg-fig">
             <defs><Arrow id="ee" color={ACCENT} /><Arrow id="ei" color={FORCE} /></defs>
             {/* vnější pole E doprava */}
-            <line x1="20" y1="40" x2="400" y2="40" stroke={ACCENT} strokeWidth="3" markerEnd="url(#ee)" />
-            <text x="375" y="30" fill={ACCENT} fontSize="15">E</text>
+            <line x1="20" y1="44" x2="388" y2="44" stroke={ACCENT} strokeWidth="3" markerEnd="url(#ee)" />
+            <text x="200" y="30" fill={ACCENT} fontSize="15" textAnchor="middle">vnější pole E</text>
             {/* vodič */}
             <rect x="130" y="70" width="160" height="100" rx="8" fill="none" stroke={TXT} strokeWidth="2.5" />
             {/* záporné vlevo, kladné vpravo */}

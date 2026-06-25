@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, ARect, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.3'
 
@@ -10,12 +10,13 @@ export const provides = {
   'skalarni-soucin': { lesson: '1.3', label: 'skalární součin', short: 'a·b = |a||b|cos α — z dvou vektorů udělá číslo; bere jen souhlasnou složku.' },
 }
 
-/* Šipka pro SVG (definice markeru). */
+/* Šipka pro SVG (definice markeru). markerUnits="userSpaceOnUse" → hrot
+   nezvětšuje se s tloušťkou tahu, takže zůstává úhledný i u silných čar. */
 function Defs({ color, id: mid = 'ar' }: { color: string; id?: string }) {
   return (
     <defs>
-      <marker id={mid} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-        <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
+      <marker id={mid} markerWidth="11" markerHeight="11" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L11,5 L0,10 z" fill={color} />
       </marker>
     </defs>
   )
@@ -58,24 +59,27 @@ export default function Lesson_1_3() {
         </p>
 
         <Figure caption="Práci koná jen složka síly ve směru pohybu (F·cos α). Kolmá složka nepracuje.">
-          <svg viewBox="0 0 360 150" className="svg-fig">
+          <svg viewBox="0 0 360 160" className="svg-fig">
             <Defs color={FORCE} />
             <Defs color={ACCENT} id="arAcc" />
+            <Defs color={MUTE} id="arMute" />
             {/* dráha */}
-            <line x1="40" y1="110" x2="320" y2="110" stroke={GROUND} strokeWidth="3" />
-            <line x1="40" y1="110" x2="300" y2="110" stroke={MUTE} strokeWidth="2" strokeDasharray="5 5" markerEnd="url(#ar)" />
-            <text x="300" y="128" fill={MUTE} fontSize="13" textAnchor="middle">dráha s</text>
+            <line x1="40" y1="120" x2="330" y2="120" stroke={GROUND} strokeWidth="3" />
+            <line x1="120" y1="120" x2="300" y2="120" stroke={MUTE} strokeWidth="2" strokeDasharray="5 5" markerEnd="url(#arMute)" />
+            <text x="260" y="138" fill={MUTE} fontSize="13" textAnchor="middle">dráha s</text>
             {/* těleso */}
-            <rect x="40" y="90" width="40" height="20" rx="4" fill={BODY} />
-            {/* síla pod úhlem */}
-            <line x1="60" y1="100" x2="180" y2="40" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar)" />
-            <text x="150" y="42" fill={FORCE} fontSize="15">F</text>
+            <rect x="44" y="100" width="40" height="20" rx="4" fill={BODY} />
+            {/* síla pod úhlem (z rohu tělesa) */}
+            <line x1="84" y1="110" x2="210" y2="48" stroke={FORCE} strokeWidth="3.5" markerEnd="url(#ar)" />
+            <text x="222" y="48" fill={FORCE} fontSize="16" fontWeight="700">F</text>
             {/* složka ve směru pohybu */}
-            <line x1="60" y1="100" x2="180" y2="100" stroke={ACCENT} strokeWidth="4" markerEnd="url(#arAcc)" />
-            <text x="120" y="92" fill={ACCENT} fontSize="13" textAnchor="middle">F·cos α</text>
-            {/* úhel */}
-            <path d="M 92 100 A 32 32 0 0 0 80 78" fill="none" stroke={TXT} strokeWidth="1.5" />
-            <text x="100" y="82" fill={TXT} fontSize="13">α</text>
+            <line x1="84" y1="110" x2="208" y2="110" stroke={ACCENT} strokeWidth="3.5" markerEnd="url(#arAcc)" />
+            <text x="170" y="102" fill={ACCENT} fontSize="14" textAnchor="middle" fontWeight="600">F·cos α</text>
+            {/* kolmá (svislá) spojnice — naznačení rozkladu */}
+            <line x1="200" y1="110" x2="200" y2="62" stroke={MUTE} strokeWidth="1.5" strokeDasharray="4 4" />
+            {/* úhel α mezi silou a dráhou (popisek uvnitř oblouku u vrcholu) */}
+            <path d="M 130 110 A 46 46 0 0 0 116 84" fill="none" stroke={TXT} strokeWidth="1.5" />
+            <text x="122" y="103" fill={TXT} fontSize="14">α</text>
           </svg>
         </Figure>
 
@@ -94,70 +98,68 @@ export default function Lesson_1_3() {
           (<M>{'s = 0'}</M>). Klikej krok po kroku:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Zvednu knihu × držím knihu"
-          steps={[
-            {
-              label: 'zvednutí = práce',
-              caption: <>Zvedám knihu z podlahy na polici. Síla míří nahoru, dráha taky → <b>koná se práce</b> <M>{'W = mgh > 0'}</M>. Tahle práce se uloží do potenciální energie knihy.</>,
-              content: (
-                <svg viewBox="0 0 360 180" className="svg-fig">
-                  <Defs color={ACCENT} id="arAcc" />
-                  <line x1="0" y1="160" x2="360" y2="160" stroke={GROUND} strokeWidth="3" />
-                  {/* police */}
-                  <rect x="250" y="60" width="90" height="8" fill={MUTE} />
-                  {/* dráha zvednutí */}
-                  <line x1="80" y1="150" x2="80" y2="70" stroke={ACCENT} strokeWidth="4" markerEnd="url(#arAcc)" />
-                  <text x="58" y="115" fill={ACCENT} fontSize="13" textAnchor="middle">h</text>
-                  {/* kniha dole (slabě) a nahoře */}
-                  <rect x="62" y="140" width="36" height="16" rx="2" fill={MUTE} opacity="0.5" />
-                  <rect x="62" y="55" width="36" height="16" rx="2" fill={ACCENT} />
-                  <text x="180" y="40" fill={TXT} fontSize="15" textAnchor="middle">W = mgh &gt; 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'držení = NULOVÁ práce',
-              caption: <>Knihu jen držím v nataženě ruce na místě. Síla míří nahoru, ale <b>dráha je nulová</b> (<M>{'s = 0'}</M>) → <M>{'W = F\\cdot 0 = 0'}</M>. Sval se unaví, fyzikální práce je <b>nula</b>.</>,
-              content: (
-                <svg viewBox="0 0 360 180" className="svg-fig">
-                  <Defs color={FORCE} />
-                  <line x1="0" y1="160" x2="360" y2="160" stroke={GROUND} strokeWidth="3" />
-                  {/* ruka drží knihu na místě */}
-                  <rect x="160" y="70" width="40" height="18" rx="2" fill={ACCENT} />
-                  {/* síla nahoru */}
-                  <line x1="180" y1="70" x2="180" y2="30" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar)" />
-                  <text x="200" y="48" fill={FORCE} fontSize="14">F</text>
-                  {/* nulová dráha */}
-                  <text x="180" y="120" fill={TXT} fontSize="14" textAnchor="middle">s = 0</text>
-                  <text x="180" y="142" fill={ACCENT} fontSize="15" textAnchor="middle" fontWeight="700">W = 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'nesu po rovině = nulová práce',
-              caption: <>Nesu tašku vodorovně. Síla ruky míří nahoru, pohyb je vodorovný → <M>{'\\alpha = 90^\\circ'}</M>, <M>{'\\cos 90^\\circ = 0'}</M> → <b>práce opět nulová</b>. (Tíhová síla taky nekoná, protože výška se nemění.)</>,
-              content: (
-                <svg viewBox="0 0 360 180" className="svg-fig">
-                  <Defs color={FORCE} />
-                  <Defs color={MUTE} id="arMute" />
-                  <line x1="0" y1="160" x2="360" y2="160" stroke={GROUND} strokeWidth="3" />
-                  {/* taška */}
-                  <rect x="60" y="78" width="34" height="26" rx="3" fill={ACCENT} />
-                  {/* síla nahoru */}
-                  <line x1="77" y1="78" x2="77" y2="40" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar)" />
-                  <text x="96" y="56" fill={FORCE} fontSize="14">F</text>
-                  {/* pohyb vodorovně */}
-                  <line x1="110" y1="91" x2="300" y2="91" stroke={MUTE} strokeWidth="3" strokeDasharray="5 5" markerEnd="url(#arMute)" />
-                  <text x="210" y="82" fill={MUTE} fontSize="13" textAnchor="middle">pohyb (vodorovně)</text>
-                  {/* úhel 90 */}
-                  <rect x="77" y="82" width="9" height="9" fill="none" stroke={TXT} strokeWidth="1.2" />
-                  <text x="200" y="135" fill={ACCENT} fontSize="15" textAnchor="middle" fontWeight="700">α = 90° → W = 0</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 200"
+          captions={[
+            <>Zvedám knihu z podlahy na polici. Síla míří nahoru, dráha taky → <b>koná se práce</b> <M>{'W = mgh > 0'}</M>. Tahle práce se uloží do potenciální energie knihy.</>,
+            <>Knihu jen držím v natažené ruce na místě. Síla míří nahoru, ale <b>dráha je nulová</b> (<M>{'s = 0'}</M>) → <M>{'W = F\\cdot 0 = 0'}</M>. Sval se unaví, fyzikální práce je <b>nula</b>.</>,
+            <>Nesu tašku vodorovně. Síla ruky míří nahoru, pohyb je vodorovný → <M>{'\\alpha = 90^\\circ'}</M>, <M>{'\\cos 90^\\circ = 0'}</M> → <b>práce opět nulová</b>. (Tíhová síla taky nekoná, protože výška se nemění.)</>,
           ]}
-        />
+        >
+          <Defs color={ACCENT} id="arAcc" />
+          <Defs color={FORCE} id="arF" />
+          <Defs color={MUTE} id="arMute" />
+
+          {/* zem (statická) */}
+          <ALine x1={0} y1={170} x2={360} y2={170} stroke={GROUND} strokeWidth={3} />
+
+          {/* police — jen v 1. kroku */}
+          <ARect x={232} y={62} width={96} height={8} rx={2} fill={MUTE} opacity={[1, 0, 0]} />
+
+          {/* dráha zvednutí h — jen v 1. kroku */}
+          <ALine x1={92} y1={160} x2={92} y2={82} stroke={ACCENT} strokeWidth={3.5} markerEnd="url(#arAcc)" opacity={[1, 0, 0]} />
+          <AText x={[74, 74, 74]} y={126} fill={ACCENT} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>h</AText>
+          {/* startovní pozice knihy na podlaze (jen krok 1, slabě) */}
+          <ARect x={74} y={150} width={36} height={16} rx={2} fill={MUTE} opacity={[0.55, 0, 0]} />
+
+          {/* KNIHA — sdílený prvek, který se mezi kroky přesouvá:
+              krok 0: nahoře u police (zvednutá)
+              krok 1: drží se uprostřed ve vzduchu
+              krok 2: drží se vlevo, pohyb vodorovně */}
+          <ARect
+            x={[74, 150, 70]}
+            y={[64, 86, 92]}
+            width={[36, 40, 36]}
+            height={[16, 18, 24]}
+            rx={3}
+            fill={ACCENT}
+          />
+
+          {/* síla F nahoru — v krocích 2 a 3 (vychází z horní hrany knihy) */}
+          <ALine
+            x1={[170, 170, 88]}
+            y1={[86, 86, 92]}
+            x2={[170, 170, 88]}
+            y2={[44, 44, 50]}
+            stroke={FORCE}
+            strokeWidth={3.5}
+            markerEnd="url(#arF)"
+            opacity={[0, 1, 1]}
+          />
+          <AText x={[192, 192, 110]} y={[60, 60, 66]} fill={FORCE} fontSize="15" fontWeight="700" opacity={[0, 1, 1]}>F</AText>
+
+          {/* pohyb vodorovně — jen krok 3 */}
+          <ALine x1={120} y1={104} x2={300} y2={104} stroke={MUTE} strokeWidth={3} strokeDasharray="5 5" markerEnd="url(#arMute)" opacity={[0, 0, 1]} />
+          <AText x={210} y={94} fill={MUTE} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>pohyb (vodorovně)</AText>
+          {/* značka pravého úhlu (90°) — krok 3 */}
+          <ARect x={88} y={92} width={10} height={10} fill="none" stroke={TXT} strokeWidth={1.2} opacity={[0, 0, 1]} />
+
+          {/* horní vzorec — mění se podle kroku */}
+          <AText x={180} y={30} fill={TXT} fontSize="16" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>W = mgh &gt; 0</AText>
+          <AText x={180} y={150} fill={ACCENT} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[0, 1, 0]}>s = 0  →  W = 0</AText>
+          <AText x={210} y={150} fill={ACCENT} fontSize="16" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>α = 90°  →  W = 0</AText>
+        </StepScene>
       </Section>
 
       <Section title="Kinetická energie: energie pohybu">
@@ -182,22 +184,29 @@ export default function Lesson_1_3() {
           </p>
         </Callout>
         <Figure caption="Válec na nakloněné rovině: jak sjíždí, mění potenciální energii (mgh) na kinetickou — translační i rotační.">
-          <svg viewBox="0 0 340 170" className="svg-fig">
+          <svg viewBox="0 0 340 180" className="svg-fig">
             <Defs color={ACCENT} id="arAcc" />
-            {/* nakloněná rovina, pravý úhel vlevo dole */}
-            <polygon points="30,30 30,140 300,140" fill="none" stroke={ACCENT} strokeWidth="3" strokeLinejoin="round" />
-            {/* válec nahoře */}
-            <circle cx="48" cy="44" r="15" fill={BODY} stroke={TXT} strokeWidth="1.5" />
-            <line x1="48" y1="44" x2="58" y2="44" stroke={GROUND} strokeWidth="2" />
-            {/* šipka pohybu dolů po svahu */}
-            <line x1="62" y1="52" x2="120" y2="76" stroke={ACCENT} strokeWidth="3" markerEnd="url(#arAcc)" />
-            {/* válec dole */}
-            <circle cx="270" cy="124" r="15" fill={BODY} stroke={TXT} strokeWidth="1.5" />
-            {/* zatáčivá šipka (rotace) u dolního válce */}
-            <path d="M 270 105 A 19 19 0 1 1 252 122" fill="none" stroke={FORCE} strokeWidth="2.5" markerEnd="url(#ar)" />
             <Defs color={FORCE} />
-            <text x="120" y="40" fill={TXT} fontSize="13">Eₚ = mgh</text>
-            <text x="210" y="98" fill={TXT} fontSize="13">↓ mění se na Eₖ</text>
+            {/* nakloněná rovina, pravý úhel vpravo dole; jemná výplň */}
+            <polygon points="30,40 300,150 30,150" fill={ACCENT} fillOpacity="0.10" stroke={ACCENT} strokeWidth="3" strokeLinejoin="round" />
+            {/* značka pravého úhlu vpravo dole */}
+            <rect x="286" y="138" width="10" height="10" fill="none" stroke={ACCENT} strokeWidth="1.4" />
+
+            {/* válec nahoře (sedí na svahu) */}
+            <circle cx="74" cy="42" r="15" fill={BODY} stroke={TXT} strokeWidth="1.5" />
+            {/* spoke = naznačení natočení (diagonála, ne minus) */}
+            <line x1="74" y1="42" x2="84" y2="53" stroke={GROUND} strokeWidth="2" />
+            {/* šipka pohybu dolů po svahu (offset nad hypotenuzou, nekryje hranu) */}
+            <line x1="100" y1="50" x2="158" y2="74" stroke={ACCENT} strokeWidth="3" markerEnd="url(#arAcc)" />
+
+            {/* válec dole (sedí na svahu u paty) */}
+            <circle cx="250" cy="113" r="15" fill={BODY} stroke={TXT} strokeWidth="1.5" />
+            {/* zatáčivá šipka (rotace) u dolního válce — vně válce, nad ním */}
+            <path d="M 234 106 A 19 19 0 1 1 250 132" fill="none" stroke={FORCE} strokeWidth="2.5" markerEnd="url(#ar)" />
+
+            {/* popisky */}
+            <text x="150" y="34" fill={TXT} fontSize="14" textAnchor="middle">Eₚ = mgh</text>
+            <text x="246" y="160" fill={TXT} fontSize="13" textAnchor="middle">→ mění se na Eₖ</text>
           </svg>
         </Figure>
       </Section>
@@ -239,13 +248,13 @@ export default function Lesson_1_3() {
             {/* člověk v sedačce */}
             <circle cx="120" cy="80" r="8" fill={ACCENT} />
             {/* šipka pohybu vlaku */}
-            <line x1="220" y1="48" x2="300" y2="48" stroke={ACCENT} strokeWidth="4" markerEnd="url(#arAcc)" />
-            <text x="260" y="40" fill={ACCENT} fontSize="13" textAnchor="middle">v</text>
+            <line x1="225" y1="48" x2="300" y2="48" stroke={ACCENT} strokeWidth="3.5" markerEnd="url(#arAcc)" />
+            <text x="262" y="40" fill={ACCENT} fontSize="14" textAnchor="middle" fontWeight="700">v</text>
             {/* výpravčí */}
             <circle cx="320" cy="105" r="8" fill={FORCE} />
-            <text x="320" y="138" fill={MUTE} fontSize="12" textAnchor="middle">výpravčí</text>
+            <text x="320" y="139" fill={MUTE} fontSize="12" textAnchor="middle">výpravčí</text>
             {/* popisky */}
-            <text x="120" y="50" fill={TXT} fontSize="11" textAnchor="middle">vůči vlaku: Eₖ = 0</text>
+            <text x="135" y="50" fill={TXT} fontSize="12" textAnchor="middle">vůči vlaku: Eₖ = 0</text>
           </svg>
         </Figure>
         <p>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.7'
 
@@ -9,12 +9,13 @@ export const provides = {
   'brownuv-pohyb': { lesson: '1.7', label: 'Brownův pohyb', short: 'Chaotický pohyb drobného zrnka v kapalině; způsobuje ho kolísání počtu nárazů částic kapaliny na zrnko.' },
 }
 
-/* Šipka pro SVG. */
+/* Šipka pro SVG. markerUnits="userSpaceOnUse" → hrot má pevnou velikost
+   nezávislou na tloušťce čáry (jinak silné čáry udělají obří hroty). */
 function Defs({ color }: { color: string }) {
   return (
     <defs>
-      <marker id="ar7" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-        <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
+      <marker id="ar7" markerUnits="userSpaceOnUse" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto">
+        <path d="M0,0 L10,5 L0,10 z" fill={color} />
       </marker>
     </defs>
   )
@@ -25,11 +26,6 @@ const AKCENT = '#f59e0b'
 const VODA = '#5b8def'
 const GRAIN = '#e8ecf8'
 const DIM = '#6b7494'
-
-/* Drobné částice kapaliny rozmístěné kolem zrnka — pro Brownův pohyb. */
-function Castice({ cx, cy }: { cx: number; cy: number }) {
-  return <circle cx={cx} cy={cy} r="4" fill={VODA} />
-}
 
 export default function Lesson() {
   return (
@@ -95,12 +91,12 @@ export default function Lesson() {
             ))}
             <text x="210" y="142" fill={DIM} fontSize="11" textAnchor="middle">kloužou těsně kolem sebe</text>
 
-            {/* plyn — daleko od sebe, šipky */}
+            {/* plyn — daleko od sebe, šipky (různé směry rychlostí) */}
             <text x="355" y="22" fill={TXT} fontSize="13" textAnchor="middle" fontWeight="700">plyn</text>
-            {[[330, 48], [380, 62], [345, 92], [390, 100]].map(([x, y], k) => (
+            {([[318, 52, 28, -14], [392, 58, -22, 18], [332, 104, 26, 10], [398, 100, -24, -16]] as const).map(([x, y, dx, dy], k) => (
               <g key={`g${k}`}>
-                <circle cx={x} cy={y} r="8" fill={AKCENT} />
-                <line x1={x} y1={y} x2={x + 18} y2={y - 12} stroke={TXT} strokeWidth="2" markerEnd="url(#ar7)" />
+                <line x1={x} y1={y} x2={x + dx} y2={y + dy} stroke={TXT} strokeWidth="2.5" markerEnd="url(#ar7)" />
+                <circle cx={x} cy={y} r="7" fill={AKCENT} />
               </g>
             ))}
             <text x="355" y="142" fill={DIM} fontSize="11" textAnchor="middle">létají volně a naráží</text>
@@ -136,98 +132,69 @@ export default function Lesson() {
           škube, i když ho nic „nestrká". Proklikej si proč:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Proč se zrnko cuká: kolísání počtu nárazů"
-          steps={[
-            {
-              label: 'klid? ne',
-              caption: <>Zrnko (světlé) obklopují částice vody (modré). Ty do něj <b>neustále narážejí</b> ze všech stran kvůli tepelnému pohybu.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs color={AKCENT} />
-                  <Castice cx={70} cy={60} />
-                  <Castice cx={120} cy={40} />
-                  <Castice cx={250} cy={50} />
-                  <Castice cx={300} cy={80} />
-                  <Castice cx={60} cy={130} />
-                  <Castice cx={110} cy={160} />
-                  <Castice cx={260} cy={150} />
-                  <Castice cx={300} cy={130} />
-                  <circle cx={180} cy={100} r="26" fill={GRAIN} />
-                  <text x="180" y="105" fill="#0b1020" fontSize="12" textAnchor="middle" fontWeight="700">zrnko</text>
-                  <text x="180" y="190" fill={DIM} fontSize="12" textAnchor="middle">částice vody buší ze všech stran</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rovnováha',
-              caption: <>Když narazí <b>stejně</b> částic zleva i zprava, nárazy se <b>vyruší</b> a zrnko se (skoro) nehne.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs color={VODA} />
-                  <circle cx={180} cy={100} r="26" fill={GRAIN} />
-                  <text x="180" y="105" fill="#0b1020" fontSize="12" textAnchor="middle" fontWeight="700">zrnko</text>
-                  {/* 3 nárazy zleva */}
-                  <line x1="90" y1="80" x2="150" y2="92" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="90" y1="100" x2="150" y2="100" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="90" y1="120" x2="150" y2="108" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  {/* 3 nárazy zprava */}
-                  <line x1="270" y1="80" x2="210" y2="92" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="270" y1="100" x2="210" y2="100" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="270" y1="120" x2="210" y2="108" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <text x="115" y="160" fill={TXT} fontSize="13" textAnchor="middle">3 zleva</text>
-                  <text x="245" y="160" fill={TXT} fontSize="13" textAnchor="middle">3 zprava</text>
-                  <text x="180" y="190" fill={DIM} fontSize="12" textAnchor="middle">stejně = vyruší se = klid</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'nerovnováha',
-              caption: <>Ale počty <b>kolísají</b> — chvíli narazí víc částic zleva. Převaha nárazů <b>strčí</b> zrnko doprava.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs color={AKCENT} />
-                  <circle cx={180} cy={100} r="26" fill={GRAIN} />
-                  <text x="180" y="105" fill="#0b1020" fontSize="12" textAnchor="middle" fontWeight="700">zrnko</text>
-                  {/* 5 nárazů zleva */}
-                  <line x1="80" y1="72" x2="150" y2="86" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="80" y1="88" x2="150" y2="94" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="80" y1="100" x2="150" y2="100" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="80" y1="112" x2="150" y2="106" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <line x1="80" y1="128" x2="150" y2="114" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  {/* 1 náraz zprava */}
-                  <line x1="270" y1="100" x2="210" y2="100" stroke={VODA} strokeWidth="4" markerEnd="url(#ar7)" />
-                  <text x="105" y="165" fill={TXT} fontSize="13" textAnchor="middle">5 zleva</text>
-                  <text x="250" y="165" fill={TXT} fontSize="13" textAnchor="middle">1 zprava</text>
-                  {/* výsledný posun */}
-                  <line x1="210" y1="60" x2="280" y2="60" stroke={AKCENT} strokeWidth="5" markerEnd="url(#ar7)" />
-                  <text x="250" y="48" fill={AKCENT} fontSize="13" textAnchor="middle" fontWeight="700">posun</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'klikatá dráha',
-              caption: <>V dalším okamžiku převáží jiný směr. Výsledkem je <b>nepravidelná klikatá dráha</b> — to je Brownův pohyb.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs color={AKCENT} />
-                  <polyline
-                    points="60,150 95,90 140,130 175,60 215,110 250,70 300,120"
-                    fill="none"
-                    stroke={AKCENT}
-                    strokeWidth="3"
-                    strokeLinejoin="round"
-                    markerEnd="url(#ar7)"
-                  />
-                  {[[60, 150], [95, 90], [140, 130], [175, 60], [215, 110], [250, 70], [300, 120]].map(([x, y], k) => (
-                    <circle key={k} cx={x} cy={y} r="4" fill={TXT} />
-                  ))}
-                  <text x="180" y="190" fill={DIM} fontSize="12" textAnchor="middle">každý zlom = jiný směr převahy nárazů</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 210"
+          captions={[
+            <>Zrnko (světlé) obklopují částice vody (modré). Ty do něj <b>neustále narážejí</b> ze všech stran kvůli tepelnému pohybu.</>,
+            <>Když narazí <b>stejně</b> částic zleva i zprava, nárazy se <b>vyruší</b> a zrnko se (skoro) nehne.</>,
+            <>Ale počty <b>kolísají</b> — chvíli narazí víc částic zleva. Převaha nárazů <b>strčí</b> zrnko doprava.</>,
+            <>V dalším okamžiku převáží jiný směr. Výsledkem je <b>nepravidelná klikatá dráha</b> — to je Brownův pohyb.</>,
           ]}
-        />
+        >
+          {/* hroty šipek (modrá = nárazy vody, oranžová = výsledný posun) */}
+          <defs>
+            <marker id="arV" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill={VODA} /></marker>
+            <marker id="arA" markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="9" refY="5.5" orient="auto"><path d="M0,0 L11,5.5 L0,11 z" fill={AKCENT} /></marker>
+          </defs>
+
+          {/* částice vody kolem zrnka — viditelné jen v 1. kroku */}
+          {([[70, 55], [120, 38], [245, 46], [300, 70], [58, 120], [108, 150], [255, 145], [302, 118]] as const).map(([x, y], k) => (
+            <ACircle key={`p${k}`} cx={x} cy={y} r={5} fill={VODA} opacity={[1, 0, 0, 0]} />
+          ))}
+
+          {/* klikatá dráha — objeví se až v posledním kroku */}
+          <APath
+            d="M60,150 L95,90 L140,130 L175,60 L215,110 L255,80 L300,118"
+            fill="none" stroke={AKCENT} strokeWidth={3} strokeLinejoin="round" strokeLinecap="round"
+            opacity={[0, 0, 0, 1]}
+          />
+          {([[60, 150], [95, 90], [140, 130], [175, 60], [215, 110], [255, 80]] as const).map(([x, y], k) => (
+            <ACircle key={`z${k}`} cx={x} cy={y} r={4} fill={TXT} opacity={[0, 0, 0, 1]} />
+          ))}
+
+          {/* nárazy ZLEVA: 3 v rovnováze, 5 v nerovnováze (krajní 2 jen nerovnováha) */}
+          <ALine x1={96} y1={92} x2={156} y2={94} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={96} y1={100} x2={156} y2={100} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={96} y1={108} x2={156} y2={106} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={96} y1={80} x2={156} y2={88} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 0, 1, 0]} />
+          <ALine x1={96} y1={120} x2={156} y2={112} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 0, 1, 0]} />
+
+          {/* nárazy ZPRAVA: 3 v rovnováze, jen 1 v nerovnováze (ta sleduje posunuté zrnko) */}
+          <ALine x1={264} y1={100} x2={[204, 204, 230, 230]} y2={100} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={264} y1={88} x2={204} y2={94} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={264} y1={112} x2={204} y2={106} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 0, 0]} />
+
+          {/* zrnko: střed → (klid) → posun doprava → konec klikaté dráhy. Drží identitu. */}
+          <ACircle cx={[180, 180, 206, 300]} cy={[100, 100, 100, 118]} r={[24, 22, 22, 7]} fill={GRAIN} />
+          <AText x={[180, 180, 206, 300]} y={[105, 105, 105, 123]} fill="#0b1020" fontSize="12" textAnchor="middle" fontWeight="700" opacity={[1, 1, 1, 0]}>zrnko</AText>
+
+          {/* výsledný posun — jen v nerovnováze */}
+          <ALine x1={238} y1={58} x2={296} y2={58} stroke={AKCENT} strokeWidth={4} markerEnd="url(#arA)" opacity={[0, 0, 1, 0]} />
+          <AText x={267} y={46} fill={AKCENT} fontSize="13" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1, 0]}>posun</AText>
+
+          {/* popisky počtů — každý stav je vlastní text, přepíná se průhledností */}
+          <AText x={110} y={172} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>3 zleva</AText>
+          <AText x={110} y={172} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1, 0]}>5 zleva</AText>
+          <AText x={250} y={172} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>3 zprava</AText>
+          <AText x={250} y={172} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1, 0]}>1 zprava</AText>
+
+          {/* spodní popisek — jeden text na každý krok */}
+          <AText x={180} y={200} fill={DIM} fontSize="12" textAnchor="middle" opacity={[1, 0, 0, 0]}>částice vody buší ze všech stran</AText>
+          <AText x={180} y={200} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 1, 0, 0]}>stejně = vyruší se = klid</AText>
+          <AText x={180} y={200} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 0, 1, 0]}>převaha zleva → posun doprava</AText>
+          <AText x={180} y={200} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 0, 0, 1]}>každý zlom = jiný směr převahy nárazů</AText>
+        </StepScene>
 
         <p>
           Proč to zrnko vůbec ucítí? Protože je <b>maličké</b> — jeho hmotnost se blíží hmotnosti částic kapaliny, takže

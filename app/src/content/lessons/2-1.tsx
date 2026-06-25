@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.1'
 
@@ -157,66 +157,59 @@ export default function Lesson() {
           a mezi nimi „důlky“ (odliv). Proklikej si to:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak Měsíc vytvoří příliv a odliv"
-          steps={[
-            {
-              label: 'gravitace klesá se vzdáleností',
-              caption: <>Měsíc přitahuje vše na Zemi, ale podle <M>{'1/r^2'}</M> <b>nestejně silně</b>: bližší stranu nejvíc, vzdálenější nejméně.</>,
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  <Defs id="ar-t1" color={FORCE} />
-                  <circle cx="150" cy="100" r="48" fill={EARTH} />
-                  <text x="150" y="105" fill={TXT} fontSize="14" textAnchor="middle" fontWeight="700">Země</text>
-                  <circle cx="400" cy="100" r="20" fill={MOON} />
-                  <text x="400" y="138" fill={TXT} fontSize="13" textAnchor="middle">Měsíc</text>
-                  {/* tři síly různé délky */}
-                  <line x1="102" y1="100" x2="155" y2="100" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-t1)" />
-                  <line x1="150" y1="100" x2="195" y2="100" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-t1)" />
-                  <line x1="198" y1="100" x2="235" y2="100" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-t1)" />
-                  <text x="120" y="75" fill={FORCE} fontSize="12" textAnchor="middle">největší</text>
-                  <text x="285" y="105" fill={FORCE} fontSize="12" textAnchor="middle">nejmenší</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'voda se vyboulí na dvou stranách',
-              caption: <>Rozdíl tahů vodu „natáhne“: <b>blízká</b> strana se přitáhne k Měsíci, <b>vzdálená</b> strana „zaostane“. Vzniknou dvě boule = dva přílivy.</>,
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  {/* vodní obal (elipsa) */}
-                  <ellipse cx="150" cy="100" rx="78" ry="52" fill={WATER} fillOpacity="0.28" />
-                  <circle cx="150" cy="100" r="48" fill={EARTH} />
-                  <text x="150" y="105" fill={TXT} fontSize="14" textAnchor="middle" fontWeight="700">Země</text>
-                  <circle cx="400" cy="100" r="20" fill={MOON} />
-                  <text x="400" y="138" fill={TXT} fontSize="13" textAnchor="middle">Měsíc</text>
-                  <text x="232" y="100" fill={ACCENT} fontSize="12" textAnchor="middle">příliv</text>
-                  <text x="58" y="100" fill={ACCENT} fontSize="12" textAnchor="middle">příliv</text>
-                  <text x="150" y="36" fill={TXT} fontSize="11" textAnchor="middle">odliv</text>
-                  <text x="150" y="172" fill={TXT} fontSize="11" textAnchor="middle">odliv</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'Země se otáčí pod boulemi',
-              caption: <>Země se za den jednou otočí, ale boule „míří“ stále na Měsíc. Každé místo proto projde <b>dvěma přílivy a dvěma odlivy denně</b>.</>,
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  <Defs id="ar-t3" color={ENERGY} />
-                  <ellipse cx="150" cy="100" rx="78" ry="52" fill={WATER} fillOpacity="0.28" />
-                  <circle cx="150" cy="100" r="48" fill={EARTH} />
-                  {/* značka místa na povrchu */}
-                  <circle cx="150" cy="52" r="6" fill={ENERGY} />
-                  {/* rotační šipka */}
-                  <path d="M150,40 A60,60 0 0 1 210,100" fill="none" stroke={ENERGY} strokeWidth="3" markerEnd="url(#ar-t3)" />
-                  <circle cx="400" cy="100" r="20" fill={MOON} />
-                  <text x="400" y="138" fill={TXT} fontSize="13" textAnchor="middle">Měsíc</text>
-                  <text x="150" y="190" fill={TXT} fontSize="11" textAnchor="middle">otáčení Země → 2× příliv, 2× odliv za den</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 218"
+          captions={[
+            <>Měsíc přitahuje vše na Zemi, ale podle <M>{'1/r^2'}</M> <b>nestejně silně</b>: bližší stranu nejvíc, vzdálenější nejméně.</>,
+            <>Rozdíl tahů vodu „natáhne“: <b>blízká</b> strana se přitáhne k Měsíci, <b>vzdálená</b> strana „zaostane“. Vzniknou dvě boule = dva přílivy.</>,
+            <>Země se za den jednou otočí, ale boule „míří“ stále na Měsíc. Každé místo proto projde <b>dvěma přílivy a dvěma odlivy denně</b>.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="ar-t-f" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FORCE} /></marker>
+            <marker id="ar-t-r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ENERGY} /></marker>
+          </defs>
+
+          {/* vodní obal (protáhlá elipsa) — objeví se od kroku 2 */}
+          <APath
+            d="M72,105 a78,52 0 1,0 156,0 a78,52 0 1,0 -156,0"
+            fill={WATER}
+            fillOpacity={0.28}
+            stroke="none"
+            opacity={[0, 1, 1]}
+          />
+
+          {/* Země (statická ve všech krocích) */}
+          <ACircle cx={150} cy={105} r={48} fill={EARTH} />
+          <AText x={150} y={110} fill={TXT} fontSize="14" textAnchor="middle" fontWeight="700">Země</AText>
+
+          {/* Měsíc (statický) */}
+          <ACircle cx={400} cy={105} r={20} fill={MOON} />
+          <AText x={400} y={143} fill={TXT} fontSize="13" textAnchor="middle">Měsíc</AText>
+
+          {/* krok 1: tři síly pod Zemí (gradient tahu), mizí v kroku 2.
+              Měsíc je vpravo → bližší (pravá) strana = největší tah, vzdálenější (levá) = nejmenší.
+              Tři řádky pod sebou, stejný start, délka roste = síla roste blíž k Měsíci. */}
+          <AText x={150} y={158} fill={FORCE} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>tah Měsíce →</AText>
+          <ALine x1={92} y1={172} x2={120} y2={172} stroke={FORCE} strokeWidth={5} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
+          <AText x={250} y={176} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>vzdálená strana – nejmenší</AText>
+          <ALine x1={92} y1={188} x2={160} y2={188} stroke={FORCE} strokeWidth={5} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
+          <AText x={250} y={192} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>střed</AText>
+          <ALine x1={92} y1={204} x2={232} y2={204} stroke={FORCE} strokeWidth={5} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
+          <AText x={250} y={208} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>bližší strana – největší</AText>
+
+          {/* krok 2: popisky přílivu a odlivu */}
+          <AText x={246} y={109} fill={ACCENT} fontSize="13" textAnchor="middle" fontWeight="700" opacity={[0, 1, 0]}>příliv</AText>
+          <AText x={54} y={109} fill={ACCENT} fontSize="13" textAnchor="middle" fontWeight="700" opacity={[0, 1, 0]}>příliv</AText>
+          <AText x={150} y={42} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>odliv</AText>
+          <AText x={150} y={178} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>odliv</AText>
+
+          {/* krok 3: značka místa na povrchu + rotační šipka */}
+          <ACircle cx={150} cy={57} r={6} fill={ENERGY} opacity={[0, 0, 1]} />
+          <APath d="M150,45 A60,60 0 0 1 215,105" fill="none" stroke={ENERGY} strokeWidth={3} markerEnd="url(#ar-t-r)" opacity={[0, 0, 1]} />
+          <AText x={150} y={200} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>otáčení Země → 2× příliv, 2× odliv za den</AText>
+        </StepScene>
 
         <p>
           Když se Měsíc a Slunce „srovnají do řady“ (úplněk/nov), jejich účinky se sčítají a příliv

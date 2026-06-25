@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.6'
 
@@ -146,62 +146,50 @@ export default function Lesson_2_6() {
           jsou <Term>soustředné kružnice</Term> kolem drátu.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak najít směr a tvar pole kolem drátu"
-          steps={[
-            {
-              label: 'drát s proudem',
-              caption: <>Svislým drátem teče proud <M>{'I'}</M> nahoru. Zatím nevíme, kudy pole míří.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs />
-                  <line x1="180" y1="20" x2="180" y2="180" stroke={WIRE} strokeWidth="4" markerEnd="url(#m26t)" />
-                  <text x="196" y="30" fill={TXT} fontSize="16" fontStyle="italic">I</text>
-                  <text x="180" y="196" fill={DIM} fontSize="12" textAnchor="middle">vodič</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'pravidlo pravé ruky',
-              caption: <>Palec pravé ruky ukáže ve směru proudu <M>{'I'}</M> — pokrčené prsty pak ukazují, kudy „obtáčí" pole <M>{'\\vec B'}</M>. To je <Term>Ampérovo pravidlo pravé ruky</Term>.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs />
-                  <line x1="180" y1="20" x2="180" y2="180" stroke={WIRE} strokeWidth="4" markerEnd="url(#m26t)" />
-                  <text x="196" y="30" fill={TXT} fontSize="16" fontStyle="italic">I</text>
-                  {/* palec nahoru */}
-                  <line x1="120" y1="150" x2="120" y2="90" stroke={CHARGE} strokeWidth="4" markerEnd="url(#m26c)" />
-                  <text x="120" y="172" fill={CHARGE} fontSize="12" textAnchor="middle">palec = I</text>
-                  {/* obtaceni */}
-                  <path d="M180,70 a64,22 0 1 1 -0.1,0" fill="none" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26a)" />
-                  <text x="262" y="66" fill={ACC} fontSize="12">prsty = B</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'soustředné kružnice',
-              caption: <>Pole tvoří <Term>soustředné kružnice</Term> kolem drátu. Čím dál (větší <M>{'r'}</M>), tím slabší — podle <M>{'B=\\mu_0 I/2\\pi r'}</M>.</>,
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <Defs />
-                  {/* drat z pohledu shora: tecka s proudem ven */}
-                  <circle cx="180" cy="100" r="6" fill={WIRE} />
-                  <circle cx="180" cy="100" r="2.5" fill={TXT} />
-                  <text x="180" y="86" fill={TXT} fontSize="12" textAnchor="middle">I (k tobě)</text>
-                  {/* kruznice se sipkami proti smeru hod. rucicek */}
-                  <circle cx="180" cy="100" r="34" fill="none" stroke={ACC} strokeWidth="2" />
-                  <circle cx="180" cy="100" r="62" fill="none" stroke={ACC} strokeWidth="2" opacity="0.7" />
-                  <circle cx="180" cy="100" r="88" fill="none" stroke={ACC} strokeWidth="2" opacity="0.45" />
-                  {/* sipecky na kruznicich */}
-                  <line x1="214" y1="100" x2="214" y2="92" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26a)" />
-                  <line x1="242" y1="100" x2="242" y2="92" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26a)" />
-                  <line x1="268" y1="100" x2="268" y2="92" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26a)" />
-                  <text x="180" y="200" fill={DIM} fontSize="11" textAnchor="middle">B slábne se vzdáleností r</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 220"
+          captions={[
+            <>Svislým drátem teče proud <M>{'I'}</M> nahoru. Zatím nevíme, kudy pole míří.</>,
+            <>Palec pravé ruky ukáže ve směru proudu <M>{'I'}</M> — pokrčené prsty pak ukazují, kudy „obtáčí" pole <M>{'\\vec B'}</M>. To je <Term>Ampérovo pravidlo pravé ruky</Term>.</>,
+            <>Pohled shora: pole tvoří <Term>soustředné kružnice</Term> kolem drátu. Čím dál (větší <M>{'r'}</M>), tím slabší — podle <M>{'B=\\mu_0 I/2\\pi r'}</M>.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="m26a" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACC} /></marker>
+            <marker id="m26t" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={WIRE} /></marker>
+            <marker id="m26c" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={CHARGE} /></marker>
+            {/* malá šipka (pevná velikost) pro tečné značky na kružnicích */}
+            <marker id="m26s" markerWidth="9" markerHeight="9" refX="6" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill={ACC} /></marker>
+          </defs>
+
+          {/* ——— BOČNÍ POHLED (kroky 0–1): svislý drát s proudem nahoru ——— */}
+          <ALine x1={180} y1={196} x2={180} y2={28} stroke={WIRE} strokeWidth={4} markerEnd="url(#m26t)" opacity={[1, 1, 0]} />
+          <AText x={196} y={40} fill={TXT} fontSize="16" fontStyle="italic" opacity={[1, 1, 0]}>I</AText>
+          <AText x={180} y={214} fill={DIM} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>vodič</AText>
+
+          {/* palec (krok 1) */}
+          <ALine x1={118} y1={170} x2={118} y2={104} stroke={CHARGE} strokeWidth={4} markerEnd="url(#m26c)" opacity={[0, 1, 0]} />
+          <AText x={118} y={190} fill={CHARGE} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>palec = I</AText>
+          {/* obtáčející pole — elipsa kolem drátu (krok 1) */}
+          <APath d="M180,84 a64,22 0 1 1 -0.1,0" fill="none" stroke={ACC} strokeWidth={2.5} markerEnd="url(#m26a)" opacity={[0, 1, 0]} />
+          <AText x={250} y={80} fill={ACC} fontSize="13" opacity={[0, 1, 0]}>prsty = B</AText>
+
+          {/* ——— POHLED SHORA (krok 2): drát jako tečka, soustředné kružnice ——— */}
+          {/* tečka = drát kolmo k rovině, proud k tobě */}
+          <ACircle cx={180} cy={118} r={6} fill={WIRE} opacity={[0, 0, 1]} />
+          <ACircle cx={180} cy={118} r={2.5} fill={TXT} opacity={[0, 0, 1]} />
+          <AText x={180} y={102} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>I (k tobě)</AText>
+          {/* soustředné kružnice (slábnou ven) */}
+          <ACircle cx={180} cy={118} r={36} fill="none" stroke={ACC} strokeWidth={2.5} opacity={[0, 0, 1]} />
+          <ACircle cx={180} cy={118} r={60} fill="none" stroke={ACC} strokeWidth={2.5} opacity={[0, 0, 0.7]} />
+          <ACircle cx={180} cy={118} r={84} fill="none" stroke={ACC} strokeWidth={2.5} opacity={[0, 0, 0.45]} />
+          {/* tečné šipky (proti směru hod. ručiček) na pravém okraji každé kružnice */}
+          <ALine x1={216} y1={124} x2={216} y2={112} stroke={ACC} strokeWidth={2.5} markerEnd="url(#m26s)" opacity={[0, 0, 1]} />
+          <ALine x1={240} y1={124} x2={240} y2={112} stroke={ACC} strokeWidth={2.5} markerEnd="url(#m26s)" opacity={[0, 0, 0.7]} />
+          <ALine x1={264} y1={124} x2={264} y2={112} stroke={ACC} strokeWidth={2.5} markerEnd="url(#m26s)" opacity={[0, 0, 0.45]} />
+          <AText x={180} y={212} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>B slábne se vzdáleností r</AText>
+        </StepScene>
       </Section>
 
       <Section title="Magnetické čáry jsou uzavřené — magnetický náboj neexistuje">

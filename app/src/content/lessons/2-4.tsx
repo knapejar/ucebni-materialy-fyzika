@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.4'
 
@@ -141,92 +141,68 @@ export default function Lesson_2_4() {
           <M>{'\\sin\\alpha'}</M> je přesně to, na co se chytá u zkoušky — proklikej si to:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Otáčivý moment dipólu podle úhlu α"
-          steps={[
-            {
-              label: 'α = 90°',
-              caption: (
-                <>
-                  Dipól je <b>kolmo</b> na pole (<M>{'\\alpha = 90^\\circ'}</M>). Síly tvoří dvojici s
-                  největším ramenem → <b>moment je MAXIMÁLNÍ</b>: <M>{'|\\vec M| = p\\,E\\,\\sin 90^\\circ = pE'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs />
-                  <FieldLines x1={20} x2={130} ys={[45, 110, 175]} />
-                  <FieldLines x1={290} x2={400} ys={[45, 110, 175]} />
-                  <text x="55" y="35" fill={ACCENT} fontSize="14" fontStyle="italic">E</text>
-                  {/* dipól svisle: - dole, + nahoře; p nahoru */}
-                  <line x1="210" y1="155" x2="210" y2="85" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
-                  <text x="222" y="120" fill={P} fontSize="15" fontStyle="italic" fontWeight="700">p</text>
-                  <Charge x={210} y={160} sign="−" />
-                  <Charge x={210} y={80} sign="+" />
-                  {/* síly: na + doprava, na - doleva */}
-                  <line x1="225" y1="80" x2="278" y2="80" stroke={POS} strokeWidth="3" markerEnd="url(#d4-pos)" />
-                  <line x1="195" y1="160" x2="142" y2="160" stroke={NEG} strokeWidth="3" markerEnd="url(#d4-neg)" />
-                  {/* rotační šipky */}
-                  <path d="M250,95 Q280,120 250,150" fill="none" stroke={ROT} strokeWidth="2.5" markerEnd="url(#d4-rot)" />
-                  <text x="210" y="208" fill={ROT} fontSize="13" textAnchor="middle">největší otáčení</text>
-                </svg>
-              ),
-            },
-            {
-              label: '0° < α < 90°',
-              caption: (
-                <>
-                  Dipól se už natáčí do směru pole. Moment <b>klesá</b> (<M>{'\\sin\\alpha'}</M> je menší než 1),
-                  ale pořád otáčí dál — pole ho „dorovnává".
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs />
-                  <FieldLines x1={20} x2={130} ys={[45, 110, 175]} />
-                  <FieldLines x1={290} x2={400} ys={[45, 110, 175]} />
-                  <text x="55" y="35" fill={ACCENT} fontSize="14" fontStyle="italic">E</text>
-                  {/* dipól pod úhlem ~45°: - vlevo dole, + vpravo nahoře */}
-                  <line x1="178" y1="150" x2="242" y2="90" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
-                  <text x="200" y="108" fill={P} fontSize="15" fontStyle="italic" fontWeight="700">p</text>
-                  <Charge x={172} y={156} sign="−" />
-                  <Charge x={248} y={84} sign="+" />
-                  <line x1="263" y1="84" x2="312" y2="84" stroke={POS} strokeWidth="3" markerEnd="url(#d4-pos)" />
-                  <line x1="157" y1="156" x2="108" y2="156" stroke={NEG} strokeWidth="3" markerEnd="url(#d4-neg)" />
-                  <path d="M278,100 Q300,120 282,145" fill="none" stroke={ROT} strokeWidth="2.5" markerEnd="url(#d4-rot)" />
-                  <text x="210" y="208" fill={ROT} fontSize="13" textAnchor="middle">otáčí se dál, moment slábne</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'α = 0°',
-              caption: (
-                <>
-                  Dipól je <b>zarovnaný s polem</b> (<M>{'\\alpha = 0^\\circ'}</M>). Obě síly leží na jedné
-                  přímce a vyruší se → <b>moment je NULOVÝ</b>: <M>{'\\sin 0^\\circ = 0'}</M>. Tohle je{' '}
-                  <Term>rovnovážná poloha</Term>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs />
-                  <FieldLines x1={20} x2={130} ys={[45, 175]} />
-                  <FieldLines x1={300} x2={400} ys={[45, 175]} />
-                  <text x="55" y="35" fill={ACCENT} fontSize="14" fontStyle="italic">E</text>
-                  {/* dipól vodorovně: - vlevo, + vpravo, p doprava (= směr E) */}
-                  <line x1="180" y1="110" x2="244" y2="110" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
-                  <text x="212" y="98" fill={P} fontSize="15" fontStyle="italic" fontWeight="700" textAnchor="middle">p</text>
-                  <Charge x={170} y={110} sign="−" />
-                  <Charge x={250} y={110} sign="+" />
-                  {/* síly na jedné přímce, opačné -> vyruší se */}
-                  <line x1="265" y1="110" x2="315" y2="110" stroke={POS} strokeWidth="3" markerEnd="url(#d4-pos)" />
-                  <line x1="155" y1="110" x2="105" y2="110" stroke={NEG} strokeWidth="3" markerEnd="url(#d4-neg)" />
-                  <text x="210" y="208" fill={TXT} fontSize="13" textAnchor="middle">síly na jedné přímce → M = 0 (rovnováha)</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 230"
+          captions={[
+            <>
+              <b>Krok 1 — </b>Dipól je <b>kolmo</b> na pole (<M>{'\\alpha = 90^\\circ'}</M>). Síly tvoří dvojici s
+              největším ramenem → <b>moment je MAXIMÁLNÍ</b>: <M>{'|\\vec M| = p\\,E\\,\\sin 90^\\circ = pE'}</M>.
+            </>,
+            <>
+              <b>Krok 2 — </b>Dipól se už natáčí do směru pole (<M>{'0^\\circ < \\alpha < 90^\\circ'}</M>). Moment <b>klesá</b>{' '}
+              (<M>{'\\sin\\alpha'}</M> je menší než 1), ale pořád otáčí dál — pole ho „dorovnává".
+            </>,
+            <>
+              <b>Krok 3 — </b>Dipól je <b>zarovnaný s polem</b> (<M>{'\\alpha = 0^\\circ'}</M>). Obě síly leží na jedné
+              přímce a vyruší se → <b>moment je NULOVÝ</b>: <M>{'\\sin 0^\\circ = 0'}</M>. Tohle je{' '}
+              <Term>rovnovážná poloha</Term>.
+            </>,
           ]}
-        />
+        >
+          <Defs />
+          {/* vnější pole E — siločáry vlevo a vpravo (jen horní/dolní pruh,
+              střed necháváme volný pro dipól a jeho vodorovné síly) */}
+          <FieldLines x1={20} x2={120} ys={[48, 192]} />
+          <FieldLines x1={300} x2={400} ys={[48, 192]} />
+          <text x="50" y="38" fill={ACCENT} fontSize="14" fontStyle="italic">E</text>
+
+          {/* dipólový moment p: od − k +, otáčí se 90° → 45° → 0° kolem středu (210,120) */}
+          <ALine
+            x1={[210, 177, 173]} y1={[155, 152, 120]}
+            x2={[210, 243, 247]} y2={[85, 88, 120]}
+            stroke={P} strokeWidth={3.5} markerEnd="url(#d4-p)"
+          />
+          <AText x={[230, 196, 210]} y={[122, 104, 102]} fill={P} fontSize="15" fontStyle="italic" fontWeight="700" textAnchor="middle">p</AText>
+
+          {/* záporný náboj − (dolní/levý konec) */}
+          <ACircle cx={[210, 172, 170]} cy={[160, 156, 120]} r={13} fill={NEG} />
+          <AText x={[210, 172, 170]} y={[165, 161, 125]} fill="#0b1020" fontSize="17" textAnchor="middle" fontWeight="800">−</AText>
+
+          {/* kladný náboj + (horní/pravý konec) */}
+          <ACircle cx={[210, 248, 250]} cy={[80, 84, 120]} r={13} fill={POS} />
+          <AText x={[210, 248, 250]} y={[85, 89, 125]} fill="#0b1020" fontSize="17" textAnchor="middle" fontWeight="800">+</AText>
+
+          {/* síla na + : vždy doprava (směr pole). Popisek vždy NAD šipkou. */}
+          <ALine x1={[227, 265, 267]} y1={[80, 84, 120]} x2={[287, 320, 322]} y2={[80, 84, 120]} stroke={POS} strokeWidth={3.5} markerEnd="url(#d4-pos)" />
+          <AText x={[300, 305, 305]} y={[68, 72, 108]} fill={POS} fontSize="14" fontStyle="italic" textAnchor="middle">F₊</AText>
+
+          {/* síla na − : vždy doleva (proti poli). Popisek vždy POD šipkou. */}
+          <ALine x1={[193, 155, 153]} y1={[160, 156, 120]} x2={[133, 100, 98]} y2={[160, 156, 120]} stroke={NEG} strokeWidth={3.5} markerEnd="url(#d4-neg)" />
+          <AText x={[150, 117, 115]} y={[180, 176, 142]} fill={NEG} fontSize="14" fontStyle="italic" textAnchor="middle">F₋</AText>
+
+          {/* rotační šipka — silná u 90°, slabší u 45°, zmizí u 0° */}
+          <APath
+            d="M252,96 Q284,120 252,144"
+            fill="none" stroke={ROT} strokeWidth={[3, 2.2, 0]} markerEnd="url(#d4-rot)"
+            opacity={[1, 0.85, 0]}
+          />
+
+          {/* popisek pod scénou — mění se podle kroku */}
+          <AText x={210} y={218} fill={ROT} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>moment MAX (největší otáčení)</AText>
+          <AText x={210} y={218} fill={ROT} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>otáčí se dál, moment slábne</AText>
+          <AText x={210} y={218} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>síly na jedné přímce → M = 0 (rovnováha)</AText>
+        </StepScene>
 
         <Callout kind="chytak" title="Chyták č. 1: kdy je moment 0 a kdy max">
           <p>Lidská intuice tě svádí to splést. Drž se vzorce <M>{'|\\vec M| = pE\\sin\\alpha'}</M>:</p>

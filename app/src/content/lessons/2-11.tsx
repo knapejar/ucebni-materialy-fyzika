@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.11'
 
@@ -28,27 +28,6 @@ function Arrow({ id: mid, color }: { id: string; color: string }) {
   )
 }
 
-/* tři vodorovné šipky vnějšího pole B mířící doprava */
-function FieldArrows({ x1, x2, marker }: { x1: number; x2: number; marker: string }) {
-  return (
-    <g stroke={ACC} strokeWidth="3">
-      <line x1={x1} y1="45" x2={x2} y2="45" markerEnd={`url(#${marker})`} />
-      <line x1={x1} y1="95" x2={x2} y2="95" markerEnd={`url(#${marker})`} />
-      <line x1={x1} y1="145" x2={x2} y2="145" markerEnd={`url(#${marker})`} />
-    </g>
-  )
-}
-
-/* malá šipka magnetického momentu (kolečko = smyčka + šipka momentu) */
-function Moment({ x, y, color, dir = 'up', len = 26 }: { x: number; y: number; color: string; dir?: 'up' | 'down'; len?: number }) {
-  const dy = dir === 'up' ? -len : len
-  return (
-    <g>
-      <circle cx={x} cy={y} r="7" fill="none" stroke={color} strokeWidth="2.5" />
-      <line x1={x} y1={y} x2={x} y2={y + dy} stroke={color} strokeWidth="2.5" markerEnd={`url(#${dir === 'up' ? 'mu' : 'md'}-${color === N ? 'n' : 's'})`} />
-    </g>
-  )
-}
 
 export default function Lesson_2_11() {
   return (
@@ -83,25 +62,25 @@ export default function Lesson_2_11() {
 
       <Section title="Atom jako proudová smyčka (názorně)">
         <Figure caption="Elektron obíhající jádro je vlastně malý kruhový proud — a každá proudová smyčka má magnetický moment m = I·S kolmý na rovinu smyčky.">
-          <svg viewBox="0 0 420 180" className="svg-fig">
+          <svg viewBox="0 0 440 210" className="svg-fig">
             <defs>
               <Arrow id="orb" color={ELEC} />
               <Arrow id="mom" color={ACC} />
             </defs>
             {/* dráha elektronu */}
-            <ellipse cx="160" cy="110" rx="95" ry="40" fill="none" stroke={MUTED} strokeWidth="2" />
+            <ellipse cx="175" cy="135" rx="95" ry="40" fill="none" stroke={MUTED} strokeWidth="2" />
             {/* jádro */}
-            <circle cx="160" cy="110" r="12" fill={N} />
-            <text x="160" y="115" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">+</text>
+            <circle cx="175" cy="135" r="12" fill={N} />
+            <text x="175" y="140" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">+</text>
             {/* elektron + směr oběhu */}
-            <circle cx="255" cy="110" r="8" fill={ELEC} />
-            <text x="255" y="92" fill={ELEC} fontSize="12" textAnchor="middle">e⁻</text>
-            <path d="M 235 78 A 95 40 0 0 1 85 95" fill="none" stroke={ELEC} strokeWidth="2.5" markerEnd="url(#orb)" />
-            <text x="160" y="52" fill={ELEC} fontSize="13" textAnchor="middle">oběh = proud I</text>
+            <circle cx="270" cy="135" r="8" fill={ELEC} />
+            <text x="289" y="139" fill={ELEC} fontSize="12" textAnchor="start">e⁻</text>
+            <path d="M 250 103 A 95 40 0 0 1 100 120" fill="none" stroke={ELEC} strokeWidth="2.5" markerEnd="url(#orb)" />
+            <text x="105" y="195" fill={ELEC} fontSize="13" textAnchor="middle">oběh = proud I</text>
             {/* magneticky moment kolmo na rovinu */}
-            <line x1="160" y1="110" x2="160" y2="30" stroke={ACC} strokeWidth="3" markerEnd="url(#mom)" />
-            <text x="178" y="40" fill={ACC} fontSize="15" textAnchor="middle" fontStyle="italic">m</text>
-            <text x="350" y="115" fill={TXT} fontSize="14" textAnchor="middle">m = I·S</text>
+            <line x1="175" y1="135" x2="175" y2="38" stroke={ACC} strokeWidth="3" markerEnd="url(#mom)" />
+            <text x="192" y="48" fill={ACC} fontSize="16" textAnchor="start" fontStyle="italic">m</text>
+            <text x="375" y="135" fill={TXT} fontSize="15" textAnchor="middle">m = I·S</text>
           </svg>
         </Figure>
         <p>
@@ -118,122 +97,120 @@ export default function Lesson_2_11() {
           výsledného momentu vůči poli. Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak látka reaguje na vnější pole B"
-          steps={[
-            {
-              label: 'diamagnet bez pole',
-              caption: (
-                <>
-                  <b>Diamagnetikum</b>: atomy mají <b>nulový</b> vlastní moment (zaplněné slupky —
-                  vzácné plyny, ionty s jejich strukturou). Bez pole se nic neděje, žádné šipky.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  <text x="230" y="30" fill={MUTED} fontSize="14" textAnchor="middle">B = 0 · diamagnetikum (vlastní moment = 0)</text>
-                  <g fill="none" stroke={MUTED} strokeWidth="2">
-                    <circle cx="120" cy="110" r="11" /><circle cx="200" cy="110" r="11" />
-                    <circle cx="280" cy="110" r="11" /><circle cx="360" cy="110" r="11" />
-                    <circle cx="160" cy="150" r="11" /><circle cx="240" cy="150" r="11" />
-                    <circle cx="320" cy="150" r="11" />
-                  </g>
-                  <text x="230" y="190" fill={MUTED} fontSize="13" textAnchor="middle">žádné vlastní momenty</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'diamagnet v poli',
-              caption: (
-                <>
-                  Zapneme <M>{'\\vec B'}</M>. Pole <b>rozkmitá oběh elektronů</b> tak, že se v atomu{' '}
-                  <Term>indukuje</Term> nový moment mířící <b>PROTI poli</b> (zelené proti modrému).
-                  Stejný princip jako <b><Concept id="elektromagneticka-indukce">elektromagnetická indukce</Concept></b> a{' '}
-                  <b><Concept id="lenzovo-pravidlo">Lenzův zákon</Concept></b>: látka se brání změně. Výsledek:{' '}
-                  <b>mírné zeslabení pole</b>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  <defs>
-                    <Arrow id="b1" color={ACC} />
-                    <Arrow id="mu-n" color={N} /><Arrow id="md-n" color={N} />
-                    <Arrow id="mu-s" color={S} /><Arrow id="md-s" color={S} />
-                  </defs>
-                  <FieldArrows x1={20} x2={95} marker="b1" />
-                  <text x="55" y="180" fill={ACC} fontSize="14" textAnchor="middle" fontStyle="italic">B</text>
-                  {/* indukovane momenty proti poli (dolu = "proti", barva N) */}
-                  <Moment x={170} y={95} color={N} dir="down" />
-                  <Moment x={240} y={95} color={N} dir="down" />
-                  <Moment x={310} y={95} color={N} dir="down" />
-                  <Moment x={205} y={155} color={N} dir="down" />
-                  <Moment x={275} y={155} color={N} dir="down" />
-                  <text x="395" y="100" fill={N} fontSize="13" textAnchor="middle">m proti B</text>
-                  <text x="395" y="120" fill={N} fontSize="12" textAnchor="middle">→ zeslabí</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'paramagnet bez pole',
-              caption: (
-                <>
-                  <b>Paramagnetikum</b>: atomy <b>mají</b> vlastní nenulový moment, ale bez pole jsou
-                  <b> rozházené náhodně</b> (<Concept id="tepelny-pohyb">tepelný pohyb</Concept>), takže navenek se vyruší a látka je
-                  nemagnetická.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  <defs>
-                    <Arrow id="mu-s2" color={S} />
-                  </defs>
-                  <text x="230" y="30" fill={MUTED} fontSize="14" textAnchor="middle">B = 0 · paramagnetikum (momenty náhodně)</text>
-                  <g stroke={S} strokeWidth="2.5" fill="none">
-                    <line x1="120" y1="110" x2="138" y2="92" markerEnd="url(#mu-s2)" />
-                    <line x1="200" y1="100" x2="190" y2="122" markerEnd="url(#mu-s2)" />
-                    <line x1="280" y1="120" x2="298" y2="105" markerEnd="url(#mu-s2)" />
-                    <line x1="360" y1="95" x2="345" y2="115" markerEnd="url(#mu-s2)" />
-                    <line x1="170" y1="150" x2="188" y2="158" markerEnd="url(#mu-s2)" />
-                    <line x1="250" y1="158" x2="240" y2="138" markerEnd="url(#mu-s2)" />
-                    <line x1="330" y1="150" x2="316" y2="140" markerEnd="url(#mu-s2)" />
-                  </g>
-                  <text x="230" y="190" fill={MUTED} fontSize="13" textAnchor="middle">navenek se vyruší</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'paramagnet v poli',
-              caption: (
-                <>
-                  Zapneme <M>{'\\vec B'}</M>. Pole vlastní momenty <b>natočí PO sobě</b> (zelené po modrém) —
-                  jako se proudová smyčka stočí do směru pole. Tepelný pohyb tomu pořád trochu brání, takže
-                  srovnání není dokonalé. Výsledek: <b>zesílení pole</b>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 200" className="svg-fig">
-                  <defs>
-                    <Arrow id="b2" color={ACC} />
-                    <Arrow id="mr" color={S} />
-                  </defs>
-                  <FieldArrows x1={20} x2={95} marker="b2" />
-                  <text x="55" y="180" fill={ACC} fontSize="14" textAnchor="middle" fontStyle="italic">B</text>
-                  {/* momenty po poli (doprava) */}
-                  <g stroke={S} strokeWidth="3" fill="none">
-                    <line x1="150" y1="80" x2="195" y2="80" markerEnd="url(#mr)" />
-                    <line x1="230" y1="80" x2="275" y2="80" markerEnd="url(#mr)" />
-                    <line x1="310" y1="80" x2="355" y2="80" markerEnd="url(#mr)" />
-                    <line x1="150" y1="130" x2="193" y2="124" markerEnd="url(#mr)" />
-                    <line x1="230" y1="125" x2="275" y2="130" markerEnd="url(#mr)" />
-                    <line x1="310" y1="130" x2="353" y2="124" markerEnd="url(#mr)" />
-                  </g>
-                  <text x="400" y="80" fill={S} fontSize="13" textAnchor="middle">m po B</text>
-                  <text x="400" y="100" fill={S} fontSize="12" textAnchor="middle">→ zesílí</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 215"
+          captions={[
+            <>
+              <b>Diamagnetikum</b>: atomy mají <b>nulový</b> vlastní moment (zaplněné slupky —
+              vzácné plyny, ionty s jejich strukturou). Bez pole se nic neděje, žádné šipky.
+            </>,
+            <>
+              Zapneme <M>{'\\vec B'}</M> (modré šipky zleva). Pole <b>rozkmitá oběh elektronů</b> tak, že se v atomu{' '}
+              <Term>indukuje</Term> nový moment mířící <b>PROTI poli</b> (červené proti modrému).
+              Stejný princip jako <b><Concept id="elektromagneticka-indukce">elektromagnetická indukce</Concept></b> a{' '}
+              <b><Concept id="lenzovo-pravidlo">Lenzův zákon</Concept></b>: látka se brání změně. Výsledek:{' '}
+              <b>mírné zeslabení pole</b>.
+            </>,
+            <>
+              <b>Paramagnetikum</b>: atomy <b>mají</b> vlastní nenulový moment, ale bez pole jsou{' '}
+              <b>rozházené náhodně</b> (<Concept id="tepelny-pohyb">tepelný pohyb</Concept>), takže navenek se vyruší a látka je
+              nemagnetická.
+            </>,
+            <>
+              Zapneme <M>{'\\vec B'}</M>. Pole vlastní momenty <b>natočí PO sobě</b> (zelené po modrém) —
+              jako se proudová smyčka stočí do směru pole. Tepelný pohyb tomu pořád trochu brání, takže
+              srovnání není dokonalé. Výsledek: <b>zesílení pole</b>.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <Arrow id="mfb" color={ACC} />
+            <Arrow id="mfn" color={N} />
+            <Arrow id="mfs" color={S} />
+          </defs>
+
+          {/* ——— horní popisek látky: dia ⇄ para (crossfade) ——— */}
+          <AText x={232} y={30} fill={MUTED} fontSize="14" textAnchor="middle" opacity={[1, 1, 0, 0]}>
+            diamagnetikum · vlastní moment = 0
+          </AText>
+          <AText x={232} y={30} fill={MUTED} fontSize="14" textAnchor="middle" opacity={[0, 0, 1, 1]}>
+            paramagnetikum · vlastní moment ≠ 0
+          </AText>
+
+          {/* ——— vnější pole B: 3 modré šipky zleva (jen „v poli") ——— */}
+          <ALine x1={22} y1={78} x2={96} y2={78} stroke={ACC} strokeWidth={3} markerEnd="url(#mfb)" opacity={[0, 1, 0, 1]} />
+          <ALine x1={22} y1={122} x2={96} y2={122} stroke={ACC} strokeWidth={3} markerEnd="url(#mfb)" opacity={[0, 1, 0, 1]} />
+          <ALine x1={22} y1={166} x2={96} y2={166} stroke={ACC} strokeWidth={3} markerEnd="url(#mfb)" opacity={[0, 1, 0, 1]} />
+          <AText x={52} y={196} fill={ACC} fontSize="15" textAnchor="middle" fontStyle="italic" opacity={[0, 1, 0, 1]}>B</AText>
+          {/* „B = 0" pro kroky bez pole */}
+          <AText x={52} y={126} fill={MUTED} fontSize="14" textAnchor="middle" opacity={[1, 0, 1, 0]}>B = 0</AText>
+
+          {/* ——— smyčky atomů (konstantní identita ve všech krocích) ——— */}
+          <ACircle cx={140} cy={98} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+          <ACircle cx={215} cy={98} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+          <ACircle cx={290} cy={98} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+          <ACircle cx={365} cy={98} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+          <ACircle cx={177} cy={152} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+          <ACircle cx={252} cy={152} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+          <ACircle cx={327} cy={152} r={11} fill="none" stroke={MUTED} strokeWidth={2} />
+
+          {/* ——— DIAMAGNET v poli: indukované momenty PROTI poli (dolů, červené) ——— */}
+          {/* viditelné jen v kroku 2 (index 1) */}
+          <ALine x1={140} y1={84} x2={140} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={215} y1={84} x2={215} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={290} y1={84} x2={290} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={177} y1={138} x2={177} y2={174} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={252} y1={138} x2={252} y2={174} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+
+          {/* ——— PARAMAGNET: zelené momenty — z náhodných (krok 3) do srovnaných doprava (krok 4) ——— */}
+          {/* každá šipka: [_, _, náhodný směr, doprava]; opacity [0,0,1,1] */}
+          <ALine
+            x1={[140, 140, 150, 122]} y1={[98, 98, 110, 98]}
+            x2={[140, 140, 128, 158]} y2={[98, 98, 84, 98]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+          <ALine
+            x1={[215, 215, 215, 197]} y1={[98, 98, 86, 98]}
+            x2={[215, 215, 215, 233]} y2={[98, 98, 116, 98]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+          <ALine
+            x1={[290, 290, 278, 272]} y1={[98, 98, 108, 98]}
+            x2={[290, 290, 302, 308]} y2={[98, 98, 88, 98]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+          <ALine
+            x1={[365, 365, 373, 347]} y1={[98, 98, 86, 98]}
+            x2={[365, 365, 357, 383]} y2={[98, 98, 114, 98]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+          <ALine
+            x1={[177, 177, 167, 159]} y1={[152, 152, 164, 152]}
+            x2={[177, 177, 187, 195]} y2={[152, 152, 140, 152]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+          <ALine
+            x1={[252, 252, 266, 234]} y1={[152, 152, 152, 152]}
+            x2={[252, 252, 238, 270]} y2={[152, 152, 152, 152]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+          <ALine
+            x1={[327, 327, 327, 309]} y1={[152, 152, 166, 152]}
+            x2={[327, 327, 327, 345]} y2={[152, 152, 138, 152]}
+            stroke={S} strokeWidth={3} markerEnd="url(#mfs)" opacity={[0, 0, 1, 1]}
+          />
+
+          {/* ——— pravý popisek výsledku ——— */}
+          <AText x={405} y={92} fill={N} fontSize="13" textAnchor="start" opacity={[0, 1, 0, 0]}>m proti B</AText>
+          <AText x={405} y={112} fill={N} fontSize="13" textAnchor="start" opacity={[0, 1, 0, 0]}>→ zeslabí</AText>
+          <AText x={405} y={92} fill={S} fontSize="13" textAnchor="start" opacity={[0, 0, 0, 1]}>m po B</AText>
+          <AText x={405} y={112} fill={S} fontSize="13" textAnchor="start" opacity={[0, 0, 0, 1]}>→ zesílí</AText>
+
+          {/* ——— spodní popisek pro kroky bez pole ——— */}
+          <AText x={232} y={205} fill={MUTED} fontSize="13" textAnchor="middle" opacity={[1, 0, 0, 0]}>žádné vlastní momenty</AText>
+          <AText x={232} y={205} fill={MUTED} fontSize="13" textAnchor="middle" opacity={[0, 0, 1, 0]}>navenek se vyruší</AText>
+        </StepScene>
       </Section>
 
       <Section title="Larmorova precese — odkud se bere diamagnetismus">

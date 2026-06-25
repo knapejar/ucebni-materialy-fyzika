@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ARect, AText, ALine, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.10'
 
@@ -25,17 +25,6 @@ function Arrow({ id: mid, color }: { id: string; color: string }) {
     <marker id={mid} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
       <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
     </marker>
-  )
-}
-
-/* tři vodorovné šipky vnějšího pole E mířící doprava */
-function FieldArrows({ x1, x2, marker }: { x1: number; x2: number; marker: string }) {
-  return (
-    <g stroke={FIELD} strokeWidth="3">
-      <line x1={x1} y1="40" x2={x2} y2="40" markerEnd={`url(#${marker})`} />
-      <line x1={x1} y1="90" x2={x2} y2="90" markerEnd={`url(#${marker})`} />
-      <line x1={x1} y1="140" x2={x2} y2="140" markerEnd={`url(#${marker})`} />
-    </g>
   )
 }
 
@@ -71,88 +60,71 @@ export default function Lesson_2_10() {
           až se pole uvnitř vyruší. Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Vznik elektrického stínu ve vodiči"
-          steps={[
-            {
-              label: 'vodič v poli',
-              caption: (
-                <>
-                  Vodič vložíme do vnějšího pole <M>{'\\vec E'}</M> (modré šipky). Uvnitř jsou volné
-                  elektrony, zatím rovnoměrně rozmístěné.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 190" className="svg-fig">
-                  <defs><Arrow id="a1" color={FIELD} /></defs>
-                  <FieldArrows x1={20} x2={120} marker="a1" />
-                  <FieldArrows x1={340} x2={440} marker="a1" />
-                  <text x="70" y="178" fill={FIELD} fontSize="15" textAnchor="middle" fontStyle="italic">E</text>
-                  <rect x="160" y="45" width="140" height="100" rx="10" fill="#1b2436" stroke={MUTED} strokeWidth="2" />
-                  <g fill={TXT} fontSize="15" textAnchor="middle">
-                    <text x="195" y="78">−</text><text x="230" y="78">−</text><text x="265" y="78">−</text>
-                    <text x="195" y="125">−</text><text x="230" y="125">−</text><text x="265" y="125">−</text>
-                  </g>
-                  <text x="230" y="35" fill={MUTED} fontSize="13" textAnchor="middle">vodič</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'náboje se hýbou',
-              caption: (
-                <>
-                  Pole tlačí na volné náboje: záporné putují proti směru <M>{'\\vec E'}</M> (doleva),
-                  takže <b>na levé stěně přebydou „−"</b> a <b>na pravé „+"</b>. Vzniká nové, vnitřní
-                  pole <M>{'\\vec E^{*}'}</M> (zelené) mířící <b>proti</b> vnějšímu.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 190" className="svg-fig">
-                  <defs><Arrow id="a2" color={FIELD} /><Arrow id="a2g" color={INNER} /></defs>
-                  <FieldArrows x1={20} x2={120} marker="a2" />
-                  <FieldArrows x1={340} x2={440} marker="a2" />
-                  <text x="70" y="178" fill={FIELD} fontSize="15" textAnchor="middle" fontStyle="italic">E</text>
-                  <rect x="160" y="45" width="140" height="100" rx="10" fill="#1b2436" stroke={MUTED} strokeWidth="2" />
-                  <g fill={MINUS} fontSize="17" textAnchor="middle" fontWeight="700">
-                    <text x="178" y="78">−</text><text x="178" y="103">−</text><text x="178" y="128">−</text>
-                  </g>
-                  <g fill={PLUS} fontSize="17" textAnchor="middle" fontWeight="700">
-                    <text x="283" y="78">+</text><text x="283" y="103">+</text><text x="283" y="128">+</text>
-                  </g>
-                  <line x1="278" y1="95" x2="185" y2="95" stroke={INNER} strokeWidth="3" markerEnd="url(#a2g)" />
-                  <text x="232" y="88" fill={INNER} fontSize="14" textAnchor="middle" fontStyle="italic">E*</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rovnováha: E = 0',
-              caption: (
-                <>
-                  Náboje se přesouvají <b>jen do chvíle</b>, než vnitřní pole přesně vyruší vnější:{' '}
-                  <M>{'\\vec E_1 + \\vec E_2 = \\vec 0'}</M>. Pak už nic nepohání — <b>uvnitř je
-                  nulové pole</b> (elektrický stín). Náboj sedí <b>na povrchu</b>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 460 190" className="svg-fig">
-                  <defs><Arrow id="a3" color={FIELD} /></defs>
-                  <FieldArrows x1={20} x2={120} marker="a3" />
-                  <FieldArrows x1={340} x2={440} marker="a3" />
-                  <text x="70" y="178" fill={FIELD} fontSize="15" textAnchor="middle" fontStyle="italic">E</text>
-                  <rect x="160" y="45" width="140" height="100" rx="10" fill="#102218" stroke={INNER} strokeWidth="2" />
-                  <g fill={MINUS} fontSize="17" textAnchor="middle" fontWeight="700">
-                    <text x="178" y="78">−</text><text x="178" y="103">−</text><text x="178" y="128">−</text>
-                  </g>
-                  <g fill={PLUS} fontSize="17" textAnchor="middle" fontWeight="700">
-                    <text x="283" y="78">+</text><text x="283" y="103">+</text><text x="283" y="128">+</text>
-                  </g>
-                  <text x="230" y="92" fill={INNER} fontSize="15" textAnchor="middle" fontWeight="700">E = 0</text>
-                  <text x="230" y="112" fill={MUTED} fontSize="12" textAnchor="middle">elektrický stín</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 190"
+          captions={[
+            <>
+              Vodič vložíme do vnějšího pole <M>{'\\vec E'}</M> (modré šipky). Uvnitř jsou volné
+              elektrony, zatím rovnoměrně rozmístěné.
+            </>,
+            <>
+              Pole tlačí na volné náboje: záporné putují proti směru <M>{'\\vec E'}</M> (doleva),
+              takže <b>na levé stěně přebydou „−"</b> a <b>na pravé „+"</b>. Vzniká nové, vnitřní
+              pole <M>{'\\vec E^{*}'}</M> (zelené) mířící <b>proti</b> vnějšímu.
+            </>,
+            <>
+              Náboje se přesouvají <b>jen do chvíle</b>, než vnitřní pole přesně vyruší vnější:{' '}
+              <M>{'\\vec E_1 + \\vec E_2 = \\vec 0'}</M>. Pak už nic nepohání — <b>uvnitř je
+              nulové pole</b> (elektrický stín). Náboj sedí <b>na povrchu</b>.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="ce-fld" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FIELD} /></marker>
+            <marker id="ce-grn" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={INNER} /></marker>
+          </defs>
+
+          {/* vnější pole E — modré šipky vlevo i vpravo (statické) */}
+          <g stroke={FIELD} strokeWidth={3}>
+            <line x1={20} y1={40} x2={120} y2={40} markerEnd="url(#ce-fld)" />
+            <line x1={20} y1={90} x2={120} y2={90} markerEnd="url(#ce-fld)" />
+            <line x1={20} y1={140} x2={120} y2={140} markerEnd="url(#ce-fld)" />
+            <line x1={340} y1={40} x2={440} y2={40} markerEnd="url(#ce-fld)" />
+            <line x1={340} y1={90} x2={440} y2={90} markerEnd="url(#ce-fld)" />
+            <line x1={340} y1={140} x2={440} y2={140} markerEnd="url(#ce-fld)" />
+          </g>
+          <text x={70} y={178} fill={FIELD} fontSize="15" textAnchor="middle" fontStyle="italic">E</text>
+          <text x={230} y={35} fill={MUTED} fontSize="13" textAnchor="middle">vodič</text>
+
+          {/* vodič — v rovnováze (krok 3) zezelená: vnitřek i okraj */}
+          <ARect x={160} y={45} width={140} height={100} rx={10}
+            fill={['#1b2436', '#1b2436', '#102218']}
+            stroke={[MUTED, MUTED, INNER]} strokeWidth={2} />
+
+          {/* tři elektrony, které se posunou na levou stěnu (a zmodrají) */}
+          <AText x={[200, 178, 178]} y={[78, 78, 78]} fill={[TXT, MINUS, MINUS]} fontSize="17" textAnchor="middle" fontWeight="700">−</AText>
+          <AText x={[200, 178, 178]} y={[101, 103, 103]} fill={[TXT, MINUS, MINUS]} fontSize="17" textAnchor="middle" fontWeight="700">−</AText>
+          <AText x={[200, 178, 178]} y={[124, 128, 128]} fill={[TXT, MINUS, MINUS]} fontSize="17" textAnchor="middle" fontWeight="700">−</AText>
+
+          {/* tři elektrony z pravé části: v kroku 1 se „přesypou" doleva a zmizí */}
+          <AText x={[260, 205, 205]} y={[78, 78, 78]} fill={TXT} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>−</AText>
+          <AText x={[260, 205, 205]} y={[101, 103, 103]} fill={TXT} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>−</AText>
+          <AText x={[260, 205, 205]} y={[124, 128, 128]} fill={TXT} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>−</AText>
+
+          {/* odkryté kladné náboje na pravé stěně (objeví se v kroku 1) */}
+          <AText x={[265, 283, 283]} y={[78, 78, 78]} fill={PLUS} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[0, 1, 1]}>+</AText>
+          <AText x={[265, 283, 283]} y={[101, 103, 103]} fill={PLUS} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[0, 1, 1]}>+</AText>
+          <AText x={[265, 283, 283]} y={[124, 128, 128]} fill={PLUS} fontSize="17" textAnchor="middle" fontWeight="700" opacity={[0, 1, 1]}>+</AText>
+
+          {/* vnitřní pole E* (jen krok 2, kdy náboje ještě tečou) */}
+          <ALine x1={278} y1={95} x2={185} y2={95} stroke={INNER} strokeWidth={3} markerEnd="url(#ce-grn)" opacity={[0, 1, 0]} />
+          <AText x={232} y={84} fill={INNER} fontSize="14" textAnchor="middle" fontStyle="italic" opacity={[0, 1, 0]}>E*</AText>
+
+          {/* rovnováha (krok 3) */}
+          <AText x={230} y={92} fill={INNER} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>E = 0</AText>
+          <AText x={230} y={112} fill={MUTED} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>elektrický stín</AText>
+        </StepScene>
 
         <p>
           Hotový vodič se proto chová jako <Term id="faradayova-klec">Faradayova klec</Term>: vnější pole se zvenčí

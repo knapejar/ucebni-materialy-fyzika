@@ -109,17 +109,17 @@ export default function Lesson_1_1() {
           <AText x={210} y={40} fill={TXT} fontSize="15" textAnchor="middle" opacity={[1, 0, 0]}>klid: p = 0</AText>
 
           {/* krok 2: akce / reakce */}
-          <ALine x1={318} y1={136} x2={392} y2={136} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
-          <AText x={356} y={120} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>akce</AText>
-          <ALine x1={150} y1={100} x2={78} y2={100} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
-          <AText x={112} y={90} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>reakce</AText>
+          <ALine x1={320} y1={136} x2={388} y2={136} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
+          <AText x={354} y={117} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>akce</AText>
+          <ALine x1={150} y1={102} x2={86} y2={102} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
+          <AText x={118} y={84} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>reakce</AText>
 
           {/* krok 3: hybnosti + součet 0 */}
-          <ALine x1={300} y1={62} x2={372} y2={62} stroke={BALL} strokeWidth={5} markerEnd="url(#arB)" opacity={[0, 0, 1]} />
-          <AText x={336} y={50} fill={BALL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (koule)</AText>
-          <ALine x1={150} y1={62} x2={88} y2={62} stroke={STEEL} strokeWidth={5} markerEnd="url(#arS)" opacity={[0, 0, 1]} />
-          <AText x={119} y={50} fill={STEEL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (dělo)</AText>
-          <AText x={210} y={152} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>součet = 0</AText>
+          <ALine x1={314} y1={98} x2={380} y2={98} stroke={BALL} strokeWidth={4} markerEnd="url(#arB)" opacity={[0, 0, 1]} />
+          <AText x={348} y={80} fill={BALL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (koule)</AText>
+          <ALine x1={150} y1={98} x2={86} y2={98} stroke={STEEL} strokeWidth={4} markerEnd="url(#arS)" opacity={[0, 0, 1]} />
+          <AText x={118} y={80} fill={STEEL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (dělo)</AText>
+          <AText x={210} y={42} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>součet = 0</AText>
         </StepScene>
       </Section>
 

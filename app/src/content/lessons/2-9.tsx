@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, APath, ARect, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.9'
 
@@ -131,94 +131,74 @@ export default function Lesson() {
           míří podél pole — pak už není co otáčet).
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak se smyčka natáčí (klikej Další →)"
-          steps={[
-            {
-              label: 'rozbor sil',
-              caption: (
-                <>
-                  Na čtyři strany působí síly. Dvě <span style={{ color: FORCE }}>(F₂, F₄)</span> míří
-                  od sebe, leží na stejné přímce → jen smyčku napínají, <b>navzájem se vyruší</b>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 390 210" className="svg-fig">
-                  <Defs />
-                  <FieldLines rows={[40, 105, 170]} x1="25" x2="360" />
-                  <text x="335" y="30" fill={ACCENT} fontSize="14" fontStyle="italic">B</text>
-                  <rect x="150" y="70" width="90" height="70" fill="none" stroke={WIRE} strokeWidth="3" />
-                  <text x="190" y="110" fill={WIRE} fontSize="13" fontStyle="italic" textAnchor="middle">I</text>
-                  {/* F2 nahoru z horni hrany */}
-                  <line x1="195" y1="70" x2="195" y2="38" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-force)" />
-                  <text x="205" y="50" fill={FORCE} fontSize="13" fontStyle="italic">F₂</text>
-                  {/* F4 dolu z dolni hrany */}
-                  <line x1="195" y1="140" x2="195" y2="172" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-force)" />
-                  <text x="205" y="165" fill={FORCE} fontSize="13" fontStyle="italic">F₄</text>
-                  <text x="70" y="200" fill={TXT} fontSize="12">F₂ = −F₄ → vyruší se (jen deformují)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'dvojice sil',
-              caption: (
-                <>
-                  Druhé dvě síly <span style={{ color: FORCE }}>(F₁, F₃)</span> jsou taky stejně velké
-                  a opačné, ale <b>působí v různé výšce</b> → tvoří <b>dvojici sil</b>, která smyčku
-                  roztáčí. To je ten moment <M>{'|\\vec M| = I\\,S\\,B\\,\\sin\\alpha'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 390 210" className="svg-fig">
-                  <Defs />
-                  <FieldLines rows={[40, 105, 170]} x1="25" x2="360" />
-                  <text x="335" y="30" fill={ACCENT} fontSize="14" fontStyle="italic">B</text>
-                  {/* smycka videna z boku jako sikma usecka */}
-                  <line x1="150" y1="150" x2="240" y2="70" stroke={WIRE} strokeWidth="4" />
-                  <circle cx="150" cy="150" r="4" fill={WIRE} />
-                  <circle cx="240" cy="70" r="4" fill={WIRE} />
-                  {/* normala S */}
-                  <line x1="195" y1="110" x2="150" y2="62" stroke={MOMENT} strokeWidth="3" markerEnd="url(#ar-mom)" />
-                  <text x="150" y="55" fill={MOMENT} fontSize="13" fontStyle="italic">S (normála)</text>
-                  {/* F1 dolu na spodnim konci */}
-                  <line x1="150" y1="150" x2="150" y2="185" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-force)" />
-                  <text x="125" y="180" fill={FORCE} fontSize="13" fontStyle="italic">F₁</text>
-                  {/* F3 nahoru na hornim konci */}
-                  <line x1="240" y1="70" x2="240" y2="40" stroke={FORCE} strokeWidth="4" markerEnd="url(#ar-force)" />
-                  <text x="248" y="55" fill={FORCE} fontSize="13" fontStyle="italic">F₃</text>
-                  {/* rotacni sipka */}
-                  <path d="M280,150 A40,40 0 0 1 300,95" fill="none" stroke={MOMENT} strokeWidth="2.5" markerEnd="url(#ar-mom)" />
-                  <text x="300" y="135" fill={MOMENT} fontSize="13">otáčí</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rovnováha',
-              caption: (
-                <>
-                  Smyčka se otáčí, dokud normála (a tím i magnetický moment) nemíří <b>podél pole</b>.
-                  Pak je <M>{'\\alpha = 0'}</M>, moment je nulový a smyčka stojí v rovnováze. <b>Rovina
-                  smyčky je pak kolmá k B.</b>
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 390 210" className="svg-fig">
-                  <Defs />
-                  <FieldLines rows={[40, 105, 170]} x1="25" x2="360" />
-                  <text x="335" y="30" fill={ACCENT} fontSize="14" fontStyle="italic">B</text>
-                  {/* smycka z boku: SVISLA usecka => rovina kolma na B */}
-                  <line x1="195" y1="60" x2="195" y2="150" stroke={WIRE} strokeWidth="4" />
-                  <circle cx="195" cy="60" r="4" fill={WIRE} />
-                  <circle cx="195" cy="150" r="4" fill={WIRE} />
-                  {/* magneticky moment m podel pole (doprava) */}
-                  <line x1="195" y1="105" x2="285" y2="105" stroke={MOMENT} strokeWidth="4" markerEnd="url(#ar-mom)" />
-                  <text x="235" y="96" fill={MOMENT} fontSize="14" fontStyle="italic">m ∥ B</text>
-                  <text x="40" y="200" fill={TXT} fontSize="12">rovina smyčky ⊥ B, moment m ∥ B → rovnováha</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 390 220"
+          captions={[
+            <>
+              Na čtyři strany působí síly. Dvě <span style={{ color: FORCE }}>(F₂, F₄)</span> míří
+              od sebe, leží na stejné přímce → jen smyčku napínají, <b>navzájem se vyruší</b>.
+            </>,
+            <>
+              Druhé dvě síly <span style={{ color: FORCE }}>(F₁, F₃)</span> jsou taky stejně velké
+              a opačné, ale <b>působí v různé výšce</b> → tvoří <b>dvojici sil</b>, která smyčku
+              roztáčí. To je ten moment <M>{'|\\vec M| = I\\,S\\,B\\,\\sin\\alpha'}</M>.
+            </>,
+            <>
+              Smyčka se otáčí, dokud normála (a tím i magnetický moment) nemíří <b>podél pole</b>.
+              Pak je <M>{'\\alpha = 0'}</M>, moment je nulový a smyčka stojí v rovnováze. <b>Rovina
+              smyčky je pak kolmá k B.</b>
+            </>,
           ]}
-        />
+        >
+          <Defs />
+          {/* pole B (statické indukční čáry) */}
+          <g stroke={ACCENT} strokeWidth="2" opacity="0.7">
+            <line x1="25" y1="45" x2="360" y2="45" markerEnd="url(#ar-acc)" />
+            <line x1="25" y1="110" x2="360" y2="110" markerEnd="url(#ar-acc)" />
+            <line x1="25" y1="175" x2="360" y2="175" markerEnd="url(#ar-acc)" />
+          </g>
+          <AText x={336} y={32} fill={ACCENT} fontSize="14" fontStyle="italic" opacity={1}>B</AText>
+
+          {/* ——— KROK 1: smyčka čelně jako obdélník, F2 nahoru / F4 dolů (vyruší se) ——— */}
+          <ARect x={150} y={75} width={90} height={70} fill="none" stroke={WIRE} strokeWidth={3} opacity={[1, 0, 0]} />
+          <AText x={195} y={114} fill={WIRE} fontSize="13" fontStyle="italic" textAnchor="middle" opacity={[1, 0, 0]}>I</AText>
+          <ALine x1={195} y1={75} x2={195} y2={40} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[1, 0, 0]} />
+          <AText x={208} y={56} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[1, 0, 0]}>F₂</AText>
+          <ALine x1={195} y1={145} x2={195} y2={180} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[1, 0, 0]} />
+          <AText x={208} y={172} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[1, 0, 0]}>F₄</AText>
+
+          {/* ——— smyčka z boku jako úsečka — rotuje z nakloněné (krok 2) do svislé (krok 3) ——— */}
+          {/* dolní konec úsečky */}
+          <ACircle cx={[150, 150, 175]} cy={[150, 150, 60]} r={4} fill={WIRE} opacity={[0, 1, 1]} />
+          {/* horní konec úsečky */}
+          <ACircle cx={[240, 240, 175]} cy={[70, 70, 160]} r={4} fill={WIRE} opacity={[0, 1, 1]} />
+          {/* tělo úsečky (smyčka z boku) */}
+          <ALine x1={[150, 150, 175]} y1={[150, 150, 60]} x2={[240, 240, 175]} y2={[70, 70, 160]} stroke={WIRE} strokeWidth={4} opacity={[0, 1, 1]} />
+
+          {/* normála S (krok 2) — kolmá na úsečku, mizí v kroku 3 */}
+          <ALine x1={195} y1={110} x2={150} y2={62} stroke={MOMENT} strokeWidth={3} markerEnd="url(#ar-mom)" opacity={[0, 1, 0]} />
+          <AText x={150} y={54} fill={MOMENT} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>S (normála)</AText>
+
+          {/* F1 dolů na spodním konci (krok 2) */}
+          <ALine x1={150} y1={150} x2={150} y2={188} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[0, 1, 0]} />
+          <AText x={122} y={182} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>F₁</AText>
+          {/* F3 nahoru na horním konci (krok 2) */}
+          <ALine x1={240} y1={70} x2={240} y2={36} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[0, 1, 0]} />
+          <AText x={250} y={52} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>F₃</AText>
+
+          {/* rotační šipka „otáčí" (krok 2) */}
+          <APath d="M285,150 A42,42 0 0 1 305,96" fill="none" stroke={MOMENT} strokeWidth={2.5} markerEnd="url(#ar-mom)" opacity={[0, 1, 0]} />
+          <AText x={300} y={140} fill={MOMENT} fontSize="13" opacity={[0, 1, 0]}>otáčí</AText>
+
+          {/* ——— KROK 3: magnetický moment m podél pole (doprava) ——— */}
+          <ALine x1={175} y1={110} x2={258} y2={110} stroke={MOMENT} strokeWidth={4} markerEnd="url(#ar-mom)" opacity={[0, 0, 1]} />
+          <AText x={205} y={95} fill={MOMENT} fontSize="14" fontStyle="italic" textAnchor="middle" opacity={[0, 0, 1]}>m ∥ B</AText>
+
+          {/* spodní popisek (mění se podle kroku) */}
+          <AText x={195} y={210} fill={TXT} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>F₂ = −F₄ → vyruší se (jen deformují)</AText>
+          <AText x={195} y={210} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>rovina smyčky ⊥ B, moment m ∥ B → rovnováha</AText>
+        </StepScene>
       </Section>
 
       <Section title="Magnetický moment — co to je">

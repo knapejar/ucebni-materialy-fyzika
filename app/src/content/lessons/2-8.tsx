@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '2.8'
 
@@ -44,8 +44,8 @@ function Defs({ color, name = 'ar' }: { color: string; name?: string }) {
   )
 }
 
-/* Cívka s žárovkou (jednoduchá smyčka). */
-function Loop({ glow }: { glow: boolean }) {
+/* Cívka s nesvítící žárovkou (statický skelet drátu). Glow se animuje zvlášť. */
+function Coil() {
   return (
     <g>
       {/* závit / smyčka */}
@@ -53,18 +53,18 @@ function Loop({ glow }: { glow: boolean }) {
       {/* drát dolů k žárovce */}
       <path d="M120,168 L120,196 L70,196" fill="none" stroke={MUTED} strokeWidth="3" />
       <path d="M120,52 L120,30 L70,30 L70,182" fill="none" stroke={MUTED} strokeWidth="3" />
-      {/* žárovka */}
-      <circle cx="70" cy="196" r="14" fill={glow ? '#fde047' : 'none'} stroke={glow ? '#fde047' : MUTED} strokeWidth="2" />
-      <line x1="61" y1="187" x2="79" y2="205" stroke={glow ? '#854d0e' : MUTED} strokeWidth="2" />
-      <line x1="79" y1="187" x2="61" y2="205" stroke={glow ? '#854d0e' : MUTED} strokeWidth="2" />
+      {/* žárovka (zhasnutý obrys) */}
+      <circle cx="70" cy="196" r="14" fill="none" stroke={MUTED} strokeWidth="2" />
+      <line x1="61" y1="187" x2="79" y2="205" stroke={MUTED} strokeWidth="2" />
+      <line x1="79" y1="187" x2="61" y2="205" stroke={MUTED} strokeWidth="2" />
     </g>
   )
 }
 
-/* Tyčový magnet N–S na pozici x. */
-function Magnet({ x }: { x: number }) {
+/* Tyčový magnet N–S v lokálním počátku (posun řeší AGroup). */
+function MagnetBody() {
   return (
-    <g transform={`translate(${x},0)`}>
+    <g>
       <rect x="0" y="88" width="70" height="44" rx="4" fill="#1e293b" stroke={MUTED} strokeWidth="1.5" />
       <rect x="0" y="88" width="35" height="44" rx="4" fill={NPOLE} opacity="0.85" />
       <rect x="35" y="88" width="35" height="44" fill={SPOLE} opacity="0.85" />
@@ -122,47 +122,40 @@ export default function Lesson_2_8() {
           (přiblížíš magnet, otočíš smyčku…), naskočí napětí.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Pohyb magnetu k cívce indukuje napětí"
-          steps={[
-            {
-              label: 'klid',
-              caption: <>Magnet i cívka stojí. Tok <M>{'\\Phi'}</M> se nemění → <b>žádné napětí, žárovka nesvítí</b>.</>,
-              content: (
-                <svg viewBox="0 0 360 230" className="svg-fig">
-                  <Loop glow={false} />
-                  <Magnet x={250} />
-                  <text x="180" y="225" fill={MUTED} fontSize="14" textAnchor="middle">Φ = konst. → ε = 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'přibližuji',
-              caption: <>Přibližuji magnet → tok přes cívku <b>roste</b> → indukuje se napětí, žárovka <b>svítí</b>. Čím rychleji, tím víc.</>,
-              content: (
-                <svg viewBox="0 0 360 230" className="svg-fig">
-                  <Defs color={ACC} />
-                  <Loop glow={true} />
-                  <Magnet x={210} />
-                  <line x1="205" y1="60" x2="160" y2="60" stroke={ACC} strokeWidth="4" markerEnd="url(#ar)" />
-                  <text x="180" y="50" fill={ACC} fontSize="14" textAnchor="middle">pohyb</text>
-                  <text x="180" y="225" fill={ACC} fontSize="14" textAnchor="middle">Φ roste → ε ≠ 0</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'zase klid',
-              caption: <>Magnet zastavím (i když je blízko). Tok je zase <b>konstantní</b> → napětí mizí, žárovka zhasne. Vidíš: rozhoduje <b>změna</b>, ne samotná blízkost.</>,
-              content: (
-                <svg viewBox="0 0 360 230" className="svg-fig">
-                  <Loop glow={false} />
-                  <Magnet x={170} />
-                  <text x="200" y="225" fill={MUTED} fontSize="14" textAnchor="middle">Φ = konst. → ε = 0</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 230"
+          captions={[
+            <>Magnet i cívka stojí. Tok <M>{'\\Phi'}</M> se nemění → <b>žádné napětí, žárovka nesvítí</b>.</>,
+            <>Přibližuji magnet → tok přes cívku <b>roste</b> → indukuje se napětí, žárovka <b>svítí</b>. Čím rychleji, tím víc.</>,
+            <>Magnet zastavím (i když je blízko). Tok je zase <b>konstantní</b> → napětí mizí, žárovka zhasne. Vidíš: rozhoduje <b>změna</b>, ne samotná blízkost.</>,
           ]}
-        />
+        >
+          {/* šipka pohybu (akcent) */}
+          <defs>
+            <marker id="arMove" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACC} /></marker>
+          </defs>
+
+          {/* statická cívka s žárovkou */}
+          <Coil />
+
+          {/* žárovka SVÍTÍ jen v kroku 2 (změna toku) — překryv přes zhasnutý obrys */}
+          <ACircle cx={70} cy={196} r={14} fill="#fde047" stroke="#fde047" strokeWidth={2} opacity={[0, 1, 0]} />
+          <ALine x1={61} y1={187} x2={79} y2={205} stroke="#854d0e" strokeWidth={2} opacity={[0, 1, 0]} />
+          <ALine x1={79} y1={187} x2={61} y2={205} stroke="#854d0e" strokeWidth={2} opacity={[0, 1, 0]} />
+
+          {/* magnet: daleko (krok 1) → přijede blíž (krok 2) → stojí blízko (krok 3) */}
+          <AGroup x={[250, 170, 170]}><MagnetBody /></AGroup>
+
+          {/* šipka pohybu + popisek (jen krok 2), nad magnetem, mimo grafiku */}
+          <ALine x1={246} y1={66} x2={188} y2={66} stroke={ACC} strokeWidth={3} markerEnd="url(#arMove)" opacity={[0, 1, 0]} />
+          <AText x={217} y={50} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>pohyb</AText>
+
+          {/* stavové popisky dole (každý krok jiný, prolnutí) */}
+          <AText x={205} y={222} fill={MUTED} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>Φ = konst. → ε = 0</AText>
+          <AText x={205} y={222} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>Φ roste → ε ≠ 0</AText>
+          <AText x={205} y={222} fill={MUTED} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>Φ = konst. → ε = 0</AText>
+        </StepScene>
       </Section>
 
       <Section title="Faradayův zákon — vzoreček, který musí padnout">
@@ -200,6 +193,9 @@ export default function Lesson_2_8() {
         <Figure caption="Tři páky, kterými se dá tok Φ = B·S·cos α změnit: síla pole B, velikost plochy S, nebo úhel α.">
           <svg viewBox="0 0 420 150" className="svg-fig">
             <Defs color={ACC} />
+            <defs>
+              <marker id="arRot" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill={MUTED} /></marker>
+            </defs>
             {/* 1) změna B */}
             <g transform="translate(0,0)">
               <rect x="20" y="50" width="40" height="50" rx="4" fill="none" stroke={ACC} strokeWidth="2.5" />
@@ -216,7 +212,8 @@ export default function Lesson_2_8() {
             {/* 3) změna α */}
             <g transform="translate(290,0)">
               <rect x="30" y="50" width="14" height="50" rx="3" fill="none" stroke={ACC} strokeWidth="2.5" transform="rotate(25 37 75)" />
-              <path d="M70,75 a18,18 0 0 0 -18,-18" fill="none" stroke={MUTED} strokeWidth="2" markerEnd="url(#ar)" />
+              {/* otáčecí šipka vpravo od rámečku, mimo grafiku */}
+              <path d="M62,96 a26,26 0 0 0 8,-44" fill="none" stroke={MUTED} strokeWidth="2" markerEnd="url(#arRot)" />
               <text x="50" y="125" fill={TXT} fontSize="13" textAnchor="middle">3) měním α</text>
             </g>
           </svg>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, APath, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.2'
 

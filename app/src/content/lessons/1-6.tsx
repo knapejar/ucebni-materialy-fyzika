@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '1.6'
 
@@ -139,80 +139,45 @@ export default function Lesson_1_6() {
         </p>
         <MB>{'v_{\\max} = \\dfrac{mg}{kS}'}</MB>
 
-        <StepFigure
+        <StepScene
           title="Jak vzniká mezní rychlost"
-          steps={[
-            {
-              label: 'start',
-              caption: (
-                <>
-                  Na začátku je rychlost malá → odpor <M>{'F_o'}</M> skoro nulový. Vyhrává tíha,
-                  těleso zrychluje (skoro jako volný pád).
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <defs>
-                    <Arrow id="bGrav1" color={GRAV} />
-                    <Arrow id="bNorm1" color={NORM} />
-                  </defs>
-                  <circle cx="180" cy="70" r="16" fill={PLANE} opacity="0.6" />
-                  <line x1="180" y1="86" x2="180" y2="160" stroke={GRAV} strokeWidth="4" markerEnd="url(#bGrav1)" />
-                  <text x="188" y="135" fill={GRAV} fontSize="14" fontWeight="700">F_G (tíha)</text>
-                  <line x1="180" y1="54" x2="180" y2="40" stroke={NORM} strokeWidth="3" markerEnd="url(#bNorm1)" />
-                  <text x="188" y="40" fill={NORM} fontSize="13">F_o ≈ 0</text>
-                  <text x="180" y="188" fill={ACC} fontSize="14" textAnchor="middle" fontWeight="700">zrychluje ↓</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'odpor roste',
-              caption: (
-                <>
-                  Čím rychleji padá, tím větší je odpor <M>{'F_o = kSv'}</M>. Výslednice (a tedy i
-                  zrychlení) se zmenšuje — těleso zrychluje pořád pomaleji.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <defs>
-                    <Arrow id="bGrav2" color={GRAV} />
-                    <Arrow id="bNorm2" color={NORM} />
-                  </defs>
-                  <circle cx="180" cy="70" r="16" fill={PLANE} opacity="0.6" />
-                  <line x1="180" y1="86" x2="180" y2="160" stroke={GRAV} strokeWidth="4" markerEnd="url(#bGrav2)" />
-                  <text x="188" y="135" fill={GRAV} fontSize="14" fontWeight="700">F_G</text>
-                  <line x1="180" y1="54" x2="180" y2="14" stroke={NORM} strokeWidth="4" markerEnd="url(#bNorm2)" />
-                  <text x="188" y="30" fill={NORM} fontSize="14" fontWeight="700">F_o roste</text>
-                  <text x="180" y="188" fill={ACC} fontSize="14" textAnchor="middle" fontWeight="700">zrychluje pomaleji</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'mezní rychlost',
-              caption: (
-                <>
-                  Odpor se vyrovná tíze: <M>{'F_o = F_G'}</M>. Výslednice = 0 → zrychlení = 0.
-                  Těleso dál padá <b>konstantní</b> mezní rychlostí <M>{'v_{\\max} = mg/(kS)'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 360 200" className="svg-fig">
-                  <defs>
-                    <Arrow id="bGrav3" color={GRAV} />
-                    <Arrow id="bNorm3" color={NORM} />
-                  </defs>
-                  <circle cx="180" cy="100" r="16" fill={ACC} opacity="0.85" />
-                  <line x1="180" y1="116" x2="180" y2="170" stroke={GRAV} strokeWidth="4" markerEnd="url(#bGrav3)" />
-                  <text x="188" y="150" fill={GRAV} fontSize="14" fontWeight="700">F_G</text>
-                  <line x1="180" y1="84" x2="180" y2="30" stroke={NORM} strokeWidth="4" markerEnd="url(#bNorm3)" />
-                  <text x="188" y="50" fill={NORM} fontSize="14" fontWeight="700">F_o</text>
-                  <text x="180" y="192" fill={TXT} fontSize="14" textAnchor="middle" fontWeight="700">v = konst. (a = 0)</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 240"
+          captions={[
+            <>
+              Na začátku je rychlost malá → odpor <M>{'F_o'}</M> skoro nulový. Vyhrává tíha,
+              těleso zrychluje (skoro jako volný pád).
+            </>,
+            <>
+              Čím rychleji padá, tím větší je odpor <M>{'F_o = kSv'}</M>. Výslednice (a tedy i
+              zrychlení) se zmenšuje — těleso zrychluje pořád pomaleji.
+            </>,
+            <>
+              Odpor se vyrovná tíze: <M>{'F_o = F_G'}</M>. Výslednice = 0 → zrychlení = 0.
+              Těleso dál padá <b>konstantní</b> mezní rychlostí <M>{'v_{\\max} = mg/(kS)'}</M>.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <Arrow id="bGrav" color={GRAV} />
+            <Arrow id="bNorm" color={NORM} />
+          </defs>
+
+          {/* kulička padá dolů (cy roste) a v posledním kroku zezlátne (mezní rychlost) */}
+          <ACircle cx={120} cy={[58, 92, 128]} r={15} fill={[PLANE, PLANE, ACC]} opacity={[0.6, 0.6, 0.9]} />
+
+          {/* F_G (tíha) — svisle dolů, konstantní délka, jede s kuličkou */}
+          <ALine x1={120} y1={[73, 107, 143]} x2={120} y2={[150, 184, 220]} stroke={GRAV} strokeWidth={4} markerEnd="url(#bGrav)" />
+          <AText x={138} y={[120, 154, 190]} fill={GRAV} fontSize="15" fontWeight="700">F_G</AText>
+
+          {/* F_o (odpor) — svisle nahoru, roste od skoro nuly po délku tíhy */}
+          <ALine x1={120} y1={[43, 77, 113]} x2={120} y2={[30, 24, 35]} stroke={NORM} strokeWidth={[3, 4, 4]} markerEnd="url(#bNorm)" />
+          <AText x={138} y={[40, 48, 70]} fill={NORM} fontSize="14" fontWeight="700" opacity={[0, 1, 1]}>F_o</AText>
+          <AText x={138} y={40} fill={NORM} fontSize="14" fontWeight="700" opacity={[1, 0, 0]}>F_o ≈ 0</AText>
+
+          {/* stavový popisek dole */}
+          <AText x={120} y={236} fill={ACC} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[1, 1, 0]}>zrychluje ↓</AText>
+          <AText x={120} y={236} fill={TXT} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>v = konst. (a = 0)</AText>
+        </StepScene>
 
         <p>
           Praktický důsledek: <b>těžší těleso „přepere" odpor snáz</b>. Pustíš-li z okna cihlu a
@@ -250,24 +215,25 @@ export default function Lesson_1_6() {
         </p>
 
         <Figure caption="Okamžitá rychlost jako limita: čím kratší úsek Δt kolem bodu vezmeš, tím přesněji vystihneš rychlost přesně v tom bodě. V limitě Δt → 0 z průměru vznikne okamžitá hodnota.">
-          <svg viewBox="0 0 380 200" className="svg-fig">
+          <svg viewBox="0 0 380 210" className="svg-fig">
             <defs>
-              <Arrow id="cAcc" color={ACC} />
+              <Arrow id="cAcc" color={MUTED} />
             </defs>
             {/* osy */}
-            <line x1="40" y1="170" x2="360" y2="170" stroke={MUTED} strokeWidth="1.5" markerEnd="url(#cAcc)" />
-            <line x1="40" y1="170" x2="40" y2="20" stroke={MUTED} strokeWidth="1.5" />
-            <text x="352" y="188" fill={TXT} fontSize="13">t</text>
-            <text x="20" y="30" fill={TXT} fontSize="13">r</text>
+            <line x1="40" y1="178" x2="362" y2="178" stroke={MUTED} strokeWidth="1.5" markerEnd="url(#cAcc)" />
+            <line x1="40" y1="178" x2="40" y2="18" stroke={MUTED} strokeWidth="1.5" />
+            <text x="356" y="198" fill={TXT} fontSize="13">t</text>
+            <text x="22" y="28" fill={TXT} fontSize="13">r</text>
             {/* křivka dráhy r(t) */}
-            <path d="M40,165 Q150,150 230,95 T350,30" fill="none" stroke={PLANE} strokeWidth="2.5" />
+            <path d="M40,172 Q150,158 230,100 T350,34" fill="none" stroke={PLANE} strokeWidth="2.5" />
             {/* dlouhá sečna (průměrná rychlost přes velký interval) */}
-            <line x1="90" y1="160" x2="320" y2="48" stroke={MUTED} strokeWidth="1.6" strokeDasharray="5,4" />
-            <text x="120" y="150" fill={MUTED} fontSize="12">velké Δt → průměrná</text>
+            <line x1="80" y1="168" x2="318" y2="50" stroke={MUTED} strokeWidth="1.6" strokeDasharray="5,4" />
+            <text x="56" y="44" fill={MUTED} fontSize="12">velké Δt → průměrná (sečna)</text>
             {/* tečna v bodě (okamžitá rychlost) */}
-            <line x1="170" y1="155" x2="290" y2="55" stroke={ACC} strokeWidth="3" />
-            <circle cx="230" cy="95" r="4.5" fill={ACC} />
-            <text x="236" y="92" fill={ACC} fontSize="12" fontWeight="700">Δt → 0 → okamžitá (tečna)</text>
+            <line x1="172" y1="160" x2="292" y2="60" stroke={ACC} strokeWidth="3" />
+            <circle cx="230" cy="100" r="4.5" fill={ACC} />
+            <text x="238" y="132" fill={ACC} fontSize="12" fontWeight="700">Δt → 0 → okamžitá</text>
+            <text x="238" y="148" fill={ACC} fontSize="12" fontWeight="700">(tečna v bodě)</text>
           </svg>
         </Figure>
       </Section>
