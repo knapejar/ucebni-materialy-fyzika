@@ -259,11 +259,29 @@ button { font-family: inherit; }
 .selfcheck__a { overflow: hidden; }
 .selfcheck__a-inner { margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: rgba(139,182,255,.08); border: 1px solid rgba(139,182,255,.25); }
 
-/* navazující lekce + footer */
-.lesson__next { margin: 26px 0; display: grid; gap: 8px; }
-.lesson__next-label { color: var(--muted); font-size: 14px; }
-.nextchip { display: block; padding: 11px 14px; border-radius: 12px; background: var(--panel); border: 1px solid var(--panel-bd); text-decoration: none; cursor: pointer; transition: all .15s; }
-.nextchip:hover { background: rgba(255,255,255,.08); transform: translateX(3px); }
+/* tlačítko Další lekce + footer */
+.lesson__nav { margin: 30px 0 6px; }
+.nextlesson {
+  display: flex; align-items: center; gap: 14px; padding: 16px 20px; border-radius: 16px;
+  text-decoration: none; cursor: pointer; transition: transform .18s, box-shadow .18s, border-color .18s;
+  background: linear-gradient(120deg, color-mix(in srgb, var(--accent) 18%, #121a34), #121a34);
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, transparent);
+}
+.nextlesson:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: 0 12px 30px rgba(0,0,0,.4), 0 0 22px color-mix(in srgb, var(--accent) 30%, transparent);
+}
+.nextlesson__txt { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.nextlesson__eyebrow { font-size: 12.5px; letter-spacing: .5px; text-transform: uppercase; color: color-mix(in srgb, var(--accent) 80%, #fff); font-weight: 700; }
+.nextlesson__name { font-size: 17px; color: var(--text); }
+.nextlesson__name b { color: var(--accent); }
+.nextlesson__arrow {
+  margin-left: auto; flex: 0 0 auto; width: 40px; height: 40px; border-radius: 50%;
+  display: grid; place-items: center; font-size: 20px; color: #0a0e1c; font-weight: 800;
+  background: var(--accent); transition: transform .18s;
+}
+.nextlesson:hover .nextlesson__arrow { transform: translateX(3px); }
 .lesson__sources code { background: rgba(255,255,255,.07); padding: 1px 6px; border-radius: 6px; margin-right: 6px; font-size: 13px; }
 .lesson__footer { display: flex; justify-content: space-between; gap: 12px; margin-top: 34px; padding-top: 18px; border-top: 1px solid var(--panel-bd); }
 

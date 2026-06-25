@@ -60,3 +60,16 @@ export function allLessons(): Lesson[] {
 export function unlockedBy(id: string): Lesson[] {
   return allLessons().filter((l) => l.prereq.includes(id))
 }
+
+// Lineární pořadí lekcí (témata po sobě, v každém lekce po sobě) — pro tlačítko „Další lekce".
+const orderedLessons: Lesson[] = themes.flatMap((t) => t.lessons)
+
+export function nextLesson(id: string): Lesson | undefined {
+  const i = orderedLessons.findIndex((l) => l.id === id)
+  return i >= 0 ? orderedLessons[i + 1] : undefined
+}
+
+export function prevLesson(id: string): Lesson | undefined {
+  const i = orderedLessons.findIndex((l) => l.id === id)
+  return i > 0 ? orderedLessons[i - 1] : undefined
+}

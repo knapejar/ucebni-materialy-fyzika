@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useParams, Navigate } from 'react-router-dom'
 import { ZoomPage, useZoom } from '../../lib/nav'
-import { getLesson, unlockedBy, type Lesson } from '../../data/course'
+import { getLesson, nextLesson, type Lesson } from '../../data/course'
 import { useProgress, markSeen } from '../../lib/progress'
 import { lessonBodies } from '../../content/lessons'
 import { ExamGoals, Callout } from './primitives'
@@ -23,7 +23,7 @@ export default function LessonView() {
   const { lesson, theme } = found
   const Body = lessonBodies[lesson.id]
   const themeNum = theme.num
-  const next = unlockedBy(lesson.id)
+  const next = nextLesson(lesson.id)
   const accent = theme.accent
 
   return (
@@ -79,17 +79,33 @@ export default function LessonView() {
             <Placeholder lesson={lesson} />
           )}
 
-          {next.length > 0 && (
-            <div className="lesson__next">
-              <span className="lesson__next-label">Tahle lekce ti odemkne:</span>
-              {next.map((l) => (
-                <a key={l.id} href={`#/lekce/${l.id}`} className="nextchip"
-                   onClick={(e) => { e.preventDefault(); zoomTo(`/lekce/${l.id}`, 'none', e) }}>
-                  <b>{l.id}</b> {l.title}
-                </a>
-              ))}
-            </div>
-          )}
+          <div className="lesson__nav">
+            {next ? (
+              <a
+                className="nextlesson"
+                href={`#/lekce/${next.id}`}
+                onClick={(e) => { e.preventDefault(); zoomTo(`/lekce/${next.id}`, 'none', e) }}
+              >
+                <span className="nextlesson__txt">
+                  <span className="nextlesson__eyebrow">Další lekce</span>
+                  <span className="nextlesson__name"><b>{next.id}</b> · {next.title}</span>
+                </span>
+                <span className="nextlesson__arrow">→</span>
+              </a>
+            ) : (
+              <a
+                className="nextlesson nextlesson--end"
+                href="#/"
+                onClick={(e) => { e.preventDefault(); zoomTo('/', 'out', e) }}
+              >
+                <span className="nextlesson__txt">
+                  <span className="nextlesson__eyebrow">🎉 Tohle byla poslední lekce</span>
+                  <span className="nextlesson__name">Zpět na mapu fyziky</span>
+                </span>
+                <span className="nextlesson__arrow">⌂</span>
+              </a>
+            )}
+          </div>
 
           <div className="lesson__footer">
             <button className="backbtn" onClick={(e) => zoomTo(`/tema/${themeNum}`, 'out', e)}>
