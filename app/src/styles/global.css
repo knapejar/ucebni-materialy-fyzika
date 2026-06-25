@@ -307,9 +307,52 @@ button { font-family: inherit; }
 .zoom-page--scroll::-webkit-scrollbar { width: 10px; }
 .zoom-page--scroll::-webkit-scrollbar-thumb { background: rgba(255,255,255,.16); border-radius: 99px; }
 
+/* ===================== PŘEHLEDOVÉ STRÁNKY (vzorečky / zkouška / rejstřík) ===================== */
+/* odkaz na lekci otevíraný v nové kartě */
+.lesslink {
+  color: var(--accent, #818cf8); text-decoration: none; white-space: nowrap;
+  border-bottom: 1px dashed color-mix(in srgb, var(--accent, #818cf8) 60%, transparent);
+  border-radius: 3px; padding: 0 1px; transition: background .15s, color .15s;
+}
+.lesslink:hover { background: color-mix(in srgb, var(--accent, #818cf8) 18%, transparent); color: #fff; }
+
+/* ---- tahák vzorečků ---- */
+.fsheet { display: grid; gap: 12px; margin: 14px 0; }
+.frow { background: var(--panel); border: 1px solid var(--panel-bd); border-radius: 12px; padding: 10px 14px 8px; }
+.frow__head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; flex-wrap: wrap; }
+.frow__name { font-weight: 700; color: var(--text); }
+.frow__head .concept, .frow__head .lesslink { font-size: 13px; flex: 0 0 auto; }
+.frow .math-block { margin: 6px 0 2px; text-align: left; }
+.frow__note { color: var(--muted); font-size: 14px; line-height: 1.5; margin-top: 4px; }
+
+/* ---- zkouškové okruhy ---- */
+.okruhy__area { font-weight: 800; font-size: 16px; margin: 20px 0 6px; color: var(--accent, #818cf8); }
+.okruhy { list-style: none; margin: 0 0 8px; padding: 0; display: grid; gap: 7px; }
+.okruhy > li { position: relative; padding: 9px 12px 9px 30px; background: var(--panel); border: 1px solid var(--panel-bd); border-radius: 10px; }
+.okruhy > li::before { content: "›"; position: absolute; left: 12px; top: 8px; color: var(--accent, #818cf8); font-weight: 800; }
+.okruhy > li .lesslink { white-space: normal; border-bottom: 0; color: var(--text); }
+.okruhy > li:hover { border-color: color-mix(in srgb, var(--accent, #818cf8) 50%, transparent); }
+.okruhy > li:hover .lesslink { color: var(--accent, #818cf8); }
+
+/* ---- rejstřík pojmů ---- */
+.cindex__jump { display: flex; flex-wrap: wrap; gap: 6px; margin: 14px 0 18px; position: sticky; top: 56px; z-index: 5;
+  background: linear-gradient(to bottom, rgba(10,14,28,.92), rgba(10,14,28,.7)); padding: 8px; border-radius: 12px; border: 1px solid var(--panel-bd); backdrop-filter: blur(6px); }
+.cindex__jump a { display: grid; place-items: center; width: 30px; height: 30px; border-radius: 8px;
+  background: var(--panel); border: 1px solid var(--panel-bd); color: var(--accent, #818cf8); text-decoration: none; font-weight: 700; font-size: 14px; }
+.cindex__jump a:hover { background: color-mix(in srgb, var(--accent, #818cf8) 22%, transparent); color: #fff; }
+.cindex { columns: 320px 2; column-gap: 22px; }
+.cindex__group { break-inside: avoid; margin-bottom: 16px; }
+.cindex__letter { font-size: 20px; margin: 0 0 8px; color: var(--accent, #818cf8); border-bottom: 1px solid var(--panel-bd); padding-bottom: 4px; scroll-margin-top: 100px; }
+.cindex__group ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 10px; }
+.cindex__item { display: flex; flex-direction: column; gap: 2px; }
+.cindex__item .concept { font-weight: 700; align-self: flex-start; }
+.cindex__lesson { font-size: 12px; color: var(--accent, #818cf8); }
+.cindex__desc { font-size: 13.5px; color: var(--muted); line-height: 1.4; }
+
 @media (max-width: 640px) {
   .mindnode-pos--lg { width: 104px; height: 104px; }
   .mindnode-pos--md { width: 84px; height: 84px; }
   .brand__sub { display: none; }
   .bar { width: 90px; }
+  .cindex { columns: 1; }
 }

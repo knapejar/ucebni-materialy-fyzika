@@ -40,6 +40,41 @@ export function Concept({ id, children }: { id: string; children: ReactNode }) {
 }
 
 /* ------------------------------------------------------------------ *
+ *  ODKAZY OTEVÍRANÉ V NOVÉ KARTĚ (pro přehledové stránky: vzorečky,
+ *  zkouška, rejstřík). Student při proklikání pojmu/lekce neztratí
+ *  rozdělanou přehledovou stránku — otevře se vedle v nové kartě.
+ * ------------------------------------------------------------------ */
+/** Hash odkaz na lekci (volitelně se zvýrazněním pojmu přes ?focus). */
+export function lessonHref(lesson: string, focus?: string): string {
+  return `#/lekce/${lesson}${focus ? `?focus=${focus}` : ''}`
+}
+/** Proklik pojmu, který se otevře v NOVÉ kartě (cílí přesně na pojem). */
+export function ConceptLink({ id, children }: { id: string; children?: ReactNode }) {
+  const c = concepts[id]
+  const text = children ?? c?.label ?? id
+  if (!c) return <span className="concept concept--pending">{text}</span>
+  return (
+    <a
+      className="concept"
+      href={lessonHref(c.lesson, id)}
+      target="_blank"
+      rel="noopener noreferrer"
+      title={c.short || c.label}
+    >
+      {text}
+    </a>
+  )
+}
+/** Obyčejný odkaz na lekci (číslo lekce) otevřený v nové kartě. */
+export function LessonLink({ lesson, focus, children }: { lesson: string; focus?: string; children: ReactNode }) {
+  return (
+    <a className="lesslink" href={lessonHref(lesson, focus)} target="_blank" rel="noopener noreferrer">
+      {children}
+    </a>
+  )
+}
+
+/* ------------------------------------------------------------------ *
  *  SEKCE
  * ------------------------------------------------------------------ */
 export function Section({ title, children }: { title: string; children: ReactNode }) {

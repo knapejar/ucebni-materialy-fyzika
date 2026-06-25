@@ -41,12 +41,14 @@ export default function LessonView() {
           <button className="backbtn" onClick={(e) => zoomTo(`/tema/${themeNum}`, 'out', e)}>
             ← {theme.title.replace(/\s*\(.*\)/, '')}
           </button>
-          <button
-            className={`donebtn ${isDone(lesson.id) ? 'is-done' : ''}`}
-            onClick={() => toggleDone(lesson.id)}
-          >
-            {isDone(lesson.id) ? '✓ Hotovo' : 'Označit jako hotové'}
-          </button>
+          {!theme.tools && (
+            <button
+              className={`donebtn ${isDone(lesson.id) ? 'is-done' : ''}`}
+              onClick={() => toggleDone(lesson.id)}
+            >
+              {isDone(lesson.id) ? '✓ Hotovo' : 'Označit jako hotové'}
+            </button>
+          )}
         </header>
 
         <article className="lesson__body">
@@ -127,12 +129,14 @@ export default function LessonView() {
             <button className="backbtn" onClick={(e) => zoomTo(`/tema/${themeNum}`, 'out', e)}>
               ← zpět na mapu tématu
             </button>
-            <button
-              className={`donebtn ${isDone(lesson.id) ? 'is-done' : ''}`}
-              onClick={() => toggleDone(lesson.id)}
-            >
-              {isDone(lesson.id) ? '✓ Hotovo' : 'Označit jako hotové'}
-            </button>
+            {!theme.tools && (
+              <button
+                className={`donebtn ${isDone(lesson.id) ? 'is-done' : ''}`}
+                onClick={() => toggleDone(lesson.id)}
+              >
+                {isDone(lesson.id) ? '✓ Hotovo' : 'Označit jako hotové'}
+              </button>
+            )}
           </div>
         </article>
       </div>

@@ -22,6 +22,8 @@ export interface Theme {
   accent: string
   accent2: string
   glow: string
+  /** true = pomocné/přehledové téma (vzorečky, zkouška, rejstřík) — nepočítá se do pokroku */
+  tools?: boolean
   lessons: Lesson[]
 }
 
@@ -31,6 +33,8 @@ export interface Course {
 
 export const course = raw as Course
 export const themes = course.themes
+/** jen obsahová témata (bez vzorečků/zkoušky/rejstříku) — pro počítání pokroku */
+export const contentThemes = themes.filter((t) => !t.tools)
 
 /** krátký název tématu (bez závorky s upřesněním) */
 export function themeShort(t: Theme): string {

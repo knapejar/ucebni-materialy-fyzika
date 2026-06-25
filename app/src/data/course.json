@@ -1051,6 +1051,61 @@
           "questions": 6
         }
       ]
+    },
+    {
+      "num": 6,
+      "title": "PŘÍPRAVA NA ZKOUŠKU",
+      "subtitle": "Není to nová látka — je to **shrnutí na poslední chvíli**: přehled všech vzorečků, zkouška nanečisto (přesně podle reálných otázek) a rejstřík pojmů. Odkazy se tu otevírají v **nové kartě**, ať neztratíš rozdělanou stránku.",
+      "accent": "#818cf8",
+      "accent2": "#a5b4fc",
+      "glow": "rgba(129,140,248,.55)",
+      "tools": true,
+      "lessons": [
+        {
+          "id": "6.1",
+          "title": "Přehled všech vzorečků",
+          "badge": null,
+          "obsah": "Tahák se všemi vzorečky z celé učebnice na jednom místě — rozdělený po tématech. U každého vzorečku je proklik (v nové kartě) na lekci, kde je vysvětlený.",
+          "goals": [],
+          "chytaky": [],
+          "prereq": [],
+          "sources": [
+            "Fyzika.html"
+          ],
+          "minutes": null,
+          "questions": null
+        },
+        {
+          "id": "6.2",
+          "title": "Zkouška nanečisto",
+          "badge": null,
+          "obsah": "Simulace zkoušky: zkouškové okruhy ke každé oblasti + krátké otázky s odpověďmi přesně podle reálných zkouškových archů. Nejdřív si zkus odpovědět, pak odkryj.",
+          "goals": [],
+          "chytaky": [],
+          "prereq": [],
+          "sources": [
+            "Q-MECH-ZS2008-web2.html",
+            "Q-FP-ZS2008-web2.html",
+            "Q-VLNENI-ZS2008-web2.html",
+            "Q-KF-ZS2008-web2.html",
+            "Q-JF-ZS2008-web2.html"
+          ],
+          "minutes": null,
+          "questions": null
+        },
+        {
+          "id": "6.3",
+          "title": "Rejstřík pojmů",
+          "badge": null,
+          "obsah": "Abecední seznam všech pojmů z učebnice. Každý odkaz tě (v nové kartě) přenese přesně na místo, kde je pojem vyložený.",
+          "goals": [],
+          "chytaky": [],
+          "prereq": [],
+          "sources": [],
+          "minutes": null,
+          "questions": null
+        }
+      ]
     }
   ]
 }

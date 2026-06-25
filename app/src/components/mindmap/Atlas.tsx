@@ -1,6 +1,6 @@
 import { useMemo } from 'react'
 import { ZoomPage, useZoom } from '../../lib/nav'
-import { themes, themeShort } from '../../data/course'
+import { themes, contentThemes, themeShort } from '../../data/course'
 import { useProgress } from '../../lib/progress'
 import MindNode from './MindNode'
 import Connectors from './Connectors'
@@ -20,8 +20,10 @@ export default function Atlas() {
     })
   }, [isDone])
 
-  const allDone = themes.flatMap((t) => t.lessons).filter((l) => isDone(l.id)).length
-  const allTotal = themes.flatMap((t) => t.lessons).length
+  // celkový pokrok počítáme jen z obsahových témat — pomocné téma (vzorečky,
+  // zkouška, rejstřík) není „lekce k naučení", tak ho do počtu nemícháme.
+  const allDone = contentThemes.flatMap((t) => t.lessons).filter((l) => isDone(l.id)).length
+  const allTotal = contentThemes.flatMap((t) => t.lessons).length
 
   return (
     <ZoomPage>
@@ -49,7 +51,7 @@ export default function Atlas() {
             key={n.t.num}
             x={n.x} y={n.y} accent={n.t.accent} size="lg" delay={0.05 + i * 0.06}
             label={<span className="tnum">{n.t.num}</span>}
-            caption={`${themeShort(n.t)} · ${n.total} lekcí`}
+            caption={n.t.tools ? 'Příprava na zkoušku' : `${themeShort(n.t)} · ${n.total} lekcí`}
             progress={n.progress}
             done={n.done === n.total}
             onClick={(ev) => zoomTo(`/tema/${n.t.num}`, 'in', ev)}
