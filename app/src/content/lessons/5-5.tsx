@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.5'
 
@@ -152,86 +152,73 @@ export default function Lesson() {
           klidně do něj pronikne (na rozdíl od fúze, kde se kladná jádra musí násilím přiblížit).
         </p>
 
-        <StepFigure
+        <StepScene
           title="Řetězová reakce krok po kroku"
-          steps={[
-            {
-              label: 'záchyt neutronu',
-              caption: (
-                <>
-                  Pomalý neutron narazí do těžkého jádra <M>{'^{235}\\mathrm{U}'}</M> a je pohlcen.
-                  Jádro tím získá přebytek energie a rozkmitá se.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 170" className="svg-fig">
-                  <Defs />
-                  <circle cx="250" cy="85" r="30" fill={HEAVY} />
-                  <text x="250" y="82" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">U-235</text>
-                  <Neutron x={70} y={85} />
-                  <line x1="84" y1="85" x2="212" y2="85" stroke={NEUT} strokeWidth="3" markerEnd="url(#ar-n)" />
-                  <text x="150" y="55" fill={TXT} fontSize="13" textAnchor="middle">neutron letí na jádro</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rozpad na 2 jádra',
-              caption: (
-                <>
-                  Jádro se rozdělí na <b>dva lehčí odštěpky</b> a vyletí <b>2–3 nové neutrony</b>.
-                  Uvolní se energie (hlavně jako pohyb odštěpků → teplo).
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 170" className="svg-fig">
-                  <Defs />
-                  {/* fragments */}
-                  <circle cx="150" cy="85" r="20" fill={LIGHT} />
-                  <circle cx="300" cy="85" r="22" fill={LIGHT} />
-                  <line x1="195" y1="80" x2="135" y2="70" stroke={TXT} strokeWidth="3" markerEnd="url(#ar-t)" />
-                  <line x1="255" y1="80" x2="318" y2="70" stroke={TXT} strokeWidth="3" markerEnd="url(#ar-t)" />
-                  {/* new neutrons */}
-                  <Neutron x={225} y={35} r={8} />
-                  <Neutron x={210} y={140} r={8} />
-                  <Neutron x={350} y={120} r={8} />
-                  <text x="225" y="100" fill={ACC} fontSize="13" textAnchor="middle" fontWeight="700">+ energie</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'lavina',
-              caption: (
-                <>
-                  Každý nový neutron může rozbít <b>další</b> jádro — a vznikne víc neutronů než na
-                  začátku. Proces se lavinovitě rozrůstá: to je <Term id="retezova-reakce">řetězová reakce</Term>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 170" className="svg-fig">
-                  <Defs />
-                  {/* gen 1 */}
-                  <circle cx="60" cy="85" r="16" fill={HEAVY} />
-                  {/* gen 2 */}
-                  <circle cx="200" cy="45" r="16" fill={HEAVY} />
-                  <circle cx="200" cy="125" r="16" fill={HEAVY} />
-                  {/* gen 3 */}
-                  <circle cx="350" cy="25" r="13" fill={HEAVY} />
-                  <circle cx="350" cy="65" r="13" fill={HEAVY} />
-                  <circle cx="350" cy="105" r="13" fill={HEAVY} />
-                  <circle cx="350" cy="145" r="13" fill={HEAVY} />
-                  {/* links */}
-                  <line x1="76" y1="80" x2="184" y2="50" stroke={NEUT} strokeWidth="2.5" markerEnd="url(#ar-n)" />
-                  <line x1="76" y1="90" x2="184" y2="120" stroke={NEUT} strokeWidth="2.5" markerEnd="url(#ar-n)" />
-                  <line x1="214" y1="40" x2="337" y2="27" stroke={NEUT} strokeWidth="2.5" markerEnd="url(#ar-n)" />
-                  <line x1="214" y1="50" x2="337" y2="63" stroke={NEUT} strokeWidth="2.5" markerEnd="url(#ar-n)" />
-                  <line x1="214" y1="120" x2="337" y2="103" stroke={NEUT} strokeWidth="2.5" markerEnd="url(#ar-n)" />
-                  <line x1="214" y1="130" x2="337" y2="143" stroke={NEUT} strokeWidth="2.5" markerEnd="url(#ar-n)" />
-                  <text x="210" y="165" fill={TXT} fontSize="12" textAnchor="middle">každá generace = víc štěpení</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 220"
+          captions={[
+            <>
+              Pomalý neutron narazí do těžkého jádra <M>{'^{235}\\mathrm{U}'}</M> a je pohlcen.
+              Jádro tím získá přebytek energie a rozkmitá se.
+            </>,
+            <>
+              Jádro se rozdělí na <b>dva lehčí odštěpky</b> a vyletí <b>2–3 nové neutrony</b>.
+              Uvolní se energie (hlavně jako pohyb odštěpků → teplo).
+            </>,
+            <>
+              Každý nový neutron může rozbít <b>další</b> jádro — a vznikne víc neutronů než na
+              začátku. Proces se lavinovitě rozrůstá: to je <Term id="retezova-reakce">řetězová reakce</Term>.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="ss-n" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={NEUT} /></marker>
+            <marker id="ss-t" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={TXT} /></marker>
+          </defs>
+
+          {/* === ROOT (gen-1) jádro: ve st0 velké U-235, pak se zmenší a odsune doleva jako kořen laviny === */}
+          <ACircle cx={[235, 95, 60]} cy={[110, 110, 110]} r={[30, 17, 15]} fill={HEAVY} />
+          <AText x={[235, 95, 60]} y={[114, 114, 114]} fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>U-235</AText>
+
+          {/* === Nalétávající neutron (st0) — vletí do jádra a je pohlcen === */}
+          <ALine x1={[80, 95, 95]} y1={110} x2={[202, 112, 112]} y2={110} stroke={NEUT} strokeWidth={3} markerEnd="url(#ss-n)" opacity={[1, 0, 0]} />
+          <ACircle cx={[60, 95, 95]} cy={110} r={9} fill={NEUT} opacity={[1, 0, 0]} />
+          <AText x={[60, 95, 95]} y={114} fill="#0b1020" fontSize="11" textAnchor="middle" fontWeight="700" opacity={[1, 0, 0]}>n</AText>
+          <AText x={150} y={55} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>neutron letí na jádro</AText>
+
+          {/* === Dva odštěpky (st1): vyletí z jádra šikmo nahoru a dolů === */}
+          <ACircle cx={[235, 168, 168]} cy={[110, 60, 60]} r={[0, 19, 0]} fill={LIGHT} opacity={[0, 1, 0]} />
+          <ACircle cx={[235, 178, 178]} cy={[110, 164, 164]} r={[0, 21, 0]} fill={LIGHT} opacity={[0, 1, 0]} />
+          <ALine x1={118} y1={100} x2={[118, 142, 142]} y2={[100, 78, 78]} stroke={TXT} strokeWidth={3} markerEnd="url(#ss-t)" opacity={[0, 1, 0]} />
+          <ALine x1={118} y1={120} x2={[118, 148, 148]} y2={[120, 142, 142]} stroke={TXT} strokeWidth={3} markerEnd="url(#ss-t)" opacity={[0, 1, 0]} />
+          <AText x={262} y={112} fill={ACC} fontSize="14" textAnchor="middle" fontWeight="700" opacity={[0, 1, 0]}>+ energie</AText>
+
+          {/* === Nové neutrony ze štěpení (st1): tři uvolněné neutrony s krátkým ocáskem směru === */}
+          <ALine x1={[235, 322, 322]} y1={[110, 86, 86]} x2={[235, 350, 350]} y2={[110, 70, 70]} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 1, 0]} />
+          <ALine x1={[235, 322, 322]} y1={[110, 134, 134]} x2={[235, 350, 350]} y2={[110, 150, 150]} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 1, 0]} />
+          <ALine x1={[235, 332, 332]} y1={[110, 110, 110]} x2={[235, 364, 364]} y2={[110, 110, 110]} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 1, 0]} />
+          <ACircle cx={[235, 312, 312]} cy={[110, 92, 92]} r={[0, 8, 0]} fill={NEUT} opacity={[0, 1, 0]} />
+          <ACircle cx={[235, 312, 312]} cy={[110, 128, 128]} r={[0, 8, 0]} fill={NEUT} opacity={[0, 1, 0]} />
+          <ACircle cx={[235, 322, 322]} cy={[110, 110, 110]} r={[0, 8, 0]} fill={NEUT} opacity={[0, 1, 0]} />
+
+          {/* === LAVINA (st2): spoje gen1→gen2 a gen2→gen3 === */}
+          <ALine x1={75} y1={102} x2={186} y2={68} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 0, 1]} />
+          <ALine x1={75} y1={118} x2={186} y2={152} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 0, 1]} />
+          <ALine x1={216} y1={58} x2={342} y2={38} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 0, 1]} />
+          <ALine x1={216} y1={66} x2={342} y2={86} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 0, 1]} />
+          <ALine x1={216} y1={154} x2={342} y2={134} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 0, 1]} />
+          <ALine x1={216} y1={162} x2={342} y2={182} stroke={NEUT} strokeWidth={2.5} markerEnd="url(#ss-n)" opacity={[0, 0, 1]} />
+
+          {/* gen-2 jádra (st2) */}
+          <ACircle cx={205} cy={62} r={16} fill={HEAVY} opacity={[0, 0, 1]} />
+          <ACircle cx={205} cy={158} r={16} fill={HEAVY} opacity={[0, 0, 1]} />
+          {/* gen-3 jádra (st2) */}
+          <ACircle cx={362} cy={32} r={13} fill={HEAVY} opacity={[0, 0, 1]} />
+          <ACircle cx={362} cy={92} r={13} fill={HEAVY} opacity={[0, 0, 1]} />
+          <ACircle cx={362} cy={128} r={13} fill={HEAVY} opacity={[0, 0, 1]} />
+          <ACircle cx={362} cy={188} r={13} fill={HEAVY} opacity={[0, 0, 1]} />
+
+          <AText x={220} y={212} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>každá generace = víc štěpení</AText>
+        </StepScene>
 
         <p>
           Aby řetězová reakce vůbec běžela, musí se to dvakrát „doladit":

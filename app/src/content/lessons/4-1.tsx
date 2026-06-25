@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, ARect, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.1'
 
@@ -132,97 +132,78 @@ export default function Lesson() {
           udělá, když se podíváme (změříme), kterou štěrbinou prošly. Klikej <b>Další →</b>.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Elektron: nepozorovaný = vlna, pozorovaný = částice"
-          steps={[
-            {
-              label: 'nepozorujeme',
-              caption: (
-                <>
-                  Nedíváme se, kterou štěrbinou elektron prošel. Chová se jako <b>vlna</b>: projde
-                  „oběma najednou“ a sám se sebou interferuje.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs color={PART} id="arS1" />
-                  <line x1="140" y1="20" x2="140" y2="80" stroke={WALL} strokeWidth="6" />
-                  <line x1="140" y1="100" x2="140" y2="120" stroke={WALL} strokeWidth="6" />
-                  <line x1="140" y1="140" x2="140" y2="200" stroke={WALL} strokeWidth="6" />
-                  <line x1="390" y1="20" x2="390" y2="200" stroke={SCREEN} strokeWidth="4" />
-                  {/* dopadající elektron */}
-                  <text x="30" y="105" fill={PART} fontSize="13" fontWeight="700">e⁻</text>
-                  <line x1="50" y1="110" x2="136" y2="110" stroke={PART} strokeWidth="2.5" markerEnd="url(#arS1)" />
-                  {/* vlny z obou štěrbin */}
-                  <g fill="none" stroke={WAVE} strokeWidth="1.6">
-                    <path d="M144,70 a34,34 0 0 1 0,40" />
-                    <path d="M144,62 a50,50 0 0 1 0,56" />
-                    <path d="M144,150 a34,34 0 0 1 0,-40" />
-                    <path d="M144,158 a50,50 0 0 1 0,-56" />
-                  </g>
-                  <g fill={WAVE}>
-                    <rect x="382" y="40" width="8" height="14" rx="2" opacity="0.8" />
-                    <rect x="382" y="74" width="8" height="20" rx="2" />
-                    <rect x="382" y="104" width="8" height="14" rx="2" opacity="0.6" />
-                    <rect x="382" y="132" width="8" height="20" rx="2" />
-                    <rect x="382" y="166" width="8" height="14" rx="2" opacity="0.8" />
-                  </g>
-                  <text x="265" y="214" fill={WAVE} fontSize="11" textAnchor="middle">→ proužky = interference (vlna)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'pozorujeme',
-              caption: (
-                <>
-                  Dáme k otvorům detektor (světlo) a sledujeme, kudy elektron prošel. Tím už se chová
-                  jako <b>částice</b>: projde jednou konkrétní štěrbinou.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs color={PART} id="arS2" />
-                  <line x1="140" y1="20" x2="140" y2="80" stroke={WALL} strokeWidth="6" />
-                  <line x1="140" y1="100" x2="140" y2="120" stroke={WALL} strokeWidth="6" />
-                  <line x1="140" y1="140" x2="140" y2="200" stroke={WALL} strokeWidth="6" />
-                  <line x1="390" y1="20" x2="390" y2="200" stroke={SCREEN} strokeWidth="4" />
-                  <text x="30" y="85" fill={PART} fontSize="13" fontWeight="700">e⁻</text>
-                  <line x1="50" y1="90" x2="136" y2="90" stroke={PART} strokeWidth="2.5" />
-                  {/* detektor / oko u horní štěrbiny */}
-                  <circle cx="160" cy="62" r="11" fill="none" stroke={ACC} strokeWidth="2" />
-                  <circle cx="160" cy="62" r="3.5" fill={ACC} />
-                  <text x="178" y="50" fill={ACC} fontSize="11">detektor</text>
-                  {/* záblesk u horní štěrbiny */}
-                  <line x1="144" y1="90" x2="158" y2="68" stroke={ACC} strokeWidth="2" />
-                  {/* elektron projde jako částice rovně */}
-                  <line x1="144" y1="90" x2="386" y2="78" stroke={PART} strokeWidth="2.5" markerEnd="url(#arS2)" />
-                  <circle cx="386" cy="78" r="4" fill={PART} />
-                  <text x="265" y="214" fill={PART} fontSize="11" textAnchor="middle">→ bodový dopad = částice (proužky zmizí)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'závěr',
-              caption: (
-                <>
-                  Pointa: v jednom uspořádání vidíš <b>buď</b> vlnu, <b>nebo</b> částici. Nikdy obojí
-                  zároveň — proto „dualismus“ neznamená „současně“.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <text x="110" y="50" fill={WAVE} fontSize="14" textAnchor="middle" fontWeight="700">nepozoruji</text>
-                  <text x="110" y="74" fill={TXT} fontSize="12" textAnchor="middle">⇒ vlna (proužky)</text>
-                  <text x="310" y="50" fill={PART} fontSize="14" textAnchor="middle" fontWeight="700">pozoruji</text>
-                  <text x="310" y="74" fill={TXT} fontSize="12" textAnchor="middle">⇒ částice (bod)</text>
-                  <line x1="210" y1="30" x2="210" y2="110" stroke={MUTED} strokeWidth="1.5" strokeDasharray="5 5" />
-                  <text x="210" y="160" fill={ACC} fontSize="15" textAnchor="middle" fontWeight="700">nikdy obojí ZÁROVEŇ</text>
-                  <text x="210" y="186" fill={MUTED} fontSize="12" textAnchor="middle">to je celý dualismus</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 230"
+          captions={[
+            <>
+              Nedíváme se, kterou štěrbinou elektron prošel. Chová se jako <b>vlna</b>: projde
+              „oběma najednou“ a sám se sebou interferuje.
+            </>,
+            <>
+              Dáme k otvorům detektor (světlo) a sledujeme, kudy elektron prošel. Tím už se chová
+              jako <b>částice</b>: projde jednou konkrétní štěrbinou.
+            </>,
+            <>
+              Pointa: v jednom uspořádání vidíš <b>buď</b> vlnu, <b>nebo</b> částici. Nikdy obojí
+              zároveň — proto „dualismus“ neznamená „současně“.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="arS" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={PART} /></marker>
+          </defs>
+
+          {/* === aparatura (kroky 0–1), v závěru zmizí === */}
+          {/* stěna se dvěma štěrbinami */}
+          <ALine x1={140} y1={20} x2={140} y2={80} stroke={WALL} strokeWidth={6} opacity={[1, 1, 0]} />
+          <ALine x1={140} y1={100} x2={140} y2={120} stroke={WALL} strokeWidth={6} opacity={[1, 1, 0]} />
+          <ALine x1={140} y1={140} x2={140} y2={200} stroke={WALL} strokeWidth={6} opacity={[1, 1, 0]} />
+          {/* stínítko */}
+          <ALine x1={390} y1={20} x2={390} y2={200} stroke={SCREEN} strokeWidth={4} opacity={[1, 1, 0]} />
+
+          {/* dopadající elektron — popisek a přílet zleva (krok 0 výš, krok 1 níž k horní štěrbině) */}
+          <AText x={30} y={[105, 85, 85]} fill={PART} fontSize="13" fontWeight="700" opacity={[1, 1, 0]}>e⁻</AText>
+          <ALine x1={50} y1={[110, 90, 90]} x2={136} y2={[110, 90, 90]} stroke={PART} strokeWidth={2.5} markerEnd="url(#arS)" opacity={[1, 1, 0]} />
+
+          {/* vlny z obou štěrbin (jen krok 0) */}
+          <AGroup opacity={[1, 0, 0]}>
+            <path d="M144,70 a34,34 0 0 1 0,40" fill="none" stroke={WAVE} strokeWidth="1.6" />
+            <path d="M144,62 a50,50 0 0 1 0,56" fill="none" stroke={WAVE} strokeWidth="1.6" />
+            <path d="M144,150 a34,34 0 0 1 0,-40" fill="none" stroke={WAVE} strokeWidth="1.6" />
+            <path d="M144,158 a50,50 0 0 1 0,-56" fill="none" stroke={WAVE} strokeWidth="1.6" />
+          </AGroup>
+
+          {/* interferenční proužky na stínítku (jen krok 0) */}
+          <ARect x={382} y={40} width={8} height={14} rx={2} fill={WAVE} opacity={[0.8, 0, 0]} />
+          <ARect x={382} y={74} width={8} height={20} rx={2} fill={WAVE} opacity={[1, 0, 0]} />
+          <ARect x={382} y={104} width={8} height={14} rx={2} fill={WAVE} opacity={[0.6, 0, 0]} />
+          <ARect x={382} y={132} width={8} height={20} rx={2} fill={WAVE} opacity={[1, 0, 0]} />
+          <ARect x={382} y={166} width={8} height={14} rx={2} fill={WAVE} opacity={[0.8, 0, 0]} />
+
+          {/* detektor u horní štěrbiny (jen krok 1) */}
+          <ALine x1={144} y1={90} x2={158} y2={68} stroke={ACC} strokeWidth={2} opacity={[0, 1, 0]} />
+          <ACircle cx={160} cy={62} r={11} fill="none" stroke={ACC} strokeWidth={2} opacity={[0, 1, 0]} />
+          <ACircle cx={160} cy={62} r={3.5} fill={ACC} opacity={[0, 1, 0]} />
+          <AText x={178} y={50} fill={ACC} fontSize="11" opacity={[0, 1, 0]}>detektor</AText>
+
+          {/* dráha částice za stěnou + bodový dopad (jen krok 1) */}
+          <ALine x1={144} y1={90} x2={386} y2={78} stroke={PART} strokeWidth={2.5} markerEnd="url(#arS)" opacity={[0, 1, 0]} />
+          <ACircle cx={386} cy={78} r={4} fill={PART} opacity={[0, 1, 0]} />
+
+          {/* popisky pod aparaturou (kroky 0 a 1, různá barva) */}
+          <AText x={265} y={222} fill={WAVE} fontSize="11" textAnchor="middle" opacity={[1, 0, 0]}>→ proužky = interference (vlna)</AText>
+          <AText x={265} y={222} fill={PART} fontSize="11" textAnchor="middle" opacity={[0, 1, 0]}>→ bodový dopad = částice (proužky zmizí)</AText>
+
+          {/* === závěr (jen krok 2) === */}
+          <AText x={110} y={55} fill={WAVE} fontSize="14" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>nepozoruji</AText>
+          <AText x={110} y={79} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>⇒ vlna (proužky)</AText>
+          <AText x={310} y={55} fill={PART} fontSize="14" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>pozoruji</AText>
+          <AText x={310} y={79} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>⇒ částice (bod)</AText>
+          <ALine x1={210} y1={35} x2={210} y2={115} stroke={MUTED} strokeWidth={1.5} strokeDasharray="5 5" opacity={[0, 0, 1]} />
+          <AText x={210} y={165} fill={ACC} fontSize="15" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>nikdy obojí ZÁROVEŇ</AText>
+          <AText x={210} y={191} fill={MUTED} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>to je celý dualismus</AText>
+        </StepScene>
       </Section>
 
       <Section title="Foton — kvantum elektromagnetického pole">

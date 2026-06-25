@@ -29,11 +29,13 @@ const GRAV = '#fb7185' // tíhová síla
 const NORM = '#38bdf8' // síla roviny / normálová
 const MUTED = '#7a86a8'
 
-/* Šipka pro SVG (marker). Kvůli více barvám dáme každé barvě vlastní id. */
+/* Šipka pro SVG (marker). markerUnits="userSpaceOnUse" → hrot má pevnou
+   velikost nezávisle na tloušťce čáry (jinak se u silných tahů nafoukne).
+   Kvůli více barvám dáme každé barvě vlastní id. */
 function Arrow({ id, color }: { id: string; color: string }) {
   return (
-    <marker id={id} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-      <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
+    <marker id={id} markerUnits="userSpaceOnUse" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto">
+      <path d="M0,0 L11,5.5 L0,11 z" fill={color} />
     </marker>
   )
 }

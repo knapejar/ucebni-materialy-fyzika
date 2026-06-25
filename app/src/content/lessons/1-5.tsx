@@ -108,7 +108,7 @@ export default function Lesson_1_5() {
           ]}
         >
           <defs>
-            <marker id="arP" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACCENT} /></marker>
+            <marker id="arP" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L9,4.5 L0,9 z" fill={ACCENT} /></marker>
           </defs>
 
           {/* zem */}
@@ -218,9 +218,9 @@ export default function Lesson_1_5() {
         <Figure caption="Dvojice sil: stejně velké, opačné, na různých přímkách. Rameno d je kolmá vzdálenost obou nositelek → těleso se roztočí. Pozor: kdyby ležely na téže přímce, jen by se vyrušily.">
           <svg viewBox="0 0 420 200" className="svg-fig">
             <defs>
-              <marker id="arF" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FORCE} /></marker>
-              <marker id="arGs" markerWidth="9" markerHeight="9" refX="2" refY="4.5" orient="auto"><path d="M9,0 L0,4.5 L9,9 z" fill={GREEN} /></marker>
-              <marker id="arGe" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={GREEN} /></marker>
+              <marker id="arF" markerWidth="11" markerHeight="11" refX="8" refY="5.5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L11,5.5 L0,11 z" fill={FORCE} /></marker>
+              <marker id="arGs" markerWidth="10" markerHeight="10" refX="2" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M10,0 L0,5 L10,10 z" fill={GREEN} /></marker>
+              <marker id="arGe" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto" markerUnits="userSpaceOnUse"><path d="M0,0 L10,5 L0,10 z" fill={GREEN} /></marker>
             </defs>
             {/* nositelky sil (vodorovne primky, na nichz sily lezi) */}
             <line x1="55" y1="55" x2="345" y2="55" stroke={FAINT} strokeWidth="1.5" strokeDasharray="5 5" />

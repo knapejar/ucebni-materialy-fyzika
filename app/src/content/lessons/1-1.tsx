@@ -108,14 +108,14 @@ export default function Lesson_1_1() {
           {/* krok 1: klid */}
           <AText x={210} y={40} fill={TXT} fontSize="15" textAnchor="middle" opacity={[1, 0, 0]}>klid: p = 0</AText>
 
-          {/* krok 2: akce / reakce */}
-          <ALine x1={320} y1={136} x2={388} y2={136} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
-          <AText x={354} y={117} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>akce</AText>
+          {/* krok 2: akce / reakce — obě síly stejně dlouhé (64 px), symetrické */}
+          <ALine x1={320} y1={136} x2={384} y2={136} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
+          <AText x={352} y={117} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>akce</AText>
           <ALine x1={150} y1={102} x2={86} y2={102} stroke={FORCE} strokeWidth={4} markerEnd="url(#arF)" opacity={[0, 1, 0]} />
           <AText x={118} y={84} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>reakce</AText>
 
-          {/* krok 3: hybnosti + součet 0 */}
-          <ALine x1={314} y1={98} x2={380} y2={98} stroke={BALL} strokeWidth={4} markerEnd="url(#arB)" opacity={[0, 0, 1]} />
+          {/* krok 3: hybnosti + součet 0 — obě hybnosti stejně dlouhé (64 px) */}
+          <ALine x1={316} y1={98} x2={380} y2={98} stroke={BALL} strokeWidth={4} markerEnd="url(#arB)" opacity={[0, 0, 1]} />
           <AText x={348} y={80} fill={BALL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (koule)</AText>
           <ALine x1={150} y1={98} x2={86} y2={98} stroke={STEEL} strokeWidth={4} markerEnd="url(#arS)" opacity={[0, 0, 1]} />
           <AText x={118} y={80} fill={STEEL} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>p (dělo)</AText>

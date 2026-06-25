@@ -160,8 +160,10 @@ export default function Lesson_2_11() {
           <ALine x1={140} y1={84} x2={140} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
           <ALine x1={215} y1={84} x2={215} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
           <ALine x1={290} y1={84} x2={290} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={365} y1={84} x2={365} y2={120} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
           <ALine x1={177} y1={138} x2={177} y2={174} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
           <ALine x1={252} y1={138} x2={252} y2={174} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={327} y1={138} x2={327} y2={174} stroke={N} strokeWidth={3} markerEnd="url(#mfn)" opacity={[0, 1, 0, 0]} />
 
           {/* ——— PARAMAGNET: zelené momenty — z náhodných (krok 3) do srovnaných doprava (krok 4) ——— */}
           {/* každá šipka: [_, _, náhodný směr, doprava]; opacity [0,0,1,1] */}

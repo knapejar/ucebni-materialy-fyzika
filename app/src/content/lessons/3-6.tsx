@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.6'
 
@@ -105,54 +105,51 @@ export default function Lesson() {
           dolík, a je po amplitudě.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Proč dráhový rozdíl rozhoduje (dva zdroje, jedno místo)"
-          steps={[
-            {
-              label: 'dva zdroje',
-              caption: <>Dva zdroje <M>{'S_1'}</M> a <M>{'S_2'}</M> vysílají stejné vlny. Sledujeme jedno místo <b>P</b>. Důležité je, o kolik se liší dráhy <M>{'S_1P'}</M> a <M>{'S_2P'}</M>.</>,
-              content: (
-                <svg viewBox="0 0 460 220" className="svg-fig">
-                  <Defs color={ACC} id="ar1" />
-                  <circle cx="50" cy="70" r="9" fill={W1} />
-                  <text x="50" y="55" fill={TXT} fontSize="13" textAnchor="middle">S₁</text>
-                  <circle cx="50" cy="160" r="9" fill={W2} />
-                  <text x="50" y="185" fill={TXT} fontSize="13" textAnchor="middle">S₂</text>
-                  <circle cx="410" cy="115" r="7" fill={ACC} />
-                  <text x="425" y="119" fill={ACC} fontSize="14" textAnchor="start">P</text>
-                  <line x1="58" y1="73" x2="402" y2="112" stroke={W1} strokeWidth="2" />
-                  <line x1="58" y1="157" x2="402" y2="118" stroke={W2} strokeWidth="2" />
-                </svg>
-              ),
-            },
-            {
-              label: 'maximum',
-              caption: <>Dráhový rozdíl je <b>celý počet vlnových délek</b> (sudý počet půlvln). Vlny dorazí ve fázi — hřeben na hřeben — a v bodě P je <b>maximum</b>.</>,
-              content: (
-                <svg viewBox="0 0 460 220" className="svg-fig">
-                  <line x1="20" y1="70" x2="320" y2="70" stroke={AXIS} strokeWidth="1" />
-                  <path d="M20,70 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0" fill="none" stroke={W1} strokeWidth="2.5" />
-                  <path d="M20,73 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0" fill="none" stroke={W2} strokeWidth="2.5" />
-                  <text x="170" y="135" fill={TXT} fontSize="13" textAnchor="middle">Δ = k·λ (= sudý počet λ/2)</text>
-                  <text x="170" y="165" fill={SUM} fontSize="16" textAnchor="middle" fontWeight="700">→ MAXIMUM</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'minimum',
-              caption: <>Dráhový rozdíl je <b>lichý počet půlvln</b>. Jedna vlna je posunutá o půl vlny — hřeben padne na dolík — a v bodě P se vlny <b>vyruší</b> (minimum).</>,
-              content: (
-                <svg viewBox="0 0 460 220" className="svg-fig">
-                  <line x1="20" y1="70" x2="320" y2="70" stroke={AXIS} strokeWidth="1" />
-                  <path d="M20,70 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0" fill="none" stroke={W1} strokeWidth="2.5" />
-                  <path d="M20,70 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0" fill="none" stroke={W2} strokeWidth="2.5" />
-                  <text x="170" y="135" fill={TXT} fontSize="13" textAnchor="middle">Δ = (2k+1)·λ/2</text>
-                  <text x="170" y="165" fill={SUM} fontSize="16" textAnchor="middle" fontWeight="700">→ MINIMUM</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 230"
+          captions={[
+            <>Dva zdroje <M>{'S_1'}</M> a <M>{'S_2'}</M> vysílají stejné vlny. Sledujeme jedno místo <b>P</b>. Důležité je, o kolik se liší dráhy <M>{'S_1P'}</M> a <M>{'S_2P'}</M>.</>,
+            <>Dráhový rozdíl je <b>celý počet vlnových délek</b> (sudý počet půlvln). Vlny dorazí ve fázi — hřeben na hřeben — a v bodě P je <b>maximum</b>.</>,
+            <>Dráhový rozdíl je <b>lichý počet půlvln</b>. Jedna vlna je posunutá o půl vlny — hřeben padne na dolík — a v bodě P se vlny <b>vyruší</b> (minimum).</>,
           ]}
-        />
+        >
+          {/* —— STEP 0: geometrie dvou zdrojů a bodu P (fade-out v dalších krocích) —— */}
+          {/* dráha S1→P */}
+          <ALine x1={58} y1={73} x2={402} y2={112} stroke={W1} strokeWidth={2} opacity={[1, 0, 0]} />
+          {/* dráha S2→P */}
+          <ALine x1={58} y1={157} x2={402} y2={118} stroke={W2} strokeWidth={2} opacity={[1, 0, 0]} />
+          <ACircle cx={50} cy={70} r={9} fill={W1} opacity={[1, 0, 0]} />
+          <AText x={50} y={52} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>S₁</AText>
+          <ACircle cx={50} cy={160} r={9} fill={W2} opacity={[1, 0, 0]} />
+          <AText x={50} y={185} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>S₂</AText>
+          <ACircle cx={410} cy={115} r={7} fill={ACC} opacity={[1, 0, 0]} />
+          <AText x={426} y={120} fill={ACC} fontSize="15" textAnchor="start" opacity={[1, 0, 0]}>P</AText>
+
+          {/* —— STEPS 1–2: dvě vlny (objeví se ve 2. kroku, vlna 2 se v 3. kroku převrátí) —— */}
+          {/* osa */}
+          <ALine x1={20} y1={86} x2={340} y2={86} stroke={AXIS} strokeWidth={1} opacity={[0, 1, 1]} />
+          {/* vlna 1 (nemění se) */}
+          <APath
+            d="M20,86 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0"
+            fill="none" stroke={W1} strokeWidth={2.5} opacity={[0, 1, 1]}
+          />
+          {/* vlna 2: ve fázi (krok 2) → v protifázi (krok 3) */}
+          <APath
+            d={[
+              'M20,89 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0',
+              'M20,89 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0',
+              'M20,83 q30,22 60,0 q30,-22 60,0 q30,22 60,0 q30,-22 60,0 q30,22 60,0',
+            ]}
+            fill="none" stroke={W2} strokeWidth={2.5} opacity={[0, 1, 1]}
+          />
+          {/* popisek vzorce — Δ = k·λ (max) / Δ = (2k+1)·λ/2 (min) */}
+          <AText x={180} y={150} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>Δ = k·λ (= sudý počet λ/2)</AText>
+          <AText x={180} y={150} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>Δ = (2k+1)·λ/2 (lichý počet λ/2)</AText>
+          {/* výsledek */}
+          <AText x={180} y={185} fill={SUM} fontSize="18" textAnchor="middle" fontWeight="700" opacity={[0, 1, 0]}>→ MAXIMUM</AText>
+          <AText x={180} y={185} fill={SUM} fontSize="18" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>→ MINIMUM</AText>
+        </StepScene>
 
         <p>
           Příklady z praxe: kytarová struna a housle (skládání odražených vln), antireflexní vrstvy
@@ -196,26 +193,34 @@ export default function Lesson() {
           </li>
         </ul>
 
-        <StepFigure
+        <StepScene
           title="Fázová vs. grupová rychlost (klubko se posouvá v čase)"
-          steps={[
-            {
-              label: 'klubko teď',
-              caption: <>Modrá obálka = <b>klubko</b> (kde je amplituda velká). Uvnitř kmitá rychlá nosná vlna. Sledujeme jeden <span style={{ color: GROUP }}>vrchol obálky</span> a jeden <span style={{ color: SUM }}>hřeben nosné vlny</span>.</>,
-              content: <Packet shiftEnv={0} shiftPhase={0} />,
-            },
-            {
-              label: 'o chvíli později',
-              caption: <>Po čase <M>{'\\Delta t'}</M>: <span style={{ color: SUM }}>hřeben nosné vlny</span> (fáze) ujel dál než <span style={{ color: GROUP }}>vrchol obálky</span> (klubko). Fázová rychlost zde &gt; grupová.</>,
-              content: <Packet shiftEnv={40} shiftPhase={75} />,
-            },
-            {
-              label: 'co přenáší energii',
-              caption: <>Energii (a u klubka i „informaci o poloze") nese <b>obálka</b> — tedy <span style={{ color: GROUP }}><b>grupová rychlost</b></span>. Fáze sama o sobě energii nepřenáší.</>,
-              content: <Packet shiftEnv={80} shiftPhase={150} energy />,
-            },
+          viewBox="0 0 560 210"
+          captions={[
+            <>Modrá obálka = <b>klubko</b> (kde je amplituda velká). Uvnitř kmitá rychlá nosná vlna. Sledujeme jeden <span style={{ color: GROUP }}>vrchol obálky</span> a jeden <span style={{ color: SUM }}>hřeben nosné vlny</span>.</>,
+            <>Po čase <M>{'\\Delta t'}</M>: <span style={{ color: SUM }}>hřeben nosné vlny</span> (fáze) ujel dál než <span style={{ color: GROUP }}>vrchol obálky</span> (klubko). Fázová rychlost zde &gt; grupová.</>,
+            <>Energii (a u klubka i „informaci o poloze") nese <b>obálka</b> — tedy <span style={{ color: GROUP }}><b>grupová rychlost</b></span>. Fáze sama o sobě energii nepřenáší.</>,
           ]}
-        />
+        >
+          {/* osa */}
+          <ALine x1={20} y1={PMID} x2={540} y2={PMID} stroke={AXIS} strokeWidth={1} />
+          {/* obálka (klubko) — horní a dolní, posouvá se doprava (grupová rychlost) */}
+          <APath d={[envTop(0), envTop(40), envTop(80)]} fill="none" stroke={GROUP} strokeWidth={2} strokeDasharray="5 4" />
+          <APath d={[envBot(0), envBot(40), envBot(80)]} fill="none" stroke={GROUP} strokeWidth={2} strokeDasharray="5 4" />
+          {/* nosná vlna modulovaná obálkou */}
+          <APath
+            d={[carrier(0, 0), carrier(40, 75), carrier(80, 150)]}
+            fill="none" stroke={W1} strokeWidth={2.5}
+          />
+          {/* značník vrcholu obálky (grupová) — posouvá se pomaleji (50,90,130) */}
+          <ALine x1={[150, 190, 230]} y1={PMID - 66} x2={[150, 190, 230]} y2={PMID + 60} stroke={GROUP} strokeWidth={2} />
+          <AText x={[150, 190, 230]} y={PMID + 80} fill={GROUP} fontSize="13" textAnchor="middle">vrchol obálky</AText>
+          {/* značník hřebene nosné vlny (fázová) — posouvá se rychleji (160,235,310), sedí na hřebenu */}
+          <ALine x1={[160, 235, 310]} y1={PMID - 56} x2={[160, 235, 310]} y2={PMID + 56} stroke={SUM} strokeWidth={2} strokeDasharray="3 3" />
+          <AText x={[160, 235, 310]} y={PMID - 64} fill={SUM} fontSize="13" textAnchor="middle">hřeben</AText>
+          {/* krok 3: kam jde energie (vlevo nahoře, mimo značníky) */}
+          <AText x={140} y={28} fill={GROUP} fontSize="14" textAnchor="middle" fontWeight="700" opacity={[0, 0, 1]}>energie jde s obálkou →</AText>
+        </StepScene>
 
         <p>
           Vztah obou rychlostí dává <Term>disperzní vztah</Term>{' '}
@@ -248,6 +253,12 @@ export default function Lesson() {
         </p>
         <Figure caption="Úzký rozsah k (vlevo) → široké, rozmazané klubko. Široký rozsah k (vpravo) → úzké, ostře lokalizované klubko. Δx·Δk ≈ 1.">
           <svg viewBox="0 0 700 200" className="svg-fig">
+            {/* levá šipka (markerStart) — doplněk k pravé z <Defs> */}
+            <defs>
+              <marker id="axL" markerWidth="9" markerHeight="9" refX="2" refY="4.5" orient="auto">
+                <path d="M9,0 L0,4.5 L9,9 z" fill={GROUP} />
+              </marker>
+            </defs>
             {/* LEVÝ: úzké Δk, široké klubko */}
             <line x1="20" y1="100" x2="320" y2="100" stroke={AXIS} strokeWidth="1" />
             <path d="M20,100 q15,-3 30,0 q15,3 30,0 q15,-22 30,0 q15,22 30,0 q15,-45 30,0 q15,45 30,0 q15,-22 30,0 q15,22 30,0 q15,-3 30,0 q15,3 30,0"
@@ -328,47 +339,43 @@ export default function Lesson() {
   )
 }
 
-/* Pomocná ilustrace vlnového klubka pro StepFigure: nosná vlna v gaussovské obálce. */
-function Packet({ shiftEnv, shiftPhase, energy = false }: { shiftEnv: number; shiftPhase: number; energy?: boolean }) {
-  const W = 560
-  const mid = 95
-  const envCenter = 150 + shiftEnv
-  const envWidth = 110
-  // body nosné vlny modulované obálkou
+/* —— Vlnové klubko: generátory SVG cest pro StepScene (nosná vlna v gaussovské obálce). —— */
+const PMID = 95         // svislý střed grafu
+const P_X0 = 20         // levý okraj
+const P_X1 = 540        // pravý okraj
+const P_AMP = 48        // amplituda klubka
+const P_W = 110         // šířka obálky
+
+function envCenterFor(shiftEnv: number) { return 150 + shiftEnv }
+
+/* horní obálka klubka (vrchol se posouvá doprava o shiftEnv) */
+function envTop(shiftEnv: number): string {
+  const c = envCenterFor(shiftEnv)
   const pts: string[] = []
-  for (let x = 20; x <= W - 20; x += 4) {
-    const env = Math.exp(-Math.pow((x - envCenter) / envWidth, 2))
-    const y = mid - 52 * env * Math.cos((x - 20 - shiftPhase) * 0.18)
+  for (let x = P_X0; x <= P_X1; x += 6) {
+    const env = Math.exp(-Math.pow((x - c) / P_W, 2))
+    pts.push(`${x},${(PMID - P_AMP * env).toFixed(1)}`)
+  }
+  return 'M' + pts.join(' L')
+}
+/* dolní obálka klubka */
+function envBot(shiftEnv: number): string {
+  const c = envCenterFor(shiftEnv)
+  const pts: string[] = []
+  for (let x = P_X0; x <= P_X1; x += 6) {
+    const env = Math.exp(-Math.pow((x - c) / P_W, 2))
+    pts.push(`${x},${(PMID + P_AMP * env).toFixed(1)}`)
+  }
+  return 'M' + pts.join(' L')
+}
+/* nosná vlna modulovaná obálkou (fáze se posouvá o shiftPhase) */
+function carrier(shiftEnv: number, shiftPhase: number): string {
+  const c = envCenterFor(shiftEnv)
+  const pts: string[] = []
+  for (let x = P_X0; x <= P_X1; x += 3) {
+    const env = Math.exp(-Math.pow((x - c) / P_W, 2))
+    const y = PMID - P_AMP * env * Math.cos((x - P_X0 - shiftPhase) * 0.18)
     pts.push(`${x},${y.toFixed(1)}`)
   }
-  // horní a dolní obálka
-  const top: string[] = []
-  const bot: string[] = []
-  for (let x = 20; x <= W - 20; x += 6) {
-    const env = Math.exp(-Math.pow((x - envCenter) / envWidth, 2))
-    top.push(`${x},${(mid - 52 * env).toFixed(1)}`)
-    bot.push(`${x},${(mid + 52 * env).toFixed(1)}`)
-  }
-  // hřeben nosné vlny, který sledujeme (nejbližší k fázovému značníku)
-  const phaseX = 150 + shiftPhase * 0.55
-  return (
-    <svg viewBox="0 0 560 200" className="svg-fig">
-      <Defs color={GROUP} id="apg" />
-      <line x1="20" y1={mid} x2={W - 20} y2={mid} stroke={AXIS} strokeWidth="1" />
-      {/* obálka (klubko) */}
-      <polyline points={top.join(' ')} fill="none" stroke={GROUP} strokeWidth="2" strokeDasharray="5 4" />
-      <polyline points={bot.join(' ')} fill="none" stroke={GROUP} strokeWidth="2" strokeDasharray="5 4" />
-      {/* nosná vlna */}
-      <polyline points={pts.join(' ')} fill="none" stroke={W1} strokeWidth="2.5" />
-      {/* značník vrcholu obálky (grupová) */}
-      <line x1={envCenter} y1={mid - 70} x2={envCenter} y2={mid + 70} stroke={GROUP} strokeWidth="2" />
-      <text x={envCenter} y={mid + 88} fill={GROUP} fontSize="12" textAnchor="middle">vrchol obálky</text>
-      {/* značník hřebene nosné vlny (fázová) */}
-      <line x1={phaseX} y1={mid - 60} x2={phaseX} y2={mid + 60} stroke={SUM} strokeWidth="2" strokeDasharray="3 3" />
-      <text x={phaseX} y={mid - 70} fill={SUM} fontSize="12" textAnchor="middle">hřeben</text>
-      {energy && (
-        <text x={envCenter} y={mid - 80} fill={GROUP} fontSize="13" textAnchor="middle" fontWeight="700">energie jde sem →</text>
-      )}
-    </svg>
-  )
+  return 'M' + pts.join(' L')
 }

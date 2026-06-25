@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, ARect, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.4'
 
@@ -106,13 +106,16 @@ export default function Lesson() {
             {/* odražený elektron nahoru-vpravo */}
             <line x1="190" y1="110" x2="285" y2="60" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#are)" />
             <text x="300" y="56" fill={ELECTRON} fontSize="13">elektron</text>
-            {/* sekundární foton dolů-vpravo, delší vlnka = větší λ */}
-            <PhotonWave x1={196} y={132} n={5} lambda={24} amp={7} />
-            <line x1="296" y1="174" x2="312" y2="183" stroke={PHOTON} strokeWidth="2.5" markerEnd="url(#arp)" />
-            <text x="300" y="205" fill={PHOTON} fontSize="13">rozptýlený foton (λ′ &gt; λ)</text>
-            {/* úhel φ */}
-            <path d="M214,120 A34,34 0 0 0 206,150" fill="none" stroke={ACC} strokeWidth="1.6" />
-            <text x="224" y="150" fill={ACC} fontSize="14" fontStyle="italic">φ</text>
+            {/* sekundární foton dolů-vpravo (delší vlnka = větší λ): celá vlnka
+                i s šipkou nakloněna o úhel φ pod původní osu kolem elektronu */}
+            <g transform="rotate(22 180 120)">
+              <PhotonWave x1={198} y={120} n={5} lambda={24} amp={7} />
+              <line x1="310" y1="120" x2="322" y2="120" stroke={PHOTON} strokeWidth="2.5" markerEnd="url(#arp)" />
+            </g>
+            <text x="330" y="205" fill={PHOTON} fontSize="13" textAnchor="middle">rozptýlený foton (λ′ &gt; λ)</text>
+            {/* úhel φ mezi osou a směrem rozptýleného fotonu */}
+            <path d="M232,120 A52,52 0 0 0 228,140" fill="none" stroke={ACC} strokeWidth="1.6" />
+            <text x="246" y="142" fill={ACC} fontSize="14" fontStyle="italic">φ</text>
           </svg>
         </Figure>
 
@@ -152,114 +155,81 @@ export default function Lesson() {
         </p>
         <p>Proklikej si, jak vznikne laserový paprsek. Klikej <b>Další →</b>:</p>
 
-        <StepFigure
+        <StepScene
           title="Jak funguje laser krok po kroku"
-          steps={[
-            {
-              label: 'čerpání',
-              caption: (
-                <>
-                  <b>Zdroj energie</b> pumpuje energii do aktivního prostředí a{' '}
-                  <b><Concept id="zakladni-excitovany-stav">excituje</Concept></b> elektrony — vybudí je ze základní hladiny do vyšší.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={ACC} name="ap1" />
-                  {/* dvě hladiny */}
-                  <line x1="60" y1="135" x2="360" y2="135" stroke={DIM} strokeWidth="2" />
-                  <line x1="60" y1="55" x2="360" y2="55" stroke={DIM} strokeWidth="2" />
-                  <text x="40" y="139" fill={TXT} fontSize="12" textAnchor="end">E₁</text>
-                  <text x="40" y="59" fill={TXT} fontSize="12" textAnchor="end">E₂</text>
-                  {/* elektron skáče nahoru */}
-                  <line x1="180" y1="130" x2="180" y2="60" stroke={ACC} strokeWidth="3" markerEnd="url(#ap1)" />
-                  <circle cx="180" cy="135" r="7" fill={ELECTRON} />
-                  <text x="210" y="100" fill={ACC} fontSize="13">excitace</text>
-                  <text x="210" y="160" fill={TXT} fontSize="12" textAnchor="middle">dodaná energie (pumpa)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'inverze populace',
-              caption: (
-                <>
-                  Pumpujeme tak silně, že <b>většina</b> elektronů je nahoře (víc nahoře než dole). Tomu
-                  se říká <Term id="inverze-populace">inverze populace</Term> — bez ní by laser nefungoval.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <line x1="60" y1="135" x2="360" y2="135" stroke={DIM} strokeWidth="2" />
-                  <line x1="60" y1="55" x2="360" y2="55" stroke={DIM} strokeWidth="2" />
-                  <text x="40" y="139" fill={TXT} fontSize="12" textAnchor="end">E₁</text>
-                  <text x="40" y="59" fill={TXT} fontSize="12" textAnchor="end">E₂</text>
-                  {/* hodně elektronů nahoře */}
-                  {[110, 150, 190, 230, 270, 310].map((cx) => (
-                    <circle key={cx} cx={cx} cy="48" r="6" fill={ELECTRON} />
-                  ))}
-                  {/* málo dole */}
-                  <circle cx="190" cy="142" r="6" fill={ELECTRON} />
-                  <text x="210" y="100" fill={ACC} fontSize="13" textAnchor="middle">víc elektronů nahoře = inverze populace</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'stimulovaná emise',
-              caption: (
-                <>
-                  Letící foton „strhne" excitovaný elektron dolů a ten vyzáří <b>druhý, totožný</b> foton
-                  — stejná frekvence i fáze. To je <Term id="stimulovana-emise">stimulovaná emise</Term>: z 1 fotonu jsou 2,
-                  pak 4, 8…
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={PHOTON} name="ap2" />
-                  <line x1="60" y1="135" x2="360" y2="135" stroke={DIM} strokeWidth="2" />
-                  <line x1="60" y1="55" x2="360" y2="55" stroke={DIM} strokeWidth="2" />
-                  {/* elektron padá dolů */}
-                  <line x1="200" y1="62" x2="200" y2="128" stroke={ACC} strokeWidth="3" markerEnd="url(#ap2)" />
-                  <circle cx="200" cy="55" r="7" fill={ELECTRON} />
-                  {/* dopadající foton */}
-                  <PhotonWave x1={70} y={95} n={3} lambda={18} />
-                  <text x="95" y="80" fill={PHOTON} fontSize="12">1 foton</text>
-                  {/* dva totožné fotony ven */}
-                  <PhotonWave x1={250} y={88} n={4} lambda={18} />
-                  <PhotonWave x1={250} y={104} n={4} lambda={18} />
-                  <text x="330" y="80" fill={PHOTON} fontSize="12" textAnchor="middle">2 totožné</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rezonátor',
-              caption: (
-                <>
-                  Fotony se odrážejí mezi zrcadly <b>rezonátoru</b>, znovu a znovu prolétají prostředím a
-                  lavinovitě se množí (<b>exponenciální zesílení</b>). Hotový svazek uniká{' '}
-                  <b>polopropustným zrcadlem</b> ven.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={ACC} name="ap3" />
-                  {/* trubice aktivního prostředí */}
-                  <rect x="80" y="70" width="250" height="40" rx="4" fill={ACC} opacity="0.28" stroke={ACC} strokeWidth="1.5" />
-                  {/* levé zrcadlo (plné) */}
-                  <rect x="72" y="55" width="9" height="70" rx="3" fill={MIRROR} />
-                  <text x="76" y="145" fill={TXT} fontSize="11" textAnchor="middle">plné</text>
-                  {/* pravé zrcadlo (polopropustné) */}
-                  <rect x="329" y="55" width="9" height="70" rx="3" fill={MIRROR} opacity="0.6" />
-                  <text x="334" y="145" fill={TXT} fontSize="11" textAnchor="middle">polopropustné</text>
-                  {/* vnitřní paprsek tam a zpět */}
-                  <PhotonWave x1={88} y={90} n={12} lambda={18} color={PHOTON} amp={5} />
-                  {/* výstupní svazek */}
-                  <line x1="338" y1="90" x2="408" y2="90" stroke={PHOTON} strokeWidth="5" markerEnd="url(#ap3)" />
-                  <text x="375" y="80" fill={PHOTON} fontSize="12" textAnchor="middle">paprsek ven</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 210"
+          captions={[
+            <>
+              <b>Zdroj energie</b> pumpuje energii do aktivního prostředí a{' '}
+              <b><Concept id="zakladni-excitovany-stav">excituje</Concept></b> elektron — vybudí ho ze základní hladiny do vyšší.
+            </>,
+            <>
+              Pumpujeme tak silně, že <b>většina</b> elektronů je nahoře (víc nahoře než dole). Tomu
+              se říká <Term id="inverze-populace">inverze populace</Term> — bez ní by laser nefungoval.
+            </>,
+            <>
+              Letící foton „strhne" excitovaný elektron dolů a ten vyzáří <b>druhý, totožný</b> foton
+              — stejná frekvence i fáze. To je <Term id="stimulovana-emise">stimulovaná emise</Term>: z 1 fotonu jsou 2,
+              pak 4, 8…
+            </>,
+            <>
+              Fotony se odrážejí mezi zrcadly <b>rezonátoru</b>, znovu a znovu prolétají prostředím a
+              lavinovitě se množí (<b>exponenciální zesílení</b>). Hotový svazek uniká{' '}
+              <b>polopropustným zrcadlem</b> ven.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="ap1" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACC} /></marker>
+            <marker id="ap3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={PHOTON} /></marker>
+          </defs>
+
+          {/* —— dvě energetické hladiny (kroky 0–2, mizí v kroku 3) —— */}
+          <ALine x1={60} y1={150} x2={360} y2={150} stroke={DIM} strokeWidth={2} opacity={[1, 1, 1, 0]} />
+          <ALine x1={60} y1={62} x2={360} y2={62} stroke={DIM} strokeWidth={2} opacity={[1, 1, 1, 0]} />
+          <AText x={44} y={154} fill={TXT} fontSize="12" textAnchor="end" opacity={[1, 1, 1, 0]}>E₁</AText>
+          <AText x={44} y={66} fill={TXT} fontSize="12" textAnchor="end" opacity={[1, 1, 1, 0]}>E₂</AText>
+
+          {/* —— hlavní elektron: krok0 vyletí E1→E2, drží se nahoře v inverzi,
+                v kroku 2 (stim. emise) spadne zpět E2→E1 —— */}
+          <ACircle cx={150} cy={[150, 55, 150, 150]} r={6} fill={ELECTRON} opacity={[1, 1, 1, 0]} />
+
+          {/* krok 0: šipka excitace + popisek pumpy */}
+          <ALine x1={150} y1={150} x2={150} y2={70} stroke={ACC} strokeWidth={3} markerEnd="url(#ap1)" opacity={[1, 0, 0, 0]} />
+          <AText x={186} y={112} fill={ACC} fontSize="13" textAnchor="start" opacity={[1, 0, 0, 0]}>excitace</AText>
+          <AText x={150} y={184} fill={TXT} fontSize="12" textAnchor="middle" opacity={[1, 0, 0, 0]}>dodaná energie (pumpa)</AText>
+
+          {/* krok 1: další elektrony nahoře (inverze), jeden zůstává dole */}
+          <ACircle cx={195} cy={55} r={6} fill={ELECTRON} opacity={[0, 1, 0, 0]} />
+          <ACircle cx={235} cy={55} r={6} fill={ELECTRON} opacity={[0, 1, 0, 0]} />
+          <ACircle cx={275} cy={55} r={6} fill={ELECTRON} opacity={[0, 1, 0, 0]} />
+          <ACircle cx={315} cy={55} r={6} fill={ELECTRON} opacity={[0, 1, 0, 0]} />
+          <ACircle cx={110} cy={55} r={6} fill={ELECTRON} opacity={[0, 1, 0, 0]} />
+          <ACircle cx={235} cy={157} r={6} fill={ELECTRON} opacity={[0, 1, 0, 0]} />
+          <AText x={210} y={112} fill={ACC} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>víc elektronů nahoře = inverze populace</AText>
+
+          {/* krok 2: stimulovaná emise — dopadající foton, 2 totožné ven */}
+          <AGroup opacity={[0, 0, 1, 0]}><PhotonWave x1={66} y={106} n={3} lambda={18} /></AGroup>
+          <AText x={96} y={90} fill={PHOTON} fontSize="12" textAnchor="middle" opacity={[0, 0, 1, 0]}>1 foton</AText>
+          <AGroup opacity={[0, 0, 1, 0]}><PhotonWave x1={250} y={98} n={4} lambda={18} /></AGroup>
+          <AGroup opacity={[0, 0, 1, 0]}><PhotonWave x1={250} y={116} n={4} lambda={18} /></AGroup>
+          <AText x={300} y={84} fill={PHOTON} fontSize="12" textAnchor="middle" opacity={[0, 0, 1, 0]}>2 totožné</AText>
+
+          {/* —— krok 3: rezonátor (objeví se až teď) —— */}
+          {/* trubice aktivního prostředí */}
+          <ARect x={[80, 80, 80, 80]} y={90} width={250} height={40} rx={4} fill={ACC} opacity={[0, 0, 0, 0.28]} stroke={ACC} strokeWidth={1.5} />
+          {/* levé zrcadlo (plné) */}
+          <ARect x={72} y={75} width={9} height={70} rx={3} fill={MIRROR} opacity={[0, 0, 0, 1]} />
+          <AText x={76} y={165} fill={TXT} fontSize="11" textAnchor="middle" opacity={[0, 0, 0, 1]}>plné</AText>
+          {/* pravé zrcadlo (polopropustné) */}
+          <ARect x={329} y={75} width={9} height={70} rx={3} fill={MIRROR} opacity={[0, 0, 0, 0.6]} />
+          <AText x={334} y={165} fill={TXT} fontSize="11" textAnchor="middle" opacity={[0, 0, 0, 1]}>polopropustné</AText>
+          {/* vnitřní paprsek */}
+          <AGroup opacity={[0, 0, 0, 1]}><PhotonWave x1={88} y={110} n={12} lambda={18} color={PHOTON} amp={5} /></AGroup>
+          {/* výstupní svazek */}
+          <ALine x1={338} y1={110} x2={392} y2={110} stroke={PHOTON} strokeWidth={4} markerEnd="url(#ap3)" opacity={[0, 0, 0, 1]} />
+          <AText x={370} y={90} fill={PHOTON} fontSize="11" textAnchor="middle" opacity={[0, 0, 0, 1]}>paprsek ven</AText>
+        </StepScene>
       </Section>
 
       <Section title="Vlastnosti a využití laseru (tohle se ptají vždycky)">

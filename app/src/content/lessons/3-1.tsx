@@ -114,7 +114,7 @@ export default function Lesson_3_1() {
         </Callout>
 
         <Figure caption="Kvazielastická síla F = −k·u vždy míří proti výchylce u, zpět k rovnováze (čárkovaná osa).">
-          <svg viewBox="0 0 460 150" className="svg-fig">
+          <svg viewBox="0 0 460 158" className="svg-fig">
             <Defs id="arF1" color={FORCE} />
             <Defs id="arU1" color={ACC} />
             {/* zeď a podlaha */}
@@ -129,11 +129,11 @@ export default function Lesson_3_1() {
             <rect x="300" y="60" width="42" height="42" rx="6" fill={BALL} />
             <text x="321" y="87" fill="#0b1020" fontSize="15" textAnchor="middle" fontWeight="700">m</text>
             {/* výchylka u */}
-            <line x1="190" y1="135" x2="321" y2="135" stroke={ACC} strokeWidth="2.5" markerEnd="url(#arU1)" />
-            <text x="255" y="150" fill={ACC} fontSize="14" textAnchor="middle">výchylka u</text>
-            {/* síla F doleva */}
+            <line x1="190" y1="136" x2="321" y2="136" stroke={ACC} strokeWidth="2.5" markerEnd="url(#arU1)" />
+            <text x="255" y="152" fill={ACC} fontSize="14" textAnchor="middle">výchylka u</text>
+            {/* síla F doleva (popisek nad šipkou, bez překryvu) */}
             <line x1="300" y1="50" x2="220" y2="50" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF1)" />
-            <text x="262" y="44" fill={FORCE} fontSize="14" textAnchor="middle">F = −k·u</text>
+            <text x="260" y="37" fill={FORCE} fontSize="14" textAnchor="middle">F = −k·u</text>
           </svg>
         </Figure>
 

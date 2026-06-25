@@ -82,19 +82,20 @@ export default function Lesson_1_4() {
         <Figure caption="Konzervativní pole: práce ze startu do cíle je stejná po obou drahách (přímé i oklikou). Záleží jen na koncových bodech.">
           <svg viewBox="0 0 320 170" className="svg-fig">
             <Defs color={ACCENT} name="arWork" />
-            {/* obě cesty míří do společného cíle, ale hroty rozneseme do různé výšky,
-                aby se nepřekrývaly: přímá končí níž, oklika výš */}
-            {/* přímá cesta */}
-            <line x1="52" y1="124" x2="244" y2="78" stroke={ACCENT} strokeWidth="3" markerEnd="url(#arWork)" />
-            {/* oklika */}
-            <path d="M48,118 C 96,30 200,26 248,44" fill="none" stroke={ACCENT} strokeWidth="3" strokeDasharray="6 5" markerEnd="url(#arWork)" />
-            <text x="150" y="120" fill={TXT} fontSize="12" textAnchor="middle">přímo</text>
-            <text x="138" y="20" fill={TXT} fontSize="12" textAnchor="middle">oklikou — stejná práce</text>
+            {/* obě cesty vychází ze startu a SBÍHAJÍ se do společného cíle;
+                hroty mířime těsně k cíli z různých stran (zdola / shora),
+                aby se markery nepřekrývaly, ale obě jasně končí U cíle */}
+            {/* přímá cesta – těsně pod střed cíle */}
+            <line x1="50" y1="122" x2="270" y2="68" stroke={ACCENT} strokeWidth="3" markerEnd="url(#arWork)" />
+            {/* oklika – obloukem nahoru a dolů těsně nad střed cíle */}
+            <path d="M46,116 C 90,28 210,24 270,52" fill="none" stroke={ACCENT} strokeWidth="3" strokeDasharray="6 5" markerEnd="url(#arWork)" />
+            <text x="148" y="128" fill={TXT} fontSize="12" textAnchor="middle">přímo</text>
+            <text x="140" y="18" fill={TXT} fontSize="12" textAnchor="middle">oklikou — stejná práce</text>
             {/* body start / cíl kreslíme NAD šipky, aby zůstaly čisté */}
             <circle cx="40" cy="128" r="9" fill={EK} />
             <text x="40" y="152" fill={TXT} fontSize="12" textAnchor="middle">start</text>
-            <circle cx="282" cy="60" r="9" fill={EP} />
-            <text x="282" y="40" fill={TXT} fontSize="12" textAnchor="middle">cíl</text>
+            <circle cx="290" cy="60" r="9" fill={EP} />
+            <text x="290" y="40" fill={TXT} fontSize="12" textAnchor="middle">cíl</text>
           </svg>
         </Figure>
       </Section>

@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.7'
 
@@ -54,79 +54,46 @@ export default function Lesson_3_7() {
           elementárních vlnek.</b>
         </p>
 
-        <StepFigure
+        <StepScene
           title="Konstrukce nové vlnoplochy podle Huygense"
-          steps={[
-            {
-              label: 'původní vlnoplocha',
-              caption: (
-                <>
-                  Máme zdroj (červeně) a kolem něj <Term>původní vlnoplochu</Term> (fialově) — všude
-                  na ní má vlnění stejnou fázi.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 260" className="svg-fig">
-                  <circle cx="120" cy="130" r="70" fill="none" stroke={ACC} strokeWidth="2.5" />
-                  <circle cx="120" cy="130" r="5" fill={SRC} />
-                  <text x="120" y="120" fill={SRC} fontSize="13" textAnchor="middle">zdroj</text>
-                  <text x="120" y="225" fill={ACC} fontSize="13" textAnchor="middle">původní vlnoplocha</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'každý bod = zdroj',
-              caption: (
-                <>
-                  Vybereme pár bodů na vlnoploše. <b>Každý z nich je nový elementární zdroj</b> a
-                  vyšle vlastní malou kulovou vlnku (modře).
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 260" className="svg-fig">
-                  <circle cx="120" cy="130" r="70" fill="none" stroke={ACC} strokeWidth="2.5" />
-                  <circle cx="120" cy="130" r="5" fill={SRC} />
-                  {/* body na pravé části vlnoplochy + jejich elementární vlnky */}
-                  {[
-                    [190, 130], [183, 95], [183, 165], [165, 65], [165, 195],
-                  ].map(([cx, cy], k) => (
-                    <g key={k}>
-                      <circle cx={cx} cy={cy} r="3" fill={NEW} />
-                      <circle cx={cx} cy={cy} r="30" fill="none" stroke={NEW} strokeWidth="1.3" opacity="0.85" />
-                    </g>
-                  ))}
-                  <text x="250" y="240" fill={NEW} fontSize="13" textAnchor="middle">elementární vlnky</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'obal = nová vlnoplocha',
-              caption: (
-                <>
-                  Vnější <b>obálka</b> všech těch vlnek (modrá oblouková čára) je <b>nová
-                  vlnoplocha</b>. Vlnění tak postoupilo dál. Tohle je celý princip.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 260" className="svg-fig">
-                  <circle cx="120" cy="130" r="70" fill="none" stroke={ACC} strokeWidth="2" opacity="0.6" />
-                  <circle cx="120" cy="130" r="5" fill={SRC} />
-                  {[
-                    [190, 130], [183, 95], [183, 165], [165, 65], [165, 195],
-                  ].map(([cx, cy], k) => (
-                    <g key={k}>
-                      <circle cx={cx} cy={cy} r="3" fill={NEW} opacity="0.7" />
-                      <circle cx={cx} cy={cy} r="30" fill="none" stroke={NEW} strokeWidth="1" opacity="0.5" />
-                    </g>
-                  ))}
-                  {/* nová vlnoplocha = obálka (poloměr 100) */}
-                  <circle cx="120" cy="130" r="100" fill="none" stroke={NEW} strokeWidth="3" strokeDasharray="0" />
-                  <text x="120" y="245" fill={NEW} fontSize="13" textAnchor="middle">nová vlnoplocha (obálka)</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 260"
+          captions={[
+            <>
+              Máme zdroj (červeně) a kolem něj <Term>původní vlnoplochu</Term> (fialově) — všude
+              na ní má vlnění stejnou fázi.
+            </>,
+            <>
+              Vybereme pár bodů na vlnoploše. <b>Každý z nich je nový elementární zdroj</b> a
+              vyšle vlastní malou kulovou vlnku (modře).
+            </>,
+            <>
+              Vnější <b>obálka</b> všech těch vlnek (modrá oblouková čára) je <b>nová
+              vlnoplocha</b>. Vlnění tak postoupilo dál. Tohle je celý princip.
+            </>,
           ]}
-        />
+        >
+          {/* původní vlnoplocha (ve 3. kroku trochu zeslábne) */}
+          <ACircle cx={120} cy={130} r={70} fill="none" stroke={ACC} strokeWidth={[2.5, 2.5, 2]} opacity={[1, 1, 0.55]} />
+          {/* zdroj */}
+          <ACircle cx={120} cy={130} r={5} fill={SRC} />
+          {/* elementární zdroje na pravé části vlnoplochy + jejich vlnky:
+              body jsou pořád, vlnky se rozrostou z r=0 (krok 1) na r=30 (kroky 2,3) */}
+          {([
+            [190, 130], [183, 95], [183, 165], [165, 65], [165, 195],
+          ] as [number, number][]).map(([cx, cy], k) => (
+            <g key={k}>
+              <ACircle cx={cx} cy={cy} r={3} fill={NEW} opacity={[0, 1, 0.7]} />
+              <ACircle cx={cx} cy={cy} r={[0, 30, 30]} fill="none" stroke={NEW} strokeWidth={[1.3, 1.3, 1]} opacity={[0, 0.85, 0.5]} />
+            </g>
+          ))}
+          {/* nová vlnoplocha = obálka (poloměr 100) — naroste až v posledním kroku */}
+          <ACircle cx={120} cy={130} r={[70, 70, 100]} fill="none" stroke={NEW} strokeWidth={3} opacity={[0, 0, 1]} />
+          {/* popisky */}
+          <AText x={120} y={108} fill={SRC} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>zdroj</AText>
+          <AText x={120} y={225} fill={ACC} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>původní vlnoplocha</AText>
+          <AText x={255} y={245} fill={NEW} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>elementární vlnky</AText>
+          <AText x={120} y={252} fill={NEW} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>nová vlnoplocha (obálka)</AText>
+        </StepScene>
       </Section>
 
       <Section title="Fresnelovo doplnění: inklinační faktor">
@@ -148,8 +115,8 @@ export default function Lesson_3_7() {
             <defs><Arrow id="kf" color={ACC} /><Arrow id="kw" color={MUTED} /></defs>
             <circle cx="150" cy="95" r="5" fill={NEW} />
             {/* dopředu - silná */}
-            <line x1="155" y1="95" x2="340" y2="95" stroke={ACC} strokeWidth="4" markerEnd="url(#kf)" />
-            <text x="300" y="85" fill={ACC} fontSize="13">θ = 0, K = 1</text>
+            <line x1="155" y1="95" x2="330" y2="95" stroke={ACC} strokeWidth="4" markerEnd="url(#kf)" />
+            <text x="250" y="84" fill={ACC} fontSize="13" textAnchor="middle">θ = 0, K = 1</text>
             {/* do strany - slabší */}
             <line x1="152" y1="90" x2="250" y2="35" stroke={ACC} strokeWidth="2.5" markerEnd="url(#kf)" opacity="0.8" />
             <line x1="152" y1="100" x2="250" y2="155" stroke={ACC} strokeWidth="2.5" markerEnd="url(#kf)" opacity="0.8" />
@@ -170,25 +137,25 @@ export default function Lesson_3_7() {
 
         <Figure caption="Ohyb: vlnoplocha projde štěrbinou a za ní se roztáhne do stran (vlnky z okrajů míří i za stěnu), proto se zvuk dostane za roh.">
           <svg viewBox="0 0 420 200" className="svg-fig">
-            {/* rovinné vlnoplochy zleva */}
+            {/* rovinné vlnoplochy zleva (před stěnou) */}
             <g stroke={ACC} strokeWidth="2.5" fill="none">
-              <line x1="30" y1="20" x2="30" y2="180" />
-              <line x1="60" y1="20" x2="60" y2="180" />
-              <line x1="90" y1="20" x2="90" y2="180" />
+              <line x1="30" y1="22" x2="30" y2="178" />
+              <line x1="60" y1="22" x2="60" y2="178" />
+              <line x1="90" y1="22" x2="90" y2="178" />
             </g>
-            <text x="55" y="195" fill={ACC} fontSize="12" textAnchor="middle">rovinná vlna</text>
-            {/* stěna se štěrbinou */}
+            <text x="60" y="195" fill={ACC} fontSize="12" textAnchor="middle">rovinná vlna</text>
+            {/* stěna se štěrbinou (štěrbina y = 95…115, střed 105) */}
             <rect x="150" y="20" width="10" height="75" fill={MUTED} />
             <rect x="150" y="115" width="10" height="65" fill={MUTED} />
-            <text x="200" y="15" fill={MUTED} fontSize="12">štěrbina</text>
-            {/* za štěrbinou: půlkruhové vlnoplochy */}
+            <text x="178" y="14" fill={MUTED} fontSize="12">štěrbina</text>
+            {/* za štěrbinou: půlkruhové vlnoplochy (jen napravo od stěny, ze středu štěrbiny) */}
             <g stroke={NEW} strokeWidth="2" fill="none">
-              <path d="M155,105 m-0,0 a40,40 0 0 1 80,0 a40,40 0 0 1 -80,0" opacity="0" />
-              <circle cx="155" cy="105" r="35" />
-              <circle cx="155" cy="105" r="60" />
-              <circle cx="155" cy="105" r="85" />
+              <path d="M160,75 A30,30 0 0 1 160,135" />
+              <path d="M160,50 A55,55 0 0 1 160,160" />
+              <path d="M160,27 A78,78 0 0 1 160,183" />
             </g>
-            <text x="300" y="105" fill={NEW} fontSize="13">vlna se ohýbá za stěnu</text>
+            <text x="312" y="100" fill={NEW} fontSize="12.5" textAnchor="middle">vlna se ohýbá</text>
+            <text x="312" y="120" fill={NEW} fontSize="12.5" textAnchor="middle">za stěnu</text>
           </svg>
         </Figure>
       </Section>
@@ -200,86 +167,51 @@ export default function Lesson_3_7() {
           <M>{'f_0'}</M> se nemění u zdroje — mění se to, <b>jak hustě k tobě vlnoplochy dorazí</b>.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Sanitka: proč se mění tón"
-          steps={[
-            {
-              label: 'zdroj stojí',
-              caption: (
-                <>
-                  Stojící zdroj vysílá vlnoplochy <b>pravidelně do všech stran</b> — vzdálenost mezi
-                  nimi (<Concept id="vlnova-delka">vlnová délka</Concept> <M>{'\\lambda'}</M>) je všude stejná. Vlevo i vpravo slyšíš{' '}
-                  <b>stejný tón</b> <M>{'f_0'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <g fill="none" stroke={ACC} strokeWidth="2">
-                    {[25, 55, 85, 115].map((r) => <circle key={r} cx="210" cy="110" r={r} />)}
-                  </g>
-                  <circle cx="210" cy="110" r="6" fill={SRC} />
-                  <text x="210" y="205" fill={MUTED} fontSize="13" textAnchor="middle">zdroj v klidu — λ všude stejná</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'zdroj se hýbe',
-              caption: (
-                <>
-                  Zdroj jede <b>doprava</b>. Každou novou vlnoplochu vyšle už z trochu jiného místa,
-                  takže se <b>vlnoplochy vepředu nahustí</b> (kratší <M>{'\\lambda'}</M>) a{' '}
-                  <b>vzadu naředí</b> (delší <M>{'\\lambda'}</M>).
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <defs><Arrow id="dv" color={SRC} /></defs>
-                  {/* nahuštěné vlnoplochy vpředu (vpravo), naředěné vzadu (vlevo) - posunuté středy */}
-                  <g fill="none" strokeWidth="2">
-                    <circle cx="160" cy="110" r="115" stroke={LOW} />
-                    <circle cx="175" cy="110" r="85" stroke={LOW} />
-                    <circle cx="190" cy="110" r="55" stroke={ACC} />
-                    <circle cx="205" cy="110" r="25" stroke={HIGH} />
-                  </g>
-                  <circle cx="218" cy="110" r="6" fill={SRC} />
-                  <line x1="226" y1="110" x2="270" y2="110" stroke={SRC} strokeWidth="3" markerEnd="url(#dv)" />
-                  <text x="300" y="60" fill={HIGH} fontSize="12" textAnchor="middle">vepředu nahuštěno</text>
-                  <text x="90" y="60" fill={LOW} fontSize="12" textAnchor="middle">vzadu naředěno</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'co slyšíš',
-              caption: (
-                <>
-                  <b>Před</b> sanitkou (blíží se k tobě) jsou vlnoplochy hustší →{' '}
-                  <b>vyšší frekvence</b>, vyšší tón.{' '}
-                  <b>Za</b> sanitkou (vzdaluje se) jsou řidší → <b>nižší frekvence</b>, nižší tón.
-                  Proto ten „íííííjóóóóu" při projetí kolem.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <defs><Arrow id="dv2" color={SRC} /></defs>
-                  <g fill="none" strokeWidth="2">
-                    <circle cx="160" cy="110" r="115" stroke={LOW} />
-                    <circle cx="175" cy="110" r="85" stroke={LOW} />
-                    <circle cx="190" cy="110" r="55" stroke={ACC} />
-                    <circle cx="205" cy="110" r="25" stroke={HIGH} />
-                  </g>
-                  <circle cx="218" cy="110" r="6" fill={SRC} />
-                  <line x1="226" y1="110" x2="265" y2="110" stroke={SRC} strokeWidth="3" markerEnd="url(#dv2)" />
-                  {/* pozorovatel vepředu */}
-                  <text x="360" y="105" fontSize="20" textAnchor="middle">🧍</text>
-                  <text x="360" y="135" fill={HIGH} fontSize="12" textAnchor="middle">vyšší tón</text>
-                  {/* pozorovatel vzadu */}
-                  <text x="55" y="105" fontSize="20" textAnchor="middle">🧍</text>
-                  <text x="55" y="135" fill={LOW} fontSize="12" textAnchor="middle">nižší tón</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 232"
+          captions={[
+            <>
+              Stojící zdroj vysílá vlnoplochy <b>pravidelně do všech stran</b> — vzdálenost mezi
+              nimi (<Concept id="vlnova-delka">vlnová délka</Concept> <M>{'\\lambda'}</M>) je všude stejná. Vlevo i vpravo slyšíš{' '}
+              <b>stejný tón</b> <M>{'f_0'}</M>.
+            </>,
+            <>
+              Zdroj jede <b>doprava</b>. Každou novou vlnoplochu vyšle už z trochu jiného místa,
+              takže se <b>vlnoplochy vepředu nahustí</b> (kratší <M>{'\\lambda'}</M>) a{' '}
+              <b>vzadu naředí</b> (delší <M>{'\\lambda'}</M>).
+            </>,
+            <>
+              <b>Před</b> sanitkou (blíží se k tobě) jsou vlnoplochy hustší →{' '}
+              <b>vyšší frekvence</b>, vyšší tón.{' '}
+              <b>Za</b> sanitkou (vzdaluje se) jsou řidší → <b>nižší frekvence</b>, nižší tón.
+              Proto ten „íííííjóóóóu" při projetí kolem.
+            </>,
           ]}
-        />
+        >
+          <defs><Arrow id="dv" color={SRC} /></defs>
+          {/* 4 vlnoplochy: v klidu soustředné (cx 210, fialové), v pohybu se středy posunou
+              doleva → vpravo se nahustí (kratší λ), vlevo naředí (delší λ); barvy: HIGH vepředu, LOW vzadu */}
+          <ACircle cx={[210, 160, 160]} cy={105} r={105} fill="none" strokeWidth={2} stroke={[ACC, LOW, LOW]} />
+          <ACircle cx={[210, 175, 175]} cy={105} r={78} fill="none" strokeWidth={2} stroke={[ACC, LOW, LOW]} />
+          <ACircle cx={[210, 190, 190]} cy={105} r={51} fill="none" strokeWidth={2} stroke={[ACC, ACC, ACC]} />
+          <ACircle cx={[210, 205, 205]} cy={105} r={24} fill="none" strokeWidth={2} stroke={[ACC, HIGH, HIGH]} />
+          {/* zdroj (sanitka) – v pohybu se posune trochu doprava */}
+          <ACircle cx={[210, 218, 218]} cy={105} r={6} fill={SRC} />
+          {/* vektor rychlosti zdroje – jen když se hýbe */}
+          <ALine x1={226} y1={105} x2={270} y2={105} stroke={SRC} strokeWidth={3} markerEnd="url(#dv)" opacity={[0, 1, 1]} />
+
+          {/* popisek klidu – pod vlnoplochami, mimo nejvyšší kružnici */}
+          <AText x={210} y={226} fill={MUTED} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>zdroj v klidu — λ všude stejná</AText>
+          {/* popisky pohybu – jen krok 2 (nad vlnoplochami, mimo zelený oblouk) */}
+          <AText x={324} y={36} fill={HIGH} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>vepředu nahuštěno</AText>
+          <AText x={86} y={20} fill={LOW} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>vzadu naředěno</AText>
+          {/* pozorovatelé + tóny – jen krok 3 */}
+          <AText x={372} y={99} fontSize="20" textAnchor="middle" opacity={[0, 0, 1]}>🧍</AText>
+          <AText x={372} y={129} fill={HIGH} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>vyšší tón</AText>
+          <AText x={40} y={99} fontSize="20" textAnchor="middle" opacity={[0, 0, 1]}>🧍</AText>
+          <AText x={40} y={129} fill={LOW} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>nižší tón</AText>
+        </StepScene>
 
         <p>
           Vzorečky pro zjednodušené případy (<M>{'w'}</M> = rychlost vlnění v prostředí,{' '}

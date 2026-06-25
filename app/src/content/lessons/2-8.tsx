@@ -33,17 +33,6 @@ const NPOLE = '#fb7185' // sever magnetu (červená)
 const SPOLE = '#60a5fa' // jih magnetu (modrá)
 const FLUX = '#34d399'  // siločáry pole B (zelená)
 
-/* Šipky pro SVG. */
-function Defs({ color, name = 'ar' }: { color: string; name?: string }) {
-  return (
-    <defs>
-      <marker id={name} markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-        <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
-      </marker>
-    </defs>
-  )
-}
-
 /* Cívka s nesvítící žárovkou (statický skelet drátu). Glow se animuje zvlášť. */
 function Coil() {
   return (
@@ -98,16 +87,19 @@ export default function Lesson_2_8() {
         </p>
         <Figure caption="Tok závisí na úhlu α: čím víc je plocha „čelem“ k poli (α = 0, cos α = 1), tím větší tok. Když je plocha „naležato“ podél pole (α = 90°), tok je nulový.">
           <svg viewBox="0 0 360 170" className="svg-fig">
-            <Defs color={FLUX} />
+            <defs>
+              <marker id="ar1b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FLUX} /></marker>
+              <marker id="ar1s" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={TXT} /></marker>
+            </defs>
             {/* siločáry pole B doprava */}
             {[40, 70, 100, 130].map((y) => (
-              <line key={y} x1="20" y1={y} x2="340" y2={y} stroke={FLUX} strokeWidth="2.5" markerEnd="url(#ar)" opacity="0.8" />
+              <line key={y} x1="20" y1={y} x2="340" y2={y} stroke={FLUX} strokeWidth="2.5" markerEnd="url(#ar1b)" opacity="0.8" />
             ))}
             <text x="40" y="22" fill={FLUX} fontSize="14" fontWeight="600">B</text>
             {/* smyčka čelem k poli (kolmo na siločáry) */}
             <rect x="150" y="30" width="14" height="110" rx="3" fill={ACC} opacity="0.85" />
             {/* vektor plochy S podél pole */}
-            <line x1="164" y1="85" x2="240" y2="85" stroke={TXT} strokeWidth="3" markerEnd="url(#ar)" />
+            <line x1="164" y1="85" x2="240" y2="85" stroke={TXT} strokeWidth="3" markerEnd="url(#ar1s)" />
             <text x="210" y="76" fill={TXT} fontSize="14" textAnchor="middle">S</text>
             <text x="200" y="160" fill={MUTED} fontSize="13" textAnchor="middle">α = 0 → Φ = B·S (maximum)</text>
           </svg>
@@ -192,28 +184,29 @@ export default function Lesson_2_8() {
         </ol>
         <Figure caption="Tři páky, kterými se dá tok Φ = B·S·cos α změnit: síla pole B, velikost plochy S, nebo úhel α.">
           <svg viewBox="0 0 420 150" className="svg-fig">
-            <Defs color={ACC} />
             <defs>
-              <marker id="arRot" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill={MUTED} /></marker>
+              <marker id="ar3rot" markerWidth="8" markerHeight="8" refX="6" refY="4" orient="auto"><path d="M0,0 L8,4 L0,8 z" fill={MUTED} /></marker>
+              <marker id="ar3b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={NPOLE} /></marker>
+              <marker id="ar3s" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={TXT} /></marker>
             </defs>
             {/* 1) změna B */}
             <g transform="translate(0,0)">
               <rect x="20" y="50" width="40" height="50" rx="4" fill="none" stroke={ACC} strokeWidth="2.5" />
-              <line x1="78" y1="75" x2="62" y2="75" stroke={NPOLE} strokeWidth="4" markerEnd="url(#ar)" />
+              <line x1="78" y1="75" x2="62" y2="75" stroke={NPOLE} strokeWidth="4" markerEnd="url(#ar3b)" />
               <text x="45" y="125" fill={TXT} fontSize="13" textAnchor="middle">1) měním B</text>
             </g>
             {/* 2) změna S */}
             <g transform="translate(140,0)">
               <rect x="10" y="50" width="34" height="50" rx="4" fill="none" stroke={ACC} strokeWidth="2.5" />
               <rect x="44" y="50" width="34" height="50" rx="4" fill="none" stroke={ACC} strokeWidth="2.5" strokeDasharray="4 4" />
-              <line x1="44" y1="40" x2="78" y2="40" stroke={TXT} strokeWidth="2.5" markerEnd="url(#ar)" />
+              <line x1="44" y1="40" x2="78" y2="40" stroke={TXT} strokeWidth="2.5" markerEnd="url(#ar3s)" />
               <text x="45" y="125" fill={TXT} fontSize="13" textAnchor="middle">2) měním S</text>
             </g>
             {/* 3) změna α */}
             <g transform="translate(290,0)">
               <rect x="30" y="50" width="14" height="50" rx="3" fill="none" stroke={ACC} strokeWidth="2.5" transform="rotate(25 37 75)" />
               {/* otáčecí šipka vpravo od rámečku, mimo grafiku */}
-              <path d="M62,96 a26,26 0 0 0 8,-44" fill="none" stroke={MUTED} strokeWidth="2" markerEnd="url(#arRot)" />
+              <path d="M62,96 a26,26 0 0 0 8,-44" fill="none" stroke={MUTED} strokeWidth="2" markerEnd="url(#ar3rot)" />
               <text x="50" y="125" fill={TXT} fontSize="13" textAnchor="middle">3) měním α</text>
             </g>
           </svg>

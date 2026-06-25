@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, ARect, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.2'
 
@@ -64,68 +64,51 @@ export default function Lesson_5_2() {
           rozložení nukleonů.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Štěpení v kapkovém modelu"
-          steps={[
-            {
-              label: 'klidná kapka',
-              caption: <>Těžké jádro je jako kulatá kapka — drží ho pohromadě přitažlivé <Concept id="jaderne-sily">jaderné síly</Concept> (povrchové napětí kapky).</>,
-              content: (
-                <svg viewBox="0 0 460 150" className="svg-fig">
-                  <circle cx="120" cy="75" r="42" fill="none" stroke={ACCENT} strokeWidth="3" />
-                  <circle cx="108" cy="64" r="8" fill={PROTON} />
-                  <circle cx="132" cy="70" r="8" fill={NEUTRON} />
-                  <circle cx="115" cy="88" r="8" fill={NEUTRON} />
-                  <circle cx="135" cy="90" r="8" fill={PROTON} />
-                  <circle cx="100" cy="82" r="8" fill={PROTON} />
-                  <text x="120" y="138" fill={TXT} fontSize="14" textAnchor="middle">jádro = kapka</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'excitace + deformace',
-              caption: <>Jádro pohltí energii (např. neutron), rozkmitá se a <b>protáhne do tvaru činky</b>. Elektrické odpuzování protonů táhne oba konce od sebe.</>,
-              content: (
-                <svg viewBox="0 0 460 150" className="svg-fig">
-                  <Defs color={ENERGY} name="arE" />
-                  <path
-                    d="M150,75 C150,48 185,46 205,58 C222,68 248,68 265,58 C285,46 320,48 320,75 C320,102 285,104 265,92 C248,82 222,82 205,92 C185,104 150,102 150,75 Z"
-                    fill="none"
-                    stroke={ACCENT}
-                    strokeWidth="3"
-                  />
-                  <circle cx="178" cy="75" r="8" fill={PROTON} />
-                  <circle cx="190" cy="64" r="8" fill={NEUTRON} />
-                  <circle cx="290" cy="75" r="8" fill={PROTON} />
-                  <circle cx="278" cy="86" r="8" fill={NEUTRON} />
-                  <line x1="150" y1="30" x2="120" y2="55" stroke={ENERGY} strokeWidth="3" markerEnd="url(#arE)" />
-                  <text x="120" y="24" fill={ENERGY} fontSize="13" textAnchor="middle">dodaná E</text>
-                  <text x="235" y="138" fill={TXT} fontSize="14" textAnchor="middle">deformace (činka)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rozdělení + energie',
-              caption: <>Když se konce vzdálí natolik, že už je krátkodosahové jaderné síly neudrží, kapka praskne na dvě lehčí jádra a <b>uvolní se energie</b> (nová jádra jsou stabilnější).</>,
-              content: (
-                <svg viewBox="0 0 460 150" className="svg-fig">
-                  <Defs color={ENERGY} name="arE2" />
-                  <circle cx="140" cy="75" r="28" fill="none" stroke={ACCENT} strokeWidth="3" />
-                  <circle cx="132" cy="70" r="7" fill={PROTON} />
-                  <circle cx="150" cy="80" r="7" fill={NEUTRON} />
-                  <text x="140" y="125" fill={TXT} fontSize="13" textAnchor="middle">jádro b₁</text>
-                  <circle cx="320" cy="75" r="28" fill="none" stroke={ACCENT} strokeWidth="3" />
-                  <circle cx="312" cy="70" r="7" fill={NEUTRON} />
-                  <circle cx="330" cy="80" r="7" fill={PROTON} />
-                  <text x="320" y="125" fill={TXT} fontSize="13" textAnchor="middle">jádro b₂</text>
-                  <line x1="172" y1="60" x2="135" y2="40" stroke={ENERGY} strokeWidth="3" markerEnd="url(#arE2)" />
-                  <line x1="288" y1="60" x2="325" y2="40" stroke={ENERGY} strokeWidth="3" markerEnd="url(#arE2)" />
-                  <text x="230" y="48" fill={ENERGY} fontSize="14" textAnchor="middle">uvolněná energie</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 160"
+          captions={[
+            <>Těžké jádro je jako kulatá kapka — drží ho pohromadě přitažlivé <Concept id="jaderne-sily">jaderné síly</Concept> (povrchové napětí kapky).</>,
+            <>Jádro pohltí energii (např. neutron), rozkmitá se a <b>protáhne do tvaru činky</b>. Elektrické odpuzování protonů táhne oba konce od sebe.</>,
+            <>Když se konce vzdálí natolik, že už je krátkodosahové jaderné síly neudrží, kapka praskne na dvě lehčí jádra a <b>uvolní se energie</b> (nová jádra jsou stabilnější).</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="arE" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ENERGY} /></marker>
+          </defs>
+
+          {/* obrys kapky: kulatý → činka → (schová se, místo něj dvě kolečka) */}
+          <ACircle cx={230} cy={80} r={[44, 44, 44]} fill="none" stroke={ACCENT} strokeWidth={3} opacity={[1, 0, 0]} />
+          <APath
+            d="M150,80 C150,52 188,50 210,62 C228,72 252,72 270,62 C292,50 330,52 330,80 C330,108 292,110 270,98 C252,88 228,88 210,98 C188,110 150,108 150,80 Z"
+            fill="none" stroke={ACCENT} strokeWidth={3} opacity={[0, 1, 0]}
+          />
+          {/* dvě výsledná jádra (objeví se v posledním kroku) */}
+          <ACircle cx={140} cy={80} r={28} fill="none" stroke={ACCENT} strokeWidth={3} opacity={[0, 0, 1]} />
+          <ACircle cx={330} cy={80} r={28} fill="none" stroke={ACCENT} strokeWidth={3} opacity={[0, 0, 1]} />
+
+          {/* 5 nukleonů — putují z klubíčka do dvou hromádek */}
+          <ACircle cx={[218, 184, 132]} cy={[68, 80, 74]} r={8} fill={PROTON} />
+          <ACircle cx={[242, 198, 150]} cy={[74, 66, 86]} r={8} fill={NEUTRON} />
+          <ACircle cx={[225, 280, 320]} cy={[92, 78, 72]} r={8} fill={NEUTRON} />
+          <ACircle cx={[245, 296, 340]} cy={[94, 90, 86]} r={8} fill={PROTON} />
+          <ACircle cx={[210, 188, 142]} cy={[86, 96, 92]} r={8} fill={PROTON} />
+
+          {/* popisky pod kresbou */}
+          <AText x={230} y={148} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>jádro = kapka</AText>
+          <AText x={240} y={148} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>deformace (činka)</AText>
+          <AText x={140} y={134} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>jádro b₁</AText>
+          <AText x={330} y={134} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>jádro b₂</AText>
+
+          {/* krok 2: dodaná energie (šipka míří do kapky) */}
+          <ALine x1={92} y1={26} x2={150} y2={56} stroke={ENERGY} strokeWidth={3} markerEnd="url(#arE)" opacity={[0, 1, 0]} />
+          <AText x={90} y={20} fill={ENERGY} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>dodaná E</AText>
+
+          {/* krok 3: uvolněná energie ven z obou jader */}
+          <ALine x1={140} y1={52} x2={108} y2={26} stroke={ENERGY} strokeWidth={3} markerEnd="url(#arE)" opacity={[0, 0, 1]} />
+          <ALine x1={330} y1={52} x2={362} y2={26} stroke={ENERGY} strokeWidth={3} markerEnd="url(#arE)" opacity={[0, 0, 1]} />
+          <AText x={235} y={26} fill={ENERGY} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>uvolněná energie</AText>
+        </StepScene>
         <p style={{ marginTop: '0.6em' }}>
           <span style={{ color: PROTON }}>●</span> proton &nbsp;&nbsp;
           <span style={{ color: NEUTRON }}>●</span> neutron
@@ -194,59 +177,62 @@ export default function Lesson_5_2() {
           vyzářilo, když vzniklo.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Proč jádro váží míň: hmotnostní úbytek"
-          steps={[
-            {
-              label: 'nukleony zvlášť',
-              caption: <>Sečteme hmotnosti všech <M>{'Z'}</M> protonů a <M>{'N'}</M> neutronů <b>jako volných částic</b>. To je horní hranice hmotnosti.</>,
-              content: (
-                <svg viewBox="0 0 440 140" className="svg-fig">
-                  <circle cx="70" cy="50" r="11" fill={PROTON} />
-                  <circle cx="110" cy="50" r="11" fill={NEUTRON} />
-                  <circle cx="150" cy="50" r="11" fill={PROTON} />
-                  <circle cx="90" cy="85" r="11" fill={NEUTRON} />
-                  <circle cx="130" cy="85" r="11" fill={PROTON} />
-                  <text x="110" y="120" fill={TXT} fontSize="14" textAnchor="middle">volné nukleony</text>
-                  <text x="300" y="68" fill={MUTED} fontSize="16" textAnchor="middle">hmotnost = N·mₙ + Z·mₚ</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'složíme jádro',
-              caption: <>Když je spojíme do jádra, vyzáří se <b>vazebná energie</b> <M>{'E_V'}</M>. S energií odejde i kousek hmoty.</>,
-              content: (
-                <svg viewBox="0 0 440 140" className="svg-fig">
-                  <Defs color={ENERGY} name="arU" />
-                  <circle cx="110" cy="65" r="34" fill="none" stroke={ACCENT} strokeWidth="3" />
-                  <circle cx="98" cy="56" r="9" fill={PROTON} />
-                  <circle cx="122" cy="60" r="9" fill={NEUTRON} />
-                  <circle cx="105" cy="78" r="9" fill={PROTON} />
-                  <circle cx="125" cy="80" r="9" fill={NEUTRON} />
-                  <circle cx="90" cy="72" r="9" fill={PROTON} />
-                  <line x1="148" y1="45" x2="195" y2="25" stroke={ENERGY} strokeWidth="3" markerEnd="url(#arU)" />
-                  <text x="255" y="28" fill={ENERGY} fontSize="15" textAnchor="middle">vyzáří E_V</text>
-                  <text x="300" y="78" fill={MUTED} fontSize="16" textAnchor="middle">hmotnost jádra = Mₓ</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'rozdíl = Δm',
-              caption: <>Jádro je lehčí: <M>{'\\Delta m = (N m_n + Z m_p) - M_X > 0'}</M>. A platí <M>{'E_V = \\Delta m\\,c^2'}</M>. Větší <M>{'\\Delta m'}</M> na nukleon = stabilnější jádro.</>,
-              content: (
-                <svg viewBox="0 0 440 140" className="svg-fig">
-                  <rect x="60" y="40" width="150" height="34" rx="5" fill={MUTED} opacity="0.5" />
-                  <text x="135" y="62" fill={TXT} fontSize="14" textAnchor="middle">nukleony zvlášť</text>
-                  <rect x="60" y="88" width="120" height="34" rx="5" fill={ACCENT} opacity="0.55" />
-                  <text x="120" y="110" fill={TXT} fontSize="14" textAnchor="middle">jádro Mₓ</text>
-                  <line x1="183" y1="105" x2="208" y2="105" stroke={ENERGY} strokeWidth="2" />
-                  <line x1="213" y1="57" x2="213" y2="105" stroke={ENERGY} strokeWidth="2" />
-                  <text x="320" y="92" fill={ENERGY} fontSize="16" textAnchor="middle">Δm → E_V = Δm·c²</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 150"
+          captions={[
+            <>Sečteme hmotnosti všech <M>{'Z'}</M> protonů a <M>{'N'}</M> neutronů <b>jako volných částic</b>. To je horní hranice hmotnosti.</>,
+            <>Když je spojíme do jádra, vyzáří se <b>vazebná energie</b> <M>{'E_V'}</M>. S energií odejde i kousek hmoty.</>,
+            <>Jádro je lehčí: <M>{'\\Delta m = (N m_n + Z m_p) - M_X > 0'}</M>. A platí <M>{'E_V = \\Delta m\\,c^2'}</M>. Větší <M>{'\\Delta m'}</M> na nukleon = stabilnější jádro.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="arU" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ENERGY} /></marker>
+          </defs>
+
+          {/* zelený obrys jádra — objeví se, až nukleony srostou (krok 2); v kroku 3 zmizí (ukazujeme sloupce) */}
+          <ACircle cx={110} cy={70} r={34} fill="none" stroke={ACCENT} strokeWidth={3} opacity={[0, 1, 0]} />
+
+          {/* 5 nukleonů: rozsypané → stlačená do jádra → schovaná pod sloupcem */}
+          <ACircle cx={[64, 98, 110]} cy={[52, 60, 56]} r={[11, 9, 9]} fill={PROTON} opacity={[1, 1, 0]} />
+          <ACircle cx={[104, 122, 130]} cy={[52, 64, 56]} r={[11, 9, 9]} fill={NEUTRON} opacity={[1, 1, 0]} />
+          <ACircle cx={[144, 105, 120]} cy={[52, 82, 56]} r={[11, 9, 9]} fill={PROTON} opacity={[1, 1, 0]} />
+          <ACircle cx={[84, 125, 110]} cy={[88, 84, 84]} r={[11, 9, 9]} fill={NEUTRON} opacity={[1, 1, 0]} />
+          <ACircle cx={[124, 90, 100]} cy={[88, 74, 84]} r={[11, 9, 9]} fill={PROTON} opacity={[1, 1, 0]} />
+
+          {/* popisek pod kresbou (krok 1) */}
+          <AText x={104} y={130} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>volné nukleony</AText>
+
+          {/* krok 1: hmotnost součtem nukleonů */}
+          <AText x={310} y={72} fill={MUTED} fontSize="16" textAnchor="middle" opacity={[1, 0, 0]}>
+            hmotnost = N·mₙ + Z·mₚ
+          </AText>
+
+          {/* krok 2: vyzáří vazebnou energii + hmotnost jádra */}
+          <ALine x1={148} y1={48} x2={196} y2={26} stroke={ENERGY} strokeWidth={3} markerEnd="url(#arU)" opacity={[0, 1, 0]} />
+          <AText x={258} y={30} fill={ENERGY} fontSize="15" textAnchor="middle" opacity={[0, 1, 0]}>
+            vyzáří E
+            <tspan dy="4" fontSize="11">V</tspan>
+          </AText>
+          <AText x={310} y={84} fill={MUTED} fontSize="16" textAnchor="middle" opacity={[0, 1, 0]}>hmotnost jádra = Mₓ</AText>
+
+          {/* krok 3: porovnání sloupců (objeví se na konci) — horní = nukleony zvlášť (delší),
+              dolní = jádro (kratší); rozdíl délek = hmotnostní úbytek Δm */}
+          <ARect x={60} y={36} width={[0, 0, 175]} height={32} rx={5} fill={MUTED} opacity={[0, 0, 0.5]} />
+          <AText x={147} y={57} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>nukleony zvlášť</AText>
+          <ARect x={60} y={84} width={[0, 0, 140]} height={32} rx={5} fill={ACCENT} opacity={[0, 0, 0.55]} />
+          <AText x={130} y={105} fill={TXT} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>jádro Mₓ</AText>
+          {/* svorka označující rozdíl délek = Δm (mezi pravými konci sloupců) */}
+          <ALine x1={200} y1={100} x2={235} y2={100} stroke={ENERGY} strokeWidth={2} opacity={[0, 0, 1]} />
+          <ALine x1={235} y1={52} x2={235} y2={100} stroke={ENERGY} strokeWidth={2} opacity={[0, 0, 1]} />
+          <ALine x1={235} y1={52} x2={258} y2={52} stroke={ENERGY} strokeWidth={2} opacity={[0, 0, 1]} />
+          <AText x={310} y={56} fill={ENERGY} fontSize="15" textAnchor="middle" opacity={[0, 0, 1]}>= Δm</AText>
+          <AText x={300} y={138} fill={ENERGY} fontSize="15" textAnchor="middle" opacity={[0, 0, 1]}>
+            E
+            <tspan dy="4" fontSize="11">V</tspan>
+            <tspan dy="-4"> = Δm·c²</tspan>
+          </AText>
+        </StepScene>
       </Section>
 
       <Section title="Stabilita a kdy se uvolní jaderná energie">
@@ -271,19 +257,19 @@ export default function Lesson_5_2() {
             <line x1="45" y1="180" x2="400" y2="180" stroke={MUTED} strokeWidth="2" markerEnd="url(#arC)" />
             <line x1="45" y1="180" x2="45" y2="20" stroke={MUTED} strokeWidth="2" markerEnd="url(#arC)" />
             <text x="395" y="200" fill={TXT} fontSize="13" textAnchor="end">A (počet nukleonů)</text>
-            <text x="50" y="18" fill={TXT} fontSize="13">E_V/A</text>
+            <text x="50" y="18" fill={TXT} fontSize="13">E<tspan dy="3" fontSize="10">V</tspan><tspan dy="-3">/A</tspan></text>
             {/* křivka: prudký vzestup, vrchol u ~50-60, pozvolný pokles */}
             <path d="M55,170 C75,70 110,55 150,52 C200,49 240,60 300,80 C340,93 370,103 390,112"
                   fill="none" stroke={ACCENT} strokeWidth="3" />
             {/* vrchol */}
             <circle cx="150" cy="52" r="4" fill={ENERGY} />
             <text x="150" y="42" fill={ENERGY} fontSize="13" textAnchor="middle">vrchol (Fe)</text>
-            {/* syntéza vlevo */}
-            <line x1="95" y1="135" x2="135" y2="75" stroke={NEUTRON} strokeWidth="2.5" markerEnd="url(#arC)" />
-            <text x="80" y="150" fill={NEUTRON} fontSize="13" textAnchor="middle">syntéza →</text>
-            {/* štěpení vpravo */}
-            <line x1="330" y1="95" x2="200" y2="58" stroke={PROTON} strokeWidth="2.5" markerEnd="url(#arC)" />
-            <text x="345" y="90" fill={PROTON} fontSize="13" textAnchor="middle">← štěpení</text>
+            {/* syntéza vlevo — šipka pod křivkou míří k vrcholu */}
+            <line x1="90" y1="150" x2="128" y2="78" stroke={NEUTRON} strokeWidth="2.5" markerEnd="url(#arC)" />
+            <text x="78" y="167" fill={NEUTRON} fontSize="13" textAnchor="middle">syntéza →</text>
+            {/* štěpení vpravo — šipka pod klesající větví míří k vrcholu */}
+            <line x1="360" y1="140" x2="178" y2="62" stroke={PROTON} strokeWidth="2.5" markerEnd="url(#arC)" />
+            <text x="368" y="150" fill={PROTON} fontSize="13" textAnchor="middle">← štěpení</text>
           </svg>
         </Figure>
       </Section>

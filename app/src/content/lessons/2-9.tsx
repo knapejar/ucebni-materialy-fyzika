@@ -168,32 +168,32 @@ export default function Lesson() {
           <ALine x1={195} y1={145} x2={195} y2={180} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[1, 0, 0]} />
           <AText x={208} y={172} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[1, 0, 0]}>F₄</AText>
 
-          {/* ——— smyčka z boku jako úsečka — rotuje z nakloněné (krok 2) do svislé (krok 3) ——— */}
-          {/* dolní konec úsečky */}
-          <ACircle cx={[150, 150, 175]} cy={[150, 150, 60]} r={4} fill={WIRE} opacity={[0, 1, 1]} />
-          {/* horní konec úsečky */}
-          <ACircle cx={[240, 240, 175]} cy={[70, 70, 160]} r={4} fill={WIRE} opacity={[0, 1, 1]} />
+          {/* ——— smyčka z boku jako úsečka — rotuje z nakloněné „\" (krok 2) do svislé (krok 3) ——— */}
+          {/* horní (levý) konec úsečky → nahoru */}
+          <ACircle cx={[155, 155, 195]} cy={[70, 70, 60]} r={4} fill={WIRE} opacity={[0, 1, 1]} />
+          {/* dolní (pravý) konec úsečky → dolů */}
+          <ACircle cx={[235, 235, 195]} cy={[150, 150, 160]} r={4} fill={WIRE} opacity={[0, 1, 1]} />
           {/* tělo úsečky (smyčka z boku) */}
-          <ALine x1={[150, 150, 175]} y1={[150, 150, 60]} x2={[240, 240, 175]} y2={[70, 70, 160]} stroke={WIRE} strokeWidth={4} opacity={[0, 1, 1]} />
+          <ALine x1={[155, 155, 195]} y1={[70, 70, 60]} x2={[235, 235, 195]} y2={[150, 150, 160]} stroke={WIRE} strokeWidth={4} opacity={[0, 1, 1]} />
 
-          {/* normála S (krok 2) — kolmá na úsečku, mizí v kroku 3 */}
-          <ALine x1={195} y1={110} x2={150} y2={62} stroke={MOMENT} strokeWidth={3} markerEnd="url(#ar-mom)" opacity={[0, 1, 0]} />
-          <AText x={150} y={54} fill={MOMENT} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>S (normála)</AText>
+          {/* normála S (krok 2) — kolmá na úsečku, míří vzhůru-vpravo, mizí v kroku 3 */}
+          <ALine x1={195} y1={110} x2={233} y2={74} stroke={MOMENT} strokeWidth={3} markerEnd="url(#ar-mom)" opacity={[0, 1, 0]} />
+          <AText x={236} y={66} fill={MOMENT} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>S (normála)</AText>
 
-          {/* F1 dolů na spodním konci (krok 2) */}
-          <ALine x1={150} y1={150} x2={150} y2={188} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[0, 1, 0]} />
-          <AText x={122} y={182} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>F₁</AText>
-          {/* F3 nahoru na horním konci (krok 2) */}
-          <ALine x1={240} y1={70} x2={240} y2={36} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[0, 1, 0]} />
-          <AText x={250} y={52} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>F₃</AText>
+          {/* F3 nahoru na horním (levém) konci (krok 2) */}
+          <ALine x1={155} y1={70} x2={155} y2={36} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[0, 1, 0]} />
+          <AText x={125} y={52} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>F₃</AText>
+          {/* F1 dolů na dolním (pravém) konci (krok 2) */}
+          <ALine x1={235} y1={150} x2={235} y2={188} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-force)" opacity={[0, 1, 0]} />
+          <AText x={258} y={166} fill={FORCE} fontSize="13" fontStyle="italic" opacity={[0, 1, 0]}>F₁</AText>
 
-          {/* rotační šipka „otáčí" (krok 2) */}
-          <APath d="M285,150 A42,42 0 0 1 305,96" fill="none" stroke={MOMENT} strokeWidth={2.5} markerEnd="url(#ar-mom)" opacity={[0, 1, 0]} />
-          <AText x={300} y={140} fill={MOMENT} fontSize="13" opacity={[0, 1, 0]}>otáčí</AText>
+          {/* rotační šipka „otáčí" (krok 2) — po směru hodin: vpravo dolů (pravá strana klesá, levá stoupá) */}
+          <APath d="M286,68 A44,44 0 0 1 300,150" fill="none" stroke={MOMENT} strokeWidth={2.5} markerEnd="url(#ar-mom)" opacity={[0, 1, 0]} />
+          <AText x={312} y={98} fill={MOMENT} fontSize="13" opacity={[0, 1, 0]}>otáčí</AText>
 
           {/* ——— KROK 3: magnetický moment m podél pole (doprava) ——— */}
-          <ALine x1={175} y1={110} x2={258} y2={110} stroke={MOMENT} strokeWidth={4} markerEnd="url(#ar-mom)" opacity={[0, 0, 1]} />
-          <AText x={205} y={95} fill={MOMENT} fontSize="14" fontStyle="italic" textAnchor="middle" opacity={[0, 0, 1]}>m ∥ B</AText>
+          <ALine x1={195} y1={110} x2={278} y2={110} stroke={MOMENT} strokeWidth={4} markerEnd="url(#ar-mom)" opacity={[0, 0, 1]} />
+          <AText x={236} y={97} fill={MOMENT} fontSize="14" fontStyle="italic" textAnchor="middle" opacity={[0, 0, 1]}>m ∥ B</AText>
 
           {/* spodní popisek (mění se podle kroku) */}
           <AText x={195} y={210} fill={TXT} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>F₂ = −F₄ → vyruší se (jen deformují)</AText>

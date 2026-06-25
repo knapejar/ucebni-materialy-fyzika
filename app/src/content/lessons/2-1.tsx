@@ -159,7 +159,7 @@ export default function Lesson() {
 
         <StepScene
           title="Jak Měsíc vytvoří příliv a odliv"
-          viewBox="0 0 460 218"
+          viewBox="0 0 470 250"
           captions={[
             <>Měsíc přitahuje vše na Zemi, ale podle <M>{'1/r^2'}</M> <b>nestejně silně</b>: bližší stranu nejvíc, vzdálenější nejméně.</>,
             <>Rozdíl tahů vodu „natáhne“: <b>blízká</b> strana se přitáhne k Měsíci, <b>vzdálená</b> strana „zaostane“. Vzniknou dvě boule = dva přílivy.</>,
@@ -167,7 +167,7 @@ export default function Lesson() {
           ]}
         >
           <defs>
-            <marker id="ar-t-f" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={FORCE} /></marker>
+            <marker id="ar-t-f" markerUnits="userSpaceOnUse" markerWidth="14" markerHeight="14" refX="11" refY="7" orient="auto"><path d="M0,0 L14,7 L0,14 z" fill={FORCE} /></marker>
             <marker id="ar-t-r" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ENERGY} /></marker>
           </defs>
 
@@ -191,13 +191,13 @@ export default function Lesson() {
           {/* krok 1: tři síly pod Zemí (gradient tahu), mizí v kroku 2.
               Měsíc je vpravo → bližší (pravá) strana = největší tah, vzdálenější (levá) = nejmenší.
               Tři řádky pod sebou, stejný start, délka roste = síla roste blíž k Měsíci. */}
-          <AText x={150} y={158} fill={FORCE} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>tah Měsíce →</AText>
-          <ALine x1={92} y1={172} x2={120} y2={172} stroke={FORCE} strokeWidth={5} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
-          <AText x={250} y={176} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>vzdálená strana – nejmenší</AText>
-          <ALine x1={92} y1={188} x2={160} y2={188} stroke={FORCE} strokeWidth={5} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
-          <AText x={250} y={192} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>střed</AText>
-          <ALine x1={92} y1={204} x2={232} y2={204} stroke={FORCE} strokeWidth={5} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
-          <AText x={250} y={208} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>bližší strana – největší</AText>
+          <AText x={92} y={172} fill={FORCE} fontSize="12" textAnchor="start" fontWeight="700" opacity={[1, 0, 0]}>tah Měsíce →</AText>
+          <ALine x1={92} y1={194} x2={120} y2={194} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
+          <AText x={250} y={198} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>vzdálená strana – nejmenší</AText>
+          <ALine x1={92} y1={218} x2={162} y2={218} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
+          <AText x={250} y={222} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>střed</AText>
+          <ALine x1={92} y1={242} x2={232} y2={242} stroke={FORCE} strokeWidth={4} markerEnd="url(#ar-t-f)" opacity={[1, 0, 0]} />
+          <AText x={250} y={246} fill={FORCE} fontSize="11" textAnchor="start" opacity={[1, 0, 0]}>bližší strana – největší</AText>
 
           {/* krok 2: popisky přílivu a odlivu */}
           <AText x={246} y={109} fill={ACCENT} fontSize="13" textAnchor="middle" fontWeight="700" opacity={[0, 1, 0]}>příliv</AText>

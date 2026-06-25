@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.3'
 
@@ -16,7 +16,65 @@ const C1 = '#67e8f9' // první kmit (azurová)
 const C2 = '#fca5a5' // druhý kmit (růžová)
 const ENV = '#fbbf24' // obálka rázů (žlutá)
 
-/* Šipka pro SVG. */
+/* ------------------------------------------------------------------ *
+ *  Generátor hladké sinusové křivky jako SVG path (lomená čára s
+ *  jemným krokem → opticky hladké). Stejný počet bodů u všech variant,
+ *  aby šlo `d` mezi kroky plynule prointerpolovat (morfing).
+ * ------------------------------------------------------------------ */
+const WX0 = 20
+const WX1 = 410
+const WMID = 90
+const WAMP = 42
+const WN = 96 // počet úseček
+
+function wave(freq: number, phase: number, ampOf: (t: number) => number): string {
+  let d = ''
+  for (let i = 0; i <= WN; i++) {
+    const t = i / WN
+    const x = WX0 + (WX1 - WX0) * t
+    const y = WMID - ampOf(t) * Math.sin(2 * Math.PI * freq * t + phase)
+    d += (i === 0 ? 'M' : ' L') + x.toFixed(1) + ',' + y.toFixed(1)
+  }
+  return d
+}
+function envelope(sign: number): string {
+  let d = ''
+  for (let i = 0; i <= WN; i++) {
+    const t = i / WN
+    const x = WX0 + (WX1 - WX0) * t
+    const e = Math.abs(Math.cos(2 * Math.PI * ((F2 - F1) / 2) * t))
+    const y = WMID - sign * WAMP * e
+    d += (i === 0 ? 'M' : ' L') + x.toFixed(1) + ',' + y.toFixed(1)
+  }
+  return d
+}
+
+const F1 = 7
+const F2 = 7.6
+const FULL = () => WAMP
+
+// Krok 1: oba kmity startují „spolu" (skoro ve fázi).
+const W1_A = wave(F1, 0, FULL)
+const W2_A = wave(F2, 0, FULL)
+// Krok 2: necháme je rozejít — druhý kmit posuneme do protifáze (přidaná fáze π).
+const W1_B = wave(F1, 0, FULL)
+const W2_B = wave(F2, Math.PI, FULL)
+// Krok 3: jejich součet = rychlá nosná vlna v pomalé obálce (rázy).
+function sumWave(): string {
+  let d = ''
+  for (let i = 0; i <= WN; i++) {
+    const t = i / WN
+    const x = WX0 + (WX1 - WX0) * t
+    const y = WMID - WAMP * (Math.sin(2 * Math.PI * F1 * t) + Math.sin(2 * Math.PI * F2 * t)) / 2
+    d += (i === 0 ? 'M' : ' L') + x.toFixed(1) + ',' + y.toFixed(1)
+  }
+  return d
+}
+const SUM = sumWave()
+const ENV_UP = envelope(1)
+const ENV_DN = envelope(-1)
+
+/* Šipka pro statický SVG (Figure). */
 function Defs({ color = ACC, name = 'ar' }: { color?: string; name?: string }) {
   return (
     <defs>
@@ -59,79 +117,58 @@ export default function Lesson_3_3() {
           dráha, kterou bod opisuje:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Skládání dvou kolmých kmitů"
-          steps={[
-            {
-              label: 've fázi → úsečka',
-              caption: (
-                <>
-                  Oba kmity jsou <b>ve fázi</b> (fázový posun <M>{'0'}</M>): <M>{'x=A\\cos\\omega t'}</M>,{' '}
-                  <M>{'y=A\\cos\\omega t'}</M>. Bod běhá tam a zpět po <b>úsečce</b> (přímce). Když ve fázi
-                  nejsou amplitudy stejné, je úsečka jen šikměji nakloněná, pořád je to ale úsečka.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 320 220" className="svg-fig">
-                  <Defs color={AXIS} name="axL" />
-                  <line x1="40" y1="110" x2="290" y2="110" stroke={AXIS} strokeWidth="1.6" markerEnd="url(#axL)" />
-                  <line x1="160" y1="200" x2="160" y2="20" stroke={AXIS} strokeWidth="1.6" markerEnd="url(#axL)" />
-                  <text x="282" y="128" fill={TXT} fontSize="13" fontStyle="italic">x</text>
-                  <text x="170" y="28" fill={TXT} fontSize="13" fontStyle="italic">y</text>
-                  <line x1="70" y1="200" x2="250" y2="20" stroke={ACC} strokeWidth="4" />
-                  <circle cx="220" cy="50" r="6" fill={ACC} />
-                  <text x="160" y="218" fill={ACC} fontSize="14" textAnchor="middle">úsečka</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'posun π/2, stejné A → kružnice',
-              caption: (
-                <>
-                  Fázový posun je <M>{'\\tfrac{\\pi}{2}'}</M> a amplitudy <b>stejné</b> (<M>{'A'}</M>):{' '}
-                  <M>{'x=A\\cos\\omega t'}</M>, <M>{'y=A\\sin\\omega t'}</M>. Bod obíhá po{' '}
-                  <b>kružnici</b> o poloměru <M>{'A'}</M>. (Je to mimochodem přesně to, z čeho se „rozbalí"
-                  <Concept id="harmonicke-kmitani">harmonický kmit</Concept> — průmět rovnoměrného pohybu po kružnici.)
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 320 220" className="svg-fig">
-                  <Defs color={AXIS} name="axC" />
-                  <line x1="40" y1="110" x2="290" y2="110" stroke={AXIS} strokeWidth="1.6" markerEnd="url(#axC)" />
-                  <line x1="160" y1="200" x2="160" y2="20" stroke={AXIS} strokeWidth="1.6" markerEnd="url(#axC)" />
-                  <text x="282" y="128" fill={TXT} fontSize="13" fontStyle="italic">x</text>
-                  <text x="170" y="28" fill={TXT} fontSize="13" fontStyle="italic">y</text>
-                  <circle cx="160" cy="110" r="72" fill="none" stroke={ACC} strokeWidth="4" />
-                  <circle cx="211" cy="59" r="6" fill={ACC} />
-                  <path d="M211,59 a72,72 0 0 1 -30,-66" fill="none" stroke={ACC} strokeWidth="2" markerEnd="url(#axC)" opacity="0.6" />
-                  <text x="160" y="218" fill={ACC} fontSize="14" textAnchor="middle">kružnice</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'posun π/2, různé A → elipsa',
-              caption: (
-                <>
-                  Fázový posun je pořád <M>{'\\tfrac{\\pi}{2}'}</M>, ale amplitudy se <b>liší</b>:{' '}
-                  <M>{'x=A\\cos\\omega t'}</M>, <M>{'y=B\\sin\\omega t'}</M> a <M>{'A\\neq B'}</M>. Z kružnice
-                  se stane <b>elipsa</b> — natažená podle toho, který kmit má větší amplitudu.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 320 220" className="svg-fig">
-                  <Defs color={AXIS} name="axE" />
-                  <line x1="40" y1="110" x2="290" y2="110" stroke={AXIS} strokeWidth="1.6" markerEnd="url(#axE)" />
-                  <line x1="160" y1="200" x2="160" y2="20" stroke={AXIS} strokeWidth="1.6" markerEnd="url(#axE)" />
-                  <text x="282" y="128" fill={TXT} fontSize="13" fontStyle="italic">x</text>
-                  <text x="170" y="28" fill={TXT} fontSize="13" fontStyle="italic">y</text>
-                  <ellipse cx="160" cy="110" rx="100" ry="55" fill="none" stroke={ACC} strokeWidth="4" />
-                  <circle cx="231" cy="71" r="6" fill={ACC} />
-                  <text x="160" y="218" fill={ACC} fontSize="14" textAnchor="middle">elipsa</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 320 240"
+          captions={[
+            <>
+              Oba kmity jsou <b>ve fázi</b> (fázový posun <M>{'0'}</M>): <M>{'x=A\\cos\\omega t'}</M>,{' '}
+              <M>{'y=A\\cos\\omega t'}</M>. Bod běhá tam a zpět po <b>úsečce</b> (přímce). Když ve fázi
+              nejsou amplitudy stejné, je úsečka jen šikměji nakloněná, pořád je to ale úsečka.
+            </>,
+            <>
+              Fázový posun je <M>{'\\tfrac{\\pi}{2}'}</M> a amplitudy <b>stejné</b> (<M>{'A'}</M>):{' '}
+              <M>{'x=A\\cos\\omega t'}</M>, <M>{'y=A\\sin\\omega t'}</M>. Bod obíhá po{' '}
+              <b>kružnici</b> o poloměru <M>{'A'}</M>. (Je to mimochodem přesně to, z čeho se „rozbalí"{' '}
+              <Concept id="harmonicke-kmitani">harmonický kmit</Concept> — průmět rovnoměrného pohybu po kružnici.)
+            </>,
+            <>
+              Fázový posun je pořád <M>{'\\tfrac{\\pi}{2}'}</M>, ale amplitudy se <b>liší</b>:{' '}
+              <M>{'x=A\\cos\\omega t'}</M>, <M>{'y=B\\sin\\omega t'}</M> a <M>{'A\\neq B'}</M>. Z kružnice
+              se stane <b>elipsa</b> — natažená podle toho, který kmit má větší amplitudu.
+            </>,
           ]}
-        />
+        >
+          <Defs color={AXIS} name="axK" />
+          {/* osy */}
+          <ALine x1={30} y1={120} x2={300} y2={120} stroke={AXIS} strokeWidth={1.6} markerEnd="url(#axK)" />
+          <ALine x1={160} y1={216} x2={160} y2={24} stroke={AXIS} strokeWidth={1.6} markerEnd="url(#axK)" />
+          <AText x={292} y={138} fill={TXT} fontSize="13" fontStyle="italic">x</AText>
+          <AText x={170} y={32} fill={TXT} fontSize="13" fontStyle="italic">y</AText>
+
+          {/* tvar dráhy: úsečka → kružnice → elipsa (jeden morfující se path) */}
+          <APath
+            d={[
+              // úsečka: šikmá přímka pod 45°
+              'M88,192 L232,48',
+              // kružnice r=72 (4 oblouky, aby šlo morfovat z/do elipsy)
+              'M232,120 A72,72 0 0 1 160,192 A72,72 0 0 1 88,120 A72,72 0 0 1 160,48 A72,72 0 0 1 232,120',
+              // elipsa rx=100, ry=55
+              'M260,120 A100,55 0 0 1 160,175 A100,55 0 0 1 60,120 A100,55 0 0 1 160,65 A100,55 0 0 1 260,120',
+            ]}
+            fill="none"
+            stroke={ACC}
+            strokeWidth={4}
+          />
+
+          {/* obíhající bod — sedí na dráze v pravém horním kvadrantu (45°) */}
+          <ACircle cx={[210, 211, 231]} cy={[70, 69, 81]} r={7} fill={ACC} />
+
+          {/* popisek tvaru */}
+          <AText x={160} y={234} fill={ACC} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>úsečka</AText>
+          <AText x={160} y={234} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>kružnice</AText>
+          <AText x={160} y={234} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>elipsa</AText>
+        </StepScene>
 
         <p>Shrnuto do tabulky (přesně tohle si zapamatuj):</p>
         <ul>
@@ -166,86 +203,61 @@ export default function Lesson_3_3() {
           a dolů. Výsledek je tón, který se rytmicky zesiluje a zeslabuje. Tomu se říká <Term id="razy">rázy</Term>.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak vznikají rázy"
-          steps={[
-            {
-              label: 'dva blízké kmity',
-              caption: (
-                <>
-                  Dva kmity stejného směru s <b>nepatrně odlišnou</b> frekvencí. Zpočátku jdou „spolu"
-                  (sčítají se), pak se rozejdou.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={AXIS} name="axR1" />
-                  <line x1="20" y1="90" x2="408" y2="90" stroke={AXIS} strokeWidth="1.4" markerEnd="url(#axR1)" />
-                  <text x="400" y="108" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-                  <path fill="none" stroke={C1} strokeWidth="2.2" d="M20,90 Q35,40 50,90 Q65,140 80,90 Q95,40 110,90 Q125,140 140,90 Q155,40 170,90 Q185,140 200,90 Q215,40 230,90 Q245,140 260,90 Q275,40 290,90 Q305,140 320,90 Q335,40 350,90 Q365,140 380,90 Q395,40 410,90" />
-                  <path fill="none" stroke={C2} strokeWidth="2.2" d="M20,90 Q36,42 52,90 Q68,138 84,90 Q100,42 116,90 Q132,138 148,90 Q164,42 180,90 Q196,138 212,90 Q228,42 244,90 Q260,138 276,90 Q292,42 308,90 Q324,138 340,90 Q356,42 372,90 Q388,138 404,90" />
-                  <text x="40" y="26" fill={C1} fontSize="13">kmit 1</text>
-                  <text x="120" y="26" fill={C2} fontSize="13">kmit 2 (jiná f)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'fáze se rozcházejí',
-              caption: (
-                <>
-                  Po chvíli je jeden kmit „nahoře" a druhý „dole" — sejdou se v <b>protifázi</b> a téměř se{' '}
-                  <b>vyruší</b>. Pak se zase srovnají a sečtou. Tohle střídání se opakuje pořád dokola.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={AXIS} name="axR2" />
-                  <line x1="20" y1="90" x2="408" y2="90" stroke={AXIS} strokeWidth="1.4" markerEnd="url(#axR2)" />
-                  <text x="400" y="108" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-                  {/* shoda vlevo, protifaze uprostred */}
-                  <path fill="none" stroke={C1} strokeWidth="2.2" d="M20,90 Q35,40 50,90 Q65,140 80,90 Q95,40 110,90 Q125,140 140,90 Q155,40 170,90 Q185,140 200,90 Q215,40 230,90 Q245,140 260,90" />
-                  <path fill="none" stroke={C2} strokeWidth="2.2" d="M20,90 Q35,140 50,90 Q65,40 80,90 Q95,140 110,90 Q125,40 140,90 Q155,140 170,90 Q185,40 200,90 Q215,140 230,90 Q245,40 260,90" />
-                  <text x="60" y="160" fill={TXT} fontSize="12" textAnchor="middle">vyruší se</text>
-                  <line x1="120" y1="40" x2="120" y2="140" stroke={ENV} strokeWidth="1" strokeDasharray="4,4" opacity="0.6" />
-                  <text x="150" y="30" fill={TXT} fontSize="12">protifáze</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'výsledek = rázy',
-              caption: (
-                <>
-                  Součet je rychlá vlna sevřená do pomalé <b style={{ color: ENV }}>obálky</b>. Hlasitost
-                  pravidelně roste a klesá. <b><Concept id="perioda">Perioda</Concept> kmitání je stálá</b>, mění se jen <b>amplituda</b> —
-                  to jsou rázy.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 180" className="svg-fig">
-                  <Defs color={AXIS} name="axR3" />
-                  <line x1="20" y1="90" x2="408" y2="90" stroke={AXIS} strokeWidth="1.4" markerEnd="url(#axR3)" />
-                  <text x="400" y="108" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-                  {/* obalka */}
-                  <path fill="none" stroke={ENV} strokeWidth="2" strokeDasharray="5,4" d="M20,90 C70,18 130,18 180,90 C230,162 290,162 340,90 C370,48 395,48 408,66" />
-                  <path fill="none" stroke={ENV} strokeWidth="2" strokeDasharray="5,4" d="M20,90 C70,162 130,162 180,90 C230,18 290,18 340,90 C370,132 395,132 408,114" />
-                  {/* nosna vlna modulovana */}
-                  <path fill="none" stroke={ACC} strokeWidth="2.2" d="M20,90 L32,74 L44,106 L56,66 L68,114 L80,62 L92,118 L104,66 L116,114 L128,74 L140,106 L152,86 L164,94 L176,90 L188,86 L200,94 L212,74 L224,106 L236,64 L248,116 L260,62 L272,118 L284,66 L296,114 L308,76 L320,104 L332,86 L344,90 L356,84 L368,96 L380,80 L392,100 L404,86" />
-                  <line x1="56" y1="150" x2="296" y2="150" stroke={ENV} strokeWidth="1.2" markerEnd="url(#axR3)" />
-                  <text x="176" y="168" fill={ENV} fontSize="13" textAnchor="middle">perioda rázů</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 180"
+          captions={[
+            <>
+              Dva kmity stejného směru s <b>nepatrně odlišnou</b> frekvencí. Vlevo jdou „spolu"
+              (sčítají se), pak se začnou rozcházet.
+            </>,
+            <>
+              Druhý kmit (růžový) se vůči prvnímu posune do <b>protifáze</b> — kde je jeden „nahoře",
+              je druhý „dole". Tam se téměř <b>vyruší</b>. Toto střídání se opakuje pořád dokola.
+            </>,
+            <>
+              Jejich součet je rychlá vlna sevřená do pomalé <b style={{ color: ENV }}>obálky</b>.
+              Hlasitost pravidelně roste a klesá. <b><Concept id="perioda">Perioda</Concept> kmitání je stálá</b>,
+              mění se jen <b>amplituda</b> — to jsou rázy.
+            </>,
           ]}
-        />
+        >
+          <Defs color={AXIS} name="axR" />
+          {/* časová osa */}
+          <ALine x1={14} y1={90} x2={410} y2={90} stroke={AXIS} strokeWidth={1.4} markerEnd="url(#axR)" />
+          <AText x={404} y={108} fill={TXT} fontSize="13" fontStyle="italic">t</AText>
+
+          {/* dva dílčí kmity (krok 1–2): morfují se z „spolu" do „protifáze" */}
+          <APath d={[W1_A, W1_B, W1_B]} fill="none" stroke={C1} strokeWidth={2.2} opacity={[1, 1, 0]} />
+          <APath d={[W2_A, W2_B, W2_B]} fill="none" stroke={C2} strokeWidth={2.2} opacity={[1, 1, 0]} />
+
+          {/* popisky dílčích kmitů (krok 1) */}
+          <AText x={70} y={26} fill={C1} fontSize="13" opacity={[1, 0, 0]}>kmit 1</AText>
+          <AText x={150} y={26} fill={C2} fontSize="13" opacity={[1, 0, 0]}>kmit 2 (jiná f)</AText>
+
+          {/* popisek protifáze (krok 2) */}
+          <AText x={250} y={30} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>protifáze → vyruší se</AText>
+
+          {/* výsledek = rázy (krok 3): obálka + nosná vlna */}
+          <APath d={ENV_UP} fill="none" stroke={ENV} strokeWidth={2} strokeDasharray="5,4" opacity={[0, 0, 1]} />
+          <APath d={ENV_DN} fill="none" stroke={ENV} strokeWidth={2} strokeDasharray="5,4" opacity={[0, 0, 1]} />
+          <APath d={SUM} fill="none" stroke={ACC} strokeWidth={2.2} opacity={[0, 0, 1]} />
+          <AText x={215} y={32} fill={ENV} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>obálka kolísá amplitudu</AText>
+        </StepScene>
 
         <Figure caption="Rázy: rychlá nosná vlna (fialová) modulovaná pomalou obálkou (žlutá). Tóny periodicky zesilují a zeslabují.">
-          <svg viewBox="0 0 440 150" className="svg-fig">
+          <svg viewBox="0 0 440 170" className="svg-fig">
             <Defs color={AXIS} name="axF" />
-            <line x1="20" y1="75" x2="428" y2="75" stroke={AXIS} strokeWidth="1.4" markerEnd="url(#axF)" />
-            <text x="420" y="93" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-            <path fill="none" stroke={ENV} strokeWidth="2" strokeDasharray="5,4" d="M20,75 C75,8 150,8 205,75 C260,142 335,142 390,75 C405,55 418,55 428,62" />
-            <path fill="none" stroke={ENV} strokeWidth="2" strokeDasharray="5,4" d="M20,75 C75,142 150,142 205,75 C260,8 335,8 390,75 C405,95 418,95 428,88" />
-            <path fill="none" stroke={ACC} strokeWidth="2" d="M20,75 L30,60 L40,90 L50,52 L60,98 L70,48 L80,102 L90,52 L100,98 L110,62 L120,88 L130,72 L140,78 L150,75 L160,72 L170,78 L180,60 L190,90 L200,50 L210,100 L220,48 L230,102 L240,52 L250,98 L260,62 L270,88 L280,72 L290,78 L300,75 L310,72 L320,78 L330,58 L340,92 L350,52 L360,98 L370,56 L380,94 L390,70 L400,80 L410,74 L420,76" />
+            <Defs color={ENV} name="axFe" />
+            <line x1="20" y1="80" x2="430" y2="80" stroke={AXIS} strokeWidth="1.4" markerEnd="url(#axF)" />
+            <text x="424" y="98" fill={TXT} fontSize="13" fontStyle="italic">t</text>
+            <path fill="none" stroke={ENV} strokeWidth="2" strokeDasharray="5,4" d={STATIC_ENV_UP} />
+            <path fill="none" stroke={ENV} strokeWidth="2" strokeDasharray="5,4" d={STATIC_ENV_DN} />
+            <path fill="none" stroke={ACC} strokeWidth="2" d={STATIC_CARRIER} />
+            {/* perioda rázů = vzdálenost mezi dvěma uzly obálky (t=0,25 → 0,75 ⇒ x=120 → 320) */}
+            <line x1="120" y1="150" x2="320" y2="150" stroke={ENV} strokeWidth="1.3" markerEnd="url(#axFe)" />
+            <line x1="120" y1="144" x2="120" y2="156" stroke={ENV} strokeWidth="1.3" />
+            <text x="218" y="166" fill={ENV} fontSize="12.5" textAnchor="middle">perioda rázů</text>
           </svg>
         </Figure>
       </Section>
@@ -313,3 +325,28 @@ export default function Lesson_3_3() {
     </>
   )
 }
+
+/* Hladká nosná vlna + obálka pro statický obrázek (viewBox 0 0 440 170, osa y=80).
+   Beats = 2 plné periody rázů: antiuzly v t=0; 0,5; 1 (x=20; 220; 420),
+   uzly v t=0,25; 0,75 (x=120; 320). Obálka i nosná vlna sdílejí stejnou
+   beat-frekvenci, takže do sebe přesně zapadají. */
+const SX0 = 20, SX1 = 420, SMID = 80, SAMP = 58, SN = 240, SBEATS = 2, SFC = 11
+function staticPath(kind: 'carrier' | 'up' | 'dn'): string {
+  let d = ''
+  for (let i = 0; i <= SN; i++) {
+    const t = i / SN
+    const x = SX0 + (SX1 - SX0) * t
+    const env = Math.cos(Math.PI * SBEATS * t)
+    const y =
+      kind === 'carrier'
+        ? SMID - SAMP * env * Math.sin(2 * Math.PI * SFC * t)
+        : kind === 'up'
+          ? SMID - SAMP * Math.abs(env)
+          : SMID + SAMP * Math.abs(env)
+    d += (i === 0 ? 'M' : ' L') + x.toFixed(1) + ',' + y.toFixed(1)
+  }
+  return d
+}
+const STATIC_CARRIER = staticPath('carrier')
+const STATIC_ENV_UP = staticPath('up')
+const STATIC_ENV_DN = staticPath('dn')

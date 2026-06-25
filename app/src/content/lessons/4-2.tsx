@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.2'
 
@@ -64,55 +64,50 @@ export default function Lesson_4_2() {
           absolutně černé těleso.</b> Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Proč se otvor dutiny chová jako černé těleso"
-          steps={[
-            {
-              label: 'paprsek vletí dovnitř',
-              caption: <>Záření vletí malým otvorem do dutiny. Otvor je malinký oproti vnitřku.</>,
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs color={ACCENT} />
-                  <rect x="70" y="40" width="280" height="140" rx="10" fill="#161c30" stroke={WALL} strokeWidth="5" />
-                  <rect x="66" y="98" width="10" height="24" fill="#0b1020" />
-                  <line x1="6" y1="110" x2="62" y2="110" stroke={ACCENT} strokeWidth="4" markerEnd="url(#ar)" />
-                  <text x="34" y="96" fill={ACCENT} fontSize="14" textAnchor="middle">záření</text>
-                  <text x="210" y="205" fill={DIM} fontSize="13" textAnchor="middle">dutina (uvnitř černá)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'odráží se a pohlcuje',
-              caption: <>Uvnitř se odráží od stěny ke stěně a <b>při každém odrazu se část pohltí</b> (paprsek slábne).</>,
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs color={ACCENT} />
-                  <rect x="70" y="40" width="280" height="140" rx="10" fill="#161c30" stroke={WALL} strokeWidth="5" />
-                  <rect x="66" y="98" width="10" height="24" fill="#0b1020" />
-                  <polyline points="76,110 200,55 320,150 180,170 290,75" fill="none" stroke={ACCENT} strokeWidth="3" markerEnd="url(#ar)" opacity="0.9" />
-                  <circle cx="200" cy="55" r="4" fill={HOT} />
-                  <circle cx="320" cy="150" r="4" fill={HOT} />
-                  <circle cx="180" cy="170" r="4" fill={HOT} />
-                  <text x="210" y="205" fill={DIM} fontSize="13" textAnchor="middle">každý odraz ubere kus energie</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'pohlceno vše',
-              caption: <>Ven otvorem se prakticky nic nevrátí → otvor <b>pohltí veškeré</b> dopadající záření = chová se jako absolutně černé těleso.</>,
-              content: (
-                <svg viewBox="0 0 420 220" className="svg-fig">
-                  <Defs color={DIM} />
-                  <rect x="70" y="40" width="280" height="140" rx="10" fill="#161c30" stroke={WALL} strokeWidth="5" />
-                  <rect x="66" y="98" width="10" height="24" fill="#0b1020" />
-                  <text x="210" y="118" fill={DIM} fontSize="15" textAnchor="middle">pohlceno</text>
-                  <line x1="62" y1="110" x2="20" y2="110" stroke={DIM} strokeWidth="3" strokeDasharray="5 5" markerEnd="url(#ar)" />
-                  <text x="38" y="96" fill={DIM} fontSize="13" textAnchor="middle">∅ ven</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 230"
+          captions={[
+            <>Záření vletí malým otvorem do dutiny. Otvor je malinký oproti vnitřku.</>,
+            <>Uvnitř se odráží od stěny ke stěně a <b>při každém odrazu se část pohltí</b> (paprsek slábne).</>,
+            <>Ven otvorem se prakticky nic nevrátí → otvor <b>pohltí veškeré</b> dopadající záření = chová se jako absolutně černé těleso.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="arA" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACCENT} /></marker>
+            <marker id="arD" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={DIM} /></marker>
+          </defs>
+
+          {/* dutina (statická) */}
+          <ALine x1={70} y1={45} x2={350} y2={45} stroke={WALL} strokeWidth={5} />
+          <ALine x1={70} y1={185} x2={350} y2={185} stroke={WALL} strokeWidth={5} />
+          <ALine x1={350} y1={45} x2={350} y2={185} stroke={WALL} strokeWidth={5} />
+          <ALine x1={70} y1={45} x2={70} y2={98} stroke={WALL} strokeWidth={5} />
+          <ALine x1={70} y1={122} x2={70} y2={185} stroke={WALL} strokeWidth={5} />
+          {/* otvor (mezera ve stěně) */}
+          <ALine x1={68} y1={98} x2={68} y2={122} stroke="#0b1020" strokeWidth={9} />
+          <AText x={210} y={210} fill={DIM} fontSize="13" textAnchor="middle">dutina (uvnitř černá)</AText>
+
+          {/* vstupní paprsek — vjede do otvoru (krok 0), pak zmizí */}
+          <ALine x1={12} y1={110} x2={64} y2={110} stroke={ACCENT} strokeWidth={4} markerEnd="url(#arA)" opacity={[1, 0, 0]} />
+          <AText x={38} y={96} fill={ACCENT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>záření</AText>
+
+          {/* odrazy uvnitř — objeví se v kroku 1, ve kroku 2 zmizí (pohlceno) */}
+          <ALine x1={70} y1={110} x2={200} y2={58} stroke={ACCENT} strokeWidth={3} opacity={[0, 1, 0]} />
+          <ALine x1={200} y1={58} x2={320} y2={150} stroke={ACCENT} strokeWidth={2.6} opacity={[0, 0.85, 0]} />
+          <ALine x1={320} y1={150} x2={170} y2={168} stroke={ACCENT} strokeWidth={2.2} opacity={[0, 0.65, 0]} />
+          <ALine x1={170} y1={168} x2={285} y2={80} stroke={ACCENT} strokeWidth={1.8} opacity={[0, 0.45, 0]} markerEnd="url(#arA)" />
+          {/* body odrazu na stěnách */}
+          <ACircle cx={200} cy={58} r={[0, 4, 0]} fill={HOT} opacity={[0, 1, 0]} />
+          <ACircle cx={320} cy={150} r={[0, 4, 0]} fill={HOT} opacity={[0, 1, 0]} />
+          <ACircle cx={170} cy={168} r={[0, 4, 0]} fill={HOT} opacity={[0, 1, 0]} />
+          <AText x={210} y={32} fill={DIM} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>každý odraz ubere kus energie</AText>
+
+          {/* krok 2: pohlceno — nic ven */}
+          <AText x={210} y={118} fill={DIM} fontSize="16" textAnchor="middle" opacity={[0, 0, 1]}>pohlceno</AText>
+          <ALine x1={64} y1={110} x2={20} y2={110} stroke={DIM} strokeWidth={3} strokeDasharray="5 5" markerEnd="url(#arD)" opacity={[0, 0, 1]} />
+          <AText x={42} y={96} fill={DIM} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>∅ ven</AText>
+        </StepScene>
       </Section>
 
       <Section title="Planckova kvantová hypotéza (klíčový moment)">
@@ -166,7 +161,7 @@ export default function Lesson_4_2() {
             <line x1="50" y1="220" x2="420" y2="220" stroke={TXT} strokeWidth="2" markerEnd="url(#axar)" />
             <line x1="50" y1="220" x2="50" y2="20" stroke={TXT} strokeWidth="2" markerEnd="url(#axar)" />
             <text x="425" y="238" fill={TXT} fontSize="13" textAnchor="end">λ (vlnová délka)</text>
-            <text x="30" y="30" fill={TXT} fontSize="13" textAnchor="start">intenzita</text>
+            <text x="64" y="34" fill={TXT} fontSize="13" textAnchor="start">intenzita</text>
             {/* klasická předpověď - ultrafialová katastrofa */}
             <path d="M55,30 C70,90 90,170 130,205 C170,222 300,222 420,221" fill="none" stroke={DIM} strokeWidth="2" strokeDasharray="6 5" />
             <text x="78" y="48" fill={DIM} fontSize="12">klasika → ∞</text>
@@ -178,10 +173,11 @@ export default function Lesson_4_2() {
             <path d="M55,219 C140,216 220,140 260,140 C300,140 350,205 420,217" fill="none" stroke={COOL} strokeWidth="3" />
             <circle cx="260" cy="140" r="4" fill={COOL} />
             <text x="270" y="136" fill={COOL} fontSize="13">nižší T</text>
-            {/* posun maxima - šipka */}
+            {/* posun maxima - šipka (od chladnějšího vrcholu k teplejšímu = ke kratším λ) */}
             <Defs color={ACCENT} name="shar" />
-            <line x1="254" y1="116" x2="160" y2="80" stroke={ACCENT} strokeWidth="2.5" markerEnd="url(#shar)" />
-            <text x="205" y="104" fill={ACCENT} fontSize="12" textAnchor="middle">↑T: maximum ke kratším λ</text>
+            <text x="372" y="96" fill={ACCENT} fontSize="12" textAnchor="middle">↑T: maximum</text>
+            <text x="372" y="112" fill={ACCENT} fontSize="12" textAnchor="middle">ke kratším λ</text>
+            <line x1="330" y1="128" x2="172" y2="80" stroke={ACCENT} strokeWidth="2.5" markerEnd="url(#shar)" />
           </svg>
         </Figure>
       </Section>

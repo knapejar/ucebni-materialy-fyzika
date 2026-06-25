@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ALine, ARect, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.9'
 
@@ -32,24 +32,6 @@ function Defs({ color = ACCENT, name = 'ar' }: { color?: string; name?: string }
         <path d="M0,0 L9,4.5 L0,9 z" fill={color} />
       </marker>
     </defs>
-  )
-}
-
-/* Filtr (polarizátor) jako rámeček se „štěrbinami" v dané ose.
-   axis: 'v' = svislá propustná osa, 'h' = vodorovná. */
-function Filter({ x, axis, color = ACCENT, label }: { x: number; axis: 'v' | 'h'; color?: string; label?: string }) {
-  const slits = []
-  if (axis === 'v') {
-    for (let i = 1; i <= 5; i++) slits.push(<line key={i} x1={x - 26 + i * 8} y1={48} x2={x - 26 + i * 8} y2={132} stroke={color} strokeWidth="2" />)
-  } else {
-    for (let i = 1; i <= 5; i++) slits.push(<line key={i} x1={x - 30} y1={48 + i * 14} x2={x + 30} y2={48 + i * 14} stroke={color} strokeWidth="2" />)
-  }
-  return (
-    <g>
-      <rect x={x - 30} y={42} width={60} height={96} rx="6" fill="none" stroke={color} strokeWidth="2.5" />
-      {slits}
-      {label && <text x={x} y={158} fill={DIM} fontSize="12" textAnchor="middle">{label}</text>}
-    </g>
   )
 }
 
@@ -109,76 +91,102 @@ export default function Lesson() {
           lineárně polarizované. Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Dva filtry: jak poznáš, že světlo je polarizované"
-          steps={[
-            {
-              label: 'vstup',
-              caption: <>Do filtru přichází <b>nepolarizované</b> světlo — kmity ve všech rovinách.</>,
-              content: (
-                <svg viewBox="0 0 420 175" className="svg-fig">
-                  <Defs color={RAY} />
-                  <line x1="10" y1="90" x2="120" y2="90" stroke={RAY} strokeWidth="3" markerEnd="url(#ar)" />
-                  {[20, 70, 110, 160].map((a, k) => {
-                    const r = (a * Math.PI) / 180
-                    return <line key={k} x1={65 - Math.cos(r) * 16} y1={90 - Math.sin(r) * 16} x2={65 + Math.cos(r) * 16} y2={90 + Math.sin(r) * 16} stroke={RAY} strokeWidth="2" />
-                  })}
-                  <text x="65" y="40" fill={TXT} fontSize="13" textAnchor="middle">nepolarizované</text>
-                </svg>
-              ),
-            },
-            {
-              label: '1. filtr',
-              caption: <>Za prvním filtrem (svislá osa) projde jen <b>svislá složka</b>. Vzniká <Term>lineárně polarizované</Term> světlo.</>,
-              content: (
-                <svg viewBox="0 0 420 175" className="svg-fig">
-                  <Defs color={RAY} />
-                  <line x1="10" y1="90" x2="120" y2="90" stroke={RAY} strokeWidth="3" markerEnd="url(#ar)" />
-                  {[20, 70, 110, 160].map((a, k) => {
-                    const r = (a * Math.PI) / 180
-                    return <line key={k} x1={65 - Math.cos(r) * 14} y1={90 - Math.sin(r) * 14} x2={65 + Math.cos(r) * 14} y2={90 + Math.sin(r) * 14} stroke={RAY} strokeWidth="2" />
-                  })}
-                  <Filter x={185} axis="v" label="propustná osa ↕" />
-                  <line x1="215" y1="90" x2="395" y2="90" stroke={OK} strokeWidth="3" markerEnd="url(#ar)" />
-                  <line x1="300" y1="64" x2="300" y2="116" stroke={OK} strokeWidth="3" />
-                  <text x="320" y="40" fill={OK} fontSize="13" textAnchor="middle">polarizované ↕</text>
-                </svg>
-              ),
-            },
-            {
-              label: '2. filtr ‖',
-              caption: <>Druhý filtr se <b>stejnou</b> osou (svislou) světlo <b>propustí</b> — projde skoro celé.</>,
-              content: (
-                <svg viewBox="0 0 420 175" className="svg-fig">
-                  <Defs color={OK} />
-                  <Filter x={70} axis="v" label="osa ↕" />
-                  <line x1="100" y1="90" x2="250" y2="90" stroke={OK} strokeWidth="3" />
-                  <line x1="175" y1="64" x2="175" y2="116" stroke={OK} strokeWidth="3" />
-                  <Filter x={300} axis="v" color={OK} label="osa ↕" />
-                  <line x1="330" y1="90" x2="410" y2="90" stroke={OK} strokeWidth="3" markerEnd="url(#ar)" />
-                  <text x="370" y="45" fill={OK} fontSize="14" textAnchor="middle">projde ✓</text>
-                </svg>
-              ),
-            },
-            {
-              label: '2. filtr ⟂',
-              caption: <>Otoč druhý filtr o <M>{'90^\\circ'}</M> (vodorovná osa) — svislé kmity neprojdou, <b>světlo zhasne</b>. <i>Tím se polarizace dokazuje.</i></>,
-              content: (
-                <svg viewBox="0 0 420 175" className="svg-fig">
-                  <Defs color={BLOCK} />
-                  <Filter x={70} axis="v" label="osa ↕" />
-                  <line x1="100" y1="90" x2="250" y2="90" stroke={OK} strokeWidth="3" />
-                  <line x1="175" y1="64" x2="175" y2="116" stroke={OK} strokeWidth="3" />
-                  <Filter x={300} axis="h" color={BLOCK} label="osa ↔ (otočen o 90°)" />
-                  <line x1="330" y1="90" x2="405" y2="90" stroke={BLOCK} strokeWidth="3" strokeDasharray="5 5" />
-                  <line x1="352" y1="74" x2="384" y2="106" stroke={BLOCK} strokeWidth="3" />
-                  <line x1="384" y1="74" x2="352" y2="106" stroke={BLOCK} strokeWidth="3" />
-                  <text x="368" y="45" fill={BLOCK} fontSize="14" textAnchor="middle">zhasne ✗</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 200"
+          captions={[
+            <>Do filtru přichází <b>nepolarizované</b> světlo — kmity ve všech rovinách.</>,
+            <>Za prvním filtrem (svislá osa) projde jen <b>svislá složka</b>. Vzniká <Term>lineárně polarizované</Term> světlo.</>,
+            <>Druhý filtr se <b>stejnou</b> osou (svislou) světlo <b>propustí</b> — projde skoro celé.</>,
+            <>Otoč druhý filtr o <M>{'90^\\circ'}</M> (vodorovná osa) — svislé kmity neprojdou, <b>světlo zhasne</b>. <i>Tím se polarizace dokazuje.</i></>,
           ]}
-        />
+        >
+          {/* markery šipek (3 barvy) */}
+          <defs>
+            <marker id="p-ray" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={RAY} /></marker>
+            <marker id="p-ok" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={OK} /></marker>
+          </defs>
+
+          {/* ── ZDROJ: nepolarizovaný paprsek + hvězdice kmitů (stálý) ── */}
+          <ALine x1={8} y1={104} x2={92} y2={104} stroke={RAY} strokeWidth={3} markerEnd="url(#p-ray)" />
+          {[20, 70, 110, 160].map((a, k) => {
+            const r = (a * Math.PI) / 180
+            return (
+              <ALine
+                key={k}
+                x1={55 - Math.cos(r) * 16}
+                y1={104 - Math.sin(r) * 16}
+                x2={55 + Math.cos(r) * 16}
+                y2={104 + Math.sin(r) * 16}
+                stroke={RAY}
+                strokeWidth={2}
+              />
+            )
+          })}
+          <AText x={55} y={48} fill={TXT} fontSize="13" textAnchor="middle">nepolarizované</AText>
+
+          {/* ── FILTR 1 (svislá osa) — objeví se od kroku 1, zůstává ── */}
+          <AGroup opacity={[0, 1, 1, 1]}>
+            <rect x={132} y={62} width={56} height={84} rx="6" fill="none" stroke={ACCENT} strokeWidth="2.5" />
+            {[1, 2, 3, 4, 5].map((i) => (
+              <line key={i} x1={132 + i * 9.3} y1={68} x2={132 + i * 9.3} y2={140} stroke={ACCENT} strokeWidth="2" />
+            ))}
+          </AGroup>
+          <AText x={160} y={166} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 1, 1, 1]}>osa ↕</AText>
+
+          {/* ── POLARIZOVANÝ PAPRSEK mezi filtry (zelený) — od kroku 1 ──
+               krok 1: vyteče z filtru1 doprava a má vlastní šipku (žádný 2. filtr)
+               krok 2-3: končí u filtru 2 (x=307) */}
+          <ALine x1={188} y1={104} x2={[386, 386, 307, 307]} y2={104} stroke={OK} strokeWidth={3} opacity={[0, 1, 1, 1]} />
+          {/* svislá „čárka" = kmit E (jen mezi filtry) */}
+          <ALine x1={245} y1={84} x2={245} y2={124} stroke={OK} strokeWidth={3} opacity={[0, 1, 1, 1]} />
+          {/* šipka konce paprsku po 1. filtru (jen krok 1, kdy 2. filtr není) */}
+          <ALine x1={386} y1={104} x2={414} y2={104} stroke={OK} strokeWidth={3} markerEnd="url(#p-ok)" opacity={[0, 1, 0, 0]} />
+          <AText x={300} y={56} fill={OK} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>polarizované ↕</AText>
+
+          {/* ── FILTR 2 — objeví se od kroku 2; štěrbiny se v kroku 3 otočí ──
+               barva rámečku: zelená (propustí) v kroku 2, červená (zablokuje) v kroku 3 */}
+          <ARect x={307} y={62} width={56} height={84} rx="6" fill="none" stroke={[ACCENT, ACCENT, OK, BLOCK]} strokeWidth={2.5} opacity={[0, 0, 1, 1]} />
+          {/* svislé štěrbiny 2. filtru (krok 2, propustný) */}
+          {[1, 2, 3, 4, 5].map((i) => (
+            <ALine
+              key={`s2v-${i}`}
+              x1={307 + i * 9.3}
+              y1={68}
+              x2={307 + i * 9.3}
+              y2={140}
+              stroke={OK}
+              strokeWidth={2}
+              opacity={[0, 0, 1, 0]}
+            />
+          ))}
+          {/* vodorovné štěrbiny 2. filtru (krok 3, zablokovaný) */}
+          {[1, 2, 3, 4, 5].map((i) => (
+            <ALine
+              key={`s2h-${i}`}
+              x1={313}
+              y1={62 + i * 14}
+              x2={357}
+              y2={62 + i * 14}
+              stroke={BLOCK}
+              strokeWidth={2}
+              opacity={[0, 0, 0, 1]}
+            />
+          ))}
+          {/* popisek osy 2. filtru — „osa ↕" (krok 2) překryto „osa ↔" (krok 3) */}
+          <AText x={335} y={166} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 0, 1, 0]}>osa ↕</AText>
+          <AText x={335} y={166} fill={DIM} fontSize="12" textAnchor="middle" opacity={[0, 0, 0, 1]}>osa ↔</AText>
+
+          {/* ── VÝSTUP za 2. filtrem ── */}
+          {/* krok 2: prošlo (zelená šipka + popisek) */}
+          <ALine x1={363} y1={104} x2={428} y2={104} stroke={OK} strokeWidth={3} markerEnd="url(#p-ok)" opacity={[0, 0, 1, 0]} />
+          <AText x={398} y={62} fill={OK} fontSize="14" textAnchor="middle" opacity={[0, 0, 1, 0]}>projde ✓</AText>
+          {/* krok 3: zhasne (červená přerušovaná + křížek) */}
+          <ALine x1={363} y1={104} x2={418} y2={104} stroke={BLOCK} strokeWidth={3} strokeDasharray="5 5" opacity={[0, 0, 0, 1]} />
+          <ALine x1={384} y1={90} x2={414} y2={118} stroke={BLOCK} strokeWidth={3} opacity={[0, 0, 0, 1]} />
+          <ALine x1={414} y1={90} x2={384} y2={118} stroke={BLOCK} strokeWidth={3} opacity={[0, 0, 0, 1]} />
+          <AText x={399} y={62} fill={BLOCK} fontSize="14" textAnchor="middle" opacity={[0, 0, 0, 1]}>zhasne ✗</AText>
+        </StepScene>
         <p style={{ color: DIM }}>
           (Polarizované světlo umí vzniknout i jinak: <Term>odrazem pod vhodným úhlem</Term> (Brewsterův
           úhel), <Term>dvojlomem</Term> v anizotropním krystalu nebo <Term>dichroismem</Term>. K vysvětlení

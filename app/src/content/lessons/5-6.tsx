@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.6'
 
@@ -150,60 +150,59 @@ export default function Lesson_5_6() {
 
         <p>Klikni si, jak to probíhá u nepřímo ionizujícího záření (foton):</p>
 
-        <StepFigure
+        <StepScene
           title="Jak nepřímo ionizující záření ionizuje látku"
-          steps={[
-            {
-              label: 'foton letí',
-              caption: <>Přilétá <b>nenabitá</b> částice (foton). Sama o sobě atomy neionizuje — proto „nepřímo".</>,
-              content: (
-                <svg viewBox="0 0 440 170" className="svg-fig">
-                  <Defs color={PHOTON} id="ar-p1" />
-                  <circle cx="330" cy="85" r="20" fill="none" stroke={MUTED} strokeWidth="2" />
-                  <circle cx="330" cy="85" r="5" fill={MUTED} />
-                  <text x="330" y="130" fill={MUTED} fontSize="13" textAnchor="middle">atom v látce</text>
-                  <line x1="40" y1="85" x2="290" y2="85" stroke={PHOTON} strokeWidth="3" strokeDasharray="2 6" markerEnd="url(#ar-p1)" />
-                  <text x="150" y="70" fill={PHOTON} fontSize="14" textAnchor="middle">foton γ (nenabitý)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'srážka',
-              caption: <>Foton se srazí s atomem a <b>vyrazí z něj elektron</b> — předá mu <Concept id="kineticka-energie">kinetickou energii</Concept>. To je ta energie, kterou počítá <b>kerma</b>.</>,
-              content: (
-                <svg viewBox="0 0 440 170" className="svg-fig">
-                  <Defs color={CHARGED} id="ar-p2" />
-                  <circle cx="240" cy="85" r="20" fill="none" stroke={MUTED} strokeWidth="2" />
-                  <circle cx="240" cy="85" r="5" fill={MUTED} />
-                  <line x1="40" y1="85" x2="212" y2="85" stroke={PHOTON} strokeWidth="3" strokeDasharray="2 6" />
-                  <text x="120" y="70" fill={PHOTON} fontSize="13" textAnchor="middle">foton</text>
-                  <line x1="258" y1="78" x2="380" y2="45" stroke={CHARGED} strokeWidth="3" markerEnd="url(#ar-p2)" />
-                  <circle cx="258" cy="78" r="6" fill={CHARGED} />
-                  <text x="350" y="35" fill={CHARGED} fontSize="14" textAnchor="middle">vyražený e⁻</text>
-                  <text x="240" y="135" fill={MUTED} fontSize="12" textAnchor="middle">předaná E → kerma</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'sekundární ionizace',
-              caption: <>Vyražený <b>nabitý</b> elektron je teď <b>přímo ionizující</b> — letí dál a po cestě vyráží další elektrony. Pohlcená energie v látce = <b>dávka</b>.</>,
-              content: (
-                <svg viewBox="0 0 440 170" className="svg-fig">
-                  <Defs color={CHARGED} id="ar-p3" />
-                  <line x1="40" y1="100" x2="380" y2="60" stroke={CHARGED} strokeWidth="3" markerEnd="url(#ar-p3)" />
-                  <circle cx="40" cy="100" r="6" fill={CHARGED} />
-                  <text x="120" y="90" fill={CHARGED} fontSize="13" textAnchor="middle">e⁻ (přímo ionizující)</text>
-                  <g stroke={ACCENT} strokeWidth="2">
-                    <line x1="150" y1="92" x2="160" y2="125" />
-                    <line x1="240" y1="84" x2="252" y2="118" />
-                    <line x1="320" y1="75" x2="332" y2="110" />
-                  </g>
-                  <text x="240" y="150" fill={ACCENT} fontSize="13" textAnchor="middle">další ionizace → pohlcená energie = dávka D</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 190"
+          captions={[
+            <>Přilétá <b>nenabitá</b> částice (foton). Sama o sobě atomy neionizuje — proto „nepřímo".</>,
+            <>Foton se srazí s atomem a <b>vyrazí z něj elektron</b> — předá mu <Concept id="kineticka-energie">kinetickou energii</Concept>. To je ta energie, kterou počítá <b>kerma</b>.</>,
+            <>Vyražený <b>nabitý</b> elektron je teď <b>přímo ionizující</b> — letí dál a po cestě vyráží další elektrony. Pohlcená energie v látce = <b>dávka</b>.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="ar56-photon" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={PHOTON} /></marker>
+            <marker id="ar56-e" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={CHARGED} /></marker>
+          </defs>
+
+          {/* atom – stojí na místě v krocích 0–1, v kroku 2 se vytratí */}
+          <AGroup opacity={[1, 1, 0]}>
+            <circle cx={330} cy={90} r={20} fill="none" stroke={MUTED} strokeWidth={2} />
+            <circle cx={330} cy={90} r={5} fill={MUTED} />
+          </AGroup>
+          <AText x={330} y={138} fill={MUTED} fontSize="13" textAnchor="middle" opacity={[1, 1, 0]}>atom v látce</AText>
+
+          {/* foton – letí zleva k atomu, po srážce se zkrátí, pak zmizí */}
+          <ALine
+            x1={40} y1={90}
+            x2={[300, 305, 305]} y2={90}
+            stroke={PHOTON} strokeWidth={3} strokeDasharray="2 6"
+            markerEnd="url(#ar56-photon)"
+            opacity={[1, 1, 0]}
+          />
+          <AText x={155} y={73} fill={PHOTON} fontSize="14" textAnchor="middle" opacity={[1, 1, 0]}>foton γ (nenabitý)</AText>
+
+          {/* předaná energie → kerma (jen krok 1) */}
+          <AText x={330} y={165} fill={TXT} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>předaná E → kerma</AText>
+
+          {/* vyražený elektron: v kroku 1 vyletí z atomu, v kroku 2 už je to letící e⁻ */}
+          <ACircle cx={[330, 348, 60]} cy={[90, 70, 120]} r={[0, 6, 6]} fill={CHARGED} opacity={[0, 1, 1]} />
+          <ALine
+            x1={[348, 348, 60]} y1={[70, 70, 120]}
+            x2={[348, 410, 400]} y2={[70, 38, 70]}
+            stroke={CHARGED} strokeWidth={3}
+            markerEnd="url(#ar56-e)"
+            opacity={[0, 1, 1]}
+          />
+          {/* popisek elektronu: krok 1 „vyražený e⁻" vpravo nahoře, v kroku 2 se prolne na „e⁻ (přímo ionizující)" nad trajektorií */}
+          <AText x={388} y={30} fill={CHARGED} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>vyražený e⁻</AText>
+          <AText x={165} y={84} fill={CHARGED} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>e⁻ (přímo ionizující)</AText>
+
+          {/* sekundární ionizace (jen krok 2) – krátké zelené čárky pod trajektorií */}
+          <ALine x1={170} y1={108} x2={180} y2={140} stroke={ACCENT} strokeWidth={2} opacity={[0, 0, 1]} />
+          <ALine x1={250} y1={94} x2={262} y2={126} stroke={ACCENT} strokeWidth={2} opacity={[0, 0, 1]} />
+          <ALine x1={330} y1={80} x2={342} y2={112} stroke={ACCENT} strokeWidth={2} opacity={[0, 0, 1]} />
+          <AText x={250} y={172} fill={ACCENT} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>další ionizace → pohlcená energie = dávka D</AText>
+        </StepScene>
       </Section>
 
       <Section title="Typy účinků: dočasné × trvalé">

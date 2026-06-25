@@ -29,7 +29,7 @@ function Defs() {
 /* Animované paprsky pro StepScene: 8 siločar z náboje (210,100).
    Délka roste podle plochy; v posledním kroku (náboj venku) zmizí. */
 const RAY_DIRS = [0, 45, 90, 135, 180, 225, 270, 315]
-const RAY_LEN = [70, 88, 66, 66] // kroky: malá, velká, divný tvar, (venku – schováno)
+const RAY_LEN = [70, 102, 70, 70] // kroky: malá, velká, divný tvar, (venku – schováno)
 function AnimRays() {
   const cx = 210
   const cy = 100

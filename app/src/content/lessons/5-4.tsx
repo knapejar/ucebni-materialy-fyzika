@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.4'
 
@@ -162,118 +162,87 @@ export default function Lesson() {
 
         <p>Proklikej si, co se s α částicí děje. Klikej <b>Další →</b>:</p>
 
-        <StepFigure
+        <StepScene
           title="Tunelový jev krok po kroku"
-          steps={[
-            {
-              label: 'uvnitř jámy',
-              caption: (
-                <>
-                  α částice se uvnitř jádra pohybuje sem a tam v <b>potenciálové jámě</b> a naráží do
-                  „valu" — <Term>bariéry</Term> <M>{'E_\\text{bar}'}</M>, kterou tvoří Coulombovské
-                  odpuzování.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  {/* osa */}
-                  <line x1="40" y1="170" x2="400" y2="170" stroke={DIM} strokeWidth="1.5" />
-                  <text x="395" y="188" fill={TXT} fontSize="12" textAnchor="end">x (vzdálenost od středu)</text>
-                  {/* profil potenciálu: jáma -> špička -> Coulombův chvost */}
-                  <path d="M55,120 L150,120 L150,45 C175,70 200,100 240,125 C280,148 330,158 395,162"
-                        fill="none" stroke={BARRIER} strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
-                  <text x="150" y="38" fill={BARRIER} fontSize="12" textAnchor="middle">E_bar</text>
-                  {/* energetická hladina částice */}
-                  <line x1="55" y1="140" x2="300" y2="140" stroke={ALPHA} strokeWidth="1.5" strokeDasharray="6 5" />
-                  <text x="48" y="144" fill={ALPHA} fontSize="11" textAnchor="end">E</text>
-                  {/* částice v jámě */}
-                  <AlphaParticle x={100} y={132} r={5} />
-                  {/* pohyb sem a tam */}
-                  <line x1="70" y1="105" x2="135" y2="105" stroke={ALPHA} strokeWidth="2" />
-                  <text x="100" y="98" fill={ALPHA} fontSize="11" textAnchor="middle">tam a zpět</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'klasicky: stop',
-              caption: (
-                <>
-                  Klasicky: částice má energii <M>{'E'}</M> <b>menší</b> než výška bariéry{' '}
-                  <M>{'E_\\text{bar}'}</M>. <b>Odrazí se</b> a nikdy se nedostane ven. Konec příběhu.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs color={PROTON} name="arstop" />
-                  <line x1="40" y1="170" x2="400" y2="170" stroke={DIM} strokeWidth="1.5" />
-                  <path d="M55,120 L150,120 L150,45 C175,70 200,100 240,125 C280,148 330,158 395,162"
-                        fill="none" stroke={BARRIER} strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
-                  <text x="150" y="38" fill={BARRIER} fontSize="12" textAnchor="middle">E_bar</text>
-                  <line x1="55" y1="140" x2="300" y2="140" stroke={ALPHA} strokeWidth="1.5" strokeDasharray="6 5" />
-                  <text x="48" y="144" fill={ALPHA} fontSize="11" textAnchor="end">E</text>
-                  <AlphaParticle x={120} y={132} r={5} />
-                  {/* náraz a odraz */}
-                  <line x1="130" y1="132" x2="148" y2="132" stroke={ALPHA} strokeWidth="2.5" markerEnd="url(#arstop)" />
-                  <line x1="146" y1="118" x2="110" y2="118" stroke={PROTON} strokeWidth="2.5" markerEnd="url(#arstop)" />
-                  <text x="200" y="90" fill={PROTON} fontSize="13" textAnchor="middle">klasicky: odraz, ven se nedostane</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'kvantově: tunel',
-              caption: (
-                <>
-                  Kvantově: <Concept id="vlnova-funkce">vlnová funkce</Concept> α částice <b>nezmizí</b> uvnitř bariéry — jen zeslábne. Za
-                  bariérou má nenulovou hodnotu, takže <b>existuje malá pravděpodobnost</b>, že tam
-                  částici najdeme. To je <Term>tunelový jev</Term>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <line x1="40" y1="170" x2="400" y2="170" stroke={DIM} strokeWidth="1.5" />
-                  <path d="M55,120 L150,120 L150,45 C175,70 200,100 240,125 C280,148 330,158 395,162"
-                        fill="none" stroke={BARRIER} strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
-                  <text x="150" y="38" fill={BARRIER} fontSize="12" textAnchor="middle">E_bar</text>
-                  {/* vlnová funkce: velké oscilace uvnitř, tlumení v bariéře, malé vně */}
-                  <path d="M60,132 q8,-22 16,0 t16,0 t16,0 t16,0
-                           C112,118 130,128 150,128
-                           C175,130 200,134 240,138
-                           C270,140 300,140 320,140
-                           q7,-7 14,0 t14,0 t14,0"
-                        fill="none" stroke="#ff2d8e" strokeWidth="2.5" strokeLinecap="round" />
-                  <text x="95" y="100" fill="#ff2d8e" fontSize="12" textAnchor="middle">ψ uvnitř (velká)</text>
-                  <text x="355" y="124" fill="#ff2d8e" fontSize="12" textAnchor="middle">ψ vně (malá, ale ≠ 0)</text>
-                  {/* α už venku */}
-                  <AlphaParticle x={365} y={150} r={5} />
-                </svg>
-              ),
-            },
-            {
-              label: 'únik α',
-              caption: (
-                <>
-                  Jakmile je α částice za bariérou, Coulombovské odpuzování ji <b>vystřelí pryč</b>{' '}
-                  jako z praku. Jádro se změní: <M>{'Z\\!\\to\\!Z-2'}</M>, <M>{'A\\!\\to\\!A-4'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 420 200" className="svg-fig">
-                  <Defs color={ALPHA} name="arout" />
-                  <line x1="40" y1="170" x2="400" y2="170" stroke={DIM} strokeWidth="1.5" />
-                  <path d="M55,120 L150,120 L150,45 C175,70 200,100 240,125 C280,148 330,158 395,162"
-                        fill="none" stroke={BARRIER} strokeWidth="3.5" strokeLinejoin="round" strokeLinecap="round" />
-                  {/* dceřiné jádro v jámě */}
-                  <circle cx="100" cy="128" r="14" fill={NEUTRON} opacity="0.7" />
-                  <text x="100" y="100" fill={TXT} fontSize="11" textAnchor="middle">dceřiné jádro Y</text>
-                  {/* α letí pryč */}
-                  <AlphaParticle x={300} y={150} r={5} />
-                  <line x1="312" y1="150" x2="390" y2="150" stroke={ALPHA} strokeWidth="3" markerEnd="url(#arout)" />
-                  <text x="350" y="138" fill={ALPHA} fontSize="12" textAnchor="middle">α letí pryč</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 420 200"
+          captions={[
+            <>
+              α částice se uvnitř jádra pohybuje sem a tam v <b>potenciálové jámě</b> a naráží do
+              „valu" — <Term>bariéry</Term> <M>{'E_\\text{bar}'}</M>, kterou tvoří Coulombovské
+              odpuzování.
+            </>,
+            <>
+              Klasicky: částice má energii <M>{'E'}</M> <b>menší</b> než výška bariéry{' '}
+              <M>{'E_\\text{bar}'}</M>. <b>Odrazí se</b> a nikdy se nedostane ven. Konec příběhu.
+            </>,
+            <>
+              Kvantově: <Concept id="vlnova-funkce">vlnová funkce</Concept> α částice <b>nezmizí</b> uvnitř bariéry — jen zeslábne. Za
+              bariérou má nenulovou hodnotu, takže <b>existuje malá pravděpodobnost</b>, že tam
+              částici najdeme. To je <Term>tunelový jev</Term>.
+            </>,
+            <>
+              Jakmile je α částice za bariérou, Coulombovské odpuzování ji <b>vystřelí pryč</b>{' '}
+              jako z praku. Jádro se změní: <M>{'Z\\!\\to\\!Z-2'}</M>, <M>{'A\\!\\to\\!A-4'}</M>.
+            </>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="arstop" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={PROTON} /></marker>
+            <marker id="arstopa" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ALPHA} /></marker>
+            <marker id="arout" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ALPHA} /></marker>
+          </defs>
+
+          {/* osa x — statická */}
+          <ALine x1={40} y1={170} x2={400} y2={170} stroke={DIM} strokeWidth={1.5} />
+          <AText x={395} y={188} fill={TXT} fontSize="12" textAnchor="end">x (vzdálenost od středu)</AText>
+
+          {/* profil potenciálu: jáma -> špička -> Coulombův chvost — statický */}
+          <APath d="M55,120 L150,120 L150,45 C175,70 200,100 240,125 C280,148 330,158 395,162"
+                 fill="none" stroke={BARRIER} strokeWidth={3.5} strokeLinejoin="round" strokeLinecap="round" />
+          <AText x={150} y={38} fill={BARRIER} fontSize="12" textAnchor="middle" opacity={[1, 1, 1, 0]}>E_bar</AText>
+
+          {/* energetická hladina E — jen kroky 1–3 */}
+          <ALine x1={55} y1={140} x2={300} y2={140} stroke={ALPHA} strokeWidth={1.5} strokeDasharray="6 5" opacity={[1, 1, 1, 0]} />
+          <AText x={48} y={144} fill={ALPHA} fontSize="11" textAnchor="end" opacity={[1, 1, 1, 0]}>E</AText>
+
+          {/* vlnová funkce ψ — jen krok 3 (kvantově) */}
+          <APath d="M60,132 q8,-22 16,0 t16,0 t16,0 t16,0
+                    C112,118 130,128 150,128
+                    C175,130 200,134 240,138
+                    C270,140 300,140 320,140
+                    q7,-7 14,0 t14,0 t14,0"
+                 fill="none" stroke="#ff2d8e" strokeWidth={2.5} strokeLinecap="round" opacity={[0, 0, 1, 0]} />
+          <AText x={95} y={102} fill="#ff2d8e" fontSize="12" textAnchor="middle" opacity={[0, 0, 1, 0]}>ψ uvnitř (velká)</AText>
+          <AText x={355} y={122} fill="#ff2d8e" fontSize="12" textAnchor="middle" opacity={[0, 0, 1, 0]}>ψ vně (malá, ale ≠ 0)</AText>
+
+          {/* krok 1: „tam a zpět" v jámě */}
+          <ALine x1={70} y1={105} x2={135} y2={105} stroke={ALPHA} strokeWidth={2} opacity={[1, 0, 0, 0]} />
+          <AText x={102} y={98} fill={ALPHA} fontSize="11" textAnchor="middle" opacity={[1, 0, 0, 0]}>tam a zpět</AText>
+
+          {/* krok 2: náraz a odraz (klasicky stop) */}
+          <ALine x1={132} y1={132} x2={150} y2={132} stroke={ALPHA} strokeWidth={2.5} markerEnd="url(#arstopa)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={150} y1={116} x2={114} y2={116} stroke={PROTON} strokeWidth={2.5} markerEnd="url(#arstop)" opacity={[0, 1, 0, 0]} />
+          <AText x={210} y={92} fill={PROTON} fontSize="13" textAnchor="middle" opacity={[0, 1, 0, 0]}>klasicky: odraz, ven se nedostane</AText>
+
+          {/* krok 4: dceřiné jádro v jámě */}
+          <ACircle cx={100} cy={128} r={14} fill={NEUTRON} opacity={[0, 0, 0, 0.7]} />
+          <AText x={100} y={100} fill={TXT} fontSize="11" textAnchor="middle" opacity={[0, 0, 0, 1]}>dceřiné jádro Y</AText>
+          <ALine x1={312} y1={150} x2={390} y2={150} stroke={ALPHA} strokeWidth={3} markerEnd="url(#arout)" opacity={[0, 0, 0, 1]} />
+          <AText x={351} y={138} fill={ALPHA} fontSize="12" textAnchor="middle" opacity={[0, 0, 0, 1]}>α letí pryč</AText>
+
+          {/* α částice — putuje: jáma → zeď → skrz bariéru ven → pryč.
+              4 protony/neutrony jako kolečka okolo středu (lokálně), skupina se translatuje. */}
+          <AGroup
+            x={[100, 122, 365, 300]}
+            y={[132, 132, 150, 150]}
+            opacity={[1, 1, 1, 1]}
+          >
+            <ACircle cx={-5} cy={-5} r={5} fill={PROTON} />
+            <ACircle cx={5} cy={-5} r={5} fill={NEUTRON} />
+            <ACircle cx={-5} cy={5} r={5} fill={NEUTRON} />
+            <ACircle cx={5} cy={5} r={5} fill={PROTON} />
+          </AGroup>
+        </StepScene>
 
         <p>
           Co znamenají barvy na obrázku: <b>modrá</b> křivka je <b>potenciál</b> (jáma uvnitř, vysoký

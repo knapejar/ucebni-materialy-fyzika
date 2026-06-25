@@ -163,12 +163,13 @@ export default function Lesson() {
             <ACircle key={`z${k}`} cx={x} cy={y} r={4} fill={TXT} opacity={[0, 0, 0, 1]} />
           ))}
 
-          {/* nárazy ZLEVA: 3 v rovnováze, 5 v nerovnováze (krajní 2 jen nerovnováha) */}
-          <ALine x1={96} y1={92} x2={156} y2={94} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
-          <ALine x1={96} y1={100} x2={156} y2={100} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
-          <ALine x1={96} y1={108} x2={156} y2={106} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
-          <ALine x1={96} y1={80} x2={156} y2={88} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 0, 1, 0]} />
-          <ALine x1={96} y1={120} x2={156} y2={112} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 0, 1, 0]} />
+          {/* nárazy ZLEVA: 3 v rovnováze, 5 v nerovnováze (krajní 2 jen nerovnováha).
+              hroty dojíždějí ke zrnku — v kroku 3 je zrnko posunuté doprava (x2 → 182). */}
+          <ALine x1={96} y1={92} x2={[156, 156, 182, 182]} y2={94} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={96} y1={100} x2={[156, 156, 182, 182]} y2={100} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={96} y1={108} x2={[156, 156, 182, 182]} y2={106} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />
+          <ALine x1={96} y1={80} x2={182} y2={88} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 0, 1, 0]} />
+          <ALine x1={96} y1={120} x2={182} y2={112} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 0, 1, 0]} />
 
           {/* nárazy ZPRAVA: 3 v rovnováze, jen 1 v nerovnováze (ta sleduje posunuté zrnko) */}
           <ALine x1={264} y1={100} x2={[204, 204, 230, 230]} y2={100} stroke={VODA} strokeWidth={3} markerEnd="url(#arV)" opacity={[0, 1, 1, 0]} />

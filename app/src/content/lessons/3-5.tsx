@@ -1,4 +1,4 @@
-import { Section, M, MB, Concept, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, Concept, Term, Figure, StepScene, ACircle, ALine, AText, ARect, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.5'
 
@@ -158,58 +158,66 @@ export default function Lesson_3_5() {
           zpátky — a tam se sčítá (<Concept id="superpozice">skládá</Concept>) se sebou samou.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Vznik stojatého vlnění odrazem na konci"
-          steps={[
-            {
-              label: 'vlna jde doprava',
-              caption: <>Po struně běží postupná vlna doprava (červeně) směrem ke zdi (pevný konec).</>,
-              content: (
-                <svg viewBox="0 0 440 170" className="svg-fig">
-                  <Defs />
-                  <line x1="20" y1="90" x2="400" y2="90" stroke={MUTED} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <rect x="400" y="40" width="14" height="100" fill={MUTED} />
-                  <path d="M20,90 C50,45 80,45 110,90 C140,135 170,135 200,90 C230,45 260,45 290,90 C320,135 350,135 380,90" fill="none" stroke={WAVE_R} strokeWidth="3" />
-                  <line x1="150" y1="115" x2="230" y2="115" stroke={WAVE_R} strokeWidth="3" markerEnd="url(#arR)" />
-                  <text x="190" y="135" fill={WAVE_R} fontSize="13" textAnchor="middle">postupná vlna →</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'odraz na konci',
-              caption: <>Na konci se vlna <b>odrazí</b> a vrací se doleva (modře). Teď máme dvě vlny jdoucí <b>proti sobě</b>.</>,
-              content: (
-                <svg viewBox="0 0 440 170" className="svg-fig">
-                  <Defs />
-                  <line x1="20" y1="90" x2="400" y2="90" stroke={MUTED} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <rect x="400" y="40" width="14" height="100" fill={MUTED} />
-                  <path d="M20,90 C50,45 80,45 110,90 C140,135 170,135 200,90 C230,45 260,45 290,90 C320,135 350,135 380,90" fill="none" stroke={WAVE_R} strokeWidth="2.5" opacity="0.85" />
-                  <path d="M20,90 C50,135 80,135 110,90 C140,45 170,45 200,90 C230,135 260,135 290,90 C320,45 350,45 380,90" fill="none" stroke={WAVE_L} strokeWidth="2.5" opacity="0.85" />
-                  <line x1="280" y1="120" x2="200" y2="120" stroke={WAVE_L} strokeWidth="3" markerEnd="url(#arL)" />
-                  <text x="240" y="138" fill={WAVE_L} fontSize="13" textAnchor="middle">← odražená vlna</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'sečtou se',
-              caption: <>Obě vlny se <b>sečtou</b> (superpozice). V některých místech se trvale vyruší → <b>uzly</b>; mezi nimi se trvale zesílí → <b>kmitny</b>.</>,
-              content: (
-                <svg viewBox="0 0 440 170" className="svg-fig">
-                  <Defs />
-                  <line x1="20" y1="90" x2="420" y2="90" stroke={MUTED} strokeWidth="1.5" strokeDasharray="4 4" />
-                  <path d="M40,90 C70,40 110,40 140,90 C170,140 210,140 240,90 C270,40 310,40 340,90 C370,140 410,140 420,90" fill="none" stroke={ANTI} strokeWidth="2.8" />
-                  <path d="M40,90 C70,140 110,140 140,90 C170,40 210,40 240,90 C270,140 310,140 340,90 C370,40 410,40 420,90" fill="none" stroke={ANTI} strokeWidth="2.8" opacity="0.5" />
-                  {[40, 140, 240, 340].map((x) => (
-                    <circle key={x} cx={x} cy="90" r="5" fill={NODE} />
-                  ))}
-                  <text x="40" y="82" fill={NODE} fontSize="11" textAnchor="middle">uzel</text>
-                  <line x1="90" y1="50" x2="90" y2="62" stroke={ANTI} strokeWidth="2" markerEnd="url(#arK)" />
-                  <text x="90" y="45" fill={ANTI} fontSize="11" textAnchor="middle">kmitna</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 175"
+          captions={[
+            <>Po struně běží postupná vlna doprava (červeně) směrem ke zdi (pevný konec).</>,
+            <>Na konci se vlna <b>odrazí</b> a vrací se doleva (modře). Teď máme dvě vlny jdoucí <b>proti sobě</b>.</>,
+            <>Obě vlny se <b>sečtou</b> (superpozice). V některých místech se trvale vyruší → <b>uzly</b>; mezi nimi se trvale zesílí → <b>kmitny</b>.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="s5arR" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={WAVE_R} /></marker>
+            <marker id="s5arL" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={WAVE_L} /></marker>
+            <marker id="s5arK" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ANTI} /></marker>
+          </defs>
+
+          {/* klidová osa (statická) */}
+          <ALine x1={20} y1={90} x2={[400, 400, 420]} y2={90} stroke={MUTED} strokeWidth={1.5} strokeDasharray="4 4" />
+          {/* zeď / pevný konec — v posledním kroku zmizí (struna kmitá v celé šíři) */}
+          <ARect x={400} y={40} width={14} height={100} fill={MUTED} opacity={[1, 1, 0]} />
+
+          {/* červená vlna jde doprava — v kroku 1 a 2; v kroku 3 se prolne se do stojaté */}
+          <APath
+            d="M20,90 C50,45 80,45 110,90 C140,135 170,135 200,90 C230,45 260,45 290,90 C320,135 350,135 380,90"
+            fill="none" stroke={WAVE_R} strokeWidth={[3, 2.5, 2.5]} opacity={[1, 0.85, 0]}
+          />
+          {/* modrá odražená vlna — objeví se v kroku 2 */}
+          <APath
+            d="M20,90 C50,135 80,135 110,90 C140,45 170,45 200,90 C230,135 260,135 290,90 C320,45 350,45 380,90"
+            fill="none" stroke={WAVE_L} strokeWidth={2.5} opacity={[0, 0.85, 0]}
+          />
+
+          {/* zelená obálka stojatého vlnění (dvě krajní polohy) — objeví se v kroku 3 */}
+          <APath
+            d="M40,90 C70,40 110,40 140,90 C170,140 210,140 240,90 C270,40 310,40 340,90 C370,140 410,140 420,90"
+            fill="none" stroke={ANTI} strokeWidth={2.8} opacity={[0, 0, 1]}
+          />
+          <APath
+            d="M40,90 C70,140 110,140 140,90 C170,40 210,40 240,90 C270,140 310,140 340,90 C370,40 410,40 420,90"
+            fill="none" stroke={ANTI} strokeWidth={2.8} opacity={[0, 0, 0.5]}
+          />
+
+          {/* uzly — objeví se v kroku 3 */}
+          <ACircle cx={40} cy={90} r={5} fill={NODE} opacity={[0, 0, 1]} />
+          <ACircle cx={140} cy={90} r={5} fill={NODE} opacity={[0, 0, 1]} />
+          <ACircle cx={240} cy={90} r={5} fill={NODE} opacity={[0, 0, 1]} />
+          <ACircle cx={340} cy={90} r={5} fill={NODE} opacity={[0, 0, 1]} />
+
+          {/* krok 1: šipka + popisek postupné vlny */}
+          <ALine x1={150} y1={118} x2={230} y2={118} stroke={WAVE_R} strokeWidth={3} markerEnd="url(#s5arR)" opacity={[1, 0, 0]} />
+          <AText x={190} y={138} fill={WAVE_R} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>postupná vlna →</AText>
+
+          {/* krok 2: šipka + popisek odražené vlny */}
+          <ALine x1={280} y1={118} x2={200} y2={118} stroke={WAVE_L} strokeWidth={3} markerEnd="url(#s5arL)" opacity={[0, 1, 0]} />
+          <AText x={240} y={138} fill={WAVE_L} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>← odražená vlna</AText>
+
+          {/* krok 3: popisky uzel + kmitna */}
+          <AText x={40} y={78} fill={NODE} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>uzel</AText>
+          <ALine x1={90} y1={52} x2={90} y2={66} stroke={ANTI} strokeWidth={2} markerEnd="url(#s5arK)" opacity={[0, 0, 1]} />
+          <AText x={90} y={46} fill={ANTI} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>kmitna</AText>
+        </StepScene>
 
         <p>
           Aby vlny daly pěkné stojaté vlnění, musejí mít <b>stejnou amplitudu, frekvenci a <Concept id="fazova-rychlost">fázovou

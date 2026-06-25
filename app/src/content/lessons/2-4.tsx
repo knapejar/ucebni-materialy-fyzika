@@ -101,7 +101,7 @@ export default function Lesson_2_4() {
           <b> <Concept id="intenzita-pole">intenzitu</Concept> od kladného a od záporného náboje</b>. Výsledné <Concept id="silocary">siločáry</Concept> vychází z <M>{'+Q'}</M> a
           vrací se do <M>{'-Q'}</M>.
         </p>
-        <Figure caption="Vlastní pole dipólu: intenzita E v daném bodě je vektorový součet polí obou nábojů. Siločáry (modré) jdou od + k −, červené čárkované jsou ekvipotenciály (jsou na siločáry kolmé).">
+        <Figure caption="Vlastní pole dipólu: intenzita E v daném bodě je vektorový součet polí obou nábojů. Siločáry (modré) jdou od + k −, šedé čárkované kružnice jsou ekvipotenciály (jsou na siločáry kolmé).">
           <svg viewBox="0 0 380 240" className="svg-fig">
             <Defs />
             {/* ekvipotenciály kolem každého náboje (jen naznačené) */}
@@ -121,7 +121,7 @@ export default function Lesson_2_4() {
             <Charge x={130} y={120} sign="−" />
             <Charge x={250} y={120} sign="+" />
             {/* dipólový moment p od - k + */}
-            <line x1="150" y1="120" x2="230" y2="120" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
+            <line x1="152" y1="120" x2="226" y2="120" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
             <text x="190" y="112" fill={P} fontSize="16" textAnchor="middle" fontStyle="italic" fontWeight="700">p</text>
             <text x="190" y="223" fill={TXT} fontSize="13" textAnchor="middle">p míří od − k +</text>
           </svg>
@@ -299,9 +299,9 @@ export default function Lesson_2_4() {
             <text x="175" y="140" fill="#0b1020" fontSize="12" textAnchor="middle" fontWeight="800">H</text>
             <line x1="135" y1="95" x2="95" y2="135" stroke={MUTED} strokeWidth="3" />
             <line x1="135" y1="95" x2="175" y2="135" stroke={MUTED} strokeWidth="3" />
-            {/* vlastní dipólový moment p míří k zápornému konci (nahoru) */}
-            <line x1="135" y1="135" x2="135" y2="70" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
-            <text x="148" y="100" fill={P} fontSize="15" fontStyle="italic" fontWeight="700">p</text>
+            {/* vlastní dipólový moment p míří k zápornému konci (nahoru) — kreslený vedle molekuly, ať „neprobodává" atom O */}
+            <line x1="220" y1="138" x2="220" y2="72" stroke={P} strokeWidth="3.5" markerEnd="url(#d4-p)" />
+            <text x="234" y="108" fill={P} fontSize="15" fontStyle="italic" fontWeight="700">p</text>
             <text x="135" y="185" fill={P} fontSize="13" textAnchor="middle">má vlastní p ≠ 0</text>
 
             {/* dělicí čára */}

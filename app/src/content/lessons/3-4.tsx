@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, APath, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.4'
 
@@ -69,31 +69,44 @@ export default function Lesson_3_4() {
           necestuje</b> — jen kmitá nahoru a dolů. Cestuje jen tvar vlny. Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Postup vlny po struně (příčné vlnění)"
-          steps={[
-            {
-              label: 't = 0',
-              caption: <>Konec struny cukne nahoru. Vznikl první „hrb", který se začne šířit doprava.</>,
-              content: <WaveFrame phase={0} />,
-            },
-            {
-              label: 't = T/4',
-              caption: <>Vlna popolezla. Náš bod <span style={{ color: HOT }}>•</span> se zvedl — ale zůstal na svém <i>x</i>, posunul se jen svisle.</>,
-              content: <WaveFrame phase={Math.PI / 2} />,
-            },
-            {
-              label: 't = T/2',
-              caption: <>Vlna postoupila dál; bod prošel přes rovnovážnou polohu dolů. Vzdálenost mezi dvěma sousedními „hrby" je <span style={{ color: HOT }}>vlnová délka λ</span>.</>,
-              content: <WaveFrame phase={Math.PI} showLambda />,
-            },
-            {
-              label: 't = T',
-              caption: <>Za jednu <Concept id="perioda">periodu</Concept> <M>{'T'}</M> vlna ujede přesně jednu <span style={{ color: HOT }}>λ</span> a bod se vrátí, kde začal. Odtud <M>{'\\lambda = w\\,T'}</M> (<M>{'w'}</M> = rychlost šíření).</>,
-              content: <WaveFrame phase={2 * Math.PI} showLambda />,
-            },
+          viewBox="0 0 640 200"
+          captions={[
+            <><b>t = 0.</b> Začínáme: vlna na struně. Sleduj vyznačený bod <span style={{ color: HOT }}>•</span> na pevném <i>x</i> — teď je dole.</>,
+            <><b>t = T/4.</b> Vlna popolezla doprava. Náš bod <span style={{ color: HOT }}>•</span> se zvedl — ale zůstal na svém <i>x</i>, posunul se jen svisle.</>,
+            <><b>t = T/2.</b> Vlna postoupila dál; bod se vyhoupl až nahoru. Vzdálenost mezi dvěma sousedními „hrby" je <span style={{ color: HOT }}>vlnová délka λ</span>.</>,
+            <><b>t = T.</b> Za jednu <Concept id="perioda">periodu</Concept> <M>{'T'}</M> vlna ujede přesně jednu <span style={{ color: HOT }}>λ</span> a bod se vrátí, kde začal. Odtud <M>{'\\lambda = w\\,T'}</M> (<M>{'w'}</M> = rychlost šíření).</>,
           ]}
-        />
+        >
+          <Defs color={HOT} id="arW" />
+          {/* osa x = rovnovážná poloha (statická) */}
+          <ALine x1={40} y1={90} x2={596} y2={90} stroke={GRID} strokeWidth={1.5} strokeDasharray="5,5" />
+          {/* šipka směru šíření vpravo (statická) */}
+          <ALine x1={566} y1={90} x2={600} y2={90} stroke={DIM} strokeWidth={2} markerEnd="url(#arW)" />
+          <AText x={600} y={80} fill={DIM} fontSize="12" textAnchor="end">směr šíření</AText>
+          {/* vlna — jedna křivka, jejíž tvar se mezi kroky plynule posouvá doprava */}
+          <APath
+            d={[
+              sineD(40, 600, 90, 38, 150, 0),
+              sineD(40, 600, 90, 38, 150, Math.PI / 2),
+              sineD(40, 600, 90, 38, 150, Math.PI),
+              sineD(40, 600, 90, 38, 150, 2 * Math.PI),
+            ]}
+            fill="none"
+            stroke={ACC}
+            strokeWidth={2.8}
+          />
+          {/* svislá spojnice sledovaného bodu k ose */}
+          <ALine x1={150} y1={90} x2={150} y2={[127.8, 86, 52.2, 127.8]} stroke={HOT} strokeWidth={1.5} strokeDasharray="3,3" />
+          {/* sledovaný bod — pevné x = 150, mění se jen y */}
+          <ACircle cx={150} cy={[127.8, 86, 52.2, 127.8]} r={7} fill={HOT} />
+          {/* vyznačení λ mezi dvěma sousedními hrby (jen kroky 3 a 4) */}
+          <ALine x1={[153, 153, 153, 228]} y1={170} x2={[303, 303, 303, 378]} y2={170}
+                 stroke={HOT} strokeWidth={2} markerStart="url(#arW)" markerEnd="url(#arW)"
+                 opacity={[0, 0, 1, 1]} />
+          <AText x={[228, 228, 228, 303]} y={188} fill={HOT} fontSize="15" fontStyle="italic" textAnchor="middle" opacity={[0, 0, 1, 1]}>λ</AText>
+        </StepScene>
       </Section>
 
       <Section title="Veličiny vlnění a jejich vztahy (přesně co psát u zkoušky)">
@@ -132,14 +145,15 @@ export default function Lesson_3_4() {
         <Figure caption="Dva pohledy na vlnu. Vlevo „film jednoho bodu v čase“ (perioda T). Vpravo „fotka celé struny v jednom okamžiku“ (vlnová délka λ).">
           <svg viewBox="0 0 640 230" className="svg-fig">
             <Defs color={ACC} id="arA" />
+            <Defs color={HOT} id="arAh" />
             {/* LEVÝ graf: u(t) pro x = konst. */}
             <line x1="40" y1="20" x2="40" y2="160" stroke={TXT} strokeWidth="1.5" />
             <line x1="30" y1="90" x2="295" y2="90" stroke={TXT} strokeWidth="1.5" markerEnd="url(#arA)" />
             <text x="22" y="28" fill={TXT} fontSize="13" fontStyle="italic">u</text>
             <text x="288" y="108" fill={TXT} fontSize="13" fontStyle="italic">t</text>
             <path d={sineD(50, 270, 90, 42, 110, 0)} fill="none" stroke={ACC} strokeWidth="2.6" />
-            <line x1="105" y1="118" x2="215" y2="118" stroke={HOT} strokeWidth="2" markerStart="url(#arA)" markerEnd="url(#arA)" />
-            <text x="155" y="135" fill={HOT} fontSize="14" fontStyle="italic" textAnchor="middle">T</text>
+            <line x1="105" y1="118" x2="215" y2="118" stroke={HOT} strokeWidth="2" markerStart="url(#arAh)" markerEnd="url(#arAh)" />
+            <text x="160" y="138" fill={HOT} fontSize="14" fontStyle="italic" textAnchor="middle">T</text>
             <text x="160" y="195" fill={DIM} fontSize="12" textAnchor="middle">x = konst. (jeden bod)</text>
 
             {/* PRAVÝ graf: u(x) pro t = konst. */}
@@ -148,8 +162,8 @@ export default function Lesson_3_4() {
             <text x="332" y="28" fill={TXT} fontSize="13" fontStyle="italic">u</text>
             <text x="608" y="108" fill={TXT} fontSize="13" fontStyle="italic">x</text>
             <path d={sineD(360, 600, 90, 42, 90, 0)} fill="none" stroke={ACC} strokeWidth="2.6" />
-            <line x1="382" y1="118" x2="472" y2="118" stroke={HOT} strokeWidth="2" markerStart="url(#arA)" markerEnd="url(#arA)" />
-            <text x="427" y="135" fill={HOT} fontSize="14" fontStyle="italic" textAnchor="middle">λ</text>
+            <line x1="382" y1="118" x2="472" y2="118" stroke={HOT} strokeWidth="2" markerStart="url(#arAh)" markerEnd="url(#arAh)" />
+            <text x="427" y="138" fill={HOT} fontSize="14" fontStyle="italic" textAnchor="middle">λ</text>
             <text x="478" y="195" fill={DIM} fontSize="12" textAnchor="middle">t = konst. (celá struna)</text>
           </svg>
         </Figure>
@@ -159,7 +173,7 @@ export default function Lesson_3_4() {
         <p>Rozdíl je v jediné věci: <b>jakým směrem kmitají body vůči směru šíření</b>.</p>
 
         <Figure caption="Příčné: výchylka ⊥ směr šíření (struna). Podélné: výchylka ∥ směr šíření — střídá se zhuštění a zředění (zvuk).">
-          <svg viewBox="0 0 640 280" className="svg-fig">
+          <svg viewBox="0 0 640 300" className="svg-fig">
             <Defs color={HOT} id="arB" />
             {/* PŘÍČNÉ */}
             <text x="20" y="24" fill={ACC} fontSize="14" fontWeight="700">PŘÍČNÉ vlnění</text>
@@ -168,8 +182,8 @@ export default function Lesson_3_4() {
             <line x1="30" y1="120" x2="490" y2="120" stroke={DIM} strokeWidth="2" markerEnd="url(#arB)" />
             <text x="500" y="125" fill={DIM} fontSize="12">šíření</text>
             {/* výchylka svisle (kolmo) */}
-            <line x1="140" y1="75" x2="140" y2="49" stroke={HOT} strokeWidth="3" markerEnd="url(#arB)" />
-            <text x="148" y="55" fill={HOT} fontSize="12">výchylka ⊥</text>
+            <line x1="140" y1="75" x2="140" y2="45" stroke={HOT} strokeWidth="3" markerEnd="url(#arB)" />
+            <text x="152" y="44" fill={HOT} fontSize="12">výchylka ⊥</text>
             <text x="500" y="80" fill={TXT} fontSize="12">struna, světlo</text>
 
             {/* PODÉLNÉ — zhuštění/zředění pomocí svislých čárek různé hustoty */}
@@ -182,10 +196,12 @@ export default function Lesson_3_4() {
                 return <line key={i} x1={x} y1="195" x2={x} y2="240" />
               })}
             </g>
-            <line x1="30" y1="262" x2="490" y2="262" stroke={DIM} strokeWidth="2" markerEnd="url(#arB)" />
-            <text x="500" y="266" fill={DIM} fontSize="12">šíření</text>
-            <line x1="118" y1="218" x2="158" y2="218" stroke={HOT} strokeWidth="3" markerEnd="url(#arB)" />
-            <text x="120" y="212" fill={HOT} fontSize="12">výchylka ∥</text>
+            {/* výchylka rovnoběžně (∥) — pod pásem čárek, ať se nepřekrývá */}
+            <line x1="120" y1="263" x2="170" y2="263" stroke={HOT} strokeWidth="3" markerEnd="url(#arB)" />
+            <text x="178" y="267" fill={HOT} fontSize="12">výchylka ∥</text>
+            {/* směr šíření */}
+            <line x1="30" y1="285" x2="490" y2="285" stroke={DIM} strokeWidth="2" markerEnd="url(#arB)" />
+            <text x="500" y="289" fill={DIM} fontSize="12">šíření</text>
             <text x="500" y="222" fill={TXT} fontSize="12">zvuk</text>
           </svg>
         </Figure>
@@ -249,13 +265,15 @@ export default function Lesson_3_4() {
               <circle key={i} cx="90" cy="115" r={r} fill="none" stroke={ACC} strokeWidth="2.4" opacity={1 - i * 0.13} />
             ))}
             {/* paprsek kolmý na vlnoplochy */}
-            <line x1="90" y1="115" x2="305" y2="115" stroke={DIM} strokeWidth="2" markerEnd="url(#arC)" />
-            <text x="300" y="105" fill={DIM} fontSize="12">paprsek</text>
-            {/* vyznačení λ mezi dvěma vlnoplochami */}
-            <line x1="170" y1="115" x2="210" y2="115" stroke={HOT} strokeWidth="3" markerStart="url(#arC)" markerEnd="url(#arC)" />
-            <text x="190" y="135" fill={HOT} fontSize="14" fontStyle="italic" textAnchor="middle">λ</text>
-            <text x="360" y="60" fill={TXT} fontSize="12">každá kružnice =</text>
-            <text x="360" y="78" fill={TXT} fontSize="12">stejná fáze</text>
+            <line x1="90" y1="115" x2="312" y2="115" stroke={DIM} strokeWidth="2" markerEnd="url(#arC)" />
+            <text x="276" y="103" fill={DIM} fontSize="12">paprsek</text>
+            {/* vyznačení λ mezi dvěma sousedními vlnoplochami (pod paprskem, ať se nepřekrývá) */}
+            <line x1="170" y1="160" x2="170" y2="182" stroke={HOT} strokeWidth="1.2" strokeDasharray="3,3" />
+            <line x1="210" y1="160" x2="210" y2="182" stroke={HOT} strokeWidth="1.2" strokeDasharray="3,3" />
+            <line x1="170" y1="176" x2="210" y2="176" stroke={HOT} strokeWidth="1.5" markerStart="url(#arC)" markerEnd="url(#arC)" />
+            <text x="190" y="200" fill={HOT} fontSize="14" fontStyle="italic" textAnchor="middle">λ</text>
+            <text x="360" y="100" fill={TXT} fontSize="12">každá kružnice =</text>
+            <text x="360" y="118" fill={TXT} fontSize="12">stejná fáze</text>
           </svg>
         </Figure>
       </Section>
@@ -314,41 +332,5 @@ export default function Lesson_3_4() {
         ]}
       />
     </>
-  )
-}
-
-/* Rámeček postupné vlny pro StepFigure (struna se sledovaným bodem). */
-function WaveFrame({ phase, showLambda }: { phase: number; showLambda?: boolean }) {
-  const y0 = 90
-  const amp = 38
-  const wavelen = 150
-  const x0 = 40
-  const x1 = 600
-  // sledovaný bod na pevném x:
-  const bx = 150
-  const by = y0 - amp * Math.sin((2 * Math.PI * (bx - x0)) / wavelen - phase)
-  return (
-    <svg viewBox="0 0 640 180" className="svg-fig">
-      <Defs color={HOT} id="arW" />
-      {/* osa x = rovnovážná poloha */}
-      <line x1={x0} y1={y0} x2={x1 + 10} y2={y0} stroke={GRID} strokeWidth="1.5" strokeDasharray="5,5" />
-      <line x1={x1 + 4} y1={y0} x2={x1 + 24} y2={y0} stroke={DIM} strokeWidth="2" markerEnd="url(#arW)" />
-      <text x={x1 - 6} y={y0 - 8} fill={DIM} fontSize="12">směr šíření</text>
-      {/* vlna */}
-      <path d={sineD(x0, x1, y0, amp, wavelen, phase)} fill="none" stroke={ACC} strokeWidth="2.8" />
-      {/* sledovaný bod */}
-      <line x1={bx} y1={y0} x2={bx} y2={by} stroke={HOT} strokeWidth="1.5" strokeDasharray="3,3" />
-      <circle cx={bx} cy={by} r="7" fill={HOT} />
-      {/* vyznačení λ mezi dvěma vrcholy */}
-      {showLambda && (
-        <>
-          <line x1={x0 + wavelen * 0.25 + phase / (2 * Math.PI) * wavelen} y1={y0 + 52}
-                x2={x0 + wavelen * 1.25 + phase / (2 * Math.PI) * wavelen} y2={y0 + 52}
-                stroke={HOT} strokeWidth="2" markerStart="url(#arW)" markerEnd="url(#arW)" />
-          <text x={x0 + wavelen * 0.75 + phase / (2 * Math.PI) * wavelen} y={y0 + 70}
-                fill={HOT} fontSize="15" fontStyle="italic" textAnchor="middle">λ</text>
-        </>
-      )}
-    </svg>
   )
 }

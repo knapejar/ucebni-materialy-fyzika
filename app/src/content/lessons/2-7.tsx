@@ -164,7 +164,7 @@ export default function Lesson() {
               </g>
             ))}
           </AGroup>
-          <AText x={300} y={120} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>B ven z roviny</AText>
+          <AText x={350} y={150} fill={ACC} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>B ven z roviny</AText>
 
           {/* === trajektorie (3 varianty, prolínají se průhledností) === */}
           {/* přímka */}
@@ -184,10 +184,10 @@ export default function Lesson() {
           {/* === rychlost v (tečně k pohybu) === */}
           <ALine
             x1={[78, 234, 74]} y1={[110, 55, 102]}
-            x2={[210, 300, 138]} y2={[110, 55, 64]}
+            x2={[210, 288, 138]} y2={[110, 55, 64]}
             stroke={VEL} strokeWidth={4} markerEnd="url(#m27V)"
           />
-          <AText x={[148, 268, 152]} y={[98, 44, 50]} fill={VEL} fontSize="14" textAnchor="middle">v</AText>
+          <AText x={[148, 262, 154]} y={[98, 44, 48]} fill={VEL} fontSize="14" textAnchor="middle">v</AText>
 
           {/* === síla F (jen kružnice, dostředivě ke středu) === */}
           <ALine x1={220} y1={70} x2={220} y2={98} stroke={FORCE} strokeWidth={4} markerEnd="url(#m27F)" opacity={[0, 1, 0]} />
@@ -284,7 +284,7 @@ export default function Lesson() {
             {/* dráha těžší částice (větší poloměr) - modrá */}
             <path d="M120,208 A 90 90 0 0 0 120 28" fill="none" stroke={ACC} strokeWidth="3" />
             <circle cx="120" cy="28" r="6" fill={ACC} />
-            <text x="300" y="170" fill={ACC} fontSize="13" textAnchor="middle">velké m → velký r</text>
+            <text x="268" y="145" fill={ACC} fontSize="13" textAnchor="middle">velké m → velký r</text>
           </svg>
         </Figure>
 

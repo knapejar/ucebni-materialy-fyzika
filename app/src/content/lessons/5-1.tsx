@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.1'
 
@@ -30,7 +30,7 @@ function Defs({ id: mid, color }: { id: string; color: string }) {
   )
 }
 
-/* jeden nukleon jako kolečko */
+/* jeden nukleon jako kolečko (statický — pro Figure) */
 function Nuc({ x, y, kind, r = 13 }: { x: number; y: number; kind: 'p' | 'n'; r?: number }) {
   const fill = kind === 'p' ? PROTON : NEUTRON
   return (
@@ -40,6 +40,24 @@ function Nuc({ x, y, kind, r = 13 }: { x: number; y: number; kind: 'p' | 'n'; r?
         {kind === 'p' ? '+' : '0'}
       </text>
     </g>
+  )
+}
+
+/* animovaný nukleon pro StepScene — kolečko + znaménko se plynule přesouvají/objevují.
+   cx/cy/opacity přijímají buď číslo, nebo POLE hodnot po krocích. */
+function ANuc({ cx, cy, kind, r = 13, opacity }: {
+  cx: number | number[]; cy: number | number[]; kind: 'p' | 'n'; r?: number; opacity?: number | number[]
+}) {
+  const fill = kind === 'p' ? PROTON : NEUTRON
+  // znaménko (+/0) musí sedět ve středu kolečka → text y = cy + 5
+  const ty = Array.isArray(cy) ? cy.map((v) => v + 5) : cy + 5
+  return (
+    <>
+      <ACircle cx={cx} cy={cy} r={r} fill={fill} stroke="#0b1020" strokeWidth={1.5} opacity={opacity} />
+      <AText x={cx} y={ty} fill="#0b1020" fontSize="14" fontWeight="700" textAnchor="middle" opacity={opacity}>
+        {kind === 'p' ? '+' : '0'}
+      </AText>
+    </>
   )
 }
 
@@ -201,10 +219,10 @@ export default function Lesson_5_1() {
             <Defs id="arC" color={COUL} />
             <Nuc x={150} y={80} kind="p" r={16} />
             <Nuc x={270} y={80} kind="p" r={16} />
-            {/* jaderná přitažlivá (dovnitř) */}
-            <line x1="178" y1="64" x2="232" y2="64" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
-            <line x1="242" y1="64" x2="188" y2="64" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
-            <text x="210" y="48" fill={FORCE} fontSize="13" textAnchor="middle">jaderná (přitažlivá)</text>
+            {/* jaderná přitažlivá (dovnitř) — dvě šipky proti sobě, mezi hroty mezera */}
+            <line x1="170" y1="64" x2="194" y2="64" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
+            <line x1="250" y1="64" x2="226" y2="64" stroke={FORCE} strokeWidth="4" markerEnd="url(#arF)" />
+            <text x="210" y="44" fill={FORCE} fontSize="13" textAnchor="middle">jaderná (přitažlivá)</text>
             {/* coulombovská odpudivá (ven) */}
             <line x1="140" y1="100" x2="80" y2="100" stroke={COUL} strokeWidth="4" markerEnd="url(#arC)" />
             <line x1="280" y1="100" x2="340" y2="100" stroke={COUL} strokeWidth="4" markerEnd="url(#arC)" />
@@ -219,73 +237,50 @@ export default function Lesson_5_1() {
           Ale čím těžší jádro, tím <b>rychleji roste počet neutronů než protonů</b>. Proč? Sleduj krok po kroku.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Proč těžká jádra potřebují přebytek neutronů"
-          steps={[
-            {
-              label: 'lehké jádro',
-              caption: <>Lehké jádro: protonů a neutronů je zhruba stejně (<M>{'N \\approx Z'}</M>). Protonů je málo a jsou blízko, jaderná síla v pohodě přebije odpuzování.</>,
-              content: (
-                <svg viewBox="0 0 360 150" className="svg-fig">
-                  <circle cx="180" cy="75" r="42" fill="none" stroke={ACC} strokeWidth="1.5" strokeDasharray="3 3" />
-                  <Nuc x={166} y={58} kind="p" />
-                  <Nuc x={194} y={62} kind="n" />
-                  <Nuc x={160} y={86} kind="n" />
-                  <Nuc x={188} y={90} kind="p" />
-                  <text x="180" y="138" fill={TXT} fontSize="13" textAnchor="middle">N ≈ Z — stabilní</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'problém odpuzování',
-              caption: <><b>Coulombovské odpuzování</b> protonů má <b>delší dosah</b> — každý proton odpuzuje úplně všechny ostatní protony, i ty na druhém konci jádra. To se s rostoucím počtem protonů sčítá a roste.</>,
-              content: (
-                <svg viewBox="0 0 360 150" className="svg-fig">
-                  <Defs id="arC2" color={COUL} />
-                  <circle cx="180" cy="75" r="56" fill="none" stroke={ACC} strokeWidth="1.5" strokeDasharray="3 3" />
-                  <Nuc x={150} y={60} kind="p" r={12} />
-                  <Nuc x={210} y={60} kind="p" r={12} />
-                  <Nuc x={180} y={95} kind="p" r={12} />
-                  <line x1="162" y1="60" x2="198" y2="60" stroke={COUL} strokeWidth="3" markerEnd="url(#arC2)" />
-                  <line x1="156" y1="70" x2="174" y2="90" stroke={COUL} strokeWidth="3" markerEnd="url(#arC2)" />
-                  <line x1="204" y1="70" x2="186" y2="90" stroke={COUL} strokeWidth="3" markerEnd="url(#arC2)" />
-                  <text x="180" y="140" fill={COUL} fontSize="13" textAnchor="middle">protony se odpuzují přes celé jádro</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'jaderná síla nestíhá',
-              caption: <><b>Jaderná síla má krátký dosah a saturuje</b> — drží jen nejbližší sousedy a nedosáhne přes celé velké jádro. Takže ve velkém jádře přitažlivost „nestíhá" sčítané odpuzování.</>,
-              content: (
-                <svg viewBox="0 0 360 150" className="svg-fig">
-                  <Defs id="arF2" color={FORCE} />
-                  <circle cx="180" cy="75" r="56" fill="none" stroke={ACC} strokeWidth="1.5" strokeDasharray="3 3" />
-                  <Nuc x={150} y={60} kind="p" r={12} />
-                  <Nuc x={210} y={60} kind="p" r={12} />
-                  <Nuc x={180} y={95} kind="p" r={12} />
-                  <line x1="162" y1="62" x2="170" y2="86" stroke={FORCE} strokeWidth="3" markerEnd="url(#arF2)" />
-                  <text x="180" y="140" fill={FORCE} fontSize="13" textAnchor="middle">jaderná síla jen mezi sousedy</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'řešení = víc neutronů',
-              caption: <>Řešení: přidat <b style={{ color: NEUTRON }}>neutrony</b>. Neutrony přidávají <b>jen přitažlivou</b> jadernou sílu (jsou nenabité, neodpuzují), a tím rozředí protony a stmelí jádro. Proto těžká jádra mají <b>přebytek neutronů</b> (<M>{'N > Z'}</M>).</>,
-              content: (
-                <svg viewBox="0 0 360 150" className="svg-fig">
-                  <circle cx="180" cy="75" r="56" fill="none" stroke={ACC} strokeWidth="1.5" strokeDasharray="3 3" />
-                  <Nuc x={150} y={58} kind="p" r={12} />
-                  <Nuc x={210} y={58} kind="p" r={12} />
-                  <Nuc x={180} y={92} kind="p" r={12} />
-                  <Nuc x={178} y={58} kind="n" r={12} />
-                  <Nuc x={150} y={88} kind="n" r={12} />
-                  <Nuc x={210} y={88} kind="n" r={12} />
-                  <text x="180" y="140" fill={NEUTRON} fontSize="13" textAnchor="middle">N &gt; Z — neutrony tmelí jádro</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 200"
+          captions={[
+            <>Lehké jádro: protonů a neutronů je zhruba stejně (<M>{'N \\approx Z'}</M>). Protonů je málo a jsou blízko, jaderná síla v pohodě přebije odpuzování.</>,
+            <><b>Coulombovské odpuzování</b> protonů má <b>delší dosah</b> — každý proton odpuzuje úplně všechny ostatní protony, i ty na druhém konci jádra. To se s rostoucím počtem protonů sčítá a roste.</>,
+            <><b>Jaderná síla má krátký dosah a saturuje</b> — drží jen nejbližší sousedy a nedosáhne přes celé velké jádro. Takže ve velkém jádře přitažlivost „nestíhá" sčítané odpuzování.</>,
+            <>Řešení: přidat <b style={{ color: NEUTRON }}>neutrony</b>. Neutrony přidávají <b>jen přitažlivou</b> jadernou sílu (jsou nenabité, neodpuzují), a tím rozředí protony a stmelí jádro. Proto těžká jádra mají <b>přebytek neutronů</b> (<M>{'N > Z'}</M>).</>,
           ]}
-        />
+        >
+          {/* markery šipek pro Coulombovskou odpudivou sílu */}
+          <defs>
+            <marker id="arCstep" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={COUL} /></marker>
+          </defs>
+
+          {/* hranice jádra — roste, jak jádro těžkne */}
+          <ACircle cx={180} cy={[86, 88, 88, 88]} r={[42, 58, 58, 64]} fill="none" stroke={ACC} strokeWidth={1.5} strokeDasharray="3 3" />
+
+          {/* —— Coulombovské odpudivé šipky (jen krok 2): radiálně ven z každého protonu —— */}
+          <ALine x1={140} y1={62} x2={116} y2={44} stroke={COUL} strokeWidth={3} markerEnd="url(#arCstep)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={220} y1={62} x2={244} y2={44} stroke={COUL} strokeWidth={3} markerEnd="url(#arCstep)" opacity={[0, 1, 0, 0]} />
+          <ALine x1={180} y1={122} x2={180} y2={150} stroke={COUL} strokeWidth={3} markerEnd="url(#arCstep)" opacity={[0, 1, 0, 0]} />
+
+          {/* —— jaderné vazby (jen krok 3): krátké zelené spojnice jen mezi sousedy —— */}
+          <ALine x1={166} y1={72} x2={194} y2={72} stroke={FORCE} strokeWidth={4} opacity={[0, 0, 1, 0]} />
+          <ALine x1={160} y1={84} x2={170} y2={96} stroke={FORCE} strokeWidth={4} opacity={[0, 0, 1, 0]} />
+          <ALine x1={200} y1={84} x2={190} y2={96} stroke={FORCE} strokeWidth={4} opacity={[0, 0, 1, 0]} />
+
+          {/* —— nukleony (zachovávají identitu, jen se přesouvají / objevují) —— */}
+          {/* protony */}
+          <ANuc cx={[164, 150, 150, 150]} cy={[72, 72, 72, 72]} kind="p" />
+          <ANuc cx={[196, 210, 210, 210]} cy={[100, 72, 72, 72]} kind="p" />
+          <ANuc cx={180} cy={[92, 108, 108, 104]} kind="p" opacity={[0, 1, 1, 1]} />
+          {/* neutrony (v lehkém jádře 2, ve velkém 3) */}
+          <ANuc cx={[196, 196, 196, 180]} cy={[72, 72, 72, 72]} kind="n" opacity={[1, 0, 0, 1]} />
+          <ANuc cx={[164, 150, 150, 150]} cy={[100, 104, 104, 104]} kind="n" opacity={[1, 0, 0, 1]} />
+          <ANuc cx={210} cy={104} kind="n" opacity={[0, 0, 0, 1]} />
+
+          {/* —— popisky pod jádrem (navzájem se vylučují průhledností) —— */}
+          <AText x={180} y={184} fill={TXT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0, 0]}>N ≈ Z — stabilní</AText>
+          <AText x={180} y={184} fill={COUL} fontSize="14" textAnchor="middle" opacity={[0, 1, 0, 0]}>protony se odpuzují přes celé jádro</AText>
+          <AText x={180} y={184} fill={FORCE} fontSize="14" textAnchor="middle" opacity={[0, 0, 1, 0]}>jaderná síla drží jen sousedy</AText>
+          <AText x={180} y={184} fill={NEUTRON} fontSize="14" textAnchor="middle" opacity={[0, 0, 0, 1]}>N &gt; Z — neutrony tmelí jádro</AText>
+        </StepScene>
 
         <p>
           Krátká věta na zkoušku: <i>„Coulombovské odpuzování protonů má delší dosah a s rostoucím Z roste,

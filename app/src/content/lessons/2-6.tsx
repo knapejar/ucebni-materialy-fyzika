@@ -30,6 +30,10 @@ function Defs() {
       <marker id="m26c" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
         <path d="M0,0 L9,4.5 L0,9 z" fill={CHARGE} />
       </marker>
+      {/* malá šipka pevné velikosti (nezvětšuje se se strokeWidth) — tečné značky na malých kružnicích */}
+      <marker id="m26sa" markerWidth="10" markerHeight="10" refX="6" refY="4.5" orient="auto" markerUnits="userSpaceOnUse">
+        <path d="M0,0 L9,4.5 L0,9 z" fill={ACC} />
+      </marker>
     </defs>
   )
 }
@@ -168,11 +172,11 @@ export default function Lesson_2_6() {
           <AText x={196} y={40} fill={TXT} fontSize="16" fontStyle="italic" opacity={[1, 1, 0]}>I</AText>
           <AText x={180} y={214} fill={DIM} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>vodič</AText>
 
-          {/* palec (krok 1) */}
-          <ALine x1={118} y1={170} x2={118} y2={104} stroke={CHARGE} strokeWidth={4} markerEnd="url(#m26c)" opacity={[0, 1, 0]} />
-          <AText x={118} y={190} fill={CHARGE} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>palec = I</AText>
+          {/* palec (krok 1) — vlevo od drátu, mimo elipsu pole */}
+          <ALine x1={92} y1={182} x2={92} y2={112} stroke={CHARGE} strokeWidth={4} markerEnd="url(#m26c)" opacity={[0, 1, 0]} />
+          <AText x={92} y={200} fill={CHARGE} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>palec = I</AText>
           {/* obtáčející pole — elipsa kolem drátu (krok 1) */}
-          <APath d="M180,84 a64,22 0 1 1 -0.1,0" fill="none" stroke={ACC} strokeWidth={2.5} markerEnd="url(#m26a)" opacity={[0, 1, 0]} />
+          <APath d="M180,84 a58,22 0 1 1 -0.1,0" fill="none" stroke={ACC} strokeWidth={2.5} markerEnd="url(#m26a)" opacity={[0, 1, 0]} />
           <AText x={250} y={80} fill={ACC} fontSize="13" opacity={[0, 1, 0]}>prsty = B</AText>
 
           {/* ——— POHLED SHORA (krok 2): drát jako tečka, soustředné kružnice ——— */}
@@ -222,8 +226,9 @@ export default function Lesson_2_6() {
             <circle cx="360" cy="80" r="2" fill={TXT} />
             <circle cx="360" cy="80" r="26" fill="none" stroke={ACC} strokeWidth="2.5" />
             <circle cx="360" cy="80" r="48" fill="none" stroke={ACC} strokeWidth="2.5" opacity="0.6" />
-            <line x1="386" y1="80" x2="386" y2="72" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26a)" />
-            <line x1="408" y1="80" x2="408" y2="72" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26a)" />
+            {/* tečné šipky (proti směru hod. ručiček) na pravém okraji kružnic — pevná velikost hrotu */}
+            <line x1="386" y1="90" x2="386" y2="74" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26sa)" />
+            <line x1="408" y1="92" x2="408" y2="74" stroke={ACC} strokeWidth="2.5" markerEnd="url(#m26sa)" opacity="0.6" />
             <text x="360" y="160" fill={TXT} fontSize="12" textAnchor="middle">magnetické: uzavřené smyčky</text>
           </svg>
         </Figure>

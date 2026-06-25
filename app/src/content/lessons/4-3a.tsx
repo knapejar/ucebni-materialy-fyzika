@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, AGroup, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.3a'
 
@@ -70,9 +70,11 @@ export default function Lesson() {
             {/* kov */}
             <rect x="20" y="95" width="320" height="60" rx="4" fill={METAL} opacity="0.85" />
             <text x="180" y="132" fill="#0b1020" fontSize="14" textAnchor="middle" fontWeight="700">kov</text>
-            {/* dopadající foton */}
-            <Photon x={40} y={40} />
-            <text x="78" y="34" fill={ACCENT} fontSize="13" textAnchor="middle">foton (hν)</text>
+            {/* dopadající foton — míří šikmo dolů na místo dopadu */}
+            <g transform="translate(38,30) rotate(33)">
+              <Photon x={0} y={0} />
+            </g>
+            <text x="60" y="22" fill={ACCENT} fontSize="13" textAnchor="middle">foton (hν)</text>
             {/* místo dopadu */}
             <circle cx="150" cy="95" r="5" fill={ACCENT} />
             {/* vyletující elektron */}
@@ -150,71 +152,56 @@ export default function Lesson() {
           Klikej <b>Další →</b>. Všimni si hlavně toho, že každý foton si „vybere" právě{' '}
           <b>jeden</b> elektron:
         </p>
-        <StepFigure
+        <StepScene
           title="Vnější fotoefekt: jeden foton uvolní jeden elektron"
-          steps={[
-            {
-              label: 'dopad fotonu',
-              caption: <>Na povrch kovu dopadá foton o energii <M>{'E = h\\nu'}</M>. Uvnitř kovu jsou vázané elektrony.</>,
-              content: (
-                <svg viewBox="0 0 360 180" className="svg-fig">
-                  <Defs color={ACCENT} name="arP" />
-                  <rect x="20" y="105" width="320" height="60" rx="4" fill={METAL} opacity="0.85" />
-                  <text x="305" y="142" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">kov</text>
-                  {/* vázané elektrony */}
-                  <circle cx="120" cy="135" r="7" fill={ELEC} />
-                  <circle cx="180" cy="135" r="7" fill={ELEC} />
-                  <circle cx="240" cy="135" r="7" fill={ELEC} />
-                  <Photon x={40} y={45} />
-                  <text x="78" y="38" fill={ACCENT} fontSize="13" textAnchor="middle">foton hν</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'pohlcení (absorpce)',
-              caption: <>Foton se <b>celý pohltí</b> jediným elektronem a předá mu svou energii <M>{'h\\nu'}</M>. <Term>Jeden foton ↔ jeden elektron.</Term></>,
-              content: (
-                <svg viewBox="0 0 360 180" className="svg-fig">
-                  <Defs color={ACCENT} name="arP" />
-                  <rect x="20" y="105" width="320" height="60" rx="4" fill={METAL} opacity="0.85" />
-                  <text x="305" y="142" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">kov</text>
-                  <circle cx="120" cy="135" r="7" fill={ELEC} />
-                  <circle cx="240" cy="135" r="7" fill={ELEC} />
-                  {/* zasažený elektron svítí akcentem */}
-                  <circle cx="180" cy="118" r="10" fill={ELEC} stroke={ACCENT} strokeWidth="3" />
-                  <Photon x={120} y={70} on={false} />
-                  <text x="180" y="100" fill={ACCENT} fontSize="12" textAnchor="middle">pohlceno</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'uvolnění',
-              caption: (
-                <>
-                  Část energie se spotřebuje na vytržení elektronu — <Term>výstupní práce</Term>{' '}
-                  <M>{'A'}</M>. Zbytek si elektron odnese jako pohybovou energii <M>{'E_e'}</M> a vyletí ven.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 360 180" className="svg-fig">
-                  <defs>
-                    <marker id="arE2" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto">
-                      <path d="M0,0 L9,4.5 L0,9 z" fill={ELEC} />
-                    </marker>
-                  </defs>
-                  <rect x="20" y="105" width="320" height="60" rx="4" fill={METAL} opacity="0.85" />
-                  <text x="305" y="142" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">kov</text>
-                  <circle cx="120" cy="135" r="7" fill={ELEC} />
-                  <circle cx="240" cy="135" r="7" fill={ELEC} />
-                  <line x1="180" y1="105" x2="250" y2="35" stroke={ELEC} strokeWidth="3" markerEnd="url(#arE2)" />
-                  <circle cx="252" cy="33" r="8" fill={ELEC} />
-                  <text x="252" y="37" fill="#0b1020" fontSize="11" textAnchor="middle" fontWeight="700">−</text>
-                  <text x="296" y="30" fill={ELEC} fontSize="12" textAnchor="middle">Eₑ</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 360 180"
+          captions={[
+            <>Na povrch kovu dopadá foton o energii <M>{'E = h\\nu'}</M>. Uvnitř kovu jsou vázané elektrony.</>,
+            <>Foton se <b>celý pohltí</b> jediným elektronem a předá mu svou energii <M>{'h\\nu'}</M>. <Term>Jeden foton ↔ jeden elektron.</Term></>,
+            <>
+              Část energie se spotřebuje na vytržení elektronu — <Term>výstupní práce</Term>{' '}
+              <M>{'A'}</M>. Zbytek si elektron odnese jako pohybovou energii <M>{'E_e'}</M> a vyletí ven.
+            </>,
           ]}
-        />
+        >
+          {/* markery šipek */}
+          <defs>
+            <marker id="arP3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ACCENT} /></marker>
+            <marker id="arE3" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={ELEC} /></marker>
+          </defs>
+
+          {/* kov (statický) */}
+          <rect x="20" y="105" width="320" height="60" rx="4" fill={METAL} opacity="0.85" />
+          <text x="305" y="142" fill="#0b1020" fontSize="13" textAnchor="middle" fontWeight="700">kov</text>
+
+          {/* dva sousední elektrony — zůstávají vázané po celou dobu */}
+          <ACircle cx={120} cy={135} r={7} fill={ELEC} />
+          <ACircle cx={240} cy={135} r={7} fill={ELEC} />
+
+          {/* dopadající foton: přilétá (krok 0), pak se pohltí → zmizí (krok 1,2) */}
+          <AGroup x={[36, 120, 120]} y={[26, 70, 70]} opacity={[1, 0, 0]}>
+            <g transform="rotate(33)">
+              <path d="M0,0 q7,-9 14,0 t14,0 t14,0 t14,0 t10,0" fill="none" stroke={ACCENT} strokeWidth="3" markerEnd="url(#arP3)" />
+            </g>
+          </AGroup>
+          <AText x={62} y={20} fill={ACCENT} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>foton hν</AText>
+
+          {/* prostřední elektron: vázaný → pohlcený (zvedne se, svítí) → vyletí ven */}
+          <ALine x1={180} y1={105} x2={250} y2={35} stroke={ELEC} strokeWidth={3} markerEnd="url(#arE3)" opacity={[0, 0, 1]} />
+          <ACircle
+            cx={[180, 180, 252]}
+            cy={[135, 118, 33]}
+            r={[7, 10, 8]}
+            fill={ELEC}
+            stroke={[ELEC, ACCENT, ELEC]}
+            strokeWidth={[0, 3, 0]}
+          />
+          <AText x={[180, 180, 252]} y={[139, 122, 37]} fill="#0b1020" fontSize="11" textAnchor="middle" fontWeight="700" opacity={[0, 1, 1]}>−</AText>
+
+          {/* popisky jednotlivých kroků */}
+          <AText x={180} y={96} fill={ACCENT} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>pohlceno</AText>
+          <AText x={296} y={30} fill={ELEC} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>Eₑ</AText>
+        </StepScene>
       </Section>
 
       <Section title="Einsteinovo vysvětlení — energetická bilance">

@@ -1,4 +1,4 @@
-import { Section, M, MB, Concept, Term, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Concept, Term, Figure, StepScene, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.5'
 
@@ -113,7 +113,7 @@ export default function Lesson_4_5() {
         </p>
 
         <Figure caption="|ψ|² nad jádrem atomu: elektron není na jedné dráze — je to „mrak pravděpodobnosti“. Hustší mrak = větší šance najít elektron právě tam.">
-          <svg viewBox="0 0 420 170" className="svg-fig">
+          <svg viewBox="0 0 420 185" className="svg-fig">
             <Defs color={ACC} />
             {/* mrak pravděpodobnosti kolem jádra */}
             <radialGradient id="cloud" cx="50%" cy="50%" r="50%">
@@ -121,10 +121,10 @@ export default function Lesson_4_5() {
               <stop offset="45%" stopColor={ACC} stopOpacity="0.4" />
               <stop offset="100%" stopColor={ACC} stopOpacity="0.03" />
             </radialGradient>
-            <circle cx="150" cy="90" r="75" fill="url(#cloud)" />
-            <circle cx="150" cy="90" r="5" fill={BLUE} />
-            <text x="150" y="80" fill={TXT} fontSize="12" textAnchor="middle">jádro</text>
-            <text x="150" y="178" fill={DIM} fontSize="12" textAnchor="middle">„elektronový mrak" |ψ|²</text>
+            <circle cx="135" cy="85" r="70" fill="url(#cloud)" />
+            <circle cx="135" cy="85" r="5" fill={BLUE} />
+            <text x="135" y="62" fill={TXT} fontSize="12" textAnchor="middle">jádro</text>
+            <text x="135" y="176" fill={DIM} fontSize="12" textAnchor="middle">„elektronový mrak" |ψ|²</text>
 
             {/* graf hustoty vpravo */}
             <line x1="280" y1="135" x2="410" y2="135" stroke={GRID} strokeWidth="2" markerEnd="url(#ar)" />
@@ -255,59 +255,49 @@ export default function Lesson_4_5() {
           zpět</b> a přebytek energie <b>vyzáří jako <Concept id="foton">foton</Concept></b>. Klikej krok po kroku:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Excitace a vyzáření fotonu"
-          steps={[
-            {
-              label: 'základní stav',
-              caption: <>Elektron sedí na nejnižší hladině <M>{'E_2'}</M> (nižší energie). Atom je stabilní.</>,
-              content: (
-                <svg viewBox="0 0 380 200" className="svg-fig">
-                  <line x1="90" y1="150" x2="290" y2="150" stroke={ACC} strokeWidth="2.5" />
-                  <text x="305" y="154" fill={ACC} fontSize="13">E₂</text>
-                  <line x1="90" y1="60" x2="290" y2="60" stroke={DIM} strokeWidth="1.6" strokeDasharray="6 5" />
-                  <text x="305" y="64" fill={DIM} fontSize="13">E₁</text>
-                  <circle cx="150" cy="150" r="8" fill={BLUE} />
-                  <text x="190" y="185" fill={TXT} fontSize="12" textAnchor="middle">elektron dole = základní stav</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'dodání energie',
-              caption: <>Dodáme energii (foton, srážka, teplo) — elektron <b>vyskočí</b> na vyšší hladinu <M>{'E_1'}</M>. Atom je teď v <b>excitovaném stavu</b>.</>,
-              content: (
-                <svg viewBox="0 0 380 200" className="svg-fig">
-                  <Defs color="#fbbf24" name="up" />
-                  <line x1="90" y1="150" x2="290" y2="150" stroke={DIM} strokeWidth="1.6" strokeDasharray="6 5" />
-                  <text x="305" y="154" fill={DIM} fontSize="13">E₂</text>
-                  <line x1="90" y1="60" x2="290" y2="60" stroke={ACC} strokeWidth="2.5" />
-                  <text x="305" y="64" fill={ACC} fontSize="13">E₁</text>
-                  <line x1="150" y1="148" x2="150" y2="66" stroke="#fbbf24" strokeWidth="3" markerEnd="url(#up)" />
-                  <circle cx="150" cy="60" r="8" fill={BLUE} />
-                  <text x="190" y="185" fill={TXT} fontSize="12" textAnchor="middle">elektron nahoře = excitovaný stav</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'deexcitace + foton',
-              caption: <>Elektron spadne zpět dolů a rozdíl energií <b>vyzáří jako foton</b> o frekvenci <M>{'\\nu = (E_1 - E_2)/h'}</M>.</>,
-              content: (
-                <svg viewBox="0 0 380 200" className="svg-fig">
-                  <Defs color="#fbbf24" name="dn" />
-                  <line x1="90" y1="150" x2="290" y2="150" stroke={ACC} strokeWidth="2.5" />
-                  <text x="305" y="154" fill={ACC} fontSize="13">E₂</text>
-                  <line x1="90" y1="60" x2="290" y2="60" stroke={DIM} strokeWidth="1.6" strokeDasharray="6 5" />
-                  <text x="305" y="64" fill={DIM} fontSize="13">E₁</text>
-                  <line x1="150" y1="64" x2="150" y2="146" stroke={BLUE} strokeWidth="2.5" markerEnd="url(#dn)" opacity="0.7" />
-                  <circle cx="150" cy="150" r="8" fill={BLUE} />
-                  {/* foton (vlnka ven) */}
-                  <path d="M170,105 q9,-9 18,0 t18,0 t18,0 t18,0 t18,0" fill="none" stroke="#fbbf24" strokeWidth="2.5" markerEnd="url(#dn)" />
-                  <text x="250" y="98" fill="#fbbf24" fontSize="13">foton ν</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 380 200"
+          captions={[
+            <>Elektron sedí na nižší hladině <M>{'E_2'}</M> — atom je v <b>základním stavu</b> (nejstabilnější).</>,
+            <>Dodáme energii (foton, srážka, teplo) — elektron <b>vyskočí</b> na vyšší hladinu <M>{'E_1'}</M>. Atom je teď v <b>excitovaném stavu</b>.</>,
+            <>Elektron spadne zpět dolů a rozdíl energií <b>vyzáří jako foton</b> o frekvenci <M>{'\\nu = (E_1 - E_2)/h'}</M>.</>,
           ]}
-        />
+        >
+          {/* markery šipek */}
+          <defs>
+            <marker id="exUp" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#fbbf24" /></marker>
+            <marker id="exDn" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={BLUE} /></marker>
+            <marker id="exPh" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill="#fbbf24" /></marker>
+          </defs>
+
+          {/* hladina E1 (horní) — „obsazená" v kroku 2 (akcent), jinak zašedlá */}
+          <ALine x1={70} y1={60} x2={270} y2={60} stroke={[DIM, ACC, DIM]} strokeWidth={[1.8, 2.5, 1.8]} />
+          <AText x={285} y={64} fill={[DIM, ACC, DIM]} fontSize="13">E₁</AText>
+
+          {/* hladina E2 (dolní) — „obsazená" v krocích 1 a 3 (akcent) */}
+          <ALine x1={70} y1={150} x2={270} y2={150} stroke={[ACC, DIM, ACC]} strokeWidth={[2.5, 1.8, 2.5]} />
+          <AText x={285} y={154} fill={[ACC, DIM, ACC]} fontSize="13">E₂</AText>
+
+          {/* šipka „dodaná energie" (nahoru) — jen v kroku 2 */}
+          <ALine x1={140} y1={148} x2={140} y2={68} stroke="#fbbf24" strokeWidth={3} markerEnd="url(#exUp)" opacity={[0, 1, 0]} />
+          <AText x={108} y={112} fill="#fbbf24" fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>+E</AText>
+
+          {/* šipka „pád elektronu" (dolů) — jen v kroku 3 */}
+          <ALine x1={140} y1={68} x2={140} y2={146} stroke={BLUE} strokeWidth={2.5} markerEnd="url(#exDn)" opacity={[0, 0, 0.75]} />
+
+          {/* vyzářený foton (vlnka + popisek) — jen v kroku 3, mimo šipku */}
+          <APath d="M180,100 q11,-11 22,0 t22,0 t22,0 t22,0" fill="none" stroke="#fbbf24" strokeWidth={2.5} markerEnd="url(#exPh)" opacity={[0, 0, 1]} />
+          <AText x={245} y={86} fill="#fbbf24" fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>foton ν</AText>
+
+          {/* elektron — jede po E2 → E1 → E2 */}
+          <ACircle cx={140} cy={[150, 60, 150]} r={8} fill={BLUE} />
+
+          {/* popisek stavu dole — mění se text prolnutím */}
+          <AText x={170} y={188} fill={TXT} fontSize="12" textAnchor="middle" opacity={[1, 0, 0]}>elektron dole = základní stav</AText>
+          <AText x={170} y={188} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 1, 0]}>elektron nahoře = excitovaný stav</AText>
+          <AText x={170} y={188} fill={TXT} fontSize="12" textAnchor="middle" opacity={[0, 0, 1]}>spadl zpět + vyzářil foton</AText>
+        </StepScene>
 
         <p>Frekvence vyzářeného fotonu je dána přesně rozdílem hladin:</p>
         <MB>{'\\nu = \\dfrac{E_1 - E_2}{h}'}</MB>

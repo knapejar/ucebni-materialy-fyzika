@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ARect, ACircle, ALine, AText, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '4.3b'
 
@@ -43,6 +43,11 @@ function Photon({ x, y, color = ACCENT, w = 1 }: { x: number; y: number; color?:
       strokeWidth={w}
     />
   )
+}
+
+/* Cesta (d) jedné vlnky-fotonu — pro animaci přes <APath>. */
+function photonD(x: number, y: number) {
+  return `M${x},${y} q 6,-7 12,0 q 6,7 12,0 q 6,-7 12,0 q 6,7 12,0`
 }
 
 export default function Lesson_4_3b() {
@@ -121,81 +126,65 @@ export default function Lesson_4_3b() {
       </Section>
 
       <Section title="Krok za krokem: co dělá která změna">
-        <p>Proklikej si tři scénáře a sleduj, co se mění a co zůstává.</p>
-        <StepFigure
+        <p>Proklikej si tři scénáře a sleduj, co se mění a co zůstává — prvky se mezi kroky plynule zanimují.</p>
+        <StepScene
           title="Zesílit světlo × změnit barvu"
-          steps={[
-            {
-              label: 'výchozí stav',
-              caption: (
-                <>
-                  Modré světlo dopadá na kov a vyráží 2 elektrony, každý má jistou rychlost (délka šipky).
-                  Foton má energii <M>{'h\\nu > A'}</M>.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 440 200" className="svg-fig">
-                  <Defs color={ELECTRON} id="ar1" />
-                  <rect x="290" y="30" width="36" height="140" rx="4" fill={METAL} />
-                  <Photon x={150} y={70} color={ACCENT} />
-                  <Photon x={150} y={120} color={ACCENT} />
-                  <line x1="330" y1="70" x2="395" y2="70" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#ar1)" />
-                  <line x1="330" y1="120" x2="395" y2="120" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#ar1)" />
-                  <text x="80" y="100" fill={ACCENT} fontSize="13">2 fotony</text>
-                  <text x="370" y="155" fill={ELECTRON} fontSize="13" textAnchor="middle">2 e⁻</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'zesílím (víc intenzity)',
-              caption: (
-                <>
-                  Zdvojnásobím <b>intenzitu</b> (stejná barva): přiletí 2× víc fotonů → vyletí 2× víc
-                  elektronů. Ale rychlost (délka šipek) je <b>úplně stejná</b>! Energie elektronu na
-                  intenzitě nezávisí.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 440 200" className="svg-fig">
-                  <Defs color={ELECTRON} id="ar2" />
-                  <rect x="290" y="20" width="36" height="160" rx="4" fill={METAL} />
-                  <Photon x={150} y={45} color={ACCENT} />
-                  <Photon x={150} y={80} color={ACCENT} />
-                  <Photon x={150} y={115} color={ACCENT} />
-                  <Photon x={150} y={150} color={ACCENT} />
-                  <line x1="330" y1="45" x2="395" y2="45" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#ar2)" />
-                  <line x1="330" y1="80" x2="395" y2="80" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#ar2)" />
-                  <line x1="330" y1="115" x2="395" y2="115" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#ar2)" />
-                  <line x1="330" y1="150" x2="395" y2="150" stroke={ELECTRON} strokeWidth="3" markerEnd="url(#ar2)" />
-                  <text x="75" y="105" fill={ACCENT} fontSize="13">4 fotony</text>
-                  <text x="370" y="195" fill={ELECTRON} fontSize="13" textAnchor="middle">4 e⁻ (stejná rychlost)</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'zvýším frekvenci (jiná barva)',
-              caption: (
-                <>
-                  Vrátím intenzitu zpět, ale zvýším <b>frekvenci</b> (modřejší světlo). Počet elektronů
-                  zůstane stejný (2), ale každý dostane <b>víc energie</b> → šipky jsou <b>delší</b>
-                  (rychlejší elektrony), protože <M>{'E_{e} = h\\nu - A'}</M> vzrostlo.
-                </>
-              ),
-              content: (
-                <svg viewBox="0 0 440 200" className="svg-fig">
-                  <Defs color={ELECTRON} id="ar3" />
-                  <rect x="290" y="30" width="36" height="140" rx="4" fill={METAL} />
-                  <Photon x={138} y={70} color={ACCENT} w={1.6} />
-                  <Photon x={138} y={120} color={ACCENT} w={1.6} />
-                  <line x1="330" y1="70" x2="425" y2="70" stroke={ELECTRON} strokeWidth="3.5" markerEnd="url(#ar3)" />
-                  <line x1="330" y1="120" x2="425" y2="120" stroke={ELECTRON} strokeWidth="3.5" markerEnd="url(#ar3)" />
-                  <text x="70" y="100" fill={ACCENT} fontSize="13">2 energičtější fotony</text>
-                  <text x="375" y="155" fill={ELECTRON} fontSize="13" textAnchor="middle">2 rychlejší e⁻</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 440 210"
+          captions={[
+            <>
+              Modré světlo dopadá na kov a vyráží 2 elektrony, každý má jistou rychlost (délka šipky).
+              Foton má energii <M>{'h\\nu > A'}</M>.
+            </>,
+            <>
+              Zdvojnásobím <b>intenzitu</b> (stejná barva): přiletí 2× víc fotonů → vyletí 2× víc
+              elektronů. Ale rychlost (délka šipek) je <b>úplně stejná</b>! Energie elektronu na
+              intenzitě nezávisí.
+            </>,
+            <>
+              Vrátím intenzitu zpět, ale zvýším <b>frekvenci</b> (modřejší světlo). Počet elektronů
+              zůstane stejný (2), ale každý dostane <b>víc energie</b> → šipky jsou <b>delší</b>{' '}
+              (rychlejší elektrony), protože <M>{'E_{e} = h\\nu - A'}</M> vzrostlo.
+            </>,
           ]}
-        />
+        >
+          {/* hrot šipky s pevnou velikostí (nezávisí na strokeWidth) */}
+          <defs>
+            <marker id="ar43b" markerUnits="userSpaceOnUse" markerWidth="12" markerHeight="12" refX="9" refY="6" orient="auto">
+              <path d="M0,0 L12,6 L0,12 z" fill={ELECTRON} />
+            </marker>
+          </defs>
+
+          {/* kov (stálý) */}
+          <ARect x={292} y={25} width={36} height={160} rx={4} fill={METAL} />
+          <AText x={310} y={203} fill={MUTED} fontSize="13" textAnchor="middle">kov</AText>
+
+          {/* fotony — p1, p2 jsou vždy; p3, p4 jen v kroku 2 (víc intenzity) */}
+          <APath d={[photonD(150, 70), photonD(150, 50), photonD(138, 70)]} fill="none" stroke={ACCENT} strokeWidth={[1, 1, 1.6]} />
+          <APath d={[photonD(150, 130), photonD(150, 160), photonD(138, 130)]} fill="none" stroke={ACCENT} strokeWidth={[1, 1, 1.6]} />
+          <APath d={photonD(150, 90)} fill="none" stroke={ACCENT} strokeWidth={1} opacity={[0, 1, 0]} />
+          <APath d={photonD(150, 120)} fill="none" stroke={ACCENT} strokeWidth={1} opacity={[0, 1, 0]} />
+
+          {/* elektrony (kolečko + šipka rychlosti) — e1, e2 vždy; e3, e4 jen krok 2 */}
+          <ALine x1={332} y1={[70, 50, 70]} x2={[395, 395, 425]} y2={[70, 50, 70]} stroke={ELECTRON} strokeWidth={3} markerEnd="url(#ar43b)" />
+          <ALine x1={332} y1={[130, 160, 130]} x2={[395, 395, 425]} y2={[130, 160, 130]} stroke={ELECTRON} strokeWidth={3} markerEnd="url(#ar43b)" />
+          <ALine x1={332} y1={90} x2={395} y2={90} stroke={ELECTRON} strokeWidth={3} markerEnd="url(#ar43b)" opacity={[0, 1, 0]} />
+          <ALine x1={332} y1={120} x2={395} y2={120} stroke={ELECTRON} strokeWidth={3} markerEnd="url(#ar43b)" opacity={[0, 1, 0]} />
+
+          <ACircle cx={336} cy={[70, 50, 70]} r={5} fill={ELECTRON} />
+          <ACircle cx={336} cy={[130, 160, 130]} r={5} fill={ELECTRON} />
+          <ACircle cx={336} cy={90} r={5} fill={ELECTRON} opacity={[0, 1, 0]} />
+          <ACircle cx={336} cy={120} r={5} fill={ELECTRON} opacity={[0, 1, 0]} />
+
+          {/* popisky fotonů (vlevo dole) — jen jeden viditelný v daném kroku */}
+          <AText x={110} y={198} fill={ACCENT} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>2 fotony</AText>
+          <AText x={110} y={198} fill={ACCENT} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>4 fotony</AText>
+          <AText x={120} y={198} fill={ACCENT} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>2 energičtější fotony</AText>
+
+          {/* popisky elektronů (vpravo) */}
+          <AText x={388} y={158} fill={ELECTRON} fontSize="14" textAnchor="middle" opacity={[1, 0, 0]}>2 e⁻</AText>
+          <AText x={395} y={203} fill={ELECTRON} fontSize="14" textAnchor="middle" opacity={[0, 1, 0]}>4 e⁻</AText>
+          <AText x={388} y={158} fill={ELECTRON} fontSize="14" textAnchor="middle" opacity={[0, 0, 1]}>2 rychlejší e⁻</AText>
+        </StepScene>
       </Section>
 
       <Section title="Mezní frekvence a mezní vlnová délka">
@@ -225,10 +214,10 @@ export default function Lesson_4_3b() {
             <text x="115" y="100" fill={MUTED} fontSize="13" textAnchor="middle">ν &lt; ν₀</text>
             <text x="115" y="120" fill={MUTED} fontSize="12" textAnchor="middle">žádné e⁻</text>
             {/* zóna emise: stoupající Emax */}
-            <line x1="240" y1="135" x2="270" y2="105" stroke={ELECTRON} strokeWidth="3" />
-            <line x1="290" y1="135" x2="330" y2="80" stroke={ELECTRON} strokeWidth="3" />
-            <line x1="350" y1="135" x2="400" y2="55" stroke={ELECTRON} strokeWidth="3" />
-            <text x="310" y="160" fill={ELECTRON} fontSize="12" textAnchor="middle">ν &gt; ν₀: roste Eₑ</text>
+            <line x1="235" y1="135" x2="262" y2="108" stroke={ELECTRON} strokeWidth="3" />
+            <line x1="290" y1="135" x2="325" y2="83" stroke={ELECTRON} strokeWidth="3" />
+            <line x1="345" y1="135" x2="392" y2="58" stroke={ELECTRON} strokeWidth="3" />
+            <text x="300" y="44" fill={ELECTRON} fontSize="13" textAnchor="middle">ν &gt; ν₀: roste Eₑ</text>
           </svg>
         </Figure>
         <p>

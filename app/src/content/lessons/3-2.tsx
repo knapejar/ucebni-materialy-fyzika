@@ -123,75 +123,51 @@ export default function Lesson() {
           Jakmile vlastní kmit dozní, soustava se ustálí a kmitá <b>frekvencí vnější síly</b>, ne svou.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak vzniknou vynucené kmity"
-          steps={[
-            {
-              label: 'tlumený vlastní kmit',
-              caption: <>Samotný oscilátor by jen doznil — amplituda klesá k nule (jako v předchozí sekci).</>,
-              content: (
-                <svg viewBox="0 0 460 180" className="svg-fig">
-                  <Defs />
-                  <line x1="30" y1="90" x2="445" y2="90" stroke={AX} strokeWidth="1.5" markerEnd="url(#ar32)" />
-                  <line x1="40" y1="20" x2="40" y2="165" stroke={AX} strokeWidth="1.5" />
-                  <text x="450" y="86" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-                  <path
-                    d="M40,90 C52,90 56,32 70,32 C84,32 90,148 104,148 C116,148 122,46 136,46
-                       C150,46 156,134 170,134 C182,134 188,56 202,56 C214,56 220,124 234,124
-                       C246,124 252,66 266,66 C278,66 284,114 298,114 C310,114 316,72 330,72
-                       C342,72 348,108 362,108 C374,108 380,78 394,78 C406,78 412,102 426,102 C434,102 438,88 444,90"
-                    fill="none" stroke={ACC} strokeWidth="2.5" />
-                  <text x="250" y="34" fill={ACC} fontSize="13">vlastní kmit dozní</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'přidáme vnější sílu',
-              caption: <>Periodická síla <M>{'F = F_0\\cos(\\omega t)'}</M> pořád dodává energii. Rozkmit nejdřív narůstá z nuly (přechodový děj).</>,
-              content: (
-                <svg viewBox="0 0 460 180" className="svg-fig">
-                  <Defs />
-                  <line x1="30" y1="90" x2="445" y2="90" stroke={AX} strokeWidth="1.5" markerEnd="url(#ar32)" />
-                  <line x1="40" y1="20" x2="40" y2="165" stroke={AX} strokeWidth="1.5" />
-                  <text x="450" y="86" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-                  {/* narustajici obalka */}
-                  <path d="M40,90 C120,80 200,52 300,48 L440,48" fill="none" stroke={ENV} strokeWidth="1.8" strokeDasharray="5,4" />
-                  <path d="M40,90 C120,100 200,128 300,132 L440,132" fill="none" stroke={ENV} strokeWidth="1.8" strokeDasharray="5,4" />
-                  <path
-                    d="M40,90 C50,90 54,82 64,82 C74,82 80,100 90,100 C100,100 106,76 116,76
-                       C126,76 132,108 142,108 C152,108 158,68 168,68 C178,68 184,116 194,116
-                       C204,116 210,60 220,60 C230,60 236,122 246,122 C256,122 262,54 272,54
-                       C282,54 288,126 298,126 C308,126 314,50 324,50 C334,50 340,130 350,130
-                       C360,130 366,50 376,50 C386,50 392,130 402,130 C412,130 418,50 428,50 C434,50 440,90 444,90"
-                    fill="none" stroke={ACC} strokeWidth="2.5" />
-                  <text x="180" y="40" fill={ENV} fontSize="13">amplituda narůstá</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'ustálené kmitání',
-              caption: <>Po odeznění přechodu kmitá soustava <b>stálou amplitudou a frekvencí vnější síly</b>. To je „provozní stav" vynucených kmitů.</>,
-              content: (
-                <svg viewBox="0 0 460 180" className="svg-fig">
-                  <Defs />
-                  <line x1="30" y1="90" x2="445" y2="90" stroke={AX} strokeWidth="1.5" markerEnd="url(#ar32)" />
-                  <line x1="40" y1="20" x2="40" y2="165" stroke={AX} strokeWidth="1.5" />
-                  <text x="450" y="86" fill={TXT} fontSize="13" fontStyle="italic">t</text>
-                  <line x1="40" y1="50" x2="440" y2="50" stroke={ENV} strokeWidth="1.6" strokeDasharray="5,4" />
-                  <line x1="40" y1="130" x2="440" y2="130" stroke={ENV} strokeWidth="1.6" strokeDasharray="5,4" />
-                  <path
-                    d="M40,90 C50,90 56,50 66,50 C76,50 82,130 92,130 C102,130 108,50 118,50
-                       C128,50 134,130 144,130 C154,130 160,50 170,50 C180,50 186,130 196,130
-                       C206,130 212,50 222,50 C232,50 238,130 248,130 C258,130 264,50 274,50
-                       C284,50 290,130 300,130 C310,130 316,50 326,50 C336,50 342,130 352,130
-                       C362,130 368,50 378,50 C388,50 394,130 404,130 C414,130 420,50 430,50 C436,50 440,90 444,90"
-                    fill="none" stroke={ACC} strokeWidth="2.5" />
-                  <text x="170" y="42" fill={ENV} fontSize="13">stálá amplituda</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 180"
+          captions={[
+            <>Samotný oscilátor by jen doznil — amplituda klesá k nule (jako v předchozí sekci).</>,
+            <>Periodická síla <M>{'F = F_0\\cos(\\omega t)'}</M> pořád dodává energii. Rozkmit nejdřív narůstá z nuly (přechodový děj).</>,
+            <>Po odeznění přechodu kmitá soustava <b>stálou amplitudou a frekvencí vnější síly</b>. To je „provozní stav" vynucených kmitů.</>,
           ]}
-        />
+        >
+          <Defs />
+          {/* osy (statické) */}
+          <line x1="30" y1="90" x2="445" y2="90" stroke={AX} strokeWidth="1.5" markerEnd="url(#ar32)" />
+          <line x1="40" y1="20" x2="40" y2="165" stroke={AX} strokeWidth="1.5" />
+          <text x="450" y="86" fill={TXT} fontSize="13" fontStyle="italic">t</text>
+
+          {/* obálky — objeví se až ve 2./3. kroku, plynule přejdou z narůstající na stálou */}
+          <APath
+            d={[
+              'M40.0,90.0 C172.0,63.5 304.0,52.3 440.0,47.4',
+              'M40.0,90.0 C172.0,63.5 304.0,52.3 440.0,47.4',
+              'M40.0,44.0 C172.0,44.0 304.0,44.0 440.0,44.0',
+            ]}
+            fill="none" stroke={ENV} strokeWidth={1.8} strokeDasharray="5,4" opacity={[0, 1, 1]} />
+          <APath
+            d={[
+              'M40.0,90.0 C172.0,116.5 304.0,127.7 440.0,132.6',
+              'M40.0,90.0 C172.0,116.5 304.0,127.7 440.0,132.6',
+              'M40.0,136.0 C172.0,136.0 304.0,136.0 440.0,136.0',
+            ]}
+            fill="none" stroke={ENV} strokeWidth={1.8} strokeDasharray="5,4" opacity={[0, 1, 1]} />
+
+          {/* samotná vlna — morfuje: tlumená → narůstající → stálá */}
+          <APath
+            d={[
+              'M40,90 C49.1,48.6 67.3,48.6 76.4,90 C85.5,123.6 103.6,123.6 112.7,90 C121.8,62.7 140.0,62.7 149.1,90 C158.2,112.1 176.4,112.1 185.5,90 C194.5,72.0 212.7,72.0 221.8,90 C230.9,104.6 249.1,104.6 258.2,90 C267.3,78.2 285.5,78.2 294.5,90 C303.6,99.6 321.8,99.6 330.9,90 C340.0,82.2 358.2,82.2 367.3,90 C376.4,96.3 394.5,96.3 403.6,90 C412.7,84.9 430.9,84.9 440.0,90',
+              'M40,90 C49.1,84.9 67.3,84.9 76.4,90 C85.5,103.7 103.6,103.7 112.7,90 C121.8,69.5 140.0,69.5 149.1,90 C158.2,115.9 176.4,115.9 185.5,90 C194.5,59.9 212.7,59.9 221.8,90 C230.9,123.5 249.1,123.5 258.2,90 C267.3,53.9 285.5,53.9 294.5,90 C303.6,128.2 321.8,128.2 330.9,90 C340.0,50.2 358.2,50.2 367.3,90 C376.4,131.1 394.5,131.1 403.6,90 C412.7,47.8 430.9,47.8 440.0,90',
+              'M40,90 C49.1,62.4 67.3,62.4 76.4,90 C85.5,126.8 103.6,126.8 112.7,90 C121.8,44.0 140.0,44.0 149.1,90 C158.2,136.0 176.4,136.0 185.5,90 C194.5,44.0 212.7,44.0 221.8,90 C230.9,136.0 249.1,136.0 258.2,90 C267.3,44.0 285.5,44.0 294.5,90 C303.6,136.0 321.8,136.0 330.9,90 C340.0,44.0 358.2,44.0 367.3,90 C376.4,136.0 394.5,136.0 403.6,90 C412.7,44.0 430.9,44.0 440.0,90',
+            ]}
+            fill="none" stroke={ACC} strokeWidth={2.5} />
+
+          {/* popisky — každý jen ve svém kroku (prolnutí), v místě, kde vlna nepřekáží */}
+          <AText x={330} y={36} fill={ACC} fontSize="13" textAnchor="middle" opacity={[1, 0, 0]}>vlastní kmit dozní</AText>
+          <AText x={150} y={36} fill={ENV} fontSize="13" textAnchor="middle" opacity={[0, 1, 0]}>amplituda narůstá</AText>
+          <AText x={240} y={32} fill={ENV} fontSize="13" textAnchor="middle" opacity={[0, 0, 1]}>stálá amplituda</AText>
+        </StepScene>
       </Section>
 
       <Section title="Rezonance — trefit se do vlastní frekvence">
@@ -251,21 +227,23 @@ export default function Lesson() {
         <Figure caption="Dva oscilátory spojené pružinou. Síla z vazby závisí na rozdílu výchylek u₂ − u₁ — když se vychýlí stejně (vlevo), vazba je v klidu; když proti sobě (vpravo), vazba je nejvíc napjatá.">
           <svg viewBox="0 0 460 210" className="svg-fig">
             <Defs />
-            {/* leva dvojice - stejna faze */}
-            <SpringBob x={70} dy={28} />
-            <SpringBob x={150} dy={28} />
-            <line x1="70" y1="120" x2="70" y2="150" stroke={ACC} strokeWidth="3" markerEnd="url(#ar32)" />
-            <line x1="150" y1="120" x2="150" y2="150" stroke={ACC} strokeWidth="3" markerEnd="url(#ar32)" />
-            <text x="110" y="185" fill={TXT} fontSize="13" textAnchor="middle">stejná fáze</text>
-            <text x="110" y="201" fill={ENV} fontSize="12" textAnchor="middle">u₂ − u₁ = 0 → vazba v klidu</text>
+            {/* leva dvojice - stejna faze (obě vychýlené dolů stejně) */}
+            <SpringBob x={62} dy={28} />
+            <SpringBob x={142} dy={28} />
+            {/* šipky výchylky vedle závaží, ať nepřekrývají kuličky */}
+            <line x1="92" y1="118" x2="92" y2="150" stroke={ACC} strokeWidth="2.4" markerEnd="url(#ar32)" />
+            <line x1="172" y1="118" x2="172" y2="150" stroke={ACC} strokeWidth="2.4" markerEnd="url(#ar32)" />
+            <text x="110" y="180" fill={TXT} fontSize="13" textAnchor="middle">stejná fáze</text>
+            <text x="110" y="198" fill={ENV} fontSize="12" textAnchor="middle">u₂ − u₁ = 0 → vazba v klidu</text>
 
-            {/* prava dvojice - opacna faze */}
-            <SpringBob x={320} dy={34} />
-            <SpringBob x={400} dy={6} />
-            <line x1="320" y1="126" x2="320" y2="156" stroke={FORCE} strokeWidth="3" markerEnd="url(#ar32f)" />
-            <line x1="400" y1="98" x2="400" y2="72" stroke={FORCE} strokeWidth="3" markerEnd="url(#ar32f)" />
-            <text x="360" y="185" fill={TXT} fontSize="13" textAnchor="middle">opačná fáze</text>
-            <text x="360" y="201" fill={FORCE} fontSize="12" textAnchor="middle">u₂ − u₁ velké → vazba napjatá</text>
+            {/* prava dvojice - opacna faze (jedna dolů, druhá nahoru) */}
+            <SpringBob x={312} dy={32} />
+            <SpringBob x={392} dy={-18} />
+            {/* šipky výchylky vedle závaží, opačné směry */}
+            <line x1="342" y1="120" x2="342" y2="152" stroke={FORCE} strokeWidth="2.4" markerEnd="url(#ar32f)" />
+            <line x1="422" y1="104" x2="422" y2="72" stroke={FORCE} strokeWidth="2.4" markerEnd="url(#ar32f)" />
+            <text x="360" y="180" fill={TXT} fontSize="13" textAnchor="middle">opačná fáze</text>
+            <text x="360" y="198" fill={FORCE} fontSize="12" textAnchor="middle">u₂ − u₁ velké → vazba napjatá</text>
           </svg>
         </Figure>
 

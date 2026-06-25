@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, AText, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.3a'
 
@@ -28,75 +28,38 @@ const AXIS = '#5a678c'
 const DECAY = '#fb7185'
 const HALF = '#fbbf24'
 const STABLE = '#60a5fa'
+const EMPTY = '#161d31' // výplň rozpadlého jádra (téměř barva pozadí → vypadá „prázdně")
 
-/* Mřížka jader: vyplněná = ještě nerozpadlá, prázdná = rozpadlá. */
-function Nuclei({ remaining }: { remaining: number }) {
-  const cells = []
-  const cols = 8
-  const rows = 4
-  for (let r = 0; r < rows; r++) {
-    for (let c = 0; c < cols; c++) {
-      const i = r * cols + c
-      const alive = i < remaining
-      cells.push(
-        <circle
-          key={i}
-          cx={28 + c * 30}
-          cy={24 + r * 30}
-          r="10"
-          fill={alive ? ACCENT : 'none'}
-          stroke={alive ? ACCENT : AXIS}
-          strokeWidth="2"
-          opacity={alive ? 1 : 0.55}
-        />,
-      )
-    }
-  }
-  return <>{cells}</>
+/* ——— Animovaná scéna „půlení vzorku" ———
+ * Levá půlka: mřížka 32 jader (8×4). V kroku s zbývá REMAIN[s] vyplněných;
+ * každé jádro plynule zhasne (zelená → prázdné kolečko) přes pole hodnot.
+ * Pravá půlka: exponenciální křivka N(t) s poločasovými značkami, které
+ * se objevují postupně (opacity po krocích). */
+const REMAIN = [32, 16, 8, 4] // počet nerozpadlých jader v krocích 0–3
+const NCOLS = 8
+const NROWS = 4
+const NX0 = 26
+const NY0 = 26
+const NDX = 28
+const NDY = 27
+
+/* Pro každé jádro vrátí pole hodnot dané vlastnosti přes všechny kroky. */
+function nucleusArr<T>(i: number, alive: T, dead: T): T[] {
+  return REMAIN.map((rem) => (i < rem ? alive : dead))
 }
 
-/* Křivka exponenciálního poklesu N(t) s vyznačením poločasů. */
-function DecayCurve({ shown }: { shown: number }) {
-  // body křivky N = N0 * 2^(-t/T), T = 60 px, N0 = 110 px výška
-  const x0 = 50
-  const y0 = 30
-  const baseY = 170
-  const T = 55
+// geometrie křivky N(t) = N0·2^(−t/T) v pravé části scény
+const CX0 = 312 // počátek os (x)
+const CBASE = 156 // osa t (y)
+const CTOP = 22 // vrchol křivky (N0)
+const CT = 50 // poločas v px po ose t
+const CH = CBASE - CTOP // výška N0
+const yAt = (t: number) => CBASE - CH * Math.pow(2, -t / CT)
+const curvePts = (() => {
   const pts: string[] = []
-  for (let t = 0; t <= 240; t += 4) {
-    const x = x0 + t
-    const y = baseY - (140 * Math.pow(2, -t / T))
-    pts.push(`${x},${y}`)
-  }
-  const yAt = (t: number) => baseY - 140 * Math.pow(2, -t / T)
-  return (
-    <>
-      {/* osy */}
-      <line x1={x0} y1={y0} x2={x0} y2={baseY} stroke={AXIS} strokeWidth="2" />
-      <line x1={x0} y1={baseY} x2="300" y2={baseY} stroke={AXIS} strokeWidth="2" />
-      <text x={x0 - 8} y={y0 + 6} fill={TXT} fontSize="13" textAnchor="end">N</text>
-      <text x="298" y={baseY + 18} fill={TXT} fontSize="13" textAnchor="end">t</text>
-
-      {/* křivka */}
-      <polyline points={pts.join(' ')} fill="none" stroke={ACCENT} strokeWidth="3" />
-
-      {/* poločasy: čárkované značky do shown */}
-      {[1, 2, 3].map((k) =>
-        k <= shown ? (
-          <g key={k}>
-            <line x1={x0 + k * T} y1={yAt(k * T)} x2={x0 + k * T} y2={baseY} stroke={HALF} strokeWidth="1.5" strokeDasharray="4 3" />
-            <line x1={x0} y1={yAt(k * T)} x2={x0 + k * T} y2={yAt(k * T)} stroke={HALF} strokeWidth="1.5" strokeDasharray="4 3" />
-            <circle cx={x0 + k * T} cy={yAt(k * T)} r="4" fill={HALF} />
-            <text x={x0 + k * T} y={baseY + 16} fill={HALF} fontSize="11" textAnchor="middle">{k}·T</text>
-            <text x={x0 - 6} y={yAt(k * T) + 4} fill={HALF} fontSize="11" textAnchor="end">{`N₀/${2 ** k}`}</text>
-          </g>
-        ) : null,
-      )}
-      {/* N0 popisek */}
-      <text x={x0 - 6} y={yAt(0) + 4} fill={TXT} fontSize="11" textAnchor="end">N₀</text>
-    </>
-  )
-}
+  for (let t = 0; t <= 200; t += 4) pts.push(`${CX0 + t},${yAt(t)}`)
+  return pts.join(' ')
+})()
 
 export default function Lesson_5_3a() {
   return (
@@ -193,55 +156,65 @@ export default function Lesson_5_3a() {
           Nejlíp si poločas zapamatuješ jako „pořád na půl". Klikej <b>Další →</b> — vlevo ubývají
           jádra, vpravo se k tomu kreslí křivka <M>{'N(t)'}</M>:
         </p>
-        <StepFigure
+        <StepScene
           title="Co se stane za každý poločas T₁/₂"
-          steps={[
-            {
-              label: 't = 0',
-              caption: <>Na začátku máme <M>{'N_0'}</M> nerozpadlých jader (zeleně). Aktivita je největší: <M>{'A_0=\\lambda N_0'}</M>.</>,
-              content: (
-                <svg viewBox="0 0 560 200" className="svg-fig">
-                  <Nuclei remaining={32} />
-                  <text x="128" y="195" fill={ACCENT} fontSize="14" textAnchor="middle">N = N₀ (vše)</text>
-                  <DecayCurve shown={0} />
-                </svg>
-              ),
-            },
-            {
-              label: 'za 1·T₁/₂',
-              caption: <>Po jednom poločase je rozpadlá <b>polovina</b> jader. Zbývá <M>{'N_0/2'}</M> a aktivita klesla na polovinu.</>,
-              content: (
-                <svg viewBox="0 0 560 200" className="svg-fig">
-                  <Nuclei remaining={16} />
-                  <text x="128" y="195" fill={HALF} fontSize="14" textAnchor="middle">N = N₀/2</text>
-                  <DecayCurve shown={1} />
-                </svg>
-              ),
-            },
-            {
-              label: 'za 2·T₁/₂',
-              caption: <>Po druhém poločase je z poloviny zase polovina: zbývá <M>{'N_0/4'}</M>. <b>Pozor: za 2 poločasy NEzbude nula!</b></>,
-              content: (
-                <svg viewBox="0 0 560 200" className="svg-fig">
-                  <Nuclei remaining={8} />
-                  <text x="128" y="195" fill={HALF} fontSize="14" textAnchor="middle">N = N₀/4</text>
-                  <DecayCurve shown={2} />
-                </svg>
-              ),
-            },
-            {
-              label: 'za 3·T₁/₂',
-              caption: <>A tak dál — vždy se ubere polovina z toho, co zbylo: <M>{'N_0/8'}</M>. Křivka je <Term>exponenciála</Term> <M>{'N=N_0\\,2^{-t/T_{1/2}}'}</M>, nikdy nedosáhne přesné nuly.</>,
-              content: (
-                <svg viewBox="0 0 560 200" className="svg-fig">
-                  <Nuclei remaining={4} />
-                  <text x="128" y="195" fill={STABLE} fontSize="14" textAnchor="middle">N = N₀/8</text>
-                  <DecayCurve shown={3} />
-                </svg>
-              ),
-            },
+          viewBox="0 0 580 210"
+          captions={[
+            <>Na začátku máme <M>{'N_0'}</M> nerozpadlých jader (zeleně). Aktivita je největší: <M>{'A_0=\\lambda N_0'}</M>.</>,
+            <>Po jednom poločase je rozpadlá <b>polovina</b> jader. Zbývá <M>{'N_0/2'}</M> a aktivita klesla na polovinu.</>,
+            <>Po druhém poločase je z poloviny zase polovina: zbývá <M>{'N_0/4'}</M>. <b>Pozor: za 2 poločasy NEzbude nula!</b></>,
+            <>A tak dál — vždy se ubere polovina z toho, co zbylo: <M>{'N_0/8'}</M>. Křivka je <Term>exponenciála</Term> <M>{'N=N_0\\,2^{-t/T_{1/2}}'}</M>, nikdy nedosáhne přesné nuly.</>,
           ]}
-        />
+        >
+          {/* ——— LEVÁ ČÁST: mřížka jader, která postupně zhasínají ——— */}
+          {Array.from({ length: NCOLS * NROWS }, (_, i) => {
+            const c = i % NCOLS
+            const r = Math.floor(i / NCOLS)
+            return (
+              <ACircle
+                key={`n${i}`}
+                cx={NX0 + c * NDX}
+                cy={NY0 + r * NDY}
+                r={9}
+                fill={nucleusArr(i, ACCENT, EMPTY)}
+                stroke={nucleusArr(i, ACCENT, AXIS)}
+                strokeWidth={2}
+                opacity={nucleusArr(i, 1, 0.75)}
+              />
+            )
+          })}
+          {/* popisek zbývajícího počtu jader (jeden text na krok, prolíná se) */}
+          <AText x={130} y={170} fill={ACCENT} fontSize="15" textAnchor="middle" fontWeight="600" opacity={[1, 0, 0, 0]}>N = N₀</AText>
+          <AText x={130} y={170} fill={HALF} fontSize="15" textAnchor="middle" fontWeight="600" opacity={[0, 1, 0, 0]}>N = N₀/2</AText>
+          <AText x={130} y={170} fill={HALF} fontSize="15" textAnchor="middle" fontWeight="600" opacity={[0, 0, 1, 0]}>N = N₀/4</AText>
+          <AText x={130} y={170} fill={STABLE} fontSize="15" textAnchor="middle" fontWeight="600" opacity={[0, 0, 0, 1]}>N = N₀/8</AText>
+
+          {/* ——— PRAVÁ ČÁST: křivka N(t) ——— */}
+          {/* osy */}
+          <ALine x1={CX0} y1={CTOP - 6} x2={CX0} y2={CBASE} stroke={AXIS} strokeWidth={2} />
+          <ALine x1={CX0} y1={CBASE} x2={566} y2={CBASE} stroke={AXIS} strokeWidth={2} />
+          {/* osa N je popsaná hodnotou v t=0, tj. N₀ (na vrcholu křivky) */}
+          <text x={CX0 - 8} y={yAt(0) + 4} fill={TXT} fontSize="13" textAnchor="end">N₀</text>
+          <text x={564} y={CBASE + 17} fill={TXT} fontSize="13" textAnchor="end">t</text>
+          {/* křivka (stejná ve všech krocích) */}
+          <polyline points={curvePts} fill="none" stroke={ACCENT} strokeWidth={3} />
+
+          {/* poločasové značky 1·T, 2·T, 3·T — objevují se postupně */}
+          {([1, 2, 3] as const).map((k) => {
+            const op = [0, 0, 0, 0].map((_, s) => (s >= k ? 1 : 0))
+            const x = CX0 + k * CT
+            const y = yAt(k * CT)
+            return (
+              <g key={`mk${k}`}>
+                <ALine x1={x} y1={y} x2={x} y2={CBASE} stroke={HALF} strokeWidth={1.5} strokeDasharray="4 3" opacity={op} />
+                <ALine x1={CX0} y1={y} x2={x} y2={y} stroke={HALF} strokeWidth={1.5} strokeDasharray="4 3" opacity={op} />
+                <ACircle cx={x} cy={y} r={4} fill={HALF} opacity={op} />
+                <AText x={x} y={CBASE + 17} fill={HALF} fontSize="11" textAnchor="middle" opacity={op}>{`${k}·T`}</AText>
+                <AText x={CX0 - 8} y={y + 4} fill={HALF} fontSize="11" textAnchor="end" opacity={op}>{`N₀/${2 ** k}`}</AText>
+              </g>
+            )
+          })}
+        </StepScene>
       </Section>
 
       <Callout kind="chytak" title="Chytáky (tady se ztrácejí body)">

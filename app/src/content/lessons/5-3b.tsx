@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ALine, AText, ARect, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '5.3b'
 
@@ -80,7 +80,7 @@ export default function Lesson_5_3b() {
         </p>
 
         <Figure caption="Částice α = jádro helia (2 protony + 2 neutrony). Z jádra ubudou 2 protony a 2 neutrony.">
-          <svg viewBox="0 0 360 130" className="svg-fig">
+          <svg viewBox="0 0 420 130" className="svg-fig">
             <Defs />
             <circle cx="70" cy="65" r="34" fill="none" stroke={MUTED} strokeWidth="2" strokeDasharray="4 4" />
             <text x="70" y="20" fill={TXT} fontSize="13" textAnchor="middle">těžké jádro X</text>
@@ -92,10 +92,10 @@ export default function Lesson_5_3b() {
             <text x="164" y="52" fill={ACC} fontSize="14" textAnchor="middle">α</text>
             <AlphaParticle x={258} y={65} />
             <text x="258" y="112" fill={TXT} fontSize="12" textAnchor="middle">jádro He</text>
-            <circle cx="316" cy="40" r="6" fill={PROTON} />
-            <text x="332" y="44" fill={MUTED} fontSize="11">proton</text>
-            <circle cx="316" cy="62" r="6" fill={NEUTRON} />
-            <text x="332" y="66" fill={MUTED} fontSize="11">neutron</text>
+            <circle cx="318" cy="44" r="6" fill={PROTON} />
+            <text x="332" y="48" fill={MUTED} fontSize="12">proton</text>
+            <circle cx="318" cy="70" r="6" fill={NEUTRON} />
+            <text x="332" y="74" fill={MUTED} fontSize="12">neutron</text>
           </svg>
         </Figure>
       </Section>
@@ -174,79 +174,46 @@ export default function Lesson_5_3b() {
           vychýlení poznáš náboj. Klikej <b>Další →</b>:
         </p>
 
-        <StepFigure
+        <StepScene
           title="Tři druhy záření v elektrickém poli kondenzátoru"
-          steps={[
-            {
-              label: 'sestava',
-              caption: <>Radioaktivní vzorek dole vyzařuje záření vzhůru mezi dvě desky: vlevo <b>+</b>, vpravo <b>−</b>.</>,
-              content: (
-                <svg viewBox="0 0 320 240" className="svg-fig">
-                  <Defs />
-                  <rect x="140" y="205" width="40" height="26" rx="4" fill={PROTON} />
-                  <text x="160" y="223" fill="#0b1020" fontSize="11" textAnchor="middle" fontWeight="700">vzorek</text>
-                  <line x1="60" y1="40" x2="60" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="46" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">+</text>
-                  <line x1="260" y1="40" x2="260" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="274" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">−</text>
-                  <text x="160" y="120" fill={MUTED} fontSize="12" textAnchor="middle">homogenní pole</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'β⁻ doleva',
-              caption: <>Záporné <b>β</b> (elektrony) se přitahuje ke <b>kladné</b> desce → vychýlí se <b>doleva</b>. Lehké, takže hodně.</>,
-              content: (
-                <svg viewBox="0 0 320 240" className="svg-fig">
-                  <Defs color={NEUTRON} />
-                  <rect x="140" y="205" width="40" height="26" rx="4" fill={PROTON} />
-                  <line x1="60" y1="40" x2="60" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="46" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">+</text>
-                  <line x1="260" y1="40" x2="260" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="274" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">−</text>
-                  <path d="M160,205 Q150,120 95,70" fill="none" stroke={NEUTRON} strokeWidth="4" markerEnd="url(#ar53b)" />
-                  <text x="92" y="58" fill={NEUTRON} fontSize="18" textAnchor="middle" fontStyle="italic">β⁻</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'α doprava',
-              caption: <>Kladné <b>α</b> se přitahuje k <b>záporné</b> desce → vychýlí se <b>doprava</b>. Těžké, takže jen málo.</>,
-              content: (
-                <svg viewBox="0 0 320 240" className="svg-fig">
-                  <Defs color={PROTON} />
-                  <rect x="140" y="205" width="40" height="26" rx="4" fill={PROTON} />
-                  <line x1="60" y1="40" x2="60" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="46" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">+</text>
-                  <line x1="260" y1="40" x2="260" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="274" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">−</text>
-                  <path d="M160,205 Q174,120 205,75" fill="none" stroke={PROTON} strokeWidth="4" markerEnd="url(#ar53b)" />
-                  <text x="216" y="68" fill={PROTON} fontSize="18" textAnchor="middle" fontStyle="italic">α</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'γ rovně',
-              caption: <>Neutrální <b>γ</b> nic nepřitahuje → letí <b>rovně</b>. Podle vychýlení tak hned poznáš, co je co.</>,
-              content: (
-                <svg viewBox="0 0 320 240" className="svg-fig">
-                  <Defs color={NEUTRON} />
-                  <rect x="140" y="205" width="40" height="26" rx="4" fill={PROTON} />
-                  <line x1="60" y1="40" x2="60" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="46" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">+</text>
-                  <line x1="260" y1="40" x2="260" y2="190" stroke={PLATE} strokeWidth="6" />
-                  <text x="274" y="36" fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">−</text>
-                  <path d="M160,205 Q150,120 95,70" fill="none" stroke={NEUTRON} strokeWidth="3" opacity="0.5" />
-                  <text x="92" y="58" fill={NEUTRON} fontSize="14" textAnchor="middle" fontStyle="italic" opacity="0.6">β⁻</text>
-                  <path d="M160,205 Q174,120 205,75" fill="none" stroke={PROTON} strokeWidth="3" opacity="0.5" />
-                  <text x="216" y="68" fill={PROTON} fontSize="14" textAnchor="middle" fontStyle="italic" opacity="0.6">α</text>
-                  <line x1="160" y1="205" x2="160" y2="60" stroke={GAMMA} strokeWidth="4" markerEnd="url(#ar53b)" />
-                  <text x="160" y="48" fill={GAMMA} fontSize="18" textAnchor="middle" fontStyle="italic">γ</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 320 240"
+          captions={[
+            <>Radioaktivní vzorek dole vyzařuje záření vzhůru mezi dvě desky: vlevo <b>+</b>, vpravo <b>−</b>.</>,
+            <>Záporné <b>β</b> (elektrony) se přitahuje ke <b>kladné</b> desce → vychýlí se <b>doleva</b>. Lehké, takže hodně.</>,
+            <>Kladné <b>α</b> se přitahuje k <b>záporné</b> desce → vychýlí se <b>doprava</b>. Těžké, takže jen málo.</>,
+            <>Neutrální <b>γ</b> nic nepřitahuje → letí <b>rovně</b>. Podle vychýlení tak hned poznáš, co je co.</>,
           ]}
-        />
+        >
+          {/* barevné markery šipek (každá svůj id → vlastní barva) */}
+          <defs>
+            <marker id="arBeta53b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={NEUTRON} /></marker>
+            <marker id="arAlpha53b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={PROTON} /></marker>
+            <marker id="arGamma53b" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={GAMMA} /></marker>
+          </defs>
+
+          {/* statická sestava: desky + vzorek (přes všechny kroky) */}
+          <ALine x1={60} y1={40} x2={60} y2={190} stroke={PLATE} strokeWidth={6} />
+          <AText x={46} y={36} fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">+</AText>
+          <ALine x1={260} y1={40} x2={260} y2={190} stroke={PLATE} strokeWidth={6} />
+          <AText x={274} y={36} fill={PLATE} fontSize="22" textAnchor="middle" fontWeight="700">−</AText>
+          <ARect x={140} y={205} width={40} height={26} rx={4} fill={PROTON} />
+          <AText x={160} y={223} fill="#0b1020" fontSize="11" textAnchor="middle" fontWeight="700">vzorek</AText>
+
+          {/* krok 1: popisek pole (zmizí, jakmile přiletí záření) */}
+          <AText x={160} y={120} fill={MUTED} fontSize="12" textAnchor="middle" opacity={[1, 0, 0, 0]}>homogenní pole</AText>
+
+          {/* β⁻ — křivka doleva, přijde v kroku 2 a zůstane */}
+          <APath d="M160,205 Q150,120 95,70" fill="none" stroke={NEUTRON} strokeWidth={4} markerEnd="url(#arBeta53b)" opacity={[0, 1, 1, 1]} />
+          <AText x={92} y={56} fill={NEUTRON} fontSize="18" textAnchor="middle" fontStyle="italic" opacity={[0, 1, 1, 1]}>β⁻</AText>
+
+          {/* α — křivka doprava, přijde v kroku 3 a zůstane */}
+          <APath d="M160,205 Q174,120 205,75" fill="none" stroke={PROTON} strokeWidth={4} markerEnd="url(#arAlpha53b)" opacity={[0, 0, 1, 1]} />
+          <AText x={216} y={64} fill={PROTON} fontSize="18" textAnchor="middle" fontStyle="italic" opacity={[0, 0, 1, 1]}>α</AText>
+
+          {/* γ — rovně nahoru, přijde v kroku 4 */}
+          <ALine x1={160} y1={205} x2={160} y2={70} stroke={GAMMA} strokeWidth={4} markerEnd="url(#arGamma53b)" opacity={[0, 0, 0, 1]} />
+          <AText x={160} y={56} fill={GAMMA} fontSize="18" textAnchor="middle" fontStyle="italic" opacity={[0, 0, 0, 1]}>γ</AText>
+        </StepScene>
       </Section>
 
       <Section title="Ochrana před zářením — jednou větou">

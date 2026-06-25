@@ -1,4 +1,4 @@
-import { Section, M, MB, Term, Concept, Figure, StepFigure, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
+import { Section, M, MB, Term, Concept, Figure, StepScene, ACircle, ALine, ARect, AText, AGroup, APath, Callout, ExamGoals, SelfCheck } from '../../components/lesson/primitives'
 
 export const id = '3.8'
 
@@ -98,100 +98,67 @@ export default function Lesson_3_8() {
           dvě blízké štěrbiny → vzdálené stínítko, na kterém naskáčou <b>interferenční proužky</b>.
         </p>
 
-        <StepFigure
+        <StepScene
           title="Jak vzniknou proužky"
-          steps={[
-            {
-              label: 'koherentní světlo',
-              caption: <>Na <b>první stínítko</b> dopadá rovinná vlna a projde dvěma blízkými štěrbinami. Ty se podle <Concept id="huygensuv-princip">Huygensova principu</Concept> chovají jako <b>dva nové zdroje</b> — a protože vznikly z jedné vlnoplochy, vychází z nich světlo se <b>stejnou fází</b> (jsou koherentní).</>,
-              content: (
-                <svg viewBox="0 0 460 240" className="svg-fig">
-                  <Defs color={RAY} />
-                  {/* clona se dvěma štěrbinami */}
-                  <rect x="150" y="20" width="10" height="200" fill={DIM} />
-                  <rect x="150" y="95" width="10" height="14" fill="#0b1020" />
-                  <rect x="150" y="131" width="10" height="14" fill="#0b1020" />
-                  {/* rovinná vlna zleva */}
-                  <g stroke={RAY} strokeWidth="2.5" opacity="0.85">
-                    <line x1="20" y1="60" x2="150" y2="60" />
-                    <line x1="20" y1="100" x2="150" y2="102" />
-                    <line x1="20" y1="140" x2="150" y2="138" />
-                    <line x1="20" y1="180" x2="150" y2="180" />
-                  </g>
-                  <text x="55" y="40" fill={TXT} fontSize="13">rovinná vlna</text>
-                  <text x="168" y="92" fill={ACCENT} fontSize="13">štěrbina 1</text>
-                  <text x="168" y="160" fill={ACCENT} fontSize="13">štěrbina 2</text>
-                  <text x="120" y="232" fill={DIM} fontSize="12" textAnchor="middle">clona</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'dvě vlnoplochy',
-              caption: <>Z obou štěrbin se šíří kruhové vlnoplochy a na cestě k druhému stínítku se <b>překrývají</b>. V každém bodě stínítka se sečte světlo z obou štěrbin.</>,
-              content: (
-                <svg viewBox="0 0 460 240" className="svg-fig">
-                  <Defs color={RAY} />
-                  <rect x="150" y="20" width="10" height="200" fill={DIM} />
-                  <rect x="150" y="95" width="10" height="14" fill="#0b1020" />
-                  <rect x="150" y="131" width="10" height="14" fill="#0b1020" />
-                  {/* vlnoplochy ze štěrbiny 1 */}
-                  <g fill="none" stroke={RAY} strokeWidth="1.6" opacity="0.7">
-                    <path d="M160,102 A40,40 0 0 1 160,22" />
-                    <path d="M160,102 A75,75 0 0 1 160,-10" transform="translate(0,0)" />
-                    <path d="M160,102 A110,110 0 0 1 160,-40" />
-                  </g>
-                  {/* vlnoplochy ze štěrbiny 2 */}
-                  <g fill="none" stroke={ACCENT} strokeWidth="1.6" opacity="0.7">
-                    <path d="M160,138 A40,40 0 0 0 160,218" />
-                    <path d="M160,138 A75,75 0 0 0 160,250" />
-                    <path d="M160,138 A110,110 0 0 0 160,280" />
-                  </g>
-                  <line x1="420" y1="20" x2="420" y2="220" stroke={DIM} strokeWidth="6" />
-                  <text x="120" y="232" fill={DIM} fontSize="12" textAnchor="middle">clona</text>
-                  <text x="430" y="124" fill={DIM} fontSize="12">stínítko</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'dráhový rozdíl',
-              caption: <>Do každého bodu stínítka dorazí paprsky z obou štěrbin po <b>různě dlouhé dráze</b>. Rozhoduje jejich <b>dráhový rozdíl</b> <M>{'\\delta'}</M>: na ose je <M>{'\\delta = 0'}</M> (maximum), výš a níž se dráhy rozcházejí.</>,
-              content: (
-                <svg viewBox="0 0 460 240" className="svg-fig">
-                  <Defs color={RAY} />
-                  <rect x="150" y="20" width="10" height="200" fill={DIM} />
-                  <line x1="420" y1="20" x2="420" y2="220" stroke={DIM} strokeWidth="6" />
-                  {/* paprsky do bodu nad osou */}
-                  <line x1="160" y1="102" x2="420" y2="80" stroke={RAY} strokeWidth="2.5" />
-                  <line x1="160" y1="138" x2="420" y2="80" stroke={ACCENT} strokeWidth="2.5" />
-                  <circle cx="420" cy="80" r="5" fill={PINK} />
-                  <text x="335" y="60" fill={PINK} fontSize="13">δ ≠ 0</text>
-                  {/* paprsky do bodu na ose */}
-                  <line x1="160" y1="102" x2="420" y2="160" stroke={RAY} strokeWidth="2" opacity="0.6" />
-                  <line x1="160" y1="138" x2="420" y2="160" stroke={ACCENT} strokeWidth="2" opacity="0.6" />
-                  <text x="300" y="185" fill={TXT} fontSize="12">na ose: δ = 0</text>
-                  <text x="430" y="124" fill={DIM} fontSize="12">stínítko</text>
-                </svg>
-              ),
-            },
-            {
-              label: 'proužky',
-              caption: <>Tam, kde je <M>{'\\delta'}</M> roven <b>celistvému násobku <M>{'\\lambda'}</M></b>, se vlny sečtou → <b>maximum</b> (světlý proužek). Kde je <M>{'\\delta'}</M> roven <b>lichému násobku <M>{'\\lambda/2'}</M></b>, se vyruší → <b>minimum</b> (tma). Vznikne pravidelné střídání světlých a tmavých proužků.</>,
-              content: (
-                <svg viewBox="0 0 460 240" className="svg-fig">
-                  <line x1="420" y1="20" x2="420" y2="220" stroke={DIM} strokeWidth="3" />
-                  {/* proužky na stínítku */}
-                  {[40, 80, 120, 160, 200].map((y, k) => (
-                    <rect key={k} x="380" y={y - 8} width="40" height="16" rx="3" fill={RAY} opacity={0.9} />
-                  ))}
-                  <text x="200" y="40" fill={RAY} fontSize="13">maximum: δ = k·λ</text>
-                  <text x="200" y="62" fill={DIM} fontSize="13">minimum: δ = (2k+1)·λ/2</text>
-                  <text x="200" y="150" fill={TXT} fontSize="13">→ interferenční proužky</text>
-                  <text x="200" y="172" fill={DIM} fontSize="12">(střídání světlo / tma)</text>
-                </svg>
-              ),
-            },
+          viewBox="0 0 460 240"
+          captions={[
+            <>Na <b>první stínítko</b> dopadá rovinná vlna a projde dvěma blízkými štěrbinami. Ty se podle <Concept id="huygensuv-princip">Huygensova principu</Concept> chovají jako <b>dva nové zdroje</b> — a protože vznikly z jedné vlnoplochy, vychází z nich světlo se <b>stejnou fází</b> (jsou koherentní).</>,
+            <>Z obou štěrbin se šíří kruhové vlnoplochy a na cestě k druhému stínítku se <b>překrývají</b>. V každém bodě stínítka se sečte světlo z obou štěrbin.</>,
+            <>Do každého bodu stínítka dorazí paprsky z obou štěrbin po <b>různě dlouhé dráze</b>. Rozhoduje jejich <b>dráhový rozdíl</b> <M>{'\\delta'}</M>: na ose je <M>{'\\delta = 0'}</M> (maximum), výš a níž se dráhy rozcházejí.</>,
+            <>Tam, kde je <M>{'\\delta'}</M> roven <b>celistvému násobku <M>{'\\lambda'}</M></b>, se vlny sečtou → <b>maximum</b> (světlý proužek). Kde je <M>{'\\delta'}</M> roven <b>lichému násobku <M>{'\\lambda/2'}</M></b>, se vyruší → <b>minimum</b> (tma). Vznikne pravidelné střídání světlých a tmavých proužků.</>,
           ]}
-        />
+        >
+          <defs>
+            <marker id="ar38ray" markerWidth="9" markerHeight="9" refX="7" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 z" fill={RAY} /></marker>
+          </defs>
+
+          {/* clona se dvěma štěrbinami — trvalá ve všech krocích, v posledním zmizí */}
+          <ARect x={150} y={20} width={10} height={200} fill={DIM} opacity={[1, 1, 1, 0]} />
+          <ARect x={150} y={95} width={10} height={14} fill="#0b1020" opacity={[1, 1, 1, 0]} />
+          <ARect x={150} y={131} width={10} height={14} fill="#0b1020" opacity={[1, 1, 1, 0]} />
+          <AText x={120} y={234} fill={DIM} fontSize="12" textAnchor="middle" opacity={[1, 1, 1, 0]}>clona</AText>
+
+          {/* stínítko vpravo — od kroku 2 dál */}
+          <ALine x1={420} y1={20} x2={420} y2={220} stroke={DIM} strokeWidth={[6, 6, 6, 5]} opacity={[0, 1, 1, 1]} />
+          <AText x={430} y={124} fill={DIM} fontSize="12" opacity={[0, 1, 1, 0]}>stínítko</AText>
+
+          {/* ——— KROK 1: rovinná vlna zleva ——— */}
+          <ALine x1={20} y1={60} x2={150} y2={60} stroke={RAY} strokeWidth={2.5} opacity={[0.85, 0, 0, 0]} />
+          <ALine x1={20} y1={101} x2={150} y2={102} stroke={RAY} strokeWidth={2.5} opacity={[0.85, 0, 0, 0]} />
+          <ALine x1={20} y1={139} x2={150} y2={138} stroke={RAY} strokeWidth={2.5} opacity={[0.85, 0, 0, 0]} />
+          <ALine x1={20} y1={180} x2={150} y2={180} stroke={RAY} strokeWidth={2.5} opacity={[0.85, 0, 0, 0]} />
+          <AText x={55} y={42} fill={TXT} fontSize="13" opacity={[1, 0, 0, 0]}>rovinná vlna</AText>
+          <AText x={168} y={92} fill={ACCENT} fontSize="13" opacity={[1, 0, 0, 0]}>štěrbina 1</AText>
+          <AText x={168} y={162} fill={ACCENT} fontSize="13" opacity={[1, 0, 0, 0]}>štěrbina 2</AText>
+
+          {/* ——— KROK 2: kruhové vlnoplochy z obou štěrbin (drží se uvnitř rámu) ——— */}
+          <APath d="M160,102 A34,34 0 0 1 160,34" fill="none" stroke={RAY} strokeWidth={1.6} opacity={[0, 0.8, 0, 0]} />
+          <APath d="M160,102 A50,50 0 0 1 160,2" fill="none" stroke={RAY} strokeWidth={1.6} opacity={[0, 0.55, 0, 0]} />
+          <APath d="M160,138 A34,34 0 0 0 160,206" fill="none" stroke={ACCENT} strokeWidth={1.6} opacity={[0, 0.8, 0, 0]} />
+          <APath d="M160,138 A50,50 0 0 0 160,238" fill="none" stroke={ACCENT} strokeWidth={1.6} opacity={[0, 0.55, 0, 0]} />
+
+          {/* ——— KROK 3: paprsky do dvou bodů + dráhový rozdíl ——— */}
+          {/* paprsky do bodu nad osou (δ ≠ 0) */}
+          <ALine x1={160} y1={102} x2={418} y2={84} stroke={RAY} strokeWidth={2.5} opacity={[0, 0, 1, 0]} />
+          <ALine x1={160} y1={138} x2={418} y2={84} stroke={ACCENT} strokeWidth={2.5} opacity={[0, 0, 1, 0]} />
+          <ACircle cx={418} cy={84} r={5} fill={PINK} opacity={[0, 0, 1, 0]} />
+          <AText x={330} y={66} fill={PINK} fontSize="13" opacity={[0, 0, 1, 0]}>δ ≠ 0</AText>
+          {/* paprsky do bodu na ose (δ = 0) */}
+          <ALine x1={160} y1={102} x2={418} y2={160} stroke={RAY} strokeWidth={2} opacity={[0, 0, 0.55, 0]} />
+          <ALine x1={160} y1={138} x2={418} y2={160} stroke={ACCENT} strokeWidth={2} opacity={[0, 0, 0.55, 0]} />
+          <AText x={250} y={186} fill={TXT} fontSize="12" opacity={[0, 0, 1, 0]}>na ose: δ = 0</AText>
+
+          {/* ——— KROK 4: proužky na stínítku + popisky ——— */}
+          <ARect x={380} y={32} width={40} height={16} rx={3} fill={RAY} opacity={[0, 0, 0, 0.9]} />
+          <ARect x={380} y={72} width={40} height={16} rx={3} fill={RAY} opacity={[0, 0, 0, 0.9]} />
+          <ARect x={380} y={112} width={40} height={16} rx={3} fill={RAY} opacity={[0, 0, 0, 0.9]} />
+          <ARect x={380} y={152} width={40} height={16} rx={3} fill={RAY} opacity={[0, 0, 0, 0.9]} />
+          <ARect x={380} y={192} width={40} height={16} rx={3} fill={RAY} opacity={[0, 0, 0, 0.9]} />
+          <AText x={40} y={48} fill={RAY} fontSize="13" opacity={[0, 0, 0, 1]}>maximum: δ = k·λ</AText>
+          <AText x={40} y={70} fill={DIM} fontSize="13" opacity={[0, 0, 0, 1]}>minimum: δ = (2k+1)·λ/2</AText>
+          <AText x={40} y={150} fill={TXT} fontSize="13" opacity={[0, 0, 0, 1]}>→ interferenční proužky</AText>
+          <AText x={40} y={172} fill={DIM} fontSize="12" opacity={[0, 0, 0, 1]}>(střídání světlo / tma)</AText>
+        </StepScene>
 
         <p>
           Zapsáno vzorečky pro <Term>dráhový rozdíl</Term> <M>{'\\delta'}</M> (rozdíl délek obou drah):
@@ -239,9 +206,11 @@ export default function Lesson_3_8() {
             <text x="345" y="48" fill={ACCENT} fontSize="13">paprsek 2</text>
             {/* sigma uvnitř */}
             <text x="248" y="175" fill={PINK} fontSize="15" fontStyle="italic">σ</text>
-            {/* fázový posun */}
+            {/* fázový posun — popisek vlevo nahoře v prázdném prostoru, s vodicí čárkou k bodu odrazu */}
             <circle cx="160" cy="120" r="7" fill="none" stroke={PINK} strokeWidth="2" />
-            <text x="120" y="112" fill={PINK} fontSize="12">−λ/2 (odraz na hustším)</text>
+            <line x1="153" y1="118" x2="110" y2="82" stroke={PINK} strokeWidth="1" strokeDasharray="3 3" opacity="0.8" />
+            <text x="40" y="64" fill={PINK} fontSize="13">−λ/2</text>
+            <text x="40" y="80" fill={PINK} fontSize="10.5">na hustším</text>
           </svg>
         </Figure>
 

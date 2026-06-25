@@ -201,8 +201,10 @@ export default function Lesson_1_3() {
 
             {/* válec dole (sedí na svahu u paty) */}
             <circle cx="250" cy="113" r="15" fill={BODY} stroke={TXT} strokeWidth="1.5" />
-            {/* zatáčivá šipka (rotace) u dolního válce — vně válce, nad ním */}
-            <path d="M 234 106 A 19 19 0 1 1 250 132" fill="none" stroke={FORCE} strokeWidth="2.5" markerEnd="url(#ar)" />
+            {/* spoke i u dolního válce – natočený dál (kotálení doprava) */}
+            <line x1="250" y1="113" x2="262" y2="106" stroke={GROUND} strokeWidth="2" />
+            {/* zatáčivá šipka (rotace ve směru kotálení = po směru hodin) – čistý oblouk vně válce */}
+            <path d="M 231 105 A 22 22 0 1 1 261 131" fill="none" stroke={FORCE} strokeWidth="2.5" markerEnd="url(#ar)" />
 
             {/* popisky */}
             <text x="150" y="34" fill={TXT} fontSize="14" textAnchor="middle">Eₚ = mgh</text>
